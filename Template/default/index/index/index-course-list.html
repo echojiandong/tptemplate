@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="applicable-device" content="pc">
+  <meta name="renderer" content="webkit"/>
+  <meta name="force-rendering" content="webkit"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <title>E点就通名校名师同步课堂</title>
+  <link rel="icon" type="image/x-icon" href="__PUBLIC__/images/bit1.ico" />
+  <link rel="stylesheet" href="__PUBLIC__/css/layui.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+  <script src="__PUBLIC__/js/jquery-2.2.3.js"></script>
+</head>
+<body>
+  <!-- 公共头部 -->
+    {include file="index/public/header"}
+  <!-- 公共头部 -->
+  <!-- 首页学习进度的查看列表 列表 -->
+<div class="index-progress clearfix">
+  <div class="index-progress-position">
+    <a href="javascript:;">当前位置：首页><a href="javascript:;" class="index-progress-now">课程列表</a></a>
+  </div>
+  <div class="index-progress-contain clearfix">
+    <!-- 课程目录 -->
+    <div class="index-progress-list clearfix">
+      <div class="index-progress-title"><h5>{$intro}</h5></div>
+      <ol class="layui-collapse" lay-accordion>
+              {volist name="courseCatalogList" id="v" key="k"}
+              <li class="layui-colla-item">
+                {if $v.part == 2}
+                <h2 class="layui-colla-title"><a href="/index/course/courseParticulars?id={$v.kid}&videoid={$v.id}">{$v.testclass}</a><!-- 第一单元--></h2>
+                {else}
+                <h2 class="layui-colla-title">{$v['testclass']}<!-- 第一单元--></h2>
+                {/if}
+                <div class="layui-colla-content {if condition='$k eq 1'}layui-show{/if}">
+                  <!-- 目录 -->
+                  {if(isset($v['son']))}
+                  {volist name="v['son']" id="vo"}
+                  <dl class="particulars-course-container">
+                    {if(!empty($vo['son']))}
+                    <dt class="particulars-course-container-title">{$vo.testclass}<!-- 阅读--></dt>
+                    {volist name="vo['son']" id="vol"}
+                    <dd class="particulars-course-container-lis clearfix">
+                      <a class="particulars-container-lis-div clearfix" href="/index/course/courseParticulars?videoid={$vol.id}&id={$vo.kid}">
+                        <div class="particulars-container-lis-name">
+                          <span class="particulars-container-lis-title">
+                              <i class="iconfont icon-bofang11"></i>
+                              {$vol['testclass']} {$vol['outline']}<!-- 1、秋天的怀念/史铁生 -->
+                          </span>
+                          <!-- <i class="iconfont icon-bianqian-"></i> -->
+                        </div>
+                        <!-- 便签 -->
+                        <div class="particulars-contain-note-fixed">
+                          <div class="particulars-contain-note particulars-contain-note1">
+                            <div class="particulars-note-close">x</div>
+                            <div class="particulars-container-note">
+                              <h3 class="particulars-study-note">学习便签</h3>
+                              <div class="particulars-study-scroll">
+                                <dl class="particulars-note-list">
+                                  {volist name="vol['skill']" id="vl"}
+                                    <dt class="particulars-note-lis">
+                                      {$vl['k_name']}
+                                    </dt>
+                                    <dd class="particulars-note-dts">
+                                      {$vl['k_content']}
+                                    </dd>
+                                  {/volist}
+                                </dl>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        {if condition="!empty($vol['videoLog'])"}
+                          {if condition="$vol['videoLog']['video_status'] eq 2 || $vol['videoLog']['video_status'] eq 3"}
+                            <span class="particulars-container-lis-frequency">已学{$vol['videoLog']['study_num']}次</span>
+                          {else}
+                            <span class="particulars-course-not-learn">未学</span>
+                          {/if}
+                        {/if}
+                        <span class="particulars-container-lis-duration">{$vol.classhour}<!-- 2:45:05 --></span>
+                      </a>
+                      <ul class="particulars-container-position-contain clearfix">
+                        {volist name="vol['skill']" id="vl" key="kl"}
+                          <li class="particulars-position-container-lis" onclick="courseListKnow({$vol['id']},{$vol['kid']},{$vl['k_id']},{$vl.start_time},{$kl})">
+                            <i class="iconfont icon-location"></i>{$vl['k_name']}
+                          </li>
+                          <!-- <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>练习</li> -->
+                        {/volist}
+                      </ul>
+                    </dd>
+                    {/volist}
+                    {else}
+                    <dd class="particulars-course-container-lis clearfix">
+                      <a class="particulars-container-lis-div clearfix" href="/index/course/courseParticulars?videoid={$v.id}&id={$v.kid}">
+                        <div class="particulars-container-lis-name">
+                          <span class="particulars-container-lis-title">
+                            <a href="/index/course/courseParticulars?videoid={$v.id}&id={$v.kid}">
+                              <i class="iconfont icon-bofang11"></i>
+                              {$vo['testclass']} {$vo['outline']}<!-- 1、秋天的怀念/史铁生 -->
+                            </a>
+                          </span>
+                          <!-- <i class="iconfont icon-bianqian-"></i> -->
+                        </div>
+                        <!-- 便签 -->
+                        <div class="particulars-contain-note-fixed">
+                          <div class="particulars-contain-note particulars-contain-note2">
+                            <div class="particulars-note-close">x</div>
+                            <div class="particulars-container-note">
+                              <h3 class="particulars-study-note">学习便签</h3>
+                              <div class="particulars-study-scroll">
+                                <dl class="particulars-note-list">
+                                  {volist name="vo['skill']" id="vl"}
+                                    <dt class="particulars-note-lis">
+                                      {$vl['k_name']}
+                                    </dt>
+                                    <dd class="particulars-note-dts">
+                                      {$vl['k_content']}
+                                    </dd>
+                                  {/volist}
+                                </dl>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        {if condition="!empty($vo['videoLog'])"}
+                          {if condition="$vo['videoLog']['video_status'] eq 2 || $vo['videoLog']['video_status'] eq 3"}
+                            <span class="particulars-container-lis-frequency">已学{$vo['videoLog']['study_num']}次</span>
+                          {else}
+                            <span class="particulars-course-not-learn">未学</span>
+                          {/if}
+                        {/if}
+                        <span class="particulars-container-lis-duration">{$vo.classhour}<!-- 2:45:05 --></span>
+                      </a>
+                      <ul class="particulars-container-position-contain clearfix">
+                        {volist name="vo['skill']" id="vl" key="kl"}
+                          <li class="particulars-position-container-lis" onclick="courseListKnow({$vo['id']},{$vo['kid']},{$vl['k_id']},{$vl.start_time},{$kl})">
+                            <i class="iconfont icon-location"></i>{$vl['k_name']}
+                          </li>
+                          <!-- <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>练习</li> -->
+                        {/volist}
+                      </ul>
+                    </dd>
+                    {/if}
+                  </dl>
+                  {/volist}
+                  {/if}
+                </div>
+              </li>
+              {/volist}
+            </ol>
+    </div>
+    <!-- 教师介绍 -->
+    {if condition="$teacherList"}
+    <div class="index-progress-teachers">
+      <div class="index-progress-teachers-img">
+        <img src="{$teacherList.litpic}" alt="">
+      </div>
+      <h5 class="index-progress-teachers-name">{$teacherList.name}</h5>
+      <p class="index-progress-teachers-msg">
+        {$teacherList.content}
+      </p>
+    </div>
+    {/if}
+  </div>
+</div>
+
+
+<!-- 底部导航  -->
+    {include file="index/public/footer"}
+<!-- 底部导航  -->
+</body>
+<script src="__PUBLIC__/js/drag.js"></script>
+<script>
+layui.use(['element','layer', 'form','carousel','laypage'], function(){
+  var layer = layui.layer
+      ,element = layui.element
+      ,form = layui.form
+      ,carousel = layui.carousel
+      ,laypage = layui.laypage;
+$(".particulars-container-lis-title").click(function() {
+    $(this).addClass("personal-learn-now")
+         .parents(".particulars-container-lis-name")
+         .siblings(".particulars-container-position-contain")
+         .toggle()
+         .end()
+         .parent(".particulars-course-container-lis")
+         .siblings()
+         .find(".particulars-container-lis-title")
+         .removeClass("personal-learn-now")
+})
+
+  // 课程目录便签部分
+$(document).on('click','.particulars-container-lis-name .icon-bianqian-',function(){
+  drag($(this).parent().next().children()[0]);//便签拖拽事件
+   $(this).parent(".particulars-container-lis-name")
+          .next()
+          .show()
+          // .children(".particulars-contain-note")
+          // .show()
+          // .children(".particulars-note-close")
+          // .show()
+          .end()
+          .parent(".particulars-course-container-lis")
+          .siblings()
+          .children()
+          .find(".particulars-contain-note-fixed")
+          .hide()
+          // .children()
+          // .find(".particulars-contain-note")
+          // .hide()
+})
+$(document).on('click',".particulars-note-close",function() {
+  $(this).hide()
+          .parent(".particulars-contain-note")
+          .hide()
+          .parent(".particulars-contain-note-fixed")
+          .hide()
+          .end()
+})
+});
+
+</script> 
+</html>

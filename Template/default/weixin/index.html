@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="__PUBLIC__/weixin//css/style.css">
+    <script src="__PUBLIC__/weixin/js/jquery-2.2.3.js"></script>
+    <title>E点就通名校名师同步课堂</title>
+</head>
+<body>
+  <div class="bind-code-page">
+    <div class="page-logo"><img src="__PUBLIC__/weixin//images/logo.png" alt=""></div>
+    <div class="bind-form">
+      <form action="" class="bind-form-form">
+        <div class="bind-form-item">
+          <i class="iconfont iconwebicon205"></i>
+          <input type="text" class="bind-form-input iconfont bind-form-name" id="bind-code-phone" placeholder="请输入手机号">
+        </div>
+        <div class="bind-form-item">
+          <i class="iconfont iconsuozi"></i>
+          <input type="password" class="bind-form-input iconfont bind-form-pwd" id="bind-code-verify" placeholder="请输入验证码">
+          <button type="button" class="bind-pwd-code" id="bind-code-btn">获取验证码</button>
+        </div>
+        <div class="bind-form-item">
+          <button type="button" class="mui-btn bind-submit-btn" id="bind-submit">绑定</button>
+        </div>
+      </form>
+    </div>
+    <!-- 吐司 -->
+    <div class="toast"></div>
+  </div>
+</body>
+</html>
+<script>
+   function isIphoneX() {
+    return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+  } 
+  if(isIphoneX()) {
+    $(".page-logo").css({"margin":"40.5% auto 0"})
+  }
+  let data = {
+    bindCodePhone : '',
+    bindCodeVerify: ''
+  }
+  // 格式输入错误表框提示
+  $('#bind-code-phone, #bind-code-verify').blur(function() {
+    if ( $(this).val() != '' ) {
+      $(this).css({borderBottom:"1px solid #E3E3E3"})
+    } else {
+      $(this).css({borderBottom:"1px solid #DF4A43"})
+    }
+  })
+  // 获取验证码
+  $("#bind-code-btn").on('click', function() {
+    let bindCodePhone = $("#bind-code-phone").val()
+    if (bindCodePhone.length == '' || bindCodePhone.length != 11) {
+      $(".toast").fadeIn().text('您的格式有误，请输入正确手机号！').fadeOut(2500);
+    } else {
+    $.ajax({
+      type:"post",
+      url:"",
+      data:{
+        phone: bindCodePhone
+      },
+      success:function(res) {
+        if(res.error_code==1) {
+          var time=60;
+          $('#bind-code-btn').text("已发送("+time+"s)")
+          var interval=setInterval(function () {
+              if (time >=1 && time <= 60 ) {
+                time--;
+                $('#bind-code-btn').text("已发送("+time+"s)").attr('disabled', true)
+              } else {
+                $('#bind-code-btn').text("重新获取").attr('disabled', false)
+                clearInterval(interval);
+              }
+          }, 1000);
+        }else{
+          mui.toast(res.msg);
+        }
+      },
+      error:function(res) {
+        console.log(res);
+      }    
+    }) 
+  }
+});
+// 点击绑定按钮
+$("#bind-submit").on('click', function() {
+  let bindCodeVerify = $("#bind-code-verify").val(),
+      bindCodePhone = $("#bind-code-phone").val()
+      data.bindCodeVerify = bindCodeVerify
+      data.bindCodePhone =  bindCodePhone
+      console.log(data.bindCodeVerify)
+      console.log(bindCodePhone)
+  if ( bindCodeVerify.length == '' ) {
+    $(".toast").fadeIn().text('您的信息不完整，请输入完整信息！').fadeOut(2500);
+  } else {
+    $.ajax({
+      type:"post",
+      url:"",
+      data:{
+        phone: bindCodePhone,
+        code: bindCodeVerify
+      },
+      success:function(res) {
+  
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        
+      }  
+    }) 
+  }
+})
+
+</script>

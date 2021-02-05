@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/admin.css" media="all" />
+</head>
+<body>
+  <div class="layui-form" lay-filter="layuiadmin-form-admin" id="layuiadmin-form-admin" style="padding: 20px 30px 0 0;">
+  	<input type="hidden" name="pid" id='pid' value="{$sid}">
+  	<input type="hidden" name="sid" id='sid' value="{$selfid}">
+    <div class="layui-form-item">
+    	<label class="layui-form-label">知识点标题</label>
+	    <div class="layui-input-block">
+	     	<input type="text" name="k_name" lay-verify="required" lay-reqText='标题是必填项哦' placeholder="例：汽化口诀" autocomplete="off" class="layui-input">
+	    </div>
+    </div>
+
+    <div class="layui-form-item">
+    	<label class="layui-form-label">开始时间</label>
+	    <div class="layui-input-inline" style="width: 80px;">
+	        <input type="text" name="s_hour" placeholder="时" lay-verify="number" autocomplete="off" class="layui-input">
+	     </div>
+	     <div class="layui-form-mid">:</div>
+	     <div class="layui-input-inline" style="width: 80px;">
+	       <input type="text" name="s_minute" placeholder="分" lay-verify="number" autocomplete="off" class="layui-input">
+	     </div>
+	     <div class="layui-form-mid">:</div>
+	     <div class="layui-input-inline" style="width: 80px;">
+	       <input type="text" name="s_second" placeholder="秒" lay-verify="number" autocomplete="off" class="layui-input">
+	     </div>
+    </div>
+
+    <div class="layui-form-item">
+    	<label class="layui-form-label">结束时间</label>
+	    <div class="layui-input-inline" style="width: 80px;">
+	        <input type="text" name="e_hour" placeholder="时"  autocomplete="off" class="layui-input">
+	     </div>
+	     <div class="layui-form-mid">:</div>
+	     <div class="layui-input-inline" style="width: 80px;">
+	       <input type="text" name="e_minute" placeholder="分"  autocomplete="off" class="layui-input">
+	     </div>
+	     <div class="layui-form-mid">:</div>
+	     <div class="layui-input-inline" style="width: 80px;">
+	       <input type="text" name="e_second" placeholder="秒"  autocomplete="off" class="layui-input">
+	     </div>
+    </div>
+
+     <div class="layui-form-item">
+    	<label class="layui-form-label">知识点详情</label>
+	    <div class="layui-input-block">
+	     	<textarea  name='k_content' placeholder="多听、多读、多看、多写"  lay-reqText='详情写点字' class="layui-textarea"></textarea>
+	    </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-user-back-submit" id="LAY-user-back-submit" value="确认">
+    </div>
+  </div>
+</body>
+</html>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript">
+  // 树扩展
+	layui.config({
+		base: '/static/manage/layui/js/',
+	})
+	layui.use(['layer','code','form'],function(){
+		var $ = layui.$
+			,form = layui.form
+			,layer = layui.layer
+			,sid = $("#sid").val()
+			,pid = $('#pid').val();
+
+			console.log(sid+'/'+pid);
+		if(sid != 0 && pid == 0){
+			$.ajax({
+				url: '/manage/videos/setknowlengeval'
+				,data: {id:sid}
+				,type: 'post'
+				,dataType: 'json'
+				,async: false
+				,success: function(e){
+					if(e.code == 0){
+						form.val('layuiadmin-form-admin',e.data)
+					}else{
+						layer.msg(e.msg,{icon:5,time:1500});
+					}
+				}
+			})
+		}
+    })
+</script>

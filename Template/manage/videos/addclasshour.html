@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/admin.css" media="all" />
+  <style type="text/css">
+    .layui-upload-drag{
+      float: left;;
+    }
+    .layui-form-div-video{
+      width: 243px;
+      margin-top: -136px;
+      float: left;
+      margin-left: 461px;
+      display: none;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="layui-form" lay-filter="layuiadmin-form-admin" id="layuiadmin-form-admin" style="padding: 20px 30px 0 0;">
+
+    <input type="hidden" name="pid" id="pid" value="{$pid}">
+    <input type="hidden" name="selfid" id="selfid" value="{$selfid}">
+    <input type="hidden" name="part" id="parts" value="{$part}">
+    {eq name='part' value='1'}
+      <div class="layui-form-item">
+        <label class="layui-form-label">课时or课时块</label>
+        <div class="layui-input-block">
+          <select name="part" lay-filter='part'>
+              <option value="1" {eq name="part" value="1"} selected="" {/eq}>课时块</option>
+              <option value="2" {eq name="part" value="2"} selected="" {/eq}>课时</option>
+          </select>
+        </div>
+      </div>
+    {/eq}
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">章(节)</label>
+      <div class="layui-input-block">
+        <input type="text" name="testclass" lay-reqText='请输入章节' placeholder="阅读" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">章（节）名称</label>
+      <div class="layui-input-block">
+        <input type="text" name="outline"  lay-reqText='请输入章（节）名称' placeholder="如：沁园春、雪" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">课程标签</label>
+      <div class="layui-input-block">
+        <div id="test1"></div>
+      </div>
+    </div>
+    
+    <div class="layui-form-item">
+      <label class="layui-form-label">课件资料上传（1）</label>
+      <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="coursewarefile1">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+
+        <div class="layui-upload-drag" id="coursewarefile_href1" style="display: none">
+          <i class="layui-icon layui-icon-file"></i>
+          <a href="">点击下载课件资料</a>
+        </div>
+        <input type="hidden" name="courseware1"  id="courseware1" lay-verify='courseware1' value="0">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">课件资料上传（2）</label>
+      <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="coursewarefile2">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+
+        <div class="layui-upload-drag" id="coursewarefile_href2" style="display: none">
+          <i class="layui-icon layui-icon-file"></i>
+          <a href="">点击下载课件资料</a>
+        </div>
+        <input type="hidden" name="courseware2"  id="courseware2" lay-verify='courseware2' value="0">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">课件资料上传</label>
+      <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="coursewarefile">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+
+        <div class="layui-upload-drag" id="coursewarefile_href" style="display: none">
+          <i class="layui-icon layui-icon-file"></i>
+          <a href="">点击下载课件资料</a>
+        </div>
+        <input type="hidden" name="courseware"  id="courseware" lay-verify='courseware' value="0">
+      </div>
+    </div>
+
+    <div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">教师</label>
+            <div class="layui-input-block">
+                <select name='teachername' lay-search=''>
+                  {volist name='t_list' id='v'}
+                    <option value="{$v.id}-{$v.name}">{$v.name}</option>
+                  {/volist}
+                </select>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">试听</label>
+            <div class="layui-input-block">
+                <input type="radio" name="audi" value="1" title="可试听">
+                <input type="radio" name="audi" value="2" title="无试听" checked>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">试听时长</label>
+            <div class="layui-input-block">
+                <input type="text" name="audi_time" placeholder="试听秒数 例：300（不填默认时五分钟）；注：无试听可不填" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="display: block">课程封面</label>
+            <div class="site-demo-upload">
+                <div class="layui-upload-drag" id="test10">
+                  <i class="layui-icon"></i>
+                  <p>点击上传，或将文件拖拽到此处</p>
+                </div>
+                <img id="testImg" style="width: 244px; height: 135px; display: none;  float: left; margin-left: 92px" src=""/>
+                <input type="hidden" name="img"  id="image" lay-verify="image">
+              </div>
+            </div>
+
+
+           <div class="layui-form-item">
+            <label class="layui-form-label">视频_480</label>
+            <div class="site-demo-upload" id="btn-uploader_480">
+                <div class="layui-upload-drag" id="test_480">
+                  <i class="layui-icon"></i>
+                  <p>点击上传，或将文件拖拽到此处</p>
+                </div>
+                <span id="v_480" style="color: red;">请选择文件上传</span>
+                <video class="layui-form-div-video" id="videos_480" controls="controls"></video>
+                <input type="hidden" name="video_480"  id="video_480" lay-verify="video">
+              </div>
+            </div>
+
+            <div class="layui-form-item">
+            <label class="layui-form-label">视频_720</label>
+            <div class="site-demo-upload" id="btn-uploader_720">
+                <div class="layui-upload-drag" id="test_720">
+                  <i class="layui-icon"></i>
+                  <p>点击上传，或将文件拖拽到此处</p>
+                </div>
+                <span id="v_720" style="color: red;">请选择文件上传</span>
+                <video class="layui-form-div-video" id="videos_720" controls="controls"></video>
+                <input type="hidden" name="video_720"  id="video_720" lay-verify="video">
+              </div>
+            </div>
+
+            <div class="layui-form-item">
+            <label class="layui-form-label">视频_1080</label>
+            <div class="site-demo-upload" id="btn-uploader_1080">
+                <div class="layui-upload-drag" id="test_1080">
+                  <i class="layui-icon"></i>
+                  <p>点击上传，或将文件拖拽到此处</p>
+                </div>
+                <span id="v_1080" style="color: red;">请选择文件上传</span>
+                <video class="layui-form-div-video" id="videos_1080" controls="controls"></video>
+                <input type="hidden" name="video_1080"  id="video_1080" lay-verify="video">
+              </div>
+            </div>
+
+            <!-- <div class="layui-form-item">
+              <label class="layui-form-label">视频_测试</label>
+              <div class="site-demo-upload" id="btn-uploader">
+                  <a id="pickfiles" href="javascript:void 0;">文件上传</a>
+                  <input type="hidden" name="video_1080"  id="video_1080" lay-verify="video">
+              </div>
+            </div> -->
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">课程技巧</label>
+            <div class="layui-input-block">
+              <textarea  name='skill' placeholder="多听、多读、多看、多写" class="layui-textarea"></textarea>
+            </div>
+          </div>
+      </div>
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-user-back-submit" id="LAY-user-back-submit" value="确认">
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+<script type="text/javascript" src="__LAY__layui.js"></script>
+
+<!-- 七牛文件上传 -->
+<script src="__MANAGE__/js/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="__MANAGE__/js/qiniu.min.js"></script>
+
+<script type="text/javascript">
+	layui.use(['layer','code','form','upload','tree'],function(){
+		var $ = layui.$
+			,form = layui.form
+			,layer = layui.layer
+      ,upload = layui.upload
+      ,tree = layui.tree
+      ,selfid = $('#selfid').val()
+      ,pid = $('#pid').val()
+      ,part = $('#parts').val()
+      ,_video = ['480', '720', '1080']
+      ,datas = '';
+
+      //拖拽上传
+      upload.render({
+          elem: '#test10'
+          ,url: '/manage/videos/uploadimg'
+          ,size:'60000'
+          ,exts:'jpg|png|jpeg'
+          ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+            layer.load(); //上传loading
+          },done: function(res){
+              layer.closeAll('loading'); //关闭loading
+              if(res.code==0){
+                  layer.msg(res.msg,{time:1200},function(){
+                      var img = res.data;
+                      var img = img.replace("\\","/");
+                      $("#testImg").attr("src",img);
+                      $("#image").attr("value",img);
+                      $("#testImg").show();
+
+                  });
+              }else{
+                  layer.msg(res.msg,{time:1200});
+              }
+          }
+      });
+
+      // 课件上传
+      upload.render({
+          elem: '#coursewarefile'
+          ,url: '/manage/videos/uploadimg'
+          ,size:'100000'
+          ,accept:'file'
+          ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+            layer.load(); //上传loading
+          },done: function(res){
+              layer.closeAll('loading'); //关闭loading
+              if(res.code==0){
+                  layer.msg(res.msg,{time:1200},function(){
+                      var file = res.data;
+                      file = file.replace("\\","/");
+                      $('input[name="courseware"]').attr('value',file);
+                      $('#coursewarefile_href').children('a').attr('href',file);
+                      $('#coursewarefile_href').show();
+                  });
+              }else{
+                  layer.msg(res.msg,{time:1200});
+              }
+          }
+      });
+
+      //    资料上传  将就用  后期改版 可删除
+      // 课件上传1
+      upload.render({
+          elem: '#coursewarefile1'
+          ,url: '/manage/videos/uploadimg'
+          ,size:'100000'
+          ,accept:'file'
+          ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+            layer.load(); //上传loading
+          },done: function(res){
+              layer.closeAll('loading'); //关闭loading
+              if(res.code==0){
+                  layer.msg(res.msg,{time:1200},function(){
+                      var file = res.data;
+                      file = file.replace("\\","/");
+                      $('input[name="courseware1"]').attr('value',file);
+                      $('#coursewarefile_href1').children('a').attr('href',file);
+                      $('#coursewarefile_href1').show();
+                  });
+              }else{
+                  layer.msg(res.msg,{time:1200});
+              }
+          }
+      });
+
+      // 课件上传2
+      upload.render({
+          elem: '#coursewarefile2'
+          ,url: '/manage/videos/uploadimg'
+          ,size:'100000'
+          ,accept:'file'
+          ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+            layer.load(); //上传loading
+          },done: function(res){
+              layer.closeAll('loading'); //关闭loading
+              if(res.code==0){
+                  layer.msg(res.msg,{time:1200},function(){
+                      var file = res.data;
+                      file = file.replace("\\","/");
+                      $('input[name="courseware2"]').attr('value',file);
+                      $('#coursewarefile_href2').children('a').attr('href',file);
+                      $('#coursewarefile_href2').show();
+                  });
+              }else{
+                  layer.msg(res.msg,{time:1200});
+              }
+          }
+      });
+      //结束
+
+    $.each(_video,function(i,v){
+      uploader = Qiniu.uploader({
+        runtimes: 'html5,flash,html4',
+        browse_button: 'test_'+v,//上传按钮的ID
+        container: 'btn-uploader_'+v,//上传按钮的上级元素ID
+        drop_element: 'btn-uploader_'+v,
+        max_file_size: '1000mb',//最大文件限制
+        flash_swf_url: '__MANAGE__/js/Moxie.swf',
+        dragdrop: false,
+        chunk_size: '4mb',//分块大小
+        uptoken_url: '/manage/videos/getToken',//设置请求qiniu-token的url
+        //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
+        // uptoken : '<Your upload token>',
+        //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
+        uptoken_func:function(file) {
+            var token = '';
+            $.ajax({
+                url: '/manage/videos/getToken',
+                type: 'GET',
+                async: false,//这里应设置为同步的方式
+                success: function(data) {
+                    token = data.uptoken
+                }
+            });
+            
+            return token;
+        },
+        // unique_names: true,
+        // 默认 false，key为文件名。若开启该选项，SDK会为每个文件自动生成key（文件名）
+        // save_key: true,
+        // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
+        domain: 'http://ydtvideo1080.ydtkt.com/',//自己的七牛云存储空间域名
+        multi_selection: false,//是否允许同时选择多文件
+        //文件类型过滤，这里限制为图片类型
+        filters: {
+            mime_types : [
+                {
+                    // title: "Image files", extensions: "jpg,jpeg,gif,png",
+                    title: "Video files", extensions: "flv,mpg,mpeg,avi,wmv,mov,asf,rm,rmvb,mkv,m4v,mp4"
+                }
+            ]
+        },
+        auto_start: true,
+        init: {
+            'FilesAdded': function(up, files) {
+                console.log('filesadded')
+                //do something
+            },
+            'BeforeUpload': function(up, file) {
+                console.log('BeforeUpload')
+                //do something
+            },
+            'UploadProgress': function(up, file) {
+                
+                $("#v_"+ v).html("正在上传中，请勿离开......");
+                //可以在这里控制上传进度的显示
+                //可参考七牛的例子
+            },
+            'UploadComplete': function() {
+                console.log('UploadComplete')
+                //do something
+            },
+            'FileUploaded': function(up, file, info) {
+               
+                //每个文件上传成功后,处理相关的事情
+                //其中 info 是文件上传成功后，服务端返回的json，形式如
+                //{
+                //  "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+                //  "key": "gogopher.jpg"
+                //}
+              
+                var domain = up.getOption('domain');
+
+                if (info.status == 200) {
+                  
+                  var res = JSON.parse(info.response);
+                  var sourceLink = domain + res.key;//获取上传文件的链接地址
+
+                  $("#videos_"+v).attr("src", sourceLink);
+                  $("#video_"+v).attr("value", sourceLink);
+                  $("#videos_"+v).show();
+                  $("#v_"+ v).html("上传成功");
+
+                }
+                
+            },
+            'Error': function(up, err, errTip) {
+                $("#v_"+ v).html("上传失败，请重新上传");
+            },
+            'Key': function(up, file) {
+               
+                //当save_key和unique_names设为false时，该方法将被调用
+                var key = "";
+
+                key = file.name;
+                // $.ajax({
+                //     url: '/qiniu-token/get-key/',
+                //     type: 'GET',
+                //     async: false,//这里应设置为同步的方式
+                //     success: function(data) {
+                //         var ext = Qiniu.getFileExtension(file.name);
+                //         key = data + '.' + ext;
+                //     },
+                //     cache: false
+                // });
+                return key;
+            }
+        }
+      })
+    })
+
+      // // //视频上传
+      // $.each(_video,function(i,v){
+      //     console.log(v)
+      //     upload.render({
+      //       elem: '#test_'+v
+      //       ,url: '/manage/videos/uploadvideo'
+      //       ,data: {q_video:v}
+      //       ,size: 0
+      //       ,accept:'video'
+      //       ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+      //         layer.load(1); //上传loading
+      //       },done: function(res){
+      //           layer.closeAll('loading'); //关闭loading
+      //           if(res.code==0){
+      //               layer.msg(res.msg,{time:1500},function(){
+      //                   var v_url = res.data.replace("\\","/");
+      //                   $("#videos_"+v).attr("src",v_url);
+      //                   $("#video_"+v).attr("value",v_url);
+      //                   $("#videos_"+v).show();
+
+      //               });
+      //           }else{
+      //               layer.msg(res.msg,{time:800});
+      //           }
+      //       }
+      //   });
+      // })
+
+      form.on('select(part)',function(elem){
+          var obj  =$('input[name="courseware"]').parent().parent().next();
+
+          if(elem.value == 1){
+            obj.hide();
+          }
+          if(elem.value == 2){
+            obj.show();
+          }
+      })
+
+      if(part == 1){
+            var select = 'dd[lay-value=1]';
+            $('select[name="part"]').siblings("div.layui-form-select").find('dl').find(select).click();
+      }
+
+      //表单初始赋值
+      if(selfid != 0){
+          $.ajax({
+            url: '/manage/videos/setformval'
+            ,data: {id:selfid,part:part}
+            ,type: 'post'
+            ,dataType: 'json'
+            ,async: false
+            ,success: function(res){
+                if(res.code == 0){
+                  form.val('layuiadmin-form-admin',res.data);
+
+                  if(res.data.courseware != 0){
+                
+                      $('#coursewarefile_href').children('a').attr('href',res.data.courseware);
+                      $('#coursewarefile_href').show();
+                  }
+                  if(res.data.courseware1 != 0){
+                
+                      $('#coursewarefile_href1').children('a').attr('href',res.data.courseware1);
+                      $('#coursewarefile_href1').show();
+                  }
+                  if(res.data.courseware2 != 0){
+                
+                      $('#coursewarefile_href2').children('a').attr('href',res.data.courseware2);
+                      $('#coursewarefile_href2').show();
+                  }
+                  if(res.data.img == null){
+                    return false;
+                  }
+                  $("#testImg").attr("src",res.data.img).show();
+                  $("#image").attr("value",res.data.img);
+                  $.each(_video,function(i,v){
+                      $('#videos_'+v).attr('src', eval('res.data.link_'+v)).show();
+                      $("#video_"+v).attr("value", eval('res.data.link_'+v));
+                  })
+                }
+            }
+          })
+      }
+
+      //初始化 视频标签树 
+          $.ajax({
+          url: '/manage/videos/videoTagTree'
+            //type:1 video_class标签 type:2 video标签
+            ,data: {id:selfid,type:2}
+            ,type: 'post'
+            ,dataType: 'json'
+            ,async: false
+            ,success: function(res){
+              if(res.code == 0){
+                  datas = res.data
+              }
+                  
+            }
+          })
+          //初始化树
+          tree.render({
+            elem: '#test1'
+            ,data: datas
+            ,id: 'demoId'
+            ,showCheckbox: true
+            ,accordion: true
+            ,click: function(obj){
+                //节点点击后的回调
+                console.log(obj.data); //得到当前点击的节点数据
+                console.log(obj.state); //得到当前节点的展开状态：open、close、normal
+                console.log(obj.elem); //得到当前节点元素
+                console.log(obj.data.children); //当前节点下是否有子节点
+            }
+            ,oncheck: function(){
+              //复选框被点击后的回调
+              
+            }
+        })
+	})
+
+
+  // uploader = Qiniu.uploader({
+  //       runtimes: 'html5,flash,html4',
+  //       browse_button: 'pickfiles',//上传按钮的ID
+  //       container: 'btn-uploader',//上传按钮的上级元素ID
+  //       drop_element: 'btn-uploader',
+  //       max_file_size: '1000mb',//最大文件限制
+  //       flash_swf_url: '__MANAGE__/js/Moxie.swf',
+  //       dragdrop: false,
+  //       chunk_size: '4mb',//分块大小
+  //       uptoken_url: '/manage/videos/getToken',//设置请求qiniu-token的url
+  //       //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
+  //       // uptoken : '<Your upload token>',
+  //       //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
+  //       uptoken_func:function(file) {
+  //           var token = '';
+  //           $.ajax({
+  //               url: '/manage/videos/getToken',
+  //               type: 'GET',
+  //               async: false,//这里应设置为同步的方式
+  //               success: function(data) {
+  //                   token = data.uptoken
+  //               }
+  //           });
+            
+  //           return token;
+  //       },
+  //       // unique_names: true,
+  //       // 默认 false，key为文件名。若开启该选项，SDK会为每个文件自动生成key（文件名）
+  //       // save_key: true,
+  //       // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
+  //       domain: 'http://ydtvideo1080.ydtkt.com/',//自己的七牛云存储空间域名
+  //       multi_selection: false,//是否允许同时选择多文件
+  //       //文件类型过滤，这里限制为图片类型
+  //       filters: {
+  //           mime_types : [
+  //               {
+  //                   // title: "Image files", extensions: "jpg,jpeg,gif,png",
+  //                   title: "Video files", extensions: "flv,mpg,mpeg,avi,wmv,mov,asf,rm,rmvb,mkv,m4v,mp4"
+  //               }
+  //           ]
+  //       },
+  //       auto_start: true,
+  //       init: {
+  //           'FilesAdded': function(up, files) {
+  //               console.log('filesadded')
+  //               //do something
+  //           },
+  //           'BeforeUpload': function(up, file) {
+  //               console.log('BeforeUpload')
+  //               //do something
+  //           },
+  //           'UploadProgress': function(up, file) {
+                
+  //               console.log("----------正在上传中，请勿离开----------")
+  //               //可以在这里控制上传进度的显示
+  //               //可参考七牛的例子
+  //           },
+  //           'UploadComplete': function() {
+  //               console.log('UploadComplete')
+  //               //do something
+  //           },
+  //           'FileUploaded': function(up, file, info) {
+  //               console.log('FileUploaded')
+  //               //每个文件上传成功后,处理相关的事情
+  //               //其中 info 是文件上传成功后，服务端返回的json，形式如
+  //               //{
+  //               //  "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+  //               //  "key": "gogopher.jpg"
+  //               //}
+              
+  //               var domain = up.getOption('domain');
+  //               console.log(domain);
+
+  //               console.log(info);
+  //               if (info.status == 200) {
+  //                 console.log('________上传成功过 ——————————')
+  //               }
+  //               //    var res = eval("(" + info + ")");
+  //               var res = JSON.parse(info.response);
+                
+  //               var sourceLink = domain + res.key;//获取上传文件的链接地址
+  //               console.log(sourceLink);
+               
+  //           },
+  //           'Error': function(up, err, errTip) {
+  //               alert('上传失败，请重新上传')
+  //           },
+  //           'Key': function(up, file) {
+  //               console.log('key')
+  //               //当save_key和unique_names设为false时，该方法将被调用
+  //               var key = "";
+
+  //               key = file.name;
+  //               // $.ajax({
+  //               //     url: '/qiniu-token/get-key/',
+  //               //     type: 'GET',
+  //               //     async: false,//这里应设置为同步的方式
+  //               //     success: function(data) {
+  //               //         var ext = Qiniu.getFileExtension(file.name);
+  //               //         key = data + '.' + ext;
+  //               //     },
+  //               //     cache: false
+  //               // });
+  //               return key;
+  //           }
+  //       }
+  //     })
+
+</script>

@@ -1,0 +1,11 @@
+[core]
+	bare = true
+	repositoryformatversion = 0
+	filemode = false
+	symlinks = false
+	ignorecase = true
+[fetch]
+	prune = false
+[remote "origin"]
+	url = git@gitee.com:gjh_520/ydt100.git
+	fetch = +refs/heads/*:refs/remotes/origin/*

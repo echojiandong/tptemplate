@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="__mobile__/js/mui.min.js"></script>
+    <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__mobile__/css/style.css">
+    <title>E点就通名校名师同步课堂</title>
+    <style>
+      html{
+        width: 100%;
+        height: 100%;
+        background: #F6F6F6;
+      }
+    </style>
+</head>
+<body>
+  <!-- header -->
+  <header class="mui-bar mui-bar-nav common-header">
+		<div class="header-back iconfont iconxiangzuojiantou"><a href="javascript:;"></a></div>
+		<h1 class="common-title">卡号激活</h1>
+  </header>
+   <!-- content -->
+   <div class="mui-content clearfix">
+      <ul class="card_tab">
+        <li class="card_tab_active" data-v='7'>七年级<div class="card_tab_active_line"></div></li>
+        <li data-v='8'>八年级<div></div></li>
+        <li data-v='9'>九年级<div></div></li>
+      </ul>
+      <div class="card_tab_content">
+        <div class="card_content_seven content_div">
+          <ul class="card_content_seven_menu">
+            <!-- <li class="seven_menu_li">
+              <div class="menu_li_left yes_purchase">
+                <span>语文上册(已购买)</span>
+              </div>
+              <div class="menu_li_right">激活</div>
+            </li>
+            <li class="seven_menu_li ">
+              <div class="menu_li_left activated">
+                <span>语文上册</span>
+                <span>(已激活)</span>
+              </div>
+              <div class="menu_li_right_text">剩余181天</div>
+            </li>
+            <li class="seven_menu_li ">
+              <div class="menu_li_left no_purchase">
+                <span>语文上册</span>
+                <span>(未购买)</span>
+              </div>
+            </li> -->
+          </ul>
+        </div>
+        <!-- 模态框 -->
+        <div class="card_model">
+          <div class="card_model_content">
+            <p>课程激活</p>
+            <div class="model_content_text">您确定激活课程吗？激活后观看时间共190天</div>
+            <div class="model_content_btn">激活</div>
+            <div class="model_content_clone">×</div>
+          </div>
+        </div>
+      </div>
+   </div>
+</body>
+</html>
+<script src="__mobile__/js/jquery-2.2.3.js"></script>
+<script src="__mobile__/js/fastclick.js"></script>
+<script src="__mobile__/js/public.js"></script>
+<script src="__mobile__/js/iconfont/iconfont.js"></script>
+<script>
+  mui.init();
+  //页面回退
+  $('.header-back').click(function(){
+    window.history.back(-1);
+  })
+  // mui('.mui-input-row input').input(); 
+  //iphoneX兼容
+  function isIphoneX() {
+    return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+  } 
+  if(isIphoneX()) {
+    // $(".card-record").css({"padding":"14% 0"})
+    $(".card-form").css({marginTop:"32%"})
+  }
+  //点击隐藏模态框
+  $('.model_content_clone').click(function(){
+    $('.card_model').hide();
+  })
+  //点击激活隐藏模态框显示toast框，激活成功
+  $('.model_content_btn').click(function(){
+    $('.card_model').hide();
+    $.ajax({
+        url : '/index/person/activeCourses'
+        ,data: {cid:cid}
+        ,dataType: 'json'
+        ,type: 'post'
+        ,async: false
+        ,success :function(e){
+            if(e.code == 0){
+                mui.toast('激活成功',{ duration:'1000', type:'div' })
+                // console.log(e.data);
+                cardactivation(e.data);
+            }
+        }
+    })
+     
+  })
+  // 修改tab切换
+  $('.card_tab li').click(function(){
+    var index = $(this).index();
+    $(this).addClass('card_tab_active').siblings().removeClass('card_tab_active');
+    $(this).find('div').addClass('card_tab_active_line').parent().siblings().find('div').removeClass('card_tab_active_line');
+    // $('.card_tab_content .content_div').eq(index).show().siblings().hide();
+    var gid = $(this).attr('data-v');
+    cardactivation(gid);
+  })
+  // 激活按钮
+  var cid;
+  $(document).on('click','div[name="activation"]',function(){
+    $('.card_model').show();
+      cid = $(this).attr('data-v');
+  })
+
+
+  var cardactivation = function (id = 7){
+      $.ajax({
+            url: '/index/person/cardactivation'
+            ,data: {gid:id}
+            ,dataType: 'json'
+            ,type: 'post'
+            ,success: function(e){
+                if(e.code == 1001){
+                  console.log(e.msg);
+                }
+                var html = '';
+                for(x in e.data){
+                  var class_name = '',btn_name = '激活',btn_class_name = '',btn_click = '',btn_class1 = 'menu_li_right';
+                  if(e.data[x].is_activate == 0){
+                    class_name = 'no_purchase';
+                    btn_name = '不可激活';
+                  }
+                  // 可激活
+                  if(e.data[x].is_activate == 1){
+                    class_name = 'yes_purchase';
+                    btn_click = 'activation';
+                  }
+                  // 剩余天数
+                  if(e.data[x].is_activate == 2){
+                    class_name = 'activated';
+                    btn_name = e.data[x]['residue_day'];
+                    btn_class1 = 'menu_li_right_text'
+                  }
+                  if(e.data[x].is_activate == 3){
+                    // persoanl-card-activation-select-already-activate
+                    class_name = 'activated';
+                    btn_name = '已过期';
+                  }
+                  html += '<li class="seven_menu_li">'+
+                          '<div class="menu_li_left '+class_name+'">'+
+                            '<span>'+e.data[x].name+'</span>'+
+                            '</div>';
+                  if(e.data[x].is_activate != 0){
+                    html += '<div class="'+btn_class1+'" name="'+btn_click+'" data-v="'+e.data[x].id+'">'+btn_name+'</div>';    
+                  }
+                  html += '</li>';
+                }
+
+                $('.card_content_seven_menu').html(html);
+            }
+      })
+  }
+
+  cardactivation();
+</script>

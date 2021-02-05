@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>学员分配</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+</head>
+<style type="text/css">
+	#test1{
+		text-align: center;
+	}
+
+</style>
+<body style="margin-top: 2em;margin-left: 4em;">
+	<div class="demoTable">
+		<div class="layui-inline" style="margin-right: 2em;">
+			全部学员：
+			<div class="layui-input-inline">
+				是：
+	   			<input type="radio" name="is_all" value="1" title="是" {if condition="$is_all eq 1"} checked {/if}>
+	   			否：
+     			<input type="radio" name="is_all" value="2" title="否" {if condition="$is_all eq 2"} checked {/if}>
+	   		</div>
+		</div>
+		<div class="layui-inline">
+			学员手机号：
+			<div class="layui-input-inline" id="videoList">
+				<input type="text" name="phone" id="phone" lay-verify="phone" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+			</div>
+		</div>
+	    <button class="layui-btn" id="getStudent">获取学员</button>
+	</div>
+	<table class="layui-hide" id="assign" lay-filter="demo"></table>
+	<script type="text/html" id="barDemo">
+		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	</script>
+	<div class="layui-form-item" style="padding-top: 20px;text-align: center;">
+		<div class="layui-input-block">
+			<button class="layui-btn" lay-submit="" lay-filter="selectOk" id="selectOk">立即提交</button>
+	    </div>
+	</div>
+	<input  type="hidden" name="students" id="students" value="{$students}">
+	<script type="text/javascript" src="__LAY__layui.js"></script>
+	<!-- <script type="text/javascript" src="__MANAGE__/js/testPaper/makePaper.js"></script> -->
+	<script type="text/javascript" src="__MANAGE__/js/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript">
+		layui.use(['form', 'layedit', 'laydate','table',"upload",'jquery'], function(){
+		    var form = layui.form;
+		        layer = layui.layer;
+		        layedit = layui.layedit;
+		        laydate = layui.laydate;
+		        table = layui.table; //表格
+		  	var students = $("#students").val();
+		    table.render({
+		        elem: '#assign'
+		        ,url:"/manage/testpaper_controller/getStudentsList?students="+students
+		        ,height:'full'
+		        ,cellMinWidth:80
+		        ,cols: [[
+		             {type: 'checkbox', fixed: 'left'}
+		            ,{field:'nickName', title: '姓名'}
+		            ,{field:'grade', title: '年级'}
+		            ,{field:'phone', title: '手机号'}
+		            ,{field:'lock',  title: '操作',toolbar: '#barDemo'}
+		        ]]
+		        ,id:'assign'
+		    });
+		    //获取新学员
+		    $('#getStudent').click(function(){
+		    	var phone = $("#phone").val();
+		    	var students = $("#students").val();
+		    	//获取学生id
+		    	$.post("/manage/testpaper_controller/getStudentInfo?students="+students,{phone:phone},function(data){
+                    if(data.error_code==0){
+	                    table.reload('assign', {
+						    url: '/manage/testpaper_controller/getStudentsList?students'
+						    ,where: {students:data.data} //设定异步数据接口的额外参数
+						});
+						$("#students").attr('value',data.data);
+						var students = data.data;
+                    }else{
+                        layer.msg(data.msg,{time:1500,icon: 5,});
+                    }
+                })
+		  
+		    });
+		    //删除
+		    table.on('tool(demo)', function(obj){
+		        var data = obj.data;
+		        var count = obj.count;
+		        var students = $("#students").val();
+		        if(obj.event==='del'){
+		                layer.confirm('真的删除吗？', function(index){
+		                    $.post("/manage/testpaper_controller/delStudent?students="+students,{id:data.id},function(data){
+		                    if(data.error_code==0){
+		                        layer.msg("删除成功",{time:400},function(){
+		                            obj.del();
+		                            layer.close(index);
+		                        });
+		                        $("#students").attr('value',data.data);
+								var students = data.data;
+		                    }else{
+		                        layer.msg("删除失败",{time:400});
+		                    }
+		                })
+
+		            });
+		        }
+		    });
+		    $('#selectOk').on('click',function(){
+		    	var students = $("#students").val();
+		    	var is_all =$('input:radio[name="is_all"]:checked').val();
+                parent.$("#students").val(students);
+                parent.$("#is_all").val(is_all);
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            });
+	    })
+	</script>
+</body>
+</html>

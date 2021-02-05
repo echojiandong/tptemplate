@@ -1,0 +1,32 @@
+ <!--开始学习之后  学习进度 -->
+    <!-- <div class="index-learning-rade-contain clearfix" style="display: none;">
+      <h4 class="index-learning-rade-tltle">学习进度</h4>
+      <p class="index-learning-rade-english">Rate of learning</p>
+    </div>
+    <div class="index-learning-rade-all clearfix" style="display: none;">
+      <div class="index-learning-rade">
+        <ul class="index-learning-rade-list clearfix">
+          {volist name="videoStudyList" key="k" id="val"}
+          {if($k < 4 )}
+          <li class="index-learning-rade-lis">
+            <div class="index-learning-rade-title">{$val.grade}{$val.subject}（{$val.semester}）</div>
+            <div class="index-learning-rade-msg clearfix">
+              <span class="index-learning-rade-span">课程共{$val.allPeriod}节</span>
+              <span class="index-learning-rade-span">总时长{$val.allTime}</span>
+              <span class="index-learning-rade-span">已学习{$val.studyPeriod}节课</span>
+              <span class="index-learning-rade-span">{if($val.studyPeriod != 0)}已学时长{$val.studyTime}{else}未学习{/if}</span>
+            </div>
+            <div class="layui-progress">
+              <div class="layui-progress-bar" lay-percent="{$val.studyPeriod/$val.allPeriod*100}%"></div>
+            </div>
+            <div class="index-learning-rade-bottom clearfix">
+              <div class="index-learning-rade-learn">
+              {if(empty($val.studyPeriod))}<a href="/index/course/courseParticulars?id={$val.video_class_id}">开始学习</a>{else}<a href="/index/course/courseParticulars?id={$val.video_class_id}&videoid={$val.video_id}&startTime={$val.study_time}">继续学习</a>{/if}</div>
+              <div class="index-learning-rade-check"><a href="/index/index/getClassList?id={$val.video_class_id}&person_id={$val.person_id}&intro={$val.intro}">查看列表</a></div>
+            </div>
+          </li>
+          {/if}
+          {/volist}
+        </ul>
+      </div>
+    </div> -->

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>用户列表</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+</head>
+<style>
+	.padding {
+		padding: 5px 2px 5px 0;
+	}
+	.laytable-cell-1-0-11{
+		width: 170px !important;
+	}
+</style>
+<body class="childrenBody" style="margin-top: 1em">
+<button class="layui-btn" lay-event="add" id="add">添加</button>
+<div class="layui-form demoTable">
+    名称：
+    <div class="layui-inline padding">
+        <input class="layui-input" name="keyword" id="keyword"  placeholder="搜索名称">
+	</div>
+	
+    <button class="layui-btn" data-type="reload" id="sousuo" style="margin-left: 5px;">搜索</button>
+</div>
+
+<table class="layui-hide" id="test" lay-filter="demo"></table>
+
+
+
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="info">查看</a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="edit">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript" src="__MANAGE__/js/datafile/index.js"></script>
+
+
+<script>
+		layui.config({
+			base: '/static/manage/layui/js/',
+		})
+	</script>
+</body>
+</html>

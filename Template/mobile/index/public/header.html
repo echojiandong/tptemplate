@@ -1,0 +1,20 @@
+<header class="mui-bar mui-bar-nav common-header">
+	<!-- <div class="common-select-grade common-header-select iconfont">选择年级</div> -->
+	<h1 class="common-title">E点就通</h1>
+	{if(!isset($user))}
+	<div class="login-register">
+		<div class="common-login"><a href="/index/login/commonLogin">登录</a></div>
+		<!-- <div class="common-register"><a href="/index/login/commonRegister">注册</a></div> -->
+	</div>
+	{else}
+    <div class="after-login"><img src="__PERSONIMG__{$personInfo.litpic?:'photo.jpg'}" alt=""></div>
+    {/if}
+</header>
+<nav class="header-nav-list">
+	<ul class="header-select-grade">
+		<li class="header-select-grade-lis" data-val='7'>初一年级</li>
+		<li class="header-select-grade-lis" data-val='8'>初二年级</li>
+		<!--  header-select-current -->
+		<li class="header-select-grade-lis" data-val='9'>初三年级</li>
+	</ul>
+</nav>

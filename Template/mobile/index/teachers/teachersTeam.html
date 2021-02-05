@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>E点就通名校名师同步课堂</title>
+    <script src="__mobile__/js/mui.min.js"></script>
+    <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__mobile__/css/style.css">
+</head>
+<body>
+  <!-- header -->
+  {include file="index/public/header"}
+  <!-- 顶部导航栏选择年级弹出部分 -->
+  <!-- content -->
+  <div class="mui-content teachers-page clearfix">
+    <section class="teachers-banner" style=" background: url(http://ydtvlitpic.ydtkt.com/teacher-banner-1.jpg)no-repeat center;
+    background-size: cover;"></section>
+    <div class="teachers-tab">
+      <div class="teachers-tab-lis teachers-tab-current">教研团队</div>
+      <div class="teachers-tab-lis">明星讲师</div>
+    </div>
+    <ul class="teachers-list clearfix">
+      <li class="teachers-lis active">
+        <ol class="teachers-lis-contain clearfix">
+          {volist name="data" id="v"}
+          {volist name="v.son" id="vo"}
+          <li class="teachers-contain-main" data-id="{$vo.id}">
+            <a href="/index/Teachers/getTeacherMobileInfo?id={$vo.id}">
+              <div class="teachers-contain-main-img"><img src="{$vo.litpic}" alt=""></div>
+              <div class="teachers-contain-main-right">
+                <h5 class="teachers-contain-main-title">{$vo.name}</h5>
+                <p class="teachers-contain-main-p">{$vo.false_cont}</p>
+              </div>
+            </a>
+          </li>
+          {/volist}
+          {/volist}
+        </ol>
+      </li>
+      <li class="teachers-lis"> 
+        <ol class="teachers-lis-contain clearfix">
+          {volist name="data1" id="v"}
+        
+          <li class="teachers-contain-main" data-id="{$v.id}">
+            <a href="/index/Teachers/getTeacherMobileInfo?id={$v.id}">
+              <div class="teachers-contain-main-img"><img src="{$v.litpic}" alt=""></div>
+              <div class="teachers-contain-main-right">
+                <h5 class="teachers-contain-main-title">{$v.name}</h5>
+                <p class="teachers-contain-main-p">{$v.false_cont}</p>
+              </div>
+            </a>
+          </li>
+          {/volist}
+        </ol>
+      </li>
+    </ul>    
+  </div>
+{include file="index/public/footer"}
+</body>
+</html>
+ <script src="__mobile__/js/jquery-2.2.3.js"></script>
+ <script src="__mobile__/js/fastclick.js"></script>
+<script src="__mobile__/js/iconfont/iconfont.js"></script>
+<script src="__mobile__/js/public.js"></script>
+<script>
+  mui.init();
+  function isIphoneX() {
+    return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+  } 
+  if(isIphoneX()) {
+    $(".course-change-list:first-child").css({"margin":"20% 0 0 4%"})
+    $(".course-list-change").css({height:"94%"})
+  }
+  $(".teachers-tab-lis").click(function() {
+    $(".teachers-tab-lis").removeClass("teachers-tab-current")
+    $(this).addClass("teachers-tab-current")
+    $(".teachers-lis").removeClass("active")
+    $(".teachers-lis").eq($(this).index()).addClass("active")
+  })
+</script>

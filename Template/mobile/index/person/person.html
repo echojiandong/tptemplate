@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="__mobile__/js/mui.min.js"></script>
+    <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__mobile__/css/style.css">
+    <title>E点就通名校名师同步课堂</title>
+</head>
+<body>
+  <header class="mui-bar mui-bar-nav common-header">
+    <div class="header-back iconfont iconxiangzuojiantou"><a href="javascript:;"></a></div>
+  </header>
+  <div class="all">
+    <div class="center-page">
+      <div class="person-top">
+        <!-- 登录前 -->
+        <!-- <div class="person-top-before-login clearfix">
+          <div class="person-before-login"><a href="javascript:;">登录</a></div>
+          <div class="person-before-login"><a href="javascript:;">注册</a></div>
+        </div> -->
+        <!-- 登录后 -->
+        <div class="person-img">
+          <div class="person-headportait">
+            <img src="__PERSONIMG__{$personInfo['litpic']|empty?'photo.jpg':$personInfo['litpic']}"  id='photo' alt="">
+          </div>
+          <p class="person-top-name">{$personInfo.nickName?:$personInfo.phone}</p>
+          <!-- 修改头像 -->
+          <div class="avatar-photo">
+            <form enctype="multipart/form-data" id="uploadForm">
+              <input type="file" id="upload" name="file" onchange="uploadImg(this.files)" accept="image/gif,image/jpeg,image/jpg,image/png" multiple="multiple" capture="camera" />
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <!-- 个人中心详细列表 -->
+      <ul class="center-ul">
+        <a href="/index/person/myCourse">
+          <li class="center-ul-lis">
+            <div class="center-msg">
+              <i class="iconfont iconshipin"></i>
+              <span class="center-msg-title">我的课程</span>
+            </div>
+            <i class="iconfont iconfont-arrow iconfanhui-copy-copy"></i>
+          </li>
+        </a>
+        <a href="/index/person/mySelect">
+          <li class="center-ul-lis">
+            <div class="center-msg">
+              <i class="iconfont iconshoucang"></i>
+              <span class="center-msg-title">我的收藏</span>
+            </div>
+            <i class="iconfont iconfont-arrow iconfanhui-copy-copy"></i>
+          </li>
+        </a>
+        <a href="/index/person/personMsg">
+          <li class="center-ul-lis">
+            <div class="center-msg">
+              <i class="iconfont icongerenxinxi"></i>
+              <span class="center-msg-title">个人信息</span>
+            </div>
+            <i class="iconfont iconfont-arrow iconfanhui-copy-copy"></i>
+          </li>
+        </a>
+        <a href="/index/person/myMessage">
+          <li class="center-ul-lis">
+            <div class="center-msg">
+              <i class="iconfont iconxiaoxizhongxin"></i>
+              <span class="center-msg-title">消息中心</span>
+            </div>
+            <i class="iconfont iconfont-arrow iconfanhui-copy-copy"></i>
+          </li>
+        </a>
+        <a href="/index/person/myCard">
+          <li class="center-ul-lis">
+            <div class="center-msg">
+              <i class="iconfont iconqiahao"></i>
+              <span class="center-msg-title">卡号激活</span>
+            </div>
+            <i class="iconfont iconfont-arrow iconfanhui-copy-copy"></i>
+          </li>
+        </a>
+        <a href="javascript:;" class="exit-login">
+          <li class="container-exit">退出登录</li>
+        </a>
+      </ul>
+    </div>
+  </div>
+ <!-- footer -->
+  {include file="index/public/footer"}
+</body>
+</html>
+<script src="__mobile__/js/jquery-2.2.3.js"></script>
+<script src="__mobile__/js/fastclick.js"></script>
+<script src="__mobile__/js/iconfont/iconfont.js"></script>
+<script src="__mobile__/js/public.js"></script>
+<script>
+  mui.init();
+  // mui('.mui-input-row input').input(); 
+  //iphoneX兼容
+  function isIphoneX() {
+    return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+  } 
+  if(isIphoneX()) {
+    $(".center-ul").css({"margin":"18.25% auto 0"})
+
+  }
+  //上传头像
+function uploadImg(files){
+	if(files.length){
+		var file=files[0];
+    console.log(files);
+    console.log(file);
+    var formData = new FormData($("#uploadForm")[0])  //创建一个forData
+    formData.append('file', file) //把file添加进去  name命名为img
+		var reader=new FileReader();
+		reader.readAsDataURL(file)
+		reader.onload=function(e){
+      var _this = this;
+      $.ajax({
+        url: 'setPersonImg'
+        ,data: formData
+        ,processData: false
+        ,contentType : false
+        ,dataType: 'json'
+        ,type: 'post'
+        ,success:function(res){
+            $("#photo").attr("src",_this.result);
+        }
+      })
+		}
+
+	}
+}
+// 列表点击事件
+$(".center-ul-lis").click(function(){
+  $(".center-ul-lis").removeClass("center-active")
+  $(this).addClass("center-active")
+})
+//页面回退
+$('.header-back').click(function(){
+  window.history.back(-1);
+})
+
+var file = document.querySelector('input');
+console.log(file)
+  if (getIos()) {
+      file.removeAttribute("capture");
+  }
+  function getIos() {
+      var ua=navigator.userAgent.toLowerCase();
+      if (ua.match(/iPhone\sOS/i) == "iphone os") {
+        console.log(ua)
+          return true;
+      } else {
+          return false;
+      }
+  }
+
+</script>

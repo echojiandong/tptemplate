@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章添加--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__MANAGE__/css/menu.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+</head>
+<style>
+	.site-doc-icon li {
+		display: inline-block;
+		vertical-align: middle;
+		width: 127px;
+		line-height: 25px;
+		padding: 20px 0;
+		margin-right: -1px;
+		margin-bottom: -1px;
+		border: 1px solid #e2e2e2;
+		font-size: 14px;
+		text-align: center;
+		color: #666;
+		transition: all .3s;
+		-webkit-transition: all .3s;
+	}
+	.site-doc-icon li .layui-icon {
+		display: inline-block;
+		font-size: 30px;
+	}
+</style>
+<body class="childrenBody">
+	<form class="layui-form" action="javascript:" style="margin-top:30px">
+		<div class="layui-form-item">
+			<label class="layui-form-label">卡号</label>
+			<div class="layui-input-block" style="width:260px">
+				<input name="card" type="text" class="layui-input newsName" lay-verify="card"  value="">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">用户昵称</label>
+			<div class="layui-input-block" style="width:260px">
+				<input name="nickName" type="text" class="layui-input newsName" lay-verify="nickName"  value="">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">用户手机号</label>
+			<div class="layui-input-block" style="width:260px">
+				<input name="phone" type="text" class="layui-input newsName" lay-verify="phone"  value="">
+			</div>
+		</div>
+		<!-- <div class="layui-form-item">
+		<label class="layui-form-label" style="display: block">收款二维码</label>
+			<div class="site-demo-upload">
+				<div class="layui-upload-drag" id="test10">
+					<i class="layui-icon"></i>
+					<p>点击上传，或将文件拖拽到此处</p>
+				</div>
+				<img id="testImg" style="width: 300px; height: 135px; display: none;  margin-top: -60px;" src=""/>
+				<input type="hidden" name="payImg"  id="image" lay-verify="image">
+			</div>
+		</div> -->
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="addOrder" >立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		    </div>
+		</div>
+	</form>
+	<script type="text/javascript" src="__LAY__layui.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/order/addOrderPerson.js"></script>
+</body>
+
+</html>

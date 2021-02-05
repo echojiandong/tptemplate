@@ -1,0 +1,87 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"D:\tp\ywd100\application/../Template/mobile/index\course\audio.html";i:1598606566;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <title>张雪燕</title>
+  <link rel="stylesheet" href="/static/mobile/css/mui.min.css">
+  <link rel="stylesheet" href="/static/mobile/css/zhangxueyan.css">
+</head>
+<body>
+  <!-- 音频地址，不做展示 -->
+    <audio  id="audio">
+      <source src="<?php echo $res['link']; ?>">
+    </audio>
+  <div class="audio-play clearfix">
+    <div class="audio-play-top">
+      <div class="audio-play-icon">
+        <a href="/index/course/course" class="audio-play-back"></a>
+        <div class="audio-play-div">
+          <h3 class="audio-play-title"><?php echo $res['outline']; ?></h3>
+          <p class="audio-play-name">张雪燕</p>
+        </div>
+      </div>
+      <div class="audio-play-btn">
+        <img class="audio-play-bang" src="/static/mobile/images/zhang-1.png">
+        <div class="audio-play-img clearfix">
+            <img src="/static/mobile/images/litpic.png" alt="" class="">
+            
+        </div>
+        <div class="audio-play-play">
+            <img id="pause" src="/static/mobile/images/pause.png" alt="">
+            <img id="play" src="/static/mobile/images/play.png" alt="">
+        </div>
+      </div>
+    </div>
+    <!-- content -->
+    <div class="audio-play-content">
+      <div class="audio-play-content-top clearfix">
+        <h4><?php echo $res['outline']; ?></h4>
+        <span class="audio-play-item">教育培训</span>
+        <span class="audio-play-num"><i class="audio-play-listen"></i><?php echo $res['likes']; ?>+</span>
+      </div>
+      <div class="audio-play-introduce">
+        <h5>课程简介</h5>
+        <p>
+            <?php echo $res['skill']; ?>                   
+        </p>
+      </div>
+      <div class="audio-play-introduce">
+          <h5>老师介绍</h5>
+          <p class="audio-play-name">张雪燕 <span>中国青少年教育专家</span></p>   
+          <ul class="introduce-ul">
+            <li><i class="introduce-ul-i"></i>国家高师级心理咨询师</li>
+            <li><i class="introduce-ul-i"></i>家庭教育专家团专家</li>
+            <li><i class="introduce-ul-i"></i>拥有12年家庭教育工作专业经历</li>
+            <li><i class="introduce-ul-i"></i>讲授全国大型讲座1800余场著作：《爱的正能量》、《父母卷》等</li>
+            <li><i class="introduce-ul-i"></i>一对一辅导帮助家庭3000余个</li>
+            <li><i class="introduce-ul-i"></i>帮助无数孩子成功逆袭，其中不乏目前已就读清华大学、北京大学、悉尼大学、中国人民大学等世界一流大学</li>
+            <li><i class="introduce-ul-i"></i>著作：《爱的正能量》、《父母卷》等</li>
+          </ul>       
+        </div>
+    </div>
+  </div>
+</body>
+</html>
+<script src="/static/mobile/js/jquery-2.2.3.js"></script>
+<script>
+    var audioPlay = $("#audio")[0];
+    $(".audio-play-play #pause").click(function() {
+      $(this).hide()
+      $(".audio-play-img").addClass("rotate")
+      $(".audio-play-bang").addClass("audio-play-bang-click")
+      time = setTimeout(function() {
+        $("#play").css({opacity:".5"})
+      },1500)
+      audioPlay.play()
+    })
+    $(".audio-play-play #play").click(function() {
+      $("#pause").show()
+      $(".audio-play-img").removeClass("rotate")
+      $(".audio-play-bang").removeClass("audio-play-bang-click")
+      audioPlay.pause()
+      clearTimeout(time)
+      $("#play").css({opacity:"1"})
+    })
+</script>

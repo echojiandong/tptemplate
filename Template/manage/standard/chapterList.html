@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>书本章节列表</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+</head>
+<body class="childrenBody" style="margin-top: 1em">
+<table class="treetable layui-table" id='treeTable'>
+	<thead>
+		<tr><th>名称</th><th>年级</th><th>学科</th><th>版本</th><th>书本</th><th>排序</th><th>是否显示</th><th width="170">管理操作</th></tr>
+	</thead>
+	{if(!empty($list))}
+	<tbody>
+		{volist name="list" id="val"}
+			<tr data-tt-id="{$val.id}" data-tt-parent-id="{$val.s_parent_id}">
+				<td width="200">{$val.chapter_name}</td>
+				<td>{$val.s_grade}</td>
+				<td>{$val.s_subject}</td>
+				<td>{$val.s_edition}</td>
+				<td>{$val.s_book}</td>
+				<td>{$val.s_sort}</td>
+				<td>{$val.s_sort == 1 ? '显示':'不显示'}</td>
+				<td>
+					<a class="layui-btn layui-btn-xs" lay-event="addSon">添加子菜单</a>
+					<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="editStandard">编辑</a>
+					<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delStandard">删除</a>
+				</td>
+			</tr>
+		{/volist}		
+	</tbody>
+	{/if}
+</table>
+
+<script type="text/html" id="switchTpl">
+	<input type="checkbox" name="sex" value="{{d.id}}" bid="{{d.isShow}}" lay-skin="switch" lay-text="显示|隐藏" lay-filter="sexDemo" {{ d.isShow == 1 ? 'checked' : '' }}>
+</script>
+
+<script type="text/html" id="images">
+	<img src="{{d.pic}}" onclick='layui.bigimg(this)'/>;
+</script>
+<script type="text/html" id="timestamp">
+	{{laytpl.toDateString(d.createTime)}}
+</script>
+
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-xs" lay-event="showLive">详情</a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="editLive">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delLive">删除</a>
+</script>
+
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript" src="__MANAGE__/js/standard/standardList.js"></script>
+<script type="text/javascript" src="__MANAGE__/js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="__LAY__jquery.treetable.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#treeTable').treetable({expandable: true,
+          	    initialState: "expanded"
+      		});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="applicable-device" content="pc">
+  <meta name="renderer" content="webkit"/>
+  <meta name="force-rendering" content="webkit"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <title>E点就通名校名师同步课堂</title>
+  <link rel="stylesheet" href="__PUBLIC__/css/layui.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+</head>
+<body>
+  <!-- header -->
+  {include file="index/public/header"}
+  <!-- contain -->
+  <div class="vertify-contain clearfix">
+    <div class="vertify-contain-all">
+      <div class="vertify-title"><h2>官方微信客服查询系统</h2></div>
+      <form class="layui-form service-search-form" action="">
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <input type="text" name="weixin" required  lay-verify="required" placeholder="请输入微信客服号码   如：gjh520177" autocomplete="off" class="layui-input service-search-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button class="layui-btn service-search-submit" lay-submit lay-filter="serviceSearch">查询</button>
+          </div>
+        </div>
+      </form>
+      <div class="service-search-result"></div>
+    </div>
+  </div>
+  <!-- footer -->
+   {include file="index/public/footer"}
+</body>
+<script src="__PUBLIC__/js/jquery-2.2.3.js"></script>
+<script>
+layui.use(['element','layer', 'form','carousel','laypage'], function(){
+  var layer = layui.layer
+      ,element = layui.element
+      ,form = layui.form
+      ,carousel = layui.carousel
+      ,laypage = layui.laypage;
+
+      
+
+  //监听提交
+  form.on('submit(serviceSearch)', function(data){
+    $.post('/index/service/getServerWeiXin',data.field,function(data){
+        if(data.msg=='success'){
+          $(".service-search-result").html(data.data);
+        }else{
+          $(".service-search-result").html(data.msg);
+        }
+    });
+    $(".service-search-result").fadeIn()
+    return false;
+  });
+  
+  $(".teachers-team-lis-msg").each(function() {
+    var maxwidth = 60;
+    if ($(this).text().length > maxwidth) {
+      $(this).text($(this).text().substring(0, maxwidth));
+      $(this).html($(this).html() + '...');
+    }
+  })
+
+});
+
+</script> 
+</html>

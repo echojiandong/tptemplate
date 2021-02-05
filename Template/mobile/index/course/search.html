@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>E点就通名校名师同步课堂</title>
+    <script src="__mobile__/js/mui.min.js"></script>
+    <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__mobile__/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mescroll.js@1.4.1/mescroll.min.css">
+    <style type="text/css">
+      .mescroll{
+        position: fixed;
+        top: 12%;
+        bottom: 0;
+        height: auto; /*如设置bottom:50px,则需height:auto才能生效*/
+      }
+      @media (max-width:320px) {
+        .mescroll{
+          top: 15%;
+        }
+      }
+    </style>
+</head>
+<body>
+  <!-- header -->
+  <header class="mui-bar mui-bar-nav common-header">
+		<div class="search-back iconfont iconxiangzuojiantou"><a href="javascripy:;"></a></div>
+		<form action="" class="course-search-form search-gobal-form">
+      <div class="course-search-btn iconfont iconguanbi"></div>
+      <input type="text" class="mui-input-clear" value='{$search_name}' placeholder="">
+    </form>
+    <div class="search-cancel" onclick="javascript:$('.search-back').click()">取消</div>
+  </header>
+  <!-- 顶部导航栏选择年级弹出部分 -->
+  <!-- content -->
+  <div class="mui-content search-page clearfix">
+    <ul class="search-tab">
+      <li class="search-tab-lis search-tab-current" data-val='1'>全部<span id='count1'>({$count[0]})</span></li>
+      <li class="search-tab-lis" data-val='2'>课程<span id='count2'>({$count[1]})</span></li>
+      <li class="search-tab-lis" data-val='3'>知识点<span id='count3'>({$count[2]})</span></li>
+    </ul>
+    <div id="mescroll" class="mescroll search-list clearfix">
+        <ul class="search-list-lis-course clearfix">
+        </ul>
+  </div>
+  </div>
+</body>
+</html>
+<script src="__mobile__/js/jquery-2.2.3.js"></script>
+<script src="__mobile__/js/fastclick.js"></script>
+<script src="__mobile__/js/public.js"></script>
+<script src="__mobile__/js/iconfont/iconfont.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mescroll.js@1.4.1/mescroll.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+    sessionStorage.setItem('page_search',1);
+    //a标签跳转
+    mui('body').on('tap','a',function(){
+        window.top.location.href=this.href;
+    });
+    //页面回退
+    $('.search-back').click(function(){
+        window.history.back(-1);
+    })
+    //tab 切换
+    $(".search-tab-lis").click(function() {
+        $(".search-tab-lis").removeClass("search-tab-current")
+        $(this).addClass("search-tab-current")
+        inputSearch();
+    })
+    //点击搜索
+    $('.course-search-btn').click(function(){
+        inputSearch();
+    })
+    //失去焦点
+    $('.mui-input-clear').blur(function(){
+        inputSearch();
+    })
+
+    function inputSearch(){
+        $(".search-list").children('ul').empty();
+        sessionStorage.setItem('page_search',1);
+        var page = {num:1,size:20,time:null}
+        globeSearch(page);
+    } 
+    var mescroll = new MeScroll('mescroll',{
+        //下拉刷新
+        down: {
+            callback: function(){
+                mescroll.endSuccess();
+            }
+        },
+        //上拉加载
+        up: {
+            callback: globeSearch,          //回调
+
+            page: {
+                num: 0,
+                size: 20
+            },
+            htmlNodata: '<p class="upwarp-nodata">-- 我是有底线的 --</p>',
+            noMoreSize: 5,
+            empty: {
+                //列表第一页无任何数据时,显示的空提示布局; 需配置warpId才显示
+                warpId: "mescroll", //父布局的id (1.3.5版本支持传入dom元素)
+                icon: "", //图标,默认null,支持网络图
+                tip: "暂无相关数据~" //提示
+            },
+
+        }
+    })
+  function globeSearch(page,status = 1){
+     var page = sessionStorage.getItem('page_search');
+     //搜索名称
+     var search_name = $('.mui-input-clear').val();
+     //类型
+     var data_val = $('.search-tab-current').attr('data-val');
+     //页码
+     $.ajax({
+        url: 'web_search'
+        ,data: {name:search_name,data_val:data_val,page:page}
+        ,dataType: 'json'
+        ,type: 'post'
+        ,async: false
+        ,success:function(res){
+            var curPageData = res.data.list;
+            $('#count1').html('('+res.data.count[0]+')');
+            $('#count2').html('('+res.data.count[1]+')');
+            $('#count3').html('('+res.data.count[2]+')');
+            // console.log(res.code == 1 && res.data.list.length != 0)
+            if(res.code == 1 && res.data.list.length != 0){
+                $.each(res.data.list,function(i,v){
+                    let li = $('<li class="search-list-course-lis"></li>');
+                    let a_href = v.start_time != undefined?'id='+v.kid+'&videoid='+v.id+'&startTime='+v.start_time:'id='+v.kid+'&videoid='+v.id;
+                    li.append('<a href="/index/course/goWx"><div class="search-course-img"><img src="'+v.img+'" alt=""></div><p class="search-course-msg">'+v.k_name+'</p></a>');
+                    $(".search-list").children('ul').append(li);
+                })
+            }else{
+                $(".search-list").children('ul').html('暂无数据');
+            }
+            var bool = 20*parseInt(page) > res.data.count[data_val-1]?false:true;
+            mescroll.endSuccess(20*parseInt(page)+1, bool);
+            sessionStorage.setItem('page_search',parseInt(page)+1);
+        },error: function(e){
+            mescroll.endErr();
+        }
+     })
+
+  }
+</script>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章添加--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__MANAGE__/css/menu.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__ueditor.config.js"></script> -->
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__ueditor.all.min.js"> </script> -->
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__lang/zh-cn/zh-cn.js"></script> -->
+</head>
+<style>
+	.site-doc-icon li {
+		display: inline-block;
+		vertical-align: middle;
+		width: 127px;
+		line-height: 25px;
+		padding: 20px 0;
+		margin-right: -1px;
+		margin-bottom: -1px;
+		border: 1px solid #e2e2e2;
+		font-size: 14px;
+		text-align: center;
+		color: #666;
+		transition: all .3s;
+		-webkit-transition: all .3s;
+	}
+	.site-doc-icon li .layui-icon {
+		display: inline-block;
+		font-size: 30px;
+	}
+	.input-width {
+		width: 250px;
+	}
+	.layui-checkbox-disbaled span {
+	    background-color: #5FB878!important;
+	}
+</style>
+<body class="childrenBody">
+	<form class="layui-form" action="javascript:">
+		<input type="hidden" name="id" class="layui-input" value="{$info.0.order_id}">
+		<input type="hidden" name="order_type" class="layui-input" value="{$info.0.order_type}"> <!-- //试听课 -->
+		<input type="hidden" name="type" class="layui-input" value="{$type}">
+		<input type="hidden" name="check" class="layui-input" value="{$check}">
+		<div class="layui-form-item">
+			<label class="layui-form-label">订单号</label>
+			<div class="layui-input-block">
+				<input name="order" type="text" class="layui-input newsName" lay-verify="card" disabled="disabled" value="{$info.0.order}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">管理员名称</label>
+			<div class="layui-input-block">
+				<input name="username" type="text" class="layui-input newsName" lay-verify="username" disabled="disabled" value="{$info.0.username}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">管理员联系方式</label>
+			<div class="layui-input-block">
+				<input name="phone" type="text" class="layui-input newsName" disabled="disabled" value="{$info.0.phone}">
+			</div>
+		</div>
+		{volist name="info" id="val"}
+			<div class="layui-input-inline top">
+				<label class="layui-form-label">{$val.classViderInfo}：</label>
+				<div class="layui-input-inline input-width">
+					<input type="text" name="order_num[]" class="layui-input newsAuthor" disabled lay-verify="state" autocomplete="off"  value="{$val.order_num}">
+					<input type="hidden" name="order_user_id[]" class="layui-input newsAuthor"  lay-verify="state" autocomplete="off"  value="{$val.id}">
+					<input type="hidden" name="video_class_id[]" class="layui-input newsAuthor"  lay-verify="state" autocomplete="off"  value="{$val.video_class_id}">
+					<input type="hidden" name="product_id[]" class="layui-input newsAuthor"  lay-verify="state" autocomplete="off"  value="{$val.product_id}">
+				</div>
+			</div>
+		{/volist}
+		<div class="layui-form-item">
+			<label class="layui-form-label">订单价格</label>
+			<div class="layui-input-block">
+				<input name="money" type="text" class="layui-input newsName" lay-verify="money" disabled value="{$info.0.price}">
+			</div>
+		</div>
+		<!-- <div class="layui-form-item">
+			<label class="layui-form-label">支付金额</label>
+			<div class="layui-input-block">
+				<input name="payMoney" type="text" class="layui-input newsName" lay-verify="payMoney" value="{$info.0.payMoney?$info.0.payMoney:$info.0.price}">
+			</div>
+		</div> -->
+		<div class="layui-form-item">
+			<label class="layui-form-label">订单类型：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="rebate" class="layui-input newsAuthor" lay-verify="rebate" id="rebate"  disabled value="{$info.0.order_type==1?'正式课':'试听课'}" >
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">下单时间</label>
+			<div class="layui-input-block">
+				<input name="strtime" type="text" class="layui-input newsName" lay-verify="password" disabled="disabled" value="{$info.0.strtime|date='Y-m-d',###}">
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">订单状态</label>
+			<div class="layui-input-block">
+				<input type="radio" name="state" value="1" title="待支付" {if($info.0.state == 1)}checked{/if}>
+				<input type="radio" name="state" value="2" title="已支付" {if($info.0.state == 2)}checked{/if}>
+			</div>
+		</div>
+		{if $check == 1}
+			{if $type == 1}
+			<!-- 内部审核 -->
+				<div class="layui-form-item">
+					<label class="layui-form-label">审核状态</label>
+					<div class="layui-input-block">
+						<input type="radio" name="orderCheck"  value="1"  title="待审核" {if($info.0.orderCheck == 1)}checked{/if}>
+						<input type="radio" name="orderCheck"  value="3"  title="审核通过" {if($info.0.orderCheck == 3)}checked{/if}>
+						{if($info.0.orderCheck == 4)}
+						<input type="radio" name="orderCheck"  value="4"  title="审核完成" {if($info.0.orderCheck == 4)}checked{/if}>
+						{/if}
+						<input type="radio" name="orderCheck" value="5" title="审核不通过" {if($info.0.orderCheck == 5)}checked{/if}>
+					</div>
+				</div>
+			{elseif($type == 2)}
+			<!-- 父级审核 -->
+				<div class="layui-form-item">
+					<label class="layui-form-label">审核状态</label>
+					<div class="layui-input-block">
+						<input type="radio" name="orderCheck"  value="3"  title="待审核" {if($info.0.orderCheck == 3)}checked{/if}>
+						<input type="radio" name="orderCheck"  value="4"  title="审核通过" {if($info.0.orderCheck == 4)}checked{/if}>
+						<input type="radio" name="orderCheck" value="5" title="审核不通过" {if($info.0.orderCheck == 5)}checked{/if}>
+					</div>
+				</div>
+			{/if}
+			<div class="layui-form-item">
+				<label class="layui-form-label">备注</label>
+				<div class="layui-input-block">
+					<textarea name="remark" placeholder="如果审核不通过，请注明审核不通过原因" class="layui-textarea">{$info.0.remark}</textarea>
+				</div>
+			</div>
+		{/if}
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="editOrder" >立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		    </div>
+		</div>
+	</form>
+	<script type="text/javascript" src="__LAY__layui.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/order/editOrder.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/jquery-3.2.0.min.js"></script>
+</body>
+</html>

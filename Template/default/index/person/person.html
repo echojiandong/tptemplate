@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="applicable-device" content="pc">
+  <meta name="renderer" content="webkit" />
+  <meta name="force-rendering" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+  <title>E点就通名校名师同步课堂</title>
+  <link rel="stylesheet" href="__PUBLIC__/css/modules/laydate/default/laydate.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/layui.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/jquery.mCustomScrollbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+  <style>
+    .select_form {
+      /* position: absolute;
+    top: 36px;
+    right: 18px; */
+      float: left;
+      margin: 0px 0 0 36px;
+    }
+
+    .select_form .layui-select-title {
+      width: 116px !important;
+      position: relative;
+    }
+
+    .select_form .layui-form-select dl {
+      width: 116px;
+      min-width: 116px;
+      top: 46px;
+      padding: 0;
+    }
+
+    .select_form .layui-input {
+      width: 116px;
+      height: 31px;
+      color: #565B67;
+      font-weight: 600;
+    }
+
+    .select_form .layui-input {
+      /* // padding-left: 26px; */
+      text-align: center;
+    }
+
+    .select_form .layui-form-select .layui-edge {
+      right: 23px;
+    }
+
+    .select_form .layui-form-select dl dd {
+      color: #565B67;
+      text-align: center;
+    }
+
+    .select_form .layui-form-select dl dd.layui-select-tips {
+      color: #565B67;
+    }
+
+    .select_form .layui-form-select dl dd.layui-this {
+      background: rgba(234, 234, 237, 1);
+      color: #565B67;
+    }
+
+    .select_form .layui-form-select .layui-input {
+      padding-right: 20px;
+    }
+
+    .select_form .layui-input,
+    .layui-textarea {
+      padding-left: 0;
+    }
+
+    .verification-activation-modal {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 509;
+      display: none;
+    }
+
+    .verification-activation-confirm {
+      width: 349px;
+      background: #fff;
+      box-shadow: 0 2px 43px 0 rgba(0, 0, 0, 0.14);
+      border-radius: 10px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: auto;
+      margin: 0;
+      right: auto;
+      bottom: auto;
+      z-index: 520;
+      display: none;
+    }
+
+    .verification-activation-power {
+      width: 100% !important;
+    }
+
+    .verification-activation-modal-confirm-btn {
+      margin-bottom: 40px !important;
+    }
+
+    .verification-activation-confirm .verification-activation-modal-confirm-close {
+      width: 31px;
+      height: 31px;
+      position: absolute;
+      top: -25px;
+      right: -25px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 29px;
+      font-size: 16px;
+      background: #eee;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .verification-activation-confirm .verification-activation-power {
+      display: inline-block;
+      width: 100%;
+      font-size: 20px;
+      line-height: 32px;
+      color: #DF4A43;
+      text-align: center;
+      margin: 40px auto 15px;
+    }
+
+    .verification-activation-confirm .verification-activation-modal-confirm-btn {
+      width: 80%;
+      height: 39px;
+      margin: 0 auto;
+      text-align: center;
+      line-height: 39px;
+      font-size: 20px;
+      color: #fff;
+      background: #DF4A43;
+      border-radius: 25px;
+      margin-top: 36px;
+      cursor: pointer;
+    }
+    .evaluation-particular-lis-img img{
+      width: 150px;
+    }
+    .layui-input-right img{
+      width: 150px;
+    }
+
+    /*0318*/
+    .evaluation-particular-lis-block p{
+      display: initial;
+    }
+
+   
+  </style>
+</head>
+
+<body>
+  <!-- 公共头部 -->
+  {include file="index/public/header"}
+  <!-- 公共头部 -->
+  <!-- 列表 -->
+  <input type="hidden" id="_type" value="{$_type}">
+  <div class="personal-contain clearfix">
+    <!-- 个人中心波浪 -->
+    <div class="personal-wave">
+      <div class="personal-planet">
+        <div class="planet-bg">
+          <img src="__PUBLIC__/images/beiji.png" alt="" />
+        </div>
+        <div class="star s1"></div>
+        <div class="star s2"></div>
+        <div class="star s3"></div>
+      </div>
+      <div class="star-wave">
+        <i class="wave w1"></i>
+        <i class="wave w2"></i>
+        <i class="wave w3"></i>
+      </div>
+    </div>
+    <!-- 用户基本信息 -->
+    <div class="personal-center-top clearfix">
+      <div class="personal-center-top-portrait">
+        <a href="/index/person/setPersonImg">
+          <img
+            src="{$personInfo['litpic']|empty?'/upload/uploads/photo.jpg':'http://ydtvlitpic.ydtkt.com/'.$personInfo['litpic']}"
+            alt="">
+          <i class="personal-center-change-pic"></i>
+        </a>
+      </div>
+      <div class="personal-center-top-center clearfix">
+        <h5 class="personal-center-top-id">ID:<span>{$personInfo['nickName']?:$personInfo['phone']}</span></h5>
+        <ul class="personal-center-top-icon clearfix">
+          {volist name='subject' id='vo'}
+          <li class="personal-center-icon-lis"><img
+              src="__PUBLIC__/images/icon{$vo.subject}{$vo.is_buy == 0? 0 : 1}.png" alt=""></li>
+          {/volist}
+        </ul>
+        <div class="layui-form select_form">
+          <select name="city" lay-filter="grade" lay-verify="" class="course_select">
+            <option value="7" data-v="1" class {if condition="$userGrade eq 7" } selected {/if}>初一</option>
+            <option value="8" data-v="1" {if condition="$userGrade eq 8" } selected {/if}>初二</option>
+            <option value="9" data-v="1" {if condition="$userGrade eq 9" } selected {/if}>初三</option>
+          </select>
+        </div>
+      </div>
+      <!-- <div class="personal-center-top-right">
+      <div class="personal-center-top-grade personal-center-top-grade-click" data-value="7">七年级</div>
+      <div class="personal-center-top-grade" data-value="8">八年级</div>
+      <div class="personal-center-top-grade" data-value="9">九年级</div>
+
+    </div> -->
+      <!-- <div class="personal-center-top-right">
+      <div class="personal-center-right">
+        <p class="personal-center-right-mesage">消息</p>
+        <p class="personal-center-mesage-num">{$message_count}</p>
+      </div>
+      <div class="personal-center-right">
+        <p class="personal-center-right-mesage">收藏</p>
+        <p class="personal-center-mesage-num">{$collect_count}</p>
+      </div>
+    </div> -->
+      <!-- 下拉框 -->
+    </div>
+    <!-- tab切换 -->
+    <div class="personal-center-tab">
+      <div class="personal-center-tab-left">
+        <div class="personal-tab-left-lis personal-left-current" data-val="1">
+          <i class="iconfont icon-bofang11  icon-current" data-val="1"></i>
+          <span>我的课程</span>
+        </div>
+        <div class="personal-tab-left-lis" data-val="2">
+          <i class="iconfont icon-shoucang"></i>
+          <span>我的收藏</span>
+        </div>
+        <div class="personal-tab-left-lis" data-val="3">
+          <i class="iconfont icon-shenhebijijishibenxiezi"></i>
+          <span>学习笔记</span>
+        </div>
+        <div class="personal-tab-left-lis" data-val="4">
+          <i class="iconfont icon-gerenxinxi"></i>
+          <span>个人信息</span>
+        </div>
+        <div class="personal-tab-left-lis personal-msg-center" data-val="5">
+          <i class="iconfont icon-xiaoxizhongxin"></i>
+          <span>消息中心</span>
+        </div>
+        <!-- <div class="personal-tab-left-lis" data-val="6">
+        <i class="iconfont icon-membership-card_icon "></i>
+        <span>激活课程</span>
+      </div> -->
+        <!-- 2020-2-7 王莹添加 -->
+        <div class="personal-tab-left-lis" data-val="6">
+          <i class="iconfont icon-shenhebijijishibenxiezi"></i>
+          <span>评测信息</span>
+        </div>
+        <!-- 2020-2-7 王莹添加 -->
+        <!-- 2020-2-27 王莹添加 -->
+        <div class="personal-tab-left-lis" data-val="7">
+          <i class="iconfont icon-shenhebijijishibenxiezi"></i>
+          <span>错题本</span>
+        </div>
+        <!-- 2020-2-27 王莹添加 -->
+        <!-- 学习周报 -->
+        <div class="personal-tab-left-lis" data-val="8">
+          <i class="iconfont icon-bofang11"></i>
+          <span>学习周报</span>
+        </div>
+        <!-- 学习周报 -->
+      </div>
+      <!-- 右侧部分 -->
+      <ul class="personal-center-tab-right clearfix">
+        <!-- 我的课程 -->
+        <li class="personal-tab-right-lis active">
+          <!-- <div class="personal-center-course-tab clearfix">
+          <ul class="personal-center-course-top clearfix" id="myClassSubject">
+            {volist name="subject" id="vo" empty="暂时没有数据" key='key'}
+              <li class="person-center-course-subject {$key == 1&&$vo['is_buy'] == 0?'personal-subject-not-buy':''} {$key == 1&&$vo['is_buy'] == 1?'personal-course-subject-active':''} {$vo['is_buy'] == 0&&$key != 1?'personal-subject-default':''}" data-seme='1' data-val="{$vo['is_buy']}" data-id='{$vo["id"]}'>
+                <span class="personal-subject">{$vo.subject}</span>
+              </li>
+            {/volist}
+          </ul> 
+          <div class="personal-center-course-volume clearfix">
+            <div class="personal-center-volume {$s_status[0] == 1?'personal-volume-buy-active':'personal-volume-not-buy-style'}"  data-subject='1' data-item="{$s_status[0] == 0?0:1}" data-value='1'>上册</div>
+            <div class="personal-center-volume {$s_status[1] == 0?'personal-volume-not-buy':''}" data-item="{$s_status[1] == 0?0:1}" data-value='2' data-subject='1'>下册</div>
+            <div class="personal-center-subject-exhibition">
+              <div class="personal-subject-exhibition-buy clearfix">
+                <span class="person-course-subject-num" id="courseNumber节">课程节数{$list['counts']}节</span>
+                <span class="person-course-subject-already" id="learnedNumber">已学25节</span>
+                <div class="person-course-prev-course" id="nodeNumber">继续学习</div>
+              </div>
+              <div class="personal-subject-exhibition-notbuy clearfix">
+                <span class="person-course-subject-num">课程节数 {$list['counts']}节</span>
+              </div>
+            </div>
+          </div> -->
+          <!-- 课程目录 -->
+          <!-- <ul class="personal-center-course-contain clearfix">
+            <li class="personal-course-contain-lis personal-center-not-buy active">
+              <ol class="layui-collapse" lay-accordion>
+                {volist name='list["data_arr"][0]' id='vo' empty="暂时没有数据"}
+                  <li class="layui-colla-item">
+                    <h2 class="layui-colla-title {$s_status[0] == 1?'':'personal-not-buy-style'}"><span>{$vo['testclass']}</span></h2>
+                    {if($vo.part != 2)}
+                        <div class="layui-colla-content {$key == 0?'layui-show':''}"> -->
+          <!-- 目录 -->
+          <!-- {volist name="vo['treelist']" id='vo1'}
+                          <dl class="personal-course-container personal-center-not-buy">
+                            <?php if(isset($vo1['treelist']) && $vo1['part'] == 1){ ?>
+                            <dt class="personal-course-container-title {$s_status[0] == 1?'':'personal-not-buy-style'}"><?php echo $vo1['testclass']?>{$vo1.outline}</dt>
+                            <?php foreach($vo1['treelist'] as $k2 =>$vo2){?>
+                            <dd class="personal-course-container-lis clearfix {$s_status[0] == 1?'':'personal-not-buy-style'}">
+                              <div class="particulars-container-lis-div clearfix">
+                                <div class="particulars-container-lis-name" data-isshow="<?php echo isset($vo2['treelist'])?1:0; ?>">
+                                  <span class="particulars-container-lis-title {$s_status[0] == 1?'':'personal-not-buy-style'}">
+                                    {if(!isset($vo2.treelist))} <a class="{$s_status[0] == 1?'':'personal-not-buy-style'}" data-url="/index/course/courseParticulars?id={$vo2.kid}&videoid={$vo2.id}&startTime=0" onclick="layui.clickurl({$vo2.id},{$vo2['audi']},this)"> {/if}
+                                      <i class="iconfont icon-bofang11"></i>
+                                      <?php echo $vo2['testclass'] ?>{$vo2.outline}
+                                      {if(!isset($vo2.treelist))} </a> {/if}
+                                  </span> -->
+          <!-- <i class="iconfont icon-bianqian-" id="personal-contain-note"></i> -->
+          <!-- <i class="iconfont icon-shoucang"  id="personal-contain-select"></i> -->
+          <!-- </div> -->
+          <!-- 便签 -->
+          <!-- <div class="particulars-contain-note-fixed">
+                                  <div class="particulars-contain-note">
+                                    <div class="particulars-note-close">x</div>
+                                    <div class="particulars-container-note">
+                                      <h3 class="particulars-study-note">学习便签</h3>
+                                      <div class="particulars-study-scroll">
+                                        <dl class="particulars-note-list">
+                                          <?php if(isset($vo2['treelist_1'])){?>
+                                          <?php foreach($vo2['treelist_1'] as $k3_1 =>$vo3_1){?>
+                                          <dt class="particulars-note-lis">
+                                            <?php echo $vo3_1['title'];?>
+                                          </dt>
+                                          <dd class="particulars-note-dts">
+                                            <?php echo $vo3_1['content'];?>
+                                          </dd>
+                                          <?php } ?>
+                                          <?php } ?>
+                                        </dl>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <?php if(isset($vo2['study_num'])){?>
+                                  {if($vo2.video_status==1)}
+                                    <span class="personal-container-lis-frequency">未学习</span>
+
+                                  {else}
+                                    {if($vo2['study_num']==0)}
+                                      <span class="personal-container-lis-frequency">学习中</span>
+                                      {else}
+                                      <span class="personal-container-lis-frequency">{$vo2['study_num']}</span>
+                                      {/if}
+                                    {/if}
+                                <?php } ?>
+                                {if($vo2['audi'] == 1 && $s_status[0] == 0)}
+                                  <span class="particulars-course-free-listen" data-url="/index/course/courseParticulars?id={$vo2.kid}&videoid={$vo2.id}&startTime=0" onclick="layui.clickurl({$vo2.id},{$vo2.audi},this)">试听</span>
+                                {/if}
+                                <?php if(isset($vo2['classhour'])){?>
+                                <span class="personal-container-lis-duration"><?php echo $vo2['classhour']?></span>
+                                <?php } ?>
+                              </div> -->
+          <!-- 知识点 -->
+          <!-- <ul class="particulars-container-position-contain clearfix">
+                                
+                                <?php if(isset($vo2['treelist'])){?>
+                                  <li class="particulars-position-container-lis {$s_status[0] == 1?'':'personal-not-buy-style'}">
+                                      <a class="{$s_status[0] == 1?'':'personal-not-buy-style'}" data-url="/index/course/courseParticulars?id={$vo2.kid}&videoid={$vo2.id}&startTime=0" onclick="layui.clickurl({$vo2.id},{$vo2['audi']},this)">
+                                        <i class="iconfont icon-location"></i>开始
+                                      </a>
+                                    </li>
+                                <?php foreach($vo2['treelist'] as $k3 =>$vo3){?>
+                                <li class="particulars-position-container-lis {$s_status[0] == 1?'':'personal-not-buy-style'}">
+                                  <a class="{$s_status[0] == 1?'':'personal-not-buy-style'}" data-url="/index/course/courseParticulars?id={$vo2.kid}&videoid={$vo2.id}&startTime={$vo3.start_time}"     onclick="layui.clickurl({$vo2.id},{$vo2['audi']},this)">
+                                    <i class="iconfont icon-location"></i><?php echo $vo3['k_name']?>
+                                  </a>
+                                </li>
+                                <?php }?>
+                                <?php }?> -->
+          <!-- <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>练习</li>
+                                <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>例题</li>
+                                <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>技巧</li> -->
+          <!-- </ul> -->
+          <!-- 收藏课程 -->
+          <!-- <ul class="particulars-container-select-contain clearfix">
+                                <li class="particulars-container-select-lis">
+                                  <i class="iconfont icon-shoucang11"></i>自己命名的收藏标题
+                                </li>
+                                <li class="particulars-container-select-lis">
+                                  <i class="iconfont icon-shoucang11"></i>自己命名的收藏标题
+                                </li>
+                                <li class="particulars-container-select-lis">
+                                  <i class="iconfont icon-shoucang11"></i>自己命名的收藏标题
+                                </li>
+                              </ul>
+                            </dd>
+                            <?php }?>
+                            <?php }else{ ?>
+                            <dd class="personal-course-container-lis clearfix {$s_status[0] == 1?'':'personal-not-buy-style'}">
+                              <div class="particulars-container-lis-div clearfix">
+                                <div class="particulars-container-lis-name" data-isshow="<?php echo isset($vo1['treelist'])?1:0; ?>">
+                                  <span class="particulars-container-lis-title {$s_status[0] == 1?'':'personal-not-buy-style'}">
+                                    {if(!isset($vo1.treelist))} <a class="{$s_status[0] == 1?'':'personal-not-buy-style'}" data-url="/index/course/courseParticulars?id={$vo1.kid}&videoid={$vo1.id}&startTime=0"   onclick="layui.clickurl({$vo1.id},{$vo1['audi']},this)"> {/if}
+                                    <i class="iconfont icon-bofang11"></i> -->
+          <!-- 1. 沁园春·雪/毛泽东 -->
+          <!-- <?php echo $vo1['testclass'] ?>{$vo1.outline}
+                                    {if(!isset($vo1.treelist))} </a> {/if}
+                                  </span> -->
+          <!-- <i class="iconfont icon-bianqian-" id="personal-contain-note"></i> -->
+          <!-- </div> -->
+          <!-- 便签 -->
+          <!-- <div class="particulars-contain-note-fixed">
+                                  <div class="particulars-contain-note">
+                                    <div class="particulars-note-close">x</div>
+                                    <div class="particulars-container-note">
+                                      <h3 class="particulars-study-note">学习便签</h3>
+                                      <div class="particulars-study-scroll">
+                                        <dl class="particulars-note-list">
+                                          <?php if(isset($vo1['treelist_1'])){?>
+                                          <?php foreach($vo1['treelist_1'] as $k3_1 =>$vo3_1){?>
+                                          <dt class="particulars-note-lis">
+                                            <?php echo $vo3_1['title'];?>
+                                          </dt>
+                                          <dd class="particulars-note-dts">
+                                            <?php echo $vo3_1['content'];?>
+                                          </dd>
+                                          <?php } ?>
+                                          <?php }?>
+                                        </dl>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <?php if(isset($vo1['study_num'])){?>
+                                  {if($vo1.video_status==1)}
+                                    <span class="personal-container-lis-frequency">未学习</span>
+                                  {else}
+                                    {if($vo1['study_num'] == 0)} -->
+          <!-- <span class="personal-container-lis-frequency">学习中</span>已学<?php echo $vo1['study_num']?>次 -->
+          <!-- {else} -->
+          <!-- <span class="personal-container-lis-frequency">{$vo1['study_num']}</span>已学<?php echo $vo1['study_num']?>次 -->
+          <!-- {/if}
+                                  {/if}
+                                <?php } ?>
+                                {if($vo1['audi'] == 1 && $s_status[0] == 0)}
+                                  <span class="particulars-course-free-listen" onclick="layui.clickurl({$vo1.id},{$vo1['audi']},this)" data-url="/index/course/courseParticulars?id={$vo1.kid}&videoid={$vo1.id}&startTime=0" onclick="layui.clickurl({$vo1.id},{$vo1['audi']},this)">试听</span>
+                                {/if}
+                                <?php if(isset($vo1['classhour'])){?>
+                                <span class="personal-container-lis-duration"><?php echo $vo1['classhour']?></span>
+                                <?php } ?>
+                              </div>
+                              <ul class="particulars-container-position-contain clearfix">
+                                
+                                <?php if(isset($vo1['treelist'])){?>
+                                  <li class="particulars-position-container-lis {$s_status[0] == 1?'':'personal-not-buy-style'}">
+                                      <a class="{$s_status[0] == 1?'':'personal-not-buy-style'}" 
+                                      onclick="layui.clickurl({$vo1.id},{$vo1['audi']},this)" data-url="/index/course/courseParticulars?id={$vo1.kid}&videoid={$vo1.id}&startTime=0">
+                                      <i class="iconfont icon-location"></i>开始</a>
+                                    </li>
+                                <?php foreach($vo1['treelist'] as $k3 =>$vo3){?>
+                                <li class="particulars-position-container-lis {$s_status[0] == 1?'':'personal-not-buy-style'}">
+                                  <a class="{$s_status[0] == 1?'':'personal-not-buy-style'}" 
+                                  onclick="layui.clickurl({$vo1.id},{$vo1['audi']},this)" data-url="/index/course/courseParticulars?id={$vo1.kid}&videoid={$vo1.id}&startTime={$vo3.start_time}">
+                                  <i class="iconfont icon-location"></i><?php echo $vo3['k_name']?></a>
+                                </li>
+                                <?php }?>
+                                <?php }?> -->
+          <!-- <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>练习</li>
+                                <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>例题</li>
+                                <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>技巧</li> -->
+          <!-- </ul>
+                            </dd>
+                            <?php }?>
+                          </dl>
+                          {/volist}
+                        </div>
+                    {else}
+                        <div class="layui-colla-content layui-show">
+                          <dl class="particulars-course-container">
+                              <dd class="particulars-course-container-lis clearfix">
+                                  <ul class="particulars-container-position-contain  clearfix" style="display: block">
+                                    {if(isset($vo.treelist))}
+                                        {volist name="$vo.treelist" id="_v1"}
+                                            <li class="particulars-position-container-lis {$s_status[0] == 1?'':'personal-not-buy-style'}"><a class="{$s_status[0] == 1?'':'personal-not-buy-style'}" onclick="layui.clickurl({$vo.id},{$vo['audi']},this)"  data-url="/index/course/courseParticulars?id={$vo.kid}&videoid={$vo.id}&startTime={$_v1.start_time}"><i class="iconfont icon-location"></i>{$_v1.k_name}</a></li>   
+                                        {/volist}
+                                    {/if}
+                                  </ul>
+                              </dd>
+                          </dl>
+                        </div>
+                    {/if}
+                  </li>
+                {/volist}
+              </ol>
+            </li> -->
+          <!-- <li class="personal-course-contain-lis"></li>
+            <li class="personal-course-contain-lis"></li>
+            <li class="personal-course-contain-lis"></li>
+            <li class="personal-course-contain-lis"></li>
+            <li class="personal-course-contain-lis"></li>
+            <li class="personal-course-contain-lis"></li>
+            <li class="personal-course-contain-lis"></li>
+            <li class="personal-course-contain-lis"></li>
+            <li class="personal-course-contain-lis"></li> -->
+          <!-- </ul>
+        </div> -->
+
+          <div class="personal-center-course-tab clearfix">
+            <!-- 已激活 -->
+            <dl class="personal-course-new-activated clearfix" id="personal-course-new-activated" {if
+              condition="empty($classList)" }style="display:none" {/if}>
+              <dt class="personal-course-new-activated-state">已激活</dt>
+              <dd class="apendto-html"></dd>
+              <!--这个空的dd不能删 -->
+              {volist name="courseList" id="vo" empty="暂时没有数据" key='key'}
+              {if $vo.is_buy == 1}
+              <dd class="personal-course-new-activated-lis">
+                <span class="personal-course-new-activated-subject">{$vo.title}</span>
+                <div class="personal-course-new-activated-img">
+                  <img src="{$vo.img}" alt="">
+                </div>
+                <div class="personal-course-new-activated-right clearfix">
+                  <h4 class="personal-course-new-activated-title">{$vo.name}{$vo.Semester}</h4>
+                  <p class="personal-course-new-activated-num">课程数量：{$vo.countClassChapter}节 已学{$vo.studyPeriod}节</p>
+                  <div class="layui-progress">
+                    <div class="layui-progress-bar" lay-percent="{$vo.studyPeriod}/{$vo.countClassChapter}"></div>
+                  </div>
+                  <div class="personal-course-new-activated-study">
+                    {if($vo.is_activate == 1)}
+                      <span class="personal-course-new-activated-day">剩余{$vo.expireTime}天</span>
+                      {if(!empty($vo.video_id))}
+                        <a class="personal-course-new-activated-continue" href="/index/course/courseParticulars?id={$vo.id}&startTime={$vo.studyTime}&videoid={$vo.video_id}&productStatus={$vo.productStatus}">继续学习</a>
+                      {else}
+                        <a class="personal-course-new-activated-continue"
+                        href="/index/course/courseParticulars?id={$vo.id}&productStatus={$vo.productStatus}">立即学习</a>
+                      {/if}
+                    {else}
+                      <span class="personal-course-new-activated-day">{$vo.expireTime}</span>
+                    {/if}
+                  </div>
+                </div>
+              </dd>
+              {/if}
+              {/volist}
+            </dl>
+            <!-- 未激活 -->
+            <dl class="personal-course-new-activated clearfix" id="personal-course-new-activated-no" {if
+              condition="empty($notActiveCourseList)" }style="display:none" {/if}>
+              <dt class="personal-course-new-activated-state">未激活</dt>
+              <!-- <p class="personal-course-new-activated-zhushi">注！选择激活课程，课程激活后可观看210天，请谨慎激活</p> -->
+              {volist name="courseList" id="vo" empty="暂时没有数据" key='key'}
+              {if $vo.is_buy == 0}
+              <dd class="personal-course-new-activated-lis">
+                <span class="personal-course-new-activated-subject">{$vo.title}</span>
+                <div class="personal-course-new-activated-img">
+                  <!-- <img src="{$vo.imgNo}" alt=""> 老版灰色图片-->
+                  <img src="{$vo.img}" alt="">
+                </div>
+                <div class="personal-course-new-activated-right clearfix">
+                  <h4 class="personal-course-new-activated-title">{$vo.name}{$vo.Semester}</h4>
+                  <p class="personal-course-new-activated-num">课程数量：{$vo.countClassChapter}节</p>
+                  <div class="personal-course-new-activated-study personal-course-new-activated-no">
+                    <a class="personal-course-new-activated-continue  personal-course-new-activated-continue-xuexi"
+                      href="javascript:;" data-v="{$vo.id}+{$vo.productStatus}">激活</a>
+                  </div>
+                </div>
+              </dd>
+              {/if}
+              {/volist}
+            </dl>
+            <!-- 推荐课程 -->
+            <dl class="personal-course-new-recommend clearfix" id="personal-course-new-recommend" {if
+              condition="empty($recommendClass)" } style="display:none" {/if}>
+              <dt class="personal-course-new-recommend-state">
+                <span>推荐课程</span>
+                <a class="personal-course-new-recommend-more" href="/index/course/course?pageNum=10">更多 >></a>
+              </dt>
+              {volist name="recommendClass" id="vo" empty="暂时没有数据" key='key'}
+              <dd class="personal-course-new-recommend-lis">
+                <div class="personal-course-new-recommend-img">
+                  <?php if(isset($vo['productUrl'])){?>
+                  <a href="/index/course/courseParticulars?id={$vo.id}&productStatus=1"><img src="{$vo.img}" alt=""></a>
+                  <?php }else{?>
+                  <a href="/index/course/courseParticulars?id={$vo.id}&productStatus=0"><img src="{$vo.img}" alt=""></a>
+                  <?php }?>>
+                </div>
+                <div class="personal-course-new-recommend-bottom clearfix">
+                  <span class="personal-course-new-recommend-title">{$vo.name}</span>
+                  <span
+                    class="personal-course-new-recommend-subject personal-course-new-recommend-subject-2">{$vo.title}</span>
+                </div>
+              </dd>
+              {/volist}
+            </dl>
+          </div>
+        </li>
+        <!-- 我的收藏 -->
+        <li class="personal-tab-right-lis">
+
+          <div class="personal-collect-contain">
+            <div class="personal-collect-contain-top clearfix">
+              <h5>我的收藏</h5>
+              <div class="personal-collect-top-edit">编辑</div>
+            </div>
+            <div class="personal-collect-contain-select clearfix">
+              <ul class="personal-collect-select-list" id="myCollectionSubjectList">
+                <!-- <li class="personal-collect-select-lis">全部</li>
+              <li class="personal-collect-select-lis">语文</li>
+              <li class="personal-collect-select-lis">数学</li>
+              <li class="personal-collect-select-lis">英语</li> -->
+                <li class="personal-collect-select-lis-last personal-collect-delete-all">删除全部</li>
+              </ul>
+            </div>
+            <!-- 有收藏状态 -->
+            <div class="personal-collect-has-select">
+              <ul class="personal-collect-contain-list clearfix" id="myCollection">
+                <!-- <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img ">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model "><i class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                  <div class="personal-collect-contain-delete">x</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title" title="公式在应用题中的应用">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+                <div class="personal-collect-contain-changename" style="/* display: none; */">
+                  <input type="text" class="personal-collect-contain-input" value="111">
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>  -->
+              </ul>
+              <div class="common-pages">
+                <ul class="common-pages-num" id="myCollectionPage">
+                </ul>
+              </div>
+            </div>
+            <!-- 没有收藏状态 -->
+            <div class="personal-collect-contain-none">
+              <div class="personal-collect-none-img"><img src="__PUBLIC__/images/nothing.png" alt=""></div>
+              <p class="personal-collect-none-introduce"><a href="javascript:;">什么都没有! 赶快去看视频收藏喜欢的课程吧!</a></p>
+            </div>
+          </div>
+        </li>
+        <!-- 学习笔记 -->
+        <li class="personal-tab-right-lis">
+          <div class="course_note clearfix">
+            <ul class="course_note_menu clearfix">
+              <li class="course_note_menu_li course_note_menu_li_active">
+                <span class="">语文</span>
+              </li>
+              <li class="course_note_menu_li">
+                <span class="">数学</span>
+              </li>
+            </ul>
+            <div class="course_note_volume clearfix">
+              <div class="course_note_volume_text course_note_volume_active">上册</div>
+              <div class="course_note_volume_text">下册</div>
+            </div>
+            学习笔记内容
+            <div class="course_note_content">
+              <div class="note_content_title">
+                <!-- <i class="iconfont icon-shenfen1"></i> -->
+                <span class="content_title_name">课程标题</span>
+              </div>
+              <div class="note_content_text">
+                学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记学习笔记
+              </div>
+              <div class="note_content_bottom clearfix">
+                <div class="note_content_bottom_left">
+                  <i class="iconfont icon-bofang11"></i>
+                  <span class="note_content_start_time">00:00</span>
+                </div>
+                <div class="note_content_bottom_right">
+                  <span class="note_content_deleat">删除</span>
+                  <span class="note_date">2019/12/13</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="common-pages" id='mynotePage_div'>
+              <ul class="common-pages-num" id="mynotePage">
+              </ul>
+            </div>
+          </div>
+          <!-- 没有笔记样式 -->
+          <div class="personal-message-contain-none">
+            <div class="personal-collect-none-img"><img src="__PUBLIC__/images/message-nothing.png" alt=""></div>
+            <p class="personal-collect-none-introduce"><a href="javascript:;">您还没有提交笔记哦!</a></p>
+          </div>
+        </li>
+        <!-- 个人信息 -->
+        <li class="personal-tab-right-lis">
+          <div class="personal-center-info">
+            <div class="personal-center-info-contain">
+              <h5>个人信息</h5>
+              <div class="personal-center-info-prefect">
+                <p class="personal-info-prefect-msg">您的资料完整度：<span class="personal-info-prefect-percent"></span></p>
+                <p class="personal-info-prefect-perfect">完善信息，让一点通更懂你</p>
+                <!-- 进度条 -->
+                <div class="progress-warpper">
+                  <div class="infor-progress">
+                    <div class="infor-sucess" style="width:45%;"></div>
+                  </div>
+                  <div class="info-smile">
+                    <!-- 信息完善100% -->
+                    <!-- <img  src="__PUBLIC__/images/icon-smile.png" alt="" /> -->
+                    <!-- 信息未完善100% -->
+                    <img src="__PUBLIC__/images/icon-smile2.png" alt="" />
+                  </div>
+                </div>
+                <!-- 信息 -->
+                <form class="layui-form personal-center-info-form">
+                  <ul class="infor-list clearfix">
+                    <li class="personal-center-info-lis">
+                      <label class="layui-form-label">性别：</label>
+                      <div class="layui-input-block">
+                        <input type="radio" name="gender" value="1" title="男" {if condition="$personInfo.gender eq 1"
+                          }checked="" {/if}>
+                        <input type="radio" name="gender" value="2" title="女" {if condition="$personInfo.gender eq 2"
+                          }checked="" {/if}>
+                      </div>
+                    </li>
+                    <li class="personal-center-info-lis">
+                      <label class="layui-form-label">姓名：</label>
+                      <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="nickName" value="{$personInfo['nickName']}"
+                          lay-reqText='请填写姓名' placeholder="请输入您的姓名" required lay-verify="required" autocomplete="off" />
+                      </div>
+                    </li>
+                    <li class="personal-center-info-lis">
+                      <label class="layui-form-label">生日：</label>
+                      <div class="layui-input-block personal-center-infor-select sel">
+                        <input type="text" class="infor-input " id="birthday" name="birthday" placeholder="请选择"
+                          lay-reqText='请选择生日' value="{$personInfo.birthday}" readonly="readonly" required
+                          lay-verify="required" autocomplete="off" />
+                      </div>
+                    </li>
+                    <li class="personal-center-info-lis">
+                      <label class="layui-form-label">年级：</label>
+                      <div class="layui-input-block personal-center-info-subject">
+                        <select name="grade_id" lay-verify="required" lay-reqText='请选择年级'>
+                          <option value="">请选择年级</option>
+                          {volist name='grade' id='vo'}
+                          <option value="{$vo.id}" {if condition="$personInfo.grade_id eq $vo.id" }selected="selected"
+                            {/if}>{$vo.grade}</option>
+                          {/volist}
+                        </select>
+                      </div>
+                    </li>
+                    <li class="personal-center-info-lis">
+                      <label class="layui-form-label">电话：</label>
+                      <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="phone" value="{$personInfo['phone']}"
+                          placeholder="请输入您的手机号" lay-reqText='请输入手机号' disabled autocomplete="off" />
+                      </div>
+                    </li>
+                    <li class="personal-center-info-lis">
+                      <label class="layui-form-label">邮箱：</label>
+                      <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="email" placeholder="请输入您的邮箱号"
+                          value="{$personInfo['email']}" lay-reqText='请输入邮箱' required lay-verify="email"
+                          autocomplete="off" />
+                      </div>
+                    </li>
+                    <li class="personal-center-info-lis">
+                      <label class="layui-form-label">微信号：</label>
+                      <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="wechat" placeholder="请输入您的微信号"
+                          value="{$personInfo['wechat']}" lay-reqText='请输入微信号' required lay-verify="required"
+                          autocomplete="off" />
+                      </div>
+                    </li>
+                    <li class="personal-center-info-lis">
+                      <label class="layui-form-label">学校：</label>
+                      <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="school" placeholder="请输入您的学校名称"
+                          value="{$personInfo['school']}" lay-reqText='请输入学校' required lay-verify="required"
+                          autocomplete="off" />
+                      </div>
+                    </li>
+                    <li class="personal-center-info-lis">
+                      <label class="layui-form-label">所在地区：</label>
+                      <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="province" placeholder="请输入您的具体地址"
+                          lay-reqText='请输入你的具体地址'
+                          value="{$personInfo['province']}{$personInfo['city']}{$personInfo['country']}" required
+                          lay-verify="required" autocomplete="off" />
+                      </div>
+                      <!-- <div class="layui-input-block sel">
+                      <input type="hidden" id="province" class="infor-select" name="province" placeholder="请选择" value="{$personInfo['province']}" required  autocomplete="off" />
+                      <input type="hidden" id="city" class="infor-select" name="city" placeholder="请选择"  value="{$personInfo['city']}" required  autocomplete="off"/>
+                      <input type="hidden" id="country" class="infor-select" name="country" placeholder="请选择" value="{$personInfo['country']}"  required  autocomplete="off"/>
+                      <p id="area" class="infor-select" style="width:80%;">请选择</p>
+                    </div> -->
+                    </li>
+                  </ul>
+                  <button type="submit" class="layui-btn info-btn" lay-submit
+                    lay-filter="formDemoPersonInfo">保存</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </li>
+        <!-- 消息中心 -->
+        <li class="personal-tab-right-lis">
+          <div class="personal-message-center">
+            <div class="personal-message-center-top clearfix">
+              <h5>消息中心</h5>
+              <span class="personal-message-center-read getList-person-message personal-message-no-read"
+                style="margin-left:65%" data-val="2">全部</span>
+              <span class="personal-message-center-read getList-person-message" data-val="0">未读</span>
+              <span class="personal-message-center-read getList-person-message" data-val="1">已读</span>
+              <!-- <span class="personal-message-center-read" onclick="del_msg()">删除已读</span> -->
+            </div>
+            <!-- 没有消息推送 -->
+            <div class="personal-message-contain-none">
+              <div class="personal-collect-none-img"><img src="__PUBLIC__/images/message-nothing.png" alt=""></div>
+              <p class="personal-collect-none-introduce"><a href="javascript:;">您还没有未读信息哦!</a></p>
+            </div>
+            <ul class="personal-message-list" id="message">
+
+            </ul>
+            <div class="common-pages">
+              <ul class="common-pages-num" id="messagePage">
+              </ul>
+            </div>
+          </div>
+          <!-- 消息详情 -->
+          <div class="personal-message-particulars" id="messageInfo">
+            <!-- <div class="personal-message-center-top clearfix">
+            <i class="iconfont icon-fanhui-copy-copy"></i>
+            <h5>消息中心</h5>
+            <span class="personal-message-center-read">删除</span>
+          </div>
+          <div class="personal-message-particulars-contain">
+            <h3>消息标题消息标题消息标题</h3>
+            <span>作者：小明&nbsp;&nbsp;&nbsp;&nbsp;2018/04/09 17:31</span>
+            <p>股份但是嘎斯大概阿萨德但是广大高大上哥仨东嘎受到广大嘎是大神爱上爱书大咖说打算爱上短发嘎</p>
+          </div> -->
+          </div>
+        </li>
+        <!-- 卡号激活 -->
+        <!-- <li class="personal-tab-right-lis ">
+        <div class="persoanl-card-activation">
+          <div class="persoanl-card-middle">初中</div>
+          <ul class="persoanl-card-grade clearfix">
+            <li class="persoanl-card-grade-lis persoanl-card-grade-lis-click" data-gid="7">七年级</li>
+            <li class="persoanl-card-grade-lis"  data-gid="8">八年级</li>
+            <li class="persoanl-card-grade-lis"  data-gid="9">九年级</li>
+          </ul> -->
+        <!-- <p class="persoanl-card-introduce">注！选择激活课程，课程激活后可观看190天，请谨慎激活</p> -->
+        <!-- <div class="persoanl-card-activation-all layui-form clearfix">
+
+          </div>
+
+        </div>
+      </li>    -->
+        <!-- 2020-2-7王莹添加   评测信息-->
+        <li class="personal-tab-right-lis" id="evaluation-click">
+          <div class="evaluation-infomation" id="paperList">
+            <div class="evaluation-infomation-top clearfix">
+              <div class="evaluation-infomation-div">
+                <ul class="evaluation-infomation-ul clearfix">
+                  <li class="evaluation-infomation-li-active" data-subject="1">语文</li>
+                  <li data-subject="2">数学</li>
+                  <li data-subject="3">英语</li>
+                  <li data-subject="10">文言文</li>
+                </ul>
+                <p class="evaluation-infomation-ce clearfix">
+                  <span class="evaluation-infomation-ce-active" data-semester="1">上册</span>
+                  <span data-semester="2">下册</span>
+                </p>
+              </div>
+
+              <!-- <div class="layui-form evaluation-form">
+              <div class="evaluation-form-block">
+                <select name="grade" lay-verify="required">
+                  <option value=""></option>
+                  <option value="7">七年级</option>
+                  <option value="8">八年级</option>
+                  <option value="9">九年级</option>
+                </select>
+              </div>
+            </div> -->
+            </div>
+            <!-- 列表 -->
+            <ul class="evaluation-infomation-list clearfix" id="getTestPaperList">
+              <li class="evaluation-infomation-lis  evaluation-infomation-title-click" data-val="32">
+                <div class="evaluation-infomation-title">
+                  下学期第一周测试卷
+                </div>
+                <div class="evaluation-infomation-right">
+                  <span>2020-02-04</span>
+                  <span class="evaluation-infomation-status">未完成</span>
+                </div>
+              </li>
+              <li class="evaluation-infomation-lis" data-val="33">
+                <div class="evaluation-infomation-title ">
+                  下学期第一周测试卷
+                </div>
+                <div class="evaluation-infomation-right">
+                  <span>2020-02-04</span>
+                  <span class="evaluation-infomation-status">已完成</span class="evaluation-infomation-status">
+                </div>
+              </li>
+              <li class="evaluation-infomation-lis" data-val="34">
+                <div class="evaluation-infomation-title">
+                  下学期第一周测试卷
+                </div>
+                <div class="evaluation-infomation-right">
+                  <span>2020-02-04</span>
+                  <span class="evaluation-infomation-status">正在进行</span class="evaluation-infomation-status">
+                </div>
+              </li>
+            </ul>
+            <div class="personal-collect-contain-none">
+              <div class="personal-collect-none-img"><img src="__PUBLIC__/images/nothing.png" alt=""></div>
+              <p class="personal-collect-none-introduce"><a href="javascript:;">暂无数据</a></p>
+            </div>
+            <div class="common-pages">
+              <ul class="common-pages-num" id="myTestPaperPage">
+              </ul>
+            </div>
+          </div>
+          <!-- 2020-02-10 -->
+          <div id="evaluation-particular" style="display: none">
+            <!-- 测评详情 -->
+            <div class="evaluation-particular-content" id="paperInfo">
+              <!-- <h3 class="evaluation-particular-title">第十一章 三角形 
+              <span>测试中</span>
+              <div class="evaluation-particular-close">+</div>
+            </h3> -->
+            <div class="errorbook-infomation-div">
+              <ul class="errorbook-infomation-ul clearfix">
+                <li class="errorbook-infomation-li-active" data-subject="1">语文</li>
+                <li data-subject="2">数学</li>
+                <li data-subject="3">英语</li>
+              </ul>
+              <!-- 未写样式 -->
+              <!-- <div class="error-endtime">剩余时间：27:12
+              </div> -->
+
+            </div>
+                <div class="evaluation-particular-content">
+                  <!-- <h3 class="evaluation-particular-title">第十一章 三角形 
+                    <span>测试中</span>
+                    <div class="evaluation-particular-close">+</div>
+                  </h3> -->
+                  <div class="evaluation-particular-list">
+                    <!-- <h4 class="evaluation-particular-list-title">11.2.1三角形的内角（100分）</h4> -->
+                    <ul class="evaluation-particular-ul">
+                      <li class="evaluation-particular-lis">
+                        <p class="evaluation-particular-lis-menu">
+                          一、【单选题】选择正确的答案。
+                        </p>
+                        <!-- 每一个模块下的列表 -->
+                        <div class="evaluation-particular-lis-list  layui-form">
+                          <p class="evaluation-particular-lis-menu-title">
+                            1、正方形的周长是边长的几倍？
+                            <!-- 做对题给一个小红花  做错没有-->
+                            <img src="" alt="">
+                          </p>
+                          <div class="evaluation-particular-lis-chiose clearfix">
+                            <div class="layui-input-block">
+                              <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                              <input type="radio" name="sex" value="B" title="B、3倍">
+                              <input type="radio" name="sex" value="C" title="C、2倍">
+                            </div>
+                          </div>
+                          <span class="evaluation-particular-tips-right">恭喜你，答对啦</span>
+                          <!-- evaluation-particular-tips-error -->
+                          <div class="evaluation-particular-lis-answer">
+                            解答：
+                            <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+                            答：正方形的周长是边长的4倍.
+                            故选：A.</p>
+                          </div>
+                        </div>
+
+                        <div class="evaluation-particular-lis-list  layui-form">
+                          <p class="evaluation-particular-lis-menu-title">
+                            2、—位数乘两位数，商可以是 ？
+                            <!-- 做对题给一个小红花  做错没有-->
+                            <img src="" alt="">
+                          </p>
+                          <div class="evaluation-particular-lis-chiose clearfix">
+                            <div class="layui-input-block">
+                              <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                              <input type="radio" name="sex" value="B" title="B、3倍">
+                              <input type="radio" name="sex" value="C" title="C、2倍">
+                            </div>
+                          </div>
+                          <span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：c</span>
+                          <!-- evaluation-particular-tips-error -->
+                          <div class="evaluation-particular-lis-answer">
+                            解答：
+                            <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+                            答：正方形的周长是边长的4倍.
+                            故选：A.</p>
+                          </div>
+                        </div>
+
+                        <div class="evaluation-particular-lis-list layui-form">
+                          <p class="evaluation-particular-lis-menu-title">
+                            3、—位数乘两位数，商可以是 ？
+                            <!-- 做对题给一个小红花  做错没有-->
+                            <img src="" alt="">
+                          </p>
+                          <div class="evaluation-particular-lis-chiose clearfix">
+                            <div class="layui-input-block">
+                              <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                              <input type="radio" name="sex" value="B" title="B、3倍">
+                              <input type="radio" name="sex" value="C" title="C、2倍">
+                            </div>
+                          </div>
+                          <span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：c</span>
+                          <!-- evaluation-particular-tips-error -->
+                          <div class="evaluation-particular-lis-answer">
+                            解答：
+                            <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+                            答：正方形的周长是边长的4倍.
+                            故选：A.</p>
+                          </div>
+                        </div>
+
+                        <div class="evaluation-particular-lis-list layui-form">
+                          <p class="evaluation-particular-lis-menu-title">
+                            4、如图，反比例函数y1＝ 和正比例函数y2＝k2x的图象交于A(－1，－3)，B(1，3)两点，若 >k2x，则x的取值范围是？
+                            <!-- 做对题给一个小红花  做错没有-->
+                            <!-- <img src="" alt=""> -->
+                          </p>
+                          <div class="evaluation-particular-lis-chiose clearfix">
+                            <div class="layui-input-block layui-input-left">
+                              <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                              <input type="radio" name="sex" value="B" title="B、3倍">
+                              <input type="radio" name="sex" value="C" title="C、2倍">
+                            </div>
+                            <div class="layui-input-right">
+                              <img src="" alt="">
+                            </div>
+                          </div>
+                          <span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：c</span>
+                          <!-- evaluation-particular-tips-error -->
+                          <div class="evaluation-particular-lis-answer">
+                            解答：
+                            <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+                            答：正方形的周长是边长的4倍.
+                            故选：A.</p>
+                          </div>
+                        </div>
+
+                        <div class="evaluation-particular-lis-list layui-form">
+                          <p class="evaluation-particular-lis-menu-title">
+                            5、如图是一个放置在水平实验台上的锥形瓶，则它的俯视图为（     ）
+                          </p>
+                          <div class="evaluation-particular-lis-chiose layui-form clearfix">
+                            <div class="layui-input-block layui-input-left">
+                              <div class="layui-input-left-img">
+                                <img src="" alt="">
+                                <input type="radio" name="sex" value="A" title="A" checked>
+                              </div>
+                              <div class="layui-input-left-img">
+                                <img src="" alt="">
+                                <input type="radio" name="sex" value="B" title="B">
+                              </div>
+                              <div class="layui-input-left-img">
+                                <img src="" alt="">
+                                <input type="radio" name="sex" value="C" title="C">
+                              </div> 
+                              <div class="layui-input-left-img">
+                                <img src="" alt="">
+                                <input type="radio" name="sex" value="D" title="D">
+                              </div> 
+                            </div>
+                            <div class="layui-input-right">
+                              <img src="" alt="">
+                            </div>
+                          </div>
+                          <span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：c</span>
+                          <!-- evaluation-particular-tips-error -->
+                          <div class="evaluation-particular-lis-answer">
+                            解答：
+                            <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+                            答：正方形的周长是边长的4倍.
+                            故选：A.</p>
+                          </div>
+                        </div>
+
+                      </li>
+
+                      <li class="evaluation-particular-lis">
+                        <p class="evaluation-particular-lis-menu">
+                          二、【填空题】在空白处填写正确的答案。
+                        </p>
+                        <!-- 每一个模块下的列表 -->
+                        <div class="evaluation-particular-lis-chiose  layui-form clearfix">
+                          <div class="layui-input-block">
+                            <div class="layui-input-blanks">
+                              1. Look! Lisa is<input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">(看书) now. 
+                              <!-- <img src="" alt="">    -->
+                            </div>
+                            <div class="layui-input-blanks">
+                              2. My house is<input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">(紧邻) the big park. 
+                              <!-- <img src="" alt="">                -->
+                            </div>
+                            <div class="layui-input-blanks">
+                              3. I eat breakfast at <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input"> (家里).
+                              <img src="" alt="">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="evaluation-particular-lis-answer">
+                          解答：
+                          <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+                          答：正方形的周长是边长的4倍.
+                          故选：A.</p>
+                        </div>
+
+                      </li>
+
+                      <li class="evaluation-particular-lis">
+                        <p class="evaluation-particular-lis-menu">
+                          三 、【判断题】判断正确的答案。
+                        </p>
+                        <div class="evaluation-particular-lis-chiose clearfix">
+                          <div class="layui-input-block">
+                            <div class="layui-input-blanks layui-input-yn  layui-form">
+                              1．一个非零的自然数，不是质数就是合数。<input type="radio" name="yes" value="是" title="是"> <input type="radio" name="no" value="否" title="否">    
+                              <img src="" alt="">    
+                              <!-- 做对题给一个小红花 -->     
+                            </div>
+                            <div class="layui-input-blanks layui-input-yn  layui-form">
+                              2．用16个棱长为1 cm的小正方体可以拼成一个大正方体。 <input type="radio" name="yes" value="是" title="是"> <input type="radio" name="no" value="否" title="否">                
+                              <img src="" alt="">
+                            </div>
+                            <div class="layui-input-blanks layui-input-yn  layui-form">
+                              3. 27的分子加上6，分母加上21，分数的大小不变。<input type="radio" name="yes" value="是" title="是"> <input type="radio" name="no" value="否" title="否">        
+                              <img src="" alt="">     
+                            </div>
+                          </div>
+                        </div>
+                        <div class="evaluation-particular-lis-answer">
+                          解答：
+                          <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+                          答：正方形的周长是边长的4倍.
+                          故选：A.</p>
+                        </div>
+
+                      </li>
+
+                      <li class="evaluation-particular-lis">
+                        <p class="evaluation-particular-lis-menu">
+                          四 、【计算题】求下列图形的表面积和体积。
+                        </p>
+                        <div class="evaluation-particular-lis-topicimg">
+                          <img src="" alt="">
+                          <img src="" alt="">
+                        </div>
+                         <div class="evaluation-particular-lis-upload clearfix">
+                           <div class="evaluation-particular-lis-left">
+                             上传答案
+                             <div class="evaluation-particular-lis-loadimg" id="">+</div>
+                           </div>
+                           <div class="evaluation-particular-lis-img">
+                             <img src="" alt="">
+                           </div>
+                         </div>
+                         <div class="evaluation-particular-lis-img-show">
+                           <div class="evaluation-particular-lis-img-close">+</div>
+                           <img src="" alt="">
+                         </div>
+
+                      </li>
+
+                      <li class="evaluation-particular-lis">
+                        <p class="evaluation-particular-lis-menu">
+                          五 、【应用题】走进生活，解决问题。
+                        </p>
+
+                        <div class="valuation-particular-lis-list clearfix">
+                          <div class="evaluation-particular-lis-block">
+                            <p class="evaluation-particular-lis-name">1.选文第②段画线部分，主要运用了哪种描写方法？有何效果？(4分）</p>
+                            <div class="evaluation-particular-lis-solution">主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。</div>
+                          </div>
+
+                          <div class="evaluation-particular-lis-block">
+                            <p class="evaluation-particular-lis-name">1.选文第②段画线部分，主要运用了哪种描写方法？有何效果？(4分）</p>
+                            <div class="evaluation-particular-lis-solution">主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。</div>
+                          </div>
+                          <div class="evaluation-particular-lis-block">
+                            <p class="evaluation-particular-lis-name">3、一块长35 cm、宽30 cm的铁皮，从四个角各切掉一个边长为5 cm的正方形，然后做成无盖盒子。这个盒子用了多少铁皮？它的容积是多少？</p>
+                            <!--上传文件 -->
+                            <div class="evaluation-particular-lis-upload clearfix">
+                              <div class="evaluation-particular-lis-left">
+                                上传答案
+                                <div class="evaluation-particular-lis-loadimg" id="">+</div>
+                              </div>
+                              <div class="evaluation-particular-lis-img">
+                                <img src="" alt="">
+                              </div>
+                            </div>
+                            <div class="evaluation-particular-lis-img-show">
+                              <div class="evaluation-particular-lis-img-close">+</div>
+                              <img src="" alt="">
+                            </div>
+                          </div>
+                        </div>
+
+                      </li>
+
+                      <li class="evaluation-particular-lis">
+                        <p class="evaluation-particular-lis-menu">
+                          六、【阅读理解】阅读下面的文章，回答问题。
+                        </p>
+                        <p class="evaluation-particular-lis-menu-content"> 
+                          父亲数钱              
+                          李书霞              
+                          ①每个月父亲发饷的那天，家里就像过节一样，洋溢着欢乐的气氛。
+                          ②父亲踏进家门时，晚饭都已经准备好了。父亲坐下来，先不动筷子，而是伸手去怀里，掏出今天发的工资，他将几张薄薄的钞票捏在手里，抖上两抖，把食指和拇指伸到嘴边，哈一哈气，开始一张张地数。当时的钱，最大面额是十块，主要是五块、两块和一块的，还有角币和分币。工资虽少，但细细地数起来，仍然要花费两三分钟。父亲数毕，报出数目，递给母亲。母亲笑眯眯地接了，走进卧房，把钱锁进一个隐秘的柜子里。她坐回饭桌旁，对着我们两个小人儿说：“存着，给你们交学费。”                              
+                        </p>
+                        <div class="valuation-particular-lis-list clearfix">
+                          <div class="evaluation-particular-lis-block">
+                            <p class="evaluation-particular-lis-name">1.选文第②段画线部分，主要运用了哪种描写方法？有何效果？(4分）</p>
+                            <div class="evaluation-particular-lis-solution">主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。</div>
+                            <div class="evaluation-particular-lis-answer">
+                              解答：
+                              <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+                              答：正方形的周长是边长的4倍.
+                              故选：A.</p>
+                            </div>
+                          </div>
+
+                          <div class="evaluation-particular-lis-block">
+                            <p class="evaluation-particular-lis-name">1.选文第②段画线部分，主要运用了哪种描写方法？有何效果？(4分）</p>
+                            <div class="evaluation-particular-lis-solution">主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。</div>
+                          </div>
+                        </div>
+
+                      </li>
+
+                      <li class="evaluation-particular-lis">
+                        <p class="evaluation-particular-lis-menu">
+                          七 、【阅读理解】阅读短文，选择正确的答案。
+                        </p>
+                        <p class="evaluation-particular-lis-menu-content"> 
+                          It’s warm in spring. The trees turn green and the flowers start to grow. I often go boating in the park. In summer, the weather is vey hot and it often rains. I often go swimming with my friends. In autumn, the days get shorter and the nights get longer. It’s often sunny, but not to hot. I like winter best. In winter, the days are short and the nights are long. It’s not very cold. I often go jogging after school.
+                        </p>
+
+                        <div class="evaluation-particular-lis-list">
+                          <div class="evaluation-particular-lis-block  layui-form">
+                            <p class="evaluation-particular-lis-menu-title">
+                              1. What’s the weather like in spring?
+                            </p>
+                            <div class="evaluation-particular-lis-chiose clearfix">
+                              <div class="layui-input-block">
+                                <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                                <input type="radio" name="sex" value="B" title="B、3倍">
+                                <input type="radio" name="sex" value="C" title="C、2倍">
+                                <input type="radio" name="sex" value="C" title="C、2倍">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="evaluation-particular-lis-block  layui-form">
+                            <p class="evaluation-particular-lis-menu-title">
+                              2. Does it often rain in summer?
+                            </p>
+                            <div class="evaluation-particular-lis-chiose layui-form clearfix">
+                              <div class="layui-input-block">
+                                <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                                <input type="radio" name="sex" value="B" title="B、3倍">
+                                <input type="radio" name="sex" value="C" title="C、2倍">
+                                <input type="radio" name="sex" value="C" title="C、2倍">
+                              </div>
+                            </div>
+                        </div>
+                          <div class="evaluation-particular-lis-answer">
+                            解答：
+                            <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+                            答：正方形的周长是边长的4倍.
+                            故选：A.</p>
+                          </div>
+                        </div>
+                      </li>
+
+                      <li class="evaluation-particular-lis">
+                        <p class="evaluation-particular-lis-menu">
+                          八 、【完形填空】完形填空。
+                        </p>
+                        <p class="evaluation-particular-lis-menu-content"> 
+                          A Move to Safety
+                          The Turners sat at the kitchen table. The sun was shining and filed the kitchen with a warm light. It was a perfect day for having a picnic or going surfing. But in the Turners' kitchen, no one seemed to be paying attention to the      .
+                          "Okay, girls," said Mrs. Turner. "I can tell by the expressions on your faces that you have a pretty good idea of why we need to have this family                      
+                          "Okay, girls," said Mrs. Turner. "I can tell by the expressions on your faces that you have a pretty good idea of why we need to have this family                          
+                          "Okay, girls," said Mrs. Turner. "I can tell by the expressions on your faces that you have a pretty good idea of why we need to have this family                           
+                          "Okay, girls," said Mrs. Turner. "I can tell by the expressions on your faces that you have a pretty good idea of why we need to have this family                                             
+                        </p>
+                        
+                        <div class="evaluation-particular-lis-list">
+                          <div class="evaluation-particular-lis-block">
+                            <div class="evaluation-particular-lis-chiose evaluation-particular-lis-english clearfix">
+                              <span>1.</span>
+                              <div class="layui-input-block layui-input-yn  layui-form">                 
+                                <input type="radio" name="sex" value="A" title="A. kitchen" checked>
+                                <input type="radio" name="sex" value="B" title="B. tablepicnic">
+                                <input type="radio" name="sex" value="C" title="C. picnicpicnic">
+                                <input type="radio" name="sex" value="C" title="D. weatherweather">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="evaluation-particular-lis-block">
+                            <div class="evaluation-particular-lis-chiose evaluation-particular-lis-english clearfix">
+                              <span>20.</span>
+                              <div class="layui-input-block layui-input-yn layui-form">   
+                                <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                                <input type="radio" name="sex" value="B" title="B、3倍">
+                                <input type="radio" name="sex" value="C" title="C、2倍">
+                                <input type="radio" name="sex" value="C" title="C、2倍">
+                              </div>
+                            </div>
+                        </div>
+                          <div class="evaluation-particular-lis-answer">
+                            解答：
+                            <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+                            答：正方形的周长是边长的4倍.
+                            故选：A.</p>
+                          </div>
+                        </div>
+                      </li>
+
+                    </ul>
+                  </div>
+                </div>
+            </div>
+            <!-- 测评详情 -->
+          </div>
+
+          <!-- 2020-02-10 -->
+        </li>
+        <!-- 2020-2-7王莹添加结束 -->
+
+        <!-- 2020-2-7王莹添加   错题本-->
+        <li class="personal-tab-right-lis">
+          <div class="errorbook-infomation">
+
+            <div class="errorbook-infomation-top clearfix">
+              <div class="errorbook-infomation-div" id="wrongQuerstSub">
+                <ul class="errorbook-infomation-ul clearfix">
+                  <li class="errorbook-infomation-li-active" data-subject="1">语文</li>
+                  <li data-subject="2">数学</li>
+                  <li data-subject="3">英语</li>
+                  <li data-subject="10">文言文</li>
+                </ul>
+                <p class="errorbook-infomation-ce clearfix">
+                  <span class="errorbook-infomation-ce-active" data-semester="1">上册</span>
+                  <span data-semester="2">下册</span>
+                </p>
+                <!-- 未写样式 -->
+                <!-- <div class="error-switch">
+                  <div class="layui-form">
+                    <label class="layui-form-label">开关</label>
+                    <div class="layui-input-block">
+                      <input type="checkbox" name="switch" lay-skin="switch" lay-text="复习|关闭">
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+
+            <!-- 错题列表 -->
+            <div class="evaluation-particular-error-list" id="wrongQuestionList" style="margin:0 auto;padding:0 0 10px;">
+              
+            </div>
+            <div class="personal-collect-contain-none">
+              <div class="personal-collect-none-img"><img src="__PUBLIC__/images/nothing.png" alt=""></div>
+              <p class="personal-collect-none-introduce"><a href="javascript:;">暂无数据</a></p>
+            </div>
+            <div class="common-pages">
+              <ul class="common-pages-num" id="myWrongQuestionPage">
+              </ul>
+            </div>
+          </div>
+          <!-- 答题弹窗 -->
+          <div class="evaluation-particular-error-modal">
+            <div class="evaluation-particular-error-content" id="answerQuest">
+              
+             
+            </div>
+          </div>
+          <!-- <div id="evaluation-particular">
+      
+              </div> -->
+        </li>
+        <!-- 2020-2-27王莹添加结束 -->
+        <!-- 学习周报 -->
+
+        <li class="personal-tab-right-lis" id="studyWeeklyResport">
+          
+        </li>
+         <!-- 学习周报 -->
+      </ul>
+      <!-- 卡号激活弹窗 -->
+      <div class="card-activation-modal"> </div>
+      <!-- 提示是否激活窗口 -->
+      <div class="card-activation-confirm">
+        <div action="" class="layui-form">
+          <div class="card-activation-modal-confirm-close">+</div>
+          <!-- <p class="card-activation-power">您将获得190天学习本课程权限.</p> -->
+          <span class="card-activation-power">您同意激活本课程吗？</span>
+          <div class="card-activation-agree clearfix">
+            <input type="checkbox" lay-skin="primary" name="ok" value="1" title="同意">
+            <span>（同意请点击确认）</span>
+          </div>
+          <div class="card-activation-modal-confirm-btn" lay-submit lay-filter="agreeBtn">确定</div>
+        </div>
+      </div>
+      <!-- 激活成功窗口 -->
+      <div class="card-activation-modal-contain">
+        <div class="card-activation-modal-contain-close">+</div>
+        <div class="card-activation-modal-contain-img">
+          <img src="__PUBLIC__/images/success.png" alt="">
+        </div>
+        <p>恭喜您激活成功！<br>您可以学习本课程了！</p>
+        <div class="card-activation-modal-contain-btn">确定</div>
+      </div>
+      <!-- 我的收藏确定删除弹窗 -->
+      <div class="messsage-delete-modal">
+        <div class="messsage-delete-modal-confirm-close">+</div>
+        <div class="messsage-delete-modal-title">删除收藏</div>
+        <p>确定删除此次收藏吗？</p>
+        <div class="messsage-delete-modal-contain-btn">确定</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 卡号激活弹窗 -->
+  <!-- <div class="verification-activation-modal"> </div> -->
+  <!-- 提示是否激活窗口 -->
+  <!-- <div class="verification-activation-confirm">
+  <div action="" class="layui-form">
+    <div class="verification-activation-modal-confirm-close">x</div>
+    <p class="verification-activation-power"></p>
+    <div class="verification-activation-modal-confirm-btn">确定</div>
+  </div>
+</div> -->
+
+  <div class="number_showmodel">
+    <div class="number_showmodel_content clearfix">
+      <div class="number_showmodel_close">+</div>
+      <i class="iconfont icon-xuexi number_showmodel_iconfont"></i>
+      <p class="number_p confirm_study">确认学习吗？</p>
+      <p class="number_p free_audition"></p>
+      <p class="number_p audited"></p>
+      <button class="showmodel_btn i_about_btn">我再想想</button>
+      <button class="showmodel_btn confirm_study_btn">确认学习</button>
+    </div>
+  </div>
+
+  <!-- 第一次登陆弹窗 -->
+  <div class="loginone_showmodel animated fadeIn"></div>
+  <div class="loginone_showmodel_content">
+    <img class="loginone_img animated bounceIn" src="__PUBLIC__/images/loginone_img.png" alt="">
+  </div>
+  <!-- 第一次登陆弹窗 END -->
+
+  <!-- 底部导航  -->
+  {include file="index/public/footer"}
+  <!-- 底部导航  -->
+</body>
+<script src="__PUBLIC__/js/jquery-2.2.3.js"></script>
+<script src="__PUBLIC__/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="__PUBLIC__/js/jquery-2.2.3.js"></script>
+<script src="__PUBLIC__/js/city.min.js"></script>
+<script src="__PUBLIC__/js/drag.js"></script>
+<script src="__PUBLIC__/js/personal-center.js"></script>
+<script type="text/javascript">
+
+
+  if ($('.personal-course-container-lis').hasClass('personal-not-buy-style')) {
+    $('.personal-course-container-lis').hover(function () {
+      $('.particulars-container-lis-title a').css('color', '#b0b4bd');
+    })
+  }
+
+
+
+  //点击返回
+  $(document).on('click', '.icon-fanhui-copy-copy', function () {
+    $('.personal-left-current').click();
+  })
+
+</script>
+
+</html>

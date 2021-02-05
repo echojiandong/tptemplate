@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>图片总数--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+</head>
+<body class="winui-window-body">
+<form class="layui-form" action="{:url('index/index/addbanner_handle')}" enctype="multipart/form-data" method="post" style="margin-top: 20px;">
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label">订单号：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="price" class="layui-input newsAuthor"  lay-verify="price" disabled autocomplete="off"  value="{$info.0.order}">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">管理员名称：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="lecturer" class="layui-input newsAuthor"  lay-verify="required" disabled autocomplete="off" value="{if(!empty($info.0.username))}{$info.0.username}{/if}">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">联系方式</label>
+			<div class="layui-input-inline">
+				<input type="text" name="phone" class="layui-input newsAuthor"  lay-verify="phone" disabled autocomplete="off"  value="{$info.0.phone}">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">订单价格：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="moeny" class="layui-input newsAuthor"  lay-verify="moeny" disabled autocomplete="off"  value="{$info.0.price}元">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">支付金额：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="payMoney" class="layui-input newsAuthor"  lay-verify="payMoney" disabled autocomplete="off"  value="{$info.0.payMoney}元">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">订单状态：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="state" class="layui-input newsAuthor"  lay-verify="state" disabled autocomplete="off"  value="{$info.0.state}">
+			</div>
+		</div>
+		{volist name="info" id="val"}
+			<div class="layui-inline">
+				<label class="layui-form-label">{$val.classViderInfo}：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="state" class="layui-input newsAuthor"  lay-verify="state" disabled autocomplete="off"  value="{$val.order_num}">
+				</div>
+			</div>
+		{/volist}
+		<div class="layui-inline">
+			<label class="layui-form-label">订单类型：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="rebate" class="layui-input newsAuthor" lay-verify="rebate" id="rebate"  disabled value="{$info.0.order_type==1?'正式课':'试听课'}" >
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">订单时间：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="rebate" class="layui-input newsAuthor" lay-verify="rebate" id="rebate"  disabled value="{$info.0.strtime|date='Y-m-d',###}" >
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">审核状态：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="rebate" class="layui-input newsAuthor" lay-verify="rebate" id="rebate"  disabled value="{$info.0.orderCheck}" >
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">备注：</label>
+			<div class="layui-input-inline">
+				 <textarea name="remark" placeholder="" disabled class="layui-textarea">{$info.0.remark}</textarea>
+			</div>
+		</div>
+	</div>
+
+</form>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript" src="__MANAGE__/js/order/orderList.js"></script>
+</body>
+</html>

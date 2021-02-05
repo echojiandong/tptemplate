@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="applicable-device" content="pc">
+  <meta name="renderer" content="webkit"/>
+  <meta name="force-rendering" content="webkit"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <title>E点就通名校名师同步课堂</title>
+  <link rel="stylesheet" href="__PUBLIC__/theme/default/laydate.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/layui.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+</head>
+<body>
+  <!-- header -->
+  {include file="index/public/header"}
+<!-- 列表 -->
+<div class="personal-contain clearfix">
+  <!-- 个人中心波浪 -->
+  <div class="personal-wave">
+    <div class="personal-planet">
+        <div class="planet-bg">
+          <img src="__PUBLIC__//images/beiji.png" alt="" />
+        </div>
+        <div class="star s1"></div>
+        <div class="star s2"></div>
+        <div class="star s3"></div>
+    </div>
+    <div class="star-wave">
+        <i class="wave w1"></i>
+        <i class="wave w2"></i>
+        <i class="wave w3"></i>
+    </div>
+  </div>
+  <!-- 用户基本信息 -->
+  <div class="personal-center-top clearfix">
+    <div class="personal-center-top-portrait">
+      <a href="javascript:;">
+        <img src="__PUBLIC__/images/5.png" alt="">
+        <i class="personal-center-change-pic"></i>
+      </a>
+    </div>
+    <div class="personal-center-top-center">
+      <h5 class="personal-center-top-id">ID:<span>20190315morning111</span></h5>
+      <ul class="personal-center-top-icon clearfix">
+        <li class="personal-center-icon-lis"><img src="__PUBLIC__/images/icon01.png" alt=""></li>
+        <li class="personal-center-icon-lis"><img src="__PUBLIC__/images/icon02.png" alt=""></li>
+        <li class="personal-center-icon-lis"><img src="__PUBLIC__/images/icon03.png" alt=""></li>
+        <li class="personal-center-icon-lis"><img src="__PUBLIC__/images/icon04.png" alt=""></li>
+        <li class="personal-center-icon-lis"><img src="__PUBLIC__/images/icon05.png" alt=""></li>
+        <li class="personal-center-icon-lis"><img src="__PUBLIC__/images/icon06.png" alt=""></li>
+        <li class="personal-center-icon-lis"><img src="__PUBLIC__/images/icon07.png" alt=""></li>
+        <li class="personal-center-icon-lis"><img src="__PUBLIC__/images/icon08.png" alt=""></li>
+        <li class="personal-center-icon-lis"><img src="__PUBLIC__/images/icon09.png" alt=""></li>
+      </ul>
+    </div>
+    <div class="personal-center-top-right">
+      <div class="personal-center-right">
+        <p class="personal-center-right-mesage">消息</p>
+        <p class="personal-center-mesage-num">33</p>
+      </div>
+      <div class="personal-center-right">
+        <p class="personal-center-right-mesage">收藏</p>
+        <p class="personal-center-mesage-num">33</p>
+      </div>
+    </div>
+  </div>
+  <!-- tab切换 -->
+  <div class="personal-center-tab">
+    <div class="personal-center-tab-left">
+      <div class="personal-tab-left-lis personal-left-current">
+        <i class="iconfont icon-style">[]</i>
+        <span>我的课程</span>
+      </div>
+      <div class="personal-tab-left-lis">
+        <i class="iconfont icon-style">[]</i>
+        <span>我的收藏</span>
+      </div>
+      <div class="personal-tab-left-lis">
+        <i class="iconfont icon-style">[]</i>
+        <span>个人信息</span>
+      </div>
+      <div class="personal-tab-left-lis personal-msg-center">
+        <i class="iconfont icon-style">[]</i>
+        <span>消息中心</span>
+      </div>
+      <div class="personal-tab-left-lis">
+        <i class="iconfont icon-style">[]</i>
+        <span>卡号激活</span>
+      </div>
+    </div>
+    <!-- 右侧部分 -->
+    <ul class="personal-center-tab-right clearfix">
+      <!-- 我的课程 -->
+      <li class="personal-tab-right-lis active">
+        <div class="personal-center-course-tab">
+
+          <ul class="personal-center-course-top clearfix">
+            <li class="person-center-course-subject personal-course-subject-active">
+              <span class="personal-subject">语文</span>
+            </li>
+            <li class="person-center-course-subject">
+              <span class="personal-subject">数学</span>
+            </li>
+            <li class="person-center-course-subject personal-subject-not-buy">
+              <span class="personal-subject">英语</span>
+            </li>
+          </ul> 
+          <div class="personal-center-course-volume clearfix">
+            <div class="personal-center-volume personal-volume-buy-active">上册</div>
+            <div class="personal-center-volume personal-volume-not-buy">下册</div>
+            <div class="personal-center-subject-exhibition">
+              <div class="personal-subject-exhibition-buy clearfix">
+                <span class="person-course-subject-num">课程节数 57节</span>
+                <span class="person-course-subject-already">已学25节</span>
+                <div class="person-course-prev-course">已学25节</div>
+              </div>
+              <div class="personal-subject-exhibition-notbuy clearfix">
+                <span class="person-course-subject-num">课程节数 57节</span>
+              </div>
+            </div>
+          </div>
+          <!-- 课程目录 -->
+          <ul class="personal-center-course-contain clearfix">
+            <li class="personal-course-contain-lis personal-center-not-buy active">
+              <!-- 语文  已买课 -->
+              <ol class="layui-collapse" lay-accordion>
+                <li class="layui-colla-item">
+                  <h2 class="layui-colla-title">第一单元</h2>
+                  <div class="layui-colla-content layui-show">
+                    <!-- 目录 -->
+                    <dl class="personal-course-container personal-center-not-buy">
+                      <dt class="personal-course-container-title">阅读</dt>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <!-- 便签 -->
+                        <div class="personal-center-note-fixed">
+                          <div class="personal-contain-note" id="personal-contain-note">
+                            <div class="personal-note-close">x</div>
+                            <div class="personal-container-note">
+                              <h3 class="personal-study-note">学习便签</h3>
+                              <div class="personal-note-list">
+                                <p class="personal-note-lis">
+                                  考点4不定代词
+                                  定义：用来指代非特定的人和物的代词
+                                  <br>
+                                  1)复合不定代词:something,anything，nothing,evetthing等。
+                                  <br>
+                                  考点3不定代词
+                                  定义：用来指代非特定的人和物的代词
+                                  <br>
+                                  1)复合不定代词:something,anything，nothing,evetthing等。
+                                  <br>
+                                  考点：形容词后置
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <span class="personal-container-lis-frequency">已学3次</span>
+                        <span class="personal-container-lis-duration">2:45:05</span>
+                      </dd>
+                      <dd class="personal-course-container-lis current-now clearfix">
+                        <span class="personal-container-lis-name personal-learn-now">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <!-- 便签 -->
+                        <div class="personal-center-note-fixed">
+                          <div class="personal-contain-note" id="personal-contain-note">
+                            <div class="personal-note-close">x</div>
+                            <div class="personal-container-note">
+                              <h3 class="personal-study-note">学习便签</h3>
+                              <div class="personal-note-list">
+                                <p class="personal-note-lis">
+                                  考点4不定代词
+                                  定义：用来指代非特定的人和物的代词
+                                  <br>
+                                  1)复合不定代词:something,anything，nothing,evetthing等。
+                                  <br>
+                                  考点3不定代词
+                                  定义：用来指代非特定的人和物的代词
+                                  <br>
+                                  1)复合不定代词:something,anything，nothing,evetthing等。
+                                  <br>
+                                  考点：形容词后置
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <span class="personal-container-lis-frequency">已学3次</span>
+                        <span class="personal-container-lis-duration">2:45:05</span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <!-- 便签 -->
+                        <div class="personal-center-note-fixed">
+                          <div class="personal-contain-note" id="personal-contain-note">
+                            <div class="personal-note-close">x</div>
+                            <div class="personal-container-note">
+                              <h3 class="personal-study-note">学习便签</h3>
+                              <div class="personal-note-list">
+                                <p class="personal-note-lis">
+                                  考点4不定代词
+                                  定义：用来指代非特定的人和物的代词
+                                  <br>
+                                  1)复合不定代词:something,anything，nothing,evetthing等。
+                                  <br>
+                                  考点3不定代词
+                                  定义：用来指代非特定的人和物的代词
+                                  <br>
+                                  1)复合不定代词:something,anything，nothing,evetthing等。
+                                  <br>
+                                  考点：形容词后置
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <span class="personal-course-not-learn">未学</span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-course-not-learn">未学</span>
+                      </dd>
+                    </dl>
+                    <dl class="personal-course-container">
+                        <dt class="personal-course-container-title">写作</dt>
+                        <dd class="personal-course-container-lis clearfix">
+                          <span class="personal-container-lis-name">
+                            <i class="iconfont icon-video">[]</i>
+                            1、秋天的怀念/史铁生
+                            <i class="iconfont icon-bianqian">[]</i>
+                          </span>
+                          <span class="personal-container-lis-frequency">已学3次</span>
+                          <span class="personal-container-lis-duration">2:45:05</span>
+                        </dd>
+                        <dd class="personal-course-container-lis current-now clearfix">
+                          <span class="personal-container-lis-name">
+                            <i class="iconfont icon-video">[]</i>
+                            1、秋天的怀念/史铁生
+                            <i class="iconfont icon-bianqian">[]</i>
+                          </span>
+                          <span class="personal-container-lis-frequency">已学3次</span>
+                          <span class="personal-container-lis-duration">2:45:05</span>
+                        </dd>
+                        <dd class="personal-course-container-lis clearfix">
+                          <span class="personal-container-lis-name">
+                            <i class="iconfont icon-video">[]</i>
+                            1、秋天的怀念/史铁生
+                            <i class="iconfont icon-bianqian">[]</i>
+                          </span>
+                          <span class="personal-course-not-learn">未学</span>
+                        </dd>
+                        <dd class="personal-course-container-lis clearfix">
+                          <span class="personal-container-lis-name">
+                            <i class="iconfont icon-video">[]</i>
+                            1、秋天的怀念/史铁生
+                            <i class="iconfont icon-bianqian">[]</i>
+                          </span>
+                          <span class="personal-course-not-learn">未学</span>
+                        </dd>
+                        <dd class="personal-course-container-lis clearfix">
+                          <span class="personal-container-lis-name">
+                            <i class="iconfont icon-video">[]</i>
+                            1、秋天的怀念/史铁生
+                            <i class="iconfont icon-bianqian">[]</i>
+                          </span>
+                          <span class="personal-course-not-learn">未学</span>
+                        </dd>
+                      </dl>
+                  </div>
+                </li>
+                <li class="layui-colla-item">
+                  <h2 class="layui-colla-title">第二单元</h2>
+                  <div class="layui-colla-content">
+                    <!-- 目录 -->
+                    <dl class="personal-course-container">
+                      <dt class="personal-course-container-title">阅读</dt>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-container-lis-frequency">已学3次</span>
+                        <span class="personal-container-lis-duration">2:45:05</span>
+                      </dd>
+                      <dd class="personal-course-container-lis current-now clearfix">
+                        <span class="personal-container-lis-name personal-learn-now">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-container-lis-frequency">已学3次</span>
+                        <span class="personal-container-lis-duration">2:45:05</span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-course-not-learn">未学</span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-course-not-learn">未学</span>
+                      </dd>
+                    </dl>
+                  </div>
+                </li>
+                <li class="layui-colla-item">
+                  <h2 class="layui-colla-title">第三单元</h2>
+                  <div class="layui-colla-content">
+                    <!-- 目录 -->
+                    <dl class="personal-course-container">
+                      <dt class="personal-course-container-title">阅读</dt>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-container-lis-frequency">已学3次</span>
+                        <span class="personal-container-lis-duration">2:45:05</span>
+                      </dd>
+                      <dd class="personal-course-container-lis current-now clearfix">
+                        <span class="personal-container-lis-name personal-learn-now">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-container-lis-frequency">已学3次</span>
+                        <span class="personal-container-lis-duration">2:45:05</span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-course-not-learn">未学</span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-course-not-learn">未学</span>
+                      </dd>
+                    </dl>
+                  </div>
+                </li>
+                <li class="layui-colla-item">
+                  <h2 class="layui-colla-title">第四单元</h2>
+                  <div class="layui-colla-content">
+                    <!-- 目录 -->
+                    <dl class="personal-course-container">
+                      <dt class="personal-course-container-title">阅读</dt>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-container-lis-frequency">已学3次</span>
+                        <span class="personal-container-lis-duration">2:45:05</span>
+                      </dd>
+                      <dd class="personal-course-container-lis current-now clearfix">
+                        <span class="personal-container-lis-name personal-learn-now">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-container-lis-frequency">已学3次</span>
+                        <span class="personal-container-lis-duration">2:45:05</span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-course-not-learn">未学</span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-course-not-learn">未学</span>
+                      </dd>
+                    </dl>
+                  </div>
+                </li>
+                <li class="layui-colla-item">
+                  <h2 class="layui-colla-title">第五单元</h2>
+                  <div class="layui-colla-content">
+                    <!-- 目录 -->
+                    <dl class="personal-course-container">
+                      <dt class="personal-course-container-title">阅读</dt>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-container-lis-frequency">已学3次</span>
+                        <span class="personal-container-lis-duration">2:45:05</span>
+                      </dd>
+                      <dd class="personal-course-container-lis current-now clearfix">
+                        <span class="personal-container-lis-name personal-learn-now">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-container-lis-frequency">已学3次</span>
+                        <span class="personal-container-lis-duration">2:45:05</span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-course-not-learn">未学</span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                          <i class="iconfont icon-bianqian">[]</i>
+                        </span>
+                        <span class="personal-course-not-learn">未学</span>
+                      </dd>
+                    </dl>
+                  </div>
+                </li>
+              </ol>
+            </li>
+            <li class="personal-course-contain-lis">2222</li>
+            <li class="personal-course-contain-lis">
+              <!-- 英语 未买课 -->
+              <ol class="layui-collapse" lay-accordion>
+                <li class="layui-colla-item">
+                  <h2 class="layui-colla-title personal-not-buy-style">第一单元</h2>
+                  <div class="layui-colla-content layui-show">
+                    <!-- 目录 -->
+                    <dl class="personal-course-container personal-center-not-buy">
+                      <dt class="personal-course-container-title personal-not-buy-style">阅读</dt>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name personal-not-buy-style">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                        </span>
+                      </dd>
+                      <dd class="personal-course-container-lis current-now clearfix">
+                        <span class="personal-container-lis-name personal-learn-now personal-not-buy-style">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                        </span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name personal-not-buy-style">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                        </span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name personal-not-buy-style">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                        </span>
+                      </dd>
+                    </dl>
+                    <dl class="personal-course-container">
+                        <dt class="personal-course-container-title personal-not-buy-style">写作</dt>
+                        <dd class="personal-course-container-lis clearfix">
+                          <span class="personal-container-lis-name personal-not-buy-style">
+                            <i class="iconfont icon-video">[]</i>
+                            1、秋天的怀念/史铁生
+                          </span>
+                        </dd>
+                        <dd class="personal-course-container-lis current-now clearfix">
+                          <span class="personal-container-lis-name personal-not-buy-style">
+                            <i class="iconfont icon-video">[]</i>
+                            1、秋天的怀念/史铁生
+                          </span>
+                        </dd>
+                        <dd class="personal-course-container-lis clearfix">
+                          <span class="personal-container-lis-name personal-not-buy-style">
+                            <i class="iconfont icon-video">[]</i>
+                            1、秋天的怀念/史铁生
+                          </span>
+                        </dd>
+                        <dd class="personal-course-container-lis clearfix">
+                          <span class="personal-container-lis-name personal-not-buy-style">
+                            <i class="iconfont icon-video">[]</i>
+                            1、秋天的怀念/史铁生
+                          </span>
+                        </dd>
+                        <dd class="personal-course-container-lis clearfix">
+                          <span class="personal-container-lis-name personal-not-buy-style">
+                            <i class="iconfont icon-video">[]</i>
+                            1、秋天的怀念/史铁生
+                          </span>
+                        </dd>
+                      </dl>
+                  </div>
+                </li>
+                <li class="layui-colla-item">
+                  <h2 class="layui-colla-title personal-not-buy-style">第二单元</h2>
+                  <div class="layui-colla-content">
+                    <!-- 目录 -->
+                    <dl class="personal-course-container">
+                      <dt class="personal-course-container-title personal-not-buy-style">阅读</dt>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name personal-not-buy-style">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                        </span>
+                      </dd>
+                      <dd class="personal-course-container-lis current-now clearfix">
+                        <span class="personal-container-lis-name personal-not-buy-style">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                        </span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name personal-not-buy-style">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                        </span>
+                      </dd>
+                      <dd class="personal-course-container-lis clearfix">
+                        <span class="personal-container-lis-name  personal-not-buy-style">
+                          <i class="iconfont icon-video">[]</i>
+                          1、秋天的怀念/史铁生
+                        </span>
+                      </dd>
+                    </dl>
+                  </div>
+                </li>
+              </ol>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- 我的收藏 -->
+      <li class="personal-tab-right-lis">
+       
+        <div class="personal-collect-contain">
+          <div class="personal-collect-contain-top clearfix">
+            <h5>我的收藏</h5>
+            <div class="personal-collect-top-edit">编辑</div>
+          </div>
+          <div class="personal-collect-contain-select clearfix">
+            <ul class="personal-collect-select-list">
+              <li class="personal-collect-select-lis">全部</li>
+              <li class="personal-collect-select-lis">语文</li>
+              <li class="personal-collect-select-lis">数学</li>
+              <li class="personal-collect-select-lis">英语</li>
+              <li class="personal-collect-select-lis-last personal-collect-delete-all">删除全部</li>
+            </ul>
+          </div> 
+           <!-- 有收藏状态 -->
+          <div class="personal-collect-has-select">
+            <ul class="personal-collect-contain-list clearfix">
+
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img ">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model "><i class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                  <div class="personal-collect-contain-delete">x</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title" title="公式在应用题中的应用">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model"><i  class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model"><i  class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model"><i class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title" title="公式在应用题中的应用">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model"><i  class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model"><i  class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model"><i class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title" title="公式在应用题中的应用">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model"><i  class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model"><i  class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model"><i class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title" title="公式在应用题中的应用">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model"><i  class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+              <li class="personal-collect-contain-lis">
+                <div class="personal-collect-contain-img">
+                  <img src="__PUBLIC__/images/jieduan.png" alt="">
+                  <div class="personal-collect-contain-model"><i  class="iconfont icon-video">[]</i></div>
+                  <div class="personal-collect-contain-timer">123分24秒</div>
+                </div>
+                <div class="personal-collect-contain-bottom">
+                  <span class="personal-collect-contain-title">公式在题中的应用</span>
+                  <span class="personal-collect-contain-subject video-subject-chinese">语文</span>
+                </div>
+              </li>
+            </ul>
+            <div class="common-pages">
+              <ul class="common-pages-num">
+                <li class="common-pages-first common-pages-style">首页</li>
+                <li class="common-pages-prev common-pages-style">上一页</li>
+                <li class="common-pages-nums">1</li>
+                <!-- <li class="common-pages-nums">2</li> -->
+                <!-- <li class="common-pages-nums">3</li>
+                <li class="common-pages-nums">4</li>
+                <li class="common-pages-nums">5</li>
+                <li class="common-pages-nums">6</li>
+                <li class="common-pages-nums">7</li> -->
+                <li class="common-pages-next common-pages-style">下一页</li>
+                <li class="common-pages-last common-pages-style">尾页</li>
+              </ul>
+            </div>
+          </div>
+           <!-- 没有收藏状态 -->
+          <div class="personal-collect-contain-none">
+            <div class="personal-collect-none-img"><img src="__PUBLIC__/images/nothing.png" alt=""></div>
+            <p class="personal-collect-none-introduce"><a href="javascript:;">什么都没有!  赶快去看视频收藏喜欢的课程吧!</a></p>
+          </div>
+        </div>
+      </li>
+      <!-- 个人信息 -->
+      <li class="personal-tab-right-lis">
+        <div class="personal-center-info">
+          <div class="personal-center-info-contain">
+            <h5>个人信息</h5>
+            <div class="personal-center-info-prefect">
+              <p class="personal-info-prefect-msg">您的资料完整度：<span class="personal-info-prefect-percent">40%</span></p>
+              <p class="personal-info-prefect-perfect">完善信息，让一点通更懂你</p>
+              <!-- 进度条 -->
+              <div class="progress-warpper">
+                  <div class="infor-progress">
+                      <div class="infor-sucess" style="width:55%;"></div>
+                  </div>
+                  <div class="info-smile">
+                    <!-- 信息完善100% -->
+                      <!-- <img  src="__PUBLIC__/images/icon-smile.png" alt="" /> -->
+                      <!-- 信息未完善100% -->
+                      <img src="__PUBLIC__/images/icon-smile2.png" alt="" />
+                  </div>
+              </div>
+              <!-- 信息 -->
+              <form method="post" class="layui-form personal-center-info-form" action="">
+                <ul class="infor-list clearfix">
+                  <li class="personal-center-info-lis">
+                    <label class="layui-form-label">性别：</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="男" title="男">
+                        <input type="radio" name="sex" value="女" title="女" checked>
+                    </div>
+                  </li>
+                  <li class="personal-center-info-lis">
+                    <label class="layui-form-label">姓名：</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="nickName" value="" placeholder="请输入您的姓名"  required lay-verify="required" autocomplete="off"/>
+                    </div>
+                  </li>
+                  <li class="personal-center-info-lis">
+                    <label class="layui-form-label">生日：</label>
+                    <div class="layui-input-block personal-center-infor-select sel">
+                        <input type="text" class="infor-input " id="birthday" name="birthday" placeholder="请选择" value="" readonly="readonly" required lay-verify="required" autocomplete="off"/>
+                    </div>
+                  </li>
+                  <li class="personal-center-info-lis">
+                    <label class="layui-form-label">年级：</label>
+                    <div class="layui-input-block personal-center-info-subject">
+                      <select name="subject" lay-verify="required">
+                        <option value="">请选择年级</option>
+                        <option value="0">七年级</option>
+                        <option value="1">八年级</option>
+                        <option value="2">九年级</option>
+                      </select>
+                    </div>
+                  </li>
+                  <li class="personal-center-info-lis">
+                    <label class="layui-form-label">电话：</label>
+                    <div class="layui-input-block">
+                      <input type="text" class="layui-input" name="phone" value="" placeholder="请输入您的手机号" required lay-verify="required" autocomplete="off" />
+                    </div>
+                  </li>
+                  <li class="personal-center-info-lis">
+                    <label class="layui-form-label">邮箱：</label>
+                    <div class="layui-input-block">
+                      <input type="text" class="layui-input" name="email" placeholder="请输入您的邮箱号" value=""  required lay-verify="required" autocomplete="off"/>
+                    </div>
+                  </li>
+                  <li class="personal-center-info-lis">
+                    <label class="layui-form-label">微信号：</label>
+                    <div class="layui-input-block">
+                      <input type="text" class="layui-input" name="wechat" placeholder="请输入您的微信号" value="" required lay-verify="required" autocomplete="off"/>
+                    </div>
+                  </li>
+                  <li class="personal-center-info-lis">
+                    <label class="layui-form-label">学校：</label>
+                    <div class="layui-input-block">
+                      <input type="text" class="layui-input" name="school" placeholder="请输入您的学校名称" value="" required lay-verify="required" autocomplete="off"/>
+                    </div>
+                  </li>
+                  <li class="personal-center-info-lis">
+                    <label class="layui-form-label">所在地区：</label>
+                    <div class="layui-input-block sel">
+                      <input type="hidden" id="province" class="infor-select" name="province" placeholder="请选择" value="北京" required lay-verify="required" autocomplete="off" />
+                      <input type="hidden" id="city" class="infor-select" name="city" placeholder="请选择"  value="朝阳" required lay-verify="required" autocomplete="off"/>
+                      <input type="hidden" id="country" class="infor-select" name="country" placeholder="请选择" value="一点通"  required lay-verify="required" autocomplete="off"/>
+                      <p id="area" class="infor-select" style="width:80%;">请选择</p>
+                    </div>
+                  </li>
+                </ul>
+                <button type="submit" class="layui-btn info-btn" lay-submit lay-filter="formDemo">保存</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </li>
+      <!-- 消息中心 -->
+      <li class="personal-tab-right-lis">
+        <div class="personal-message-center">
+          <div class="personal-message-center-top clearfix">
+            <h5>消息中心</h5>
+            <span class="personal-message-center-read personal-message-no-read">未读</span>
+            <span class="personal-message-center-read">已读</span>
+            <span class="personal-message-center-read">删除已读</span>
+          </div>
+          <ul class="personal-message-list">
+            <li class="personal-message-lis">
+              <p class="personal-message-lis-msg personal-message-msg-noread" title="消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标">消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标</p>
+              <span class="personal-message-lis-time" title="2018/04/09 17:31">2018/04/09 17:31</span>
+            </li>
+            <li class="personal-message-lis">
+              <p class="personal-message-lis-msg" title="消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标">消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标</p>
+              <span class="personal-message-lis-time" title="2018/04/09 17:31">2018/04/09 17:31</span>
+            </li>
+            <li class="personal-message-lis">
+              <p class="personal-message-lis-msg" title="消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标">消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标</p>
+              <span class="personal-message-lis-time" title="2018/04/09 17:31">2018/04/09 17:31</span>
+            </li>
+            <li class="personal-message-lis">
+              <p class="personal-message-lis-msg" title="消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标">消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标</p>
+              <span class="personal-message-lis-time" title="2018/04/09 17:31">2018/04/09 17:31</span>
+            </li>
+            <li class="personal-message-lis">
+              <p class="personal-message-lis-msg" title="消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标">消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标</p>
+              <span class="personal-message-lis-time" title="2018/04/09 17:31">2018/04/09 17:31</span>
+            </li>
+            <li class="personal-message-lis">
+              <p class="personal-message-lis-msg" title="消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标">消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标</p>
+              <span class="personal-message-lis-time" title="2018/04/09 17:31">2018/04/09 17:31</span>
+            </li>
+            <li class="personal-message-lis">
+              <p class="personal-message-lis-msg" title="消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标">消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标</p>
+              <span class="personal-message-lis-time" title="2018/04/09 17:31">2018/04/09 17:31</span>
+            </li>
+            <li class="personal-message-lis">
+              <p class="personal-message-lis-msg" title="消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标">消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标</p>
+              <span class="personal-message-lis-time" title="2018/04/09 17:31">2018/04/09 17:31</span>
+            </li>
+            <li class="personal-message-lis">
+              <p class="personal-message-lis-msg" title="消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标">消息标题消息标题 消息标题 消息标题消息标题消息标题 消息题消息标题消息标题 消息标题 消息标</p>
+              <span class="personal-message-lis-time" title="2018/04/09 17:31">2018/04/09 17:31</span>
+            </li>
+          </ul>
+          <div class="common-pages">
+            <ul class="common-pages-num">
+              <li class="common-pages-first common-pages-style">首页</li>
+              <li class="common-pages-prev common-pages-style">上一页</li>
+              <li class="common-pages-nums">1</li>
+              <li class="common-pages-nums">2</li>
+              <li class="common-pages-nums">3</li>
+              <li class="common-pages-nums">4</li>
+              <li class="common-pages-nums">5</li>
+              <li class="common-pages-nums">6</li>
+              <li class="common-pages-nums">7</li>
+              <li class="common-pages-next common-pages-style">下一页</li>
+              <li class="common-pages-last common-pages-style">尾页</li>
+            </ul>
+          </div>
+        </div> 
+        <!-- 消息详情 -->
+        <div class="personal-message-particulars">
+          <div class="personal-message-center-top clearfix">
+            <h5>消息中心</h5>
+            <span class="personal-message-center-read">删除</span>
+          </div>
+          <div class="personal-message-particulars-contain">
+            <h3>消息标题消息标题消息标题</h3>
+            <span>作者：小明&nbsp;&nbsp;&nbsp;&nbsp;2018/04/09 17:31</span>
+            <p>短发方法覆盖广泛的股份奥迪是个阿萨德高等师范士大夫阿萨德发生的股份但是嘎斯大概阿萨德但是广大高大上哥仨东嘎受到广大嘎是大神爱上爱书大咖说打算爱上短发嘎短发方法覆盖广泛的股份奥迪是个阿萨德高等师范士大夫阿萨德发生的股份但是嘎斯大概阿萨德但是广大高大上哥仨东嘎受到广大嘎是大神爱上爱书大咖说打算爱上短发嘎短发方法覆盖广泛的股份奥迪是个阿萨德高等师范士大夫阿萨德发生的股份但是嘎斯大概阿萨德但是广大高大上哥仨东嘎受到广大嘎是大神爱上爱书大咖说打算爱上短发嘎短发方法覆盖广泛的股份奥迪是个阿萨德高等师范士大夫阿萨德发生的股份但是嘎斯大概阿萨德但是广大高大上哥仨东嘎受到广大嘎是大神爱上爱书大咖说打算爱上短发嘎短发方法覆盖广泛的股份奥迪是个阿萨德高等师范士大夫阿萨德发生的股份但是嘎斯大概阿萨德但是广大高大上哥仨东嘎受到广大嘎是大神爱上爱书大咖说打算爱上短发嘎短发方法覆盖广泛的股份奥迪是个阿萨德高等师范士大夫阿萨德发生的股份但是嘎斯大概阿萨德但是广大高大上哥仨东嘎受到广大嘎是大神爱上爱书大咖说打算爱上短发嘎短发方法覆盖广泛的股份奥迪是个阿萨德高等师范士大夫阿萨德发生的股份但是嘎斯大概阿萨德但是广大高大上哥仨东嘎受到广大嘎是大神爱上爱书大咖说打算爱上短发嘎短发方法覆盖广泛的股份奥迪是个阿萨德高等师范士大夫阿萨德发生的股份但是嘎斯大概阿萨德但是广大高大上哥仨东嘎受到广大嘎是大神爱上爱书大咖说打算爱上短发嘎短发方法覆盖广泛的股份奥迪是个阿萨德高等师范士大夫阿萨德发生的股份但是嘎斯大概阿萨德但是广大高大上哥仨东嘎受到广大嘎是大神爱上爱书大咖说打算爱上短发嘎短发方法覆盖广泛的股份奥迪是个阿萨德高等师范士大夫阿萨德发生的股份但是嘎斯大概阿萨德但是广大高大上哥仨东嘎受到广大嘎是大神爱上爱书大咖说打算爱上短发嘎</p>
+          </div>
+        </div>
+      </li>
+      <!-- 卡号激活 -->
+      <li class="personal-tab-right-lis">
+        <div class="persoanl-card-activation">
+          <ul class="persoanl-card-activation-list clearfix">
+            <li class="persoanl-card-activation-lis persoanl-card-activation-active">卡号激活</li>
+            <li class="persoanl-card-activation-lis">激活记录</li>
+          </ul>
+          <ol class="persoanl-card-activation-contain">
+            <li class="persoanl-card-contain-lis active">
+              <!-- 激活之前 -->
+              <div class="persoanl-card-activation-first persoanl-card-before-activation active">
+                <form class="layui-form persoanl-card-activation-form" action="">
+                  <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <input type="text" class="persoanl-card-activation-input" name="title" required  lay-verify="required" placeholder="请输入卡号" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <input type="text" class="persoanl-card-activation-input" name="password" required lay-verify="required" placeholder="请输入卡号密码" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <button class="personal-card-activation-submit" lay-submit lay-filter="formDemo">立即提交</button>
+                  </div>
+                </form>
+              </div>
+              <!-- 激活之后 -->
+              <div class="persoanl-card-activation-first persoanl-card-after-activation">
+                <div class="persoanl-card-after-img"><img src="__PUBLIC__/images/nothing.png" alt=""></div>
+                <p class="persoanl-card-after-introduce">您的卡号已激活成功！</p>
+              </div>
+            </li>
+            <li class="persoanl-card-contain-lis">
+              <!-- 卡号激活记录 -->
+             <ol class="persoanl-card-record clearfix">
+              <li class="persoanl-card-record-lis">
+                <p class="persoanl-card-record-number">卡号123596525967656已激活</p>
+                <span class="persoanl-card-record-time">2019年9月6日 16:12</span>
+              </li>
+              <li class="persoanl-card-record-lis">
+                <p class="persoanl-card-record-number">卡号123596525967656已激活</p>
+                <span class="persoanl-card-record-time">2019年9月6日 16:12</span>
+              </li>
+              <li class="persoanl-card-record-lis">
+                <p class="persoanl-card-record-number">卡号123596525967656已激活</p>
+                <span class="persoanl-card-record-time">2019年9月6日 16:12</span>
+              </li>
+              <li class="persoanl-card-record-lis">
+                <p class="persoanl-card-record-number">卡号123596525967656已激活</p>
+                <span class="persoanl-card-record-time">2019年9月6日 16:12</span>
+              </li>
+              <li class="persoanl-card-record-lis">
+                <p class="persoanl-card-record-number">卡号123596525967656已激活</p>
+                <span class="persoanl-card-record-time">2019年9月6日 16:12</span>
+              </li>
+             </ol>
+            </li>
+          </ol>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+  <!-- footer -->  
+  {include file="index/public/footer"}
+</body>
+<script src="__PUBLIC__/js/laydate.js"></script>
+<script src="__PUBLIC__/js/city.min.js"></script>
+<script src="__PUBLIC__/js/drag.js"></script>
+<script src="__PUBLIC__/js/personal-center.js"></script>
+</html>

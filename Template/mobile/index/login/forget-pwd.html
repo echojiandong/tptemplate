@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="__mobile__/js/mui.min.js"></script>
+    <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+    <!-- <link rel="stylesheet" href="__mobile__/css/swiper.min.css"> -->
+    <link rel="stylesheet" href="__mobile__/css/style.css">
+    <script src="__mobile__/js/jquery-2.2.3.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      mui.init();
+    </script>
+    <script src="__mobile__/css/iconfont/iconfont.js"></script>
+    <title>E点就通名校名师同步课堂</title>
+</head>
+<body>
+  <header class="mui-bar mui-bar-nav common-header">
+    <div class="header-back iconfont iconxiangzuojiantou"><a href="javascript:;"></a></div>
+    <h1 class="common-title">找回密码</h1>
+  </header>
+  <div class="register-page">
+    <div class="page-logo"><img src="__mobile__/images/logo.png" alt=""></div>
+    <div class="login-form">
+      <!-- <div class="forget-page"><h4>找回密码</h4></div> -->
+      <form action="" class="login-form-form">
+        <div class="login-form-item">
+          <i class="iconfont iconwebicon205"></i>
+          <input type="text" class="login-form-input iconfont forget-form-name" id="forget-phone" placeholder="请输入手机号">
+        </div>
+        <div class="login-form-item">
+          <i class="iconfont iconkefuyanzheng1"></i>
+          <input type="text" class="login-form-input iconfont forget-form-code" id="forget-code" placeholder="请输入验证码">
+          <button type="button" class="forget-code" id="forget-code-btn">获取验证码</button>
+        </div>
+        <div class="login-form-item">
+          <i class="iconfont iconsuozi"></i>
+          <input type="password" class="login-form-input iconfont forget-form-pwd" id="forget-pwd" placeholder="请输入新密码">
+        </div>
+        
+      </form>
+      <div class="login-form-item">
+          <button type="button" class="mui-btn login-submit-btn" id="forget-submit-btn">确定</button>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
+<script src="__mobile__/js/fastclick.js"></script>
+<script>
+  // mui('.mui-input-row input').input(); 
+  //iphoneX兼容
+  function isIphoneX() {
+    return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+  } 
+  if(isIphoneX()) {
+    $(".page-logo").css({"margin":"36.5% auto 0"})
+  }
+  let data = {
+    forgetPhone : '',
+    forgetCode: '',
+    forgetPwd: ''
+  }
+  // 格式输入错误表框提示
+  $('#forget-phone, #forget-code, #forget-pwd').blur(function() {
+    if ( $(this).val() != '' ) {
+      $(this).css({borderBottom:"1px solid #E3E3E3"})
+    } else {
+      $(this).css({borderBottom:"1px solid #0a3e82"})
+    }
+  })
+  // 验证码
+  document.getElementById("forget-code-btn").addEventListener('tap', function() {
+    let forgetPhone = $("#forget-phone").val()
+    console.log(data.forgetPhone)
+    if (forgetPhone.length == '' || forgetPhone.length != 11) {
+      mui.toast('您的格式有误，请输入正确手机号！');
+    } else {
+    $.ajax({
+      type:"post",
+      url:"/index/login/VerifyCode",
+      data:{
+        phone: forgetPhone
+      },
+      success:function(res) {
+        // var res = JSON.parse(res)         
+        if(res.error_code==1) {
+          var time=60;
+          $('#forget-code-btn').text("已发送("+time+"s)")
+          var interval=setInterval(function () {
+              if (time >=1 && time <= 60 ) {
+                time--;
+                $('#forget-code-btn').text("已发送("+time+"s)").attr('disabled', true)
+              } else {
+                $('#forget-code-btn').text("重新获取").attr('disabled', false)
+                clearInterval(interval);
+              }
+          }, 1000);
+        }else{
+          mui.toast(res.msg);
+        }
+      },
+      error:function(res) {
+        console.log(res);
+      }    
+    }) 
+  }
+});
+
+// 点击注册按钮
+document.getElementById("forget-submit-btn").addEventListener('tap', function() {
+   mui.toast("111");
+  let forgetPhone = $("#forget-phone").val()
+      forgetCode = $("#forget-code").val(),
+      forgetPwd = $("#forget-pwd").val()
+      data.forgetPhone = forgetPhone
+      data.forgetCode = forgetCode
+      data.forgetPwd = forgetPwd
+      console.log(data.forgetPhone)
+      console.log(data.forgetCode)
+      console.log(data.forgetPwd)
+  if ( forgetCode.length == '' || forgetPwd.length == '' ) {
+    mui.toast('您的信息不完整，请输入完整信息！');
+  } else {
+    $.ajax({
+      type:"post",
+      url:"/index/login/forgetPassword",
+      data:{
+        phone: forgetPhone,
+        code: forgetCode,
+        password: forgetPwd
+      },
+      success:function(res) {
+        if(res.error_code==1){
+          mui.toast(res.msg);
+          //登陆成功跳转个人中心页面
+          window.location.href="/index/index/index";
+        }else{
+          mui.toast(res.msg);
+        }       
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        
+      }  
+    }) 
+  }
+})
+//页面回退
+$('.header-back').click(function(){
+  window.history.back(-1);
+})
+</script>

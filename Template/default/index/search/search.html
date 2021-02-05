@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="applicable-device" content="pc">
+  <meta name="renderer" content="webkit"/>
+  <meta name="force-rendering" content="webkit"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <title>E点就通名校名师同步课堂</title>
+  <link rel="stylesheet" href="__PUBLIC__/css/layui.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+  <style type="text/css">
+    .card-activation-modal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 509;
+    display: none;
+  }
+  .card-activation-confirm{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: auto;
+    margin: 0;
+    right: auto;
+    bottom: auto;
+  }
+  .card-activation-power{
+    width: 100% !important;
+  }
+  .card-activation-modal-confirm-btn{
+        margin-bottom: 40px !important;
+      }
+  </style>
+</head>
+<body>
+  <!-- header -->
+  {include file="index/public/header"}
+<!-- 列表 -->
+<div class="golobal-search-contain clearfix">
+  <div class="golobal-search-page">
+    <div class="layui-form golobal-form">
+      <div class="layui-input-block golobal-search-form">
+        <input type="text" name="gloalSearch" required placeholder="课程名称/标签" autocomplete="off" class="golobal-search-input" value="{$search_name}">
+        <button class="layui-btn golobal-search-button" lay-submit lay-filter="searchMsg"><i class="iconfont icon-sousuo"></i>搜索</button>
+      </div>
+    </div>
+  </div>
+  <input type="text" name="ids">
+  <!-- 搜索结果 -->
+  <p class="golobal-search-result">共找到<i class="golobal-search-num" id="counts">{$count[0]}</i>条结果</p>
+  <div class="golobal-search-list">
+    <ul class="golobal-search-select clearfix">
+      <li class="golobal-search-select-lis golobal-search-select-change" data-val='1' >全部<span id="count1">{$count[0]}</span></li>
+      <li class="golobal-search-select-lis" data-val='2'>课程<span id="count2">{$count[1]}</span></li>
+      <li class="golobal-search-select-lis" data-val='3'>知识点<span id='count3'>{$count[2]}</span></li>
+      {if condition="$is_login == 1"}
+        <li class="golobal-search-select-lis" data-val='4'>我的收藏<span id='count4'>{$count[3] ?? '0'}</span></li>
+      {/if}
+    </ul>
+  </div>
+  <!-- 搜索列表 -->
+  <ul class="golobal-search-video-list clearfix">
+    {volist name='list' id='v'}
+      {if condition="$v.type eq 1"}
+        <li class="golobal-search-video-lis">
+          <a href="/index/course/courseParticulars?id={$v.video_class_id}&productStatus={$v.productStatus}">
+            <div class="golobal-search-lis-img">
+              <img src="{$v.img}" alt="">
+            </div>
+            <p class="golobal-search-lis-title">{$v.Titles ?? ''}</p>
+          </a>
+        </li>
+      {elseif condition="$v.type eq 2"}
+        <li class="golobal-search-video-lis">
+          <a data-url="/index/course/courseParticulars?id={$v.video_class_id}&videoid={$v.video_id}&startTime={$v.startTime??''}&productStatus={$v.productStatus}" onclick="layui.clickurl({$v.video_id},{$v.audi},this,{$v.video_class_id},{$v.productStatus})">
+            <div class="golobal-search-lis-img">
+              <img src="{$v.img}" alt="">
+            </div>
+            <p class="golobal-search-lis-title">{$v.Titles ?? ''}</p>
+            <p class="golobal-search-lis-title">{$v.outline?? ''}</p>
+          </a>
+        </li>
+      {else /}
+    <li class="golobal-search-video-lis">
+      <a data-url="/index/course/courseParticulars?id={$v.video_class_id}&videoid={$v.video_id}&startTime={$v.startTime??''}&productStatus={$v.productStatus}" onclick="layui.clickurl({$v.video_id},{$v.audi},this,{$v.video_class_id},{$v.productStatus})">
+        <div class="golobal-search-lis-img">
+          <img src="{$v.img}" alt="">
+        </div>
+        <p class="golobal-search-lis-title">{$v.Titles ?? ''}</p>
+        <p class="golobal-search-lis-title">{$v.k_name?? ''}</p>
+      </a>
+    </li>
+      {/if}
+    {/volist}
+
+  </ul>
+  <div class="course-pages">
+    <ul class="course-pages-num" id="page">
+          {$pagesize}
+    </ul>
+  </div>
+</div>
+<!-- 卡号激活弹窗 -->
+<!-- <div class="card-activation-modal"> </div> -->
+<!-- 提示是否激活窗口 -->
+<!-- <div class="card-activation-confirm">
+  <div action="" class="layui-form">
+    <div class="card-activation-modal-confirm-close">x</div>
+    <p class="card-activation-power"></p>
+    <div class="card-activation-modal-confirm-btn" lay-submit lay-filter="agreeBtn">确定</div>
+  </div>
+</div> -->
+
+<div class="number_showmodel">
+  <div class="number_showmodel_content clearfix">
+    <div class="number_showmodel_close">+</div>
+    <i class="iconfont icon-xuexi number_showmodel_iconfont"></i>
+    <p class="number_p confirm_study">确认学习吗？</p>
+    <p class="number_p free_audition"></p>
+    <!-- <p class="number_p audited"></p> -->
+    <button class="showmodel_btn i_about_btn">我再想想</button>
+    <button class="showmodel_btn confirm_study_btn">确认学习</button>
+  </div>
+</div>
+  
+  <!-- footer -->
+  {include file="index/public/footer"}
+</body>
+<script>
+layui.use(['element','layer', 'form','carousel','laypage'], function(){
+  var layer = layui.layer
+      ,element = layui.element
+      ,form = layui.form
+      ,carousel = layui.carousel
+      ,laypage = layui.laypage;
+
+        //判断是否登录
+    $(document).on('click','.golobal-search-video-list .golobal-search-video-lis a',function(){
+      return loginpage();
+    })
+
+    // 选择课程
+    $(".course-select-list").on('click', '.course-list-item .course-list-lis', function() {
+      var item = $(this).data("id");
+      console.log(item);
+      $(".course-list-item .course-list-lis").removeClass("course-list-lis-click")
+      $(this).addClass("course-list-lis-click")
+    })
+    $(".course-select-list").on('click', '.course-list-grade .course-list-lis', function() {
+      var grade = $(this).data("value");
+      $(".course-list-grade .course-list-lis").removeClass("course-list-lis-click")
+      $(this).addClass("course-list-lis-click")
+    })
+    $(".golobal-search-select-lis").click(function() {
+      let data_val = $(this).attr('data-val');
+      $(".golobal-search-select-lis").removeClass("golobal-search-select-change")
+      $(this).addClass("golobal-search-select-change")
+      classlist(data_val);
+    })
+    form.on('submit(searchMsg)',function(data){
+      let data_val = $('.golobal-search-select-change').attr('data-val');
+      let search_name = $(".golobal-search-input").val();
+      if(search_name != ''){
+          classlist(data_val);
+      }else{
+        layer.msg('请输入搜索条件',{icon:2,time:2000});
+      }
+      
+    })
+    function classlist(data_val,pagenow){
+      var pagenow = pagenow || 1;
+      $('.golobal-search-video-list').empty();
+      let search_name = $(".golobal-search-input").val();
+      // console.log(search_name == '');
+        var field = search_name == ''?{'data_val':data_val,'page':pagenow}:{'gloalSearch':search_name,'data_val':data_val,'page':pagenow};
+      $.ajax({
+        url: 'glodalsearch'
+        ,data:field
+        ,dateType: 'json'
+        ,type: 'get'
+        ,success:function(res){
+          
+            $('#counts').html(res.data.count[0]);
+            $('#count1').html(res.data.count[0]);
+            $('#count2').html(res.data.count[1]);
+            $('#count3').html(res.data.count[2]);
+            if(res.data.count[3] != undefined){
+              $('#count4').html(res.data.count[3]);
+            }
+            if(res.data.list != undefined){
+
+              $.each(res.data.list,function(i,v){
+                    let li = $('<li class="golobal-search-video-lis"></li>');
+                    if (v.type == 1) {
+                      // let li = $('<li class="golobal-search-video-lis"></li>');
+                      // let a_href = v.start_time != undefined?'id='+v.kid+'&videoid='+v.id+'&startTime='+v.start_time:'id='+v.kid+'&videoid='+v.id;
+                      li.append('<a href="/index/course/courseParticulars?id='+v.video_class_id+'&productStatus='+v.productStatus+'"><div class="golobal-search-lis-img">'+
+                              '<img src="'+v.img+'" alt=""></div>'+
+                              '<p class="golobal-search-lis-title">'+v.Titles+'</p></a>');
+                    }else if(v.type==2) {
+                      // let li = $('<li class="golobal-search-video-lis"></li>');
+                      let a_href = v.startTime != undefined?'id='+v.video_class_id+'&videoid='+v.video_id+'&startTime='+v.startTime:'id='+v.video_class_id+'&videoid='+v.video_id+'&startTime=';
+                      li.append('<a data-url="/index/course/courseParticulars?'+a_href+'&productStatus='+v.productStatus+'" onclick="layui.clickurl('+v.video_id+','+v.audi+',this,'+v.video_class_id+','+v.productStatus+')"><div class="golobal-search-lis-img">'+
+                              '<img src="'+v.img+'" alt=""></div>'+
+                              '<p class="golobal-search-lis-title">'+v.Titles+'</p></a>'+
+                              '<p class="golobal-search-lis-title">'+v.outline+'</p></a>');
+                    }else {
+
+                      // let li = $('<li class="golobal-search-video-lis"></li>');
+                      let a_href = v.startTime != undefined?'id='+v.video_class_id+'&videoid='+v.video_id+'&startTime='+v.startTime:'id='+v.video_class_id+'&videoid='+v.video_id+'&startTime=';
+                      li.append('<a data-url="/index/course/courseParticulars?'+a_href+'&productStatus='+v.productStatus+'" onclick="layui.clickurl('+v.video_id+','+v.audi+',this,'+v.video_class_id+','+v.productStatus+')"><div class="golobal-search-lis-img">'+
+                             '<img src="'+v.img+'" alt=""></div>'+
+                             '<p class="golobal-search-lis-title">'+v.Titles+'</p></a>'+
+                             '<p class="golobal-search-lis-title">'+v.k_name+'</p></a>');
+                    }
+
+                    $('.golobal-search-video-list').append(li);
+                })
+              $('#page').html(res.data.pagesize);
+            }
+            if(res.data.list.length == 0){
+                $('.golobal-search-video-list').html('暂无数据');
+            }
+        }
+      })
+    }
+    //分页js
+     window.pagebody = function(pagenow)
+    {
+      let data_val = $('.golobal-search-select-change').attr('data-val');
+      classlist(data_val,pagenow)
+    }
+     layui.clickurl = function(id,audi,that,kid,productStatus){
+      var url = $(that).attr('data-url');
+      // console.log()
+        // console.log(url);
+        // return false;
+        $.ajax({
+           type: "POST",  
+           url: "/index/course/checkAudiVideo",  
+           data: {videoid:id,kid:kid,productStatus:productStatus},
+           dataType: "json",  
+           success: function(data){
+               if(data.error_code == 1){
+                $('.free_audition').html(data.msg)
+                $('.number_showmodel').show();
+                $('.showmodel_btn').show();
+                $('.confirm_study').show();
+                $('.number_showmodel_iconfont').removeClass('showmodel_bg');
+                $('.number_showmodel_iconfont').addClass('iconfont icon-xuexi');
+                $('.number_showmodel_close').click(function(){
+                  $('.number_showmodel').hide();
+                })
+                $('.confirm_study_btn').click(function(){
+                  $('.number_showmodel').hide();
+                  if(data.data){
+                    window.location.href = data.data;
+                  }else{
+                    window.location.href = url;
+                  }
+                })
+                $('.i_about_btn').click(function(){
+                  $('.number_showmodel').hide();
+                })
+               }else if(data.error_code == 0){
+                //  layer.msg(data.msg,{time:1500,icon:0});
+                $('.free_audition').html(data.msg)
+                $('.showmodel_btn').hide();
+                $('.confirm_study').hide();
+                $('.number_showmodel_iconfont').removeClass('iconfont icon-xuexi');
+                $('.number_showmodel_iconfont').addClass('showmodel_bg');
+                $('.number_showmodel').show();
+                $('.number_showmodel_close').click(function(){
+                  $('.number_showmodel').hide();
+                })
+                $('.confirm_study_btn').click(function(){
+                  $('.number_showmodel').hide();
+                })
+                $('.i_about_btn').click(function(){
+                  $('.number_showmodel').hide();
+                })
+               }else if(data.error_code == 2){
+                window.location.href = url;
+               }
+            },  
+           error:function(e){  
+              console.log(e);  
+           }  
+      })
+
+      }
+});
+</script> 
+</html>

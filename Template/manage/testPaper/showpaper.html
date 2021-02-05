@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>生成手工试卷</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+</head>
+<style type="text/css">
+	.layui-card-body p{
+		margin-top: 5px;
+	}
+	.layui-card-header{
+		height:auto;
+	}
+	.pr p{
+		display:initial;
+	}
+</style>
+<body class="childrenBody" style="margin-top: 2em">
+	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;text-align: center;">
+  		<legend>{$testPaperList.0.title}</legend>
+  	</fieldset>
+  	{volist name="newList" id="val" key="key"}
+  	<div class="layui-tab layui-tab-card">
+	  <ul class="layui-tab-title">
+	    <li>{$bit[$key-1]}、{$val.questype}</li>
+	  </ul>
+	</div>
+	{volist name="val['son']" id="v" key="k"}
+	<!-- <div class="layui-tab layui-tab-card">
+	  <ul class="layui-tab-title">
+	    <li>{$v.question_sort}</li>
+	  </ul>
+	</div> -->
+	<div class="layui-col-md12">
+      <div class="layui-card">
+        <div class="layui-card-header">{$k}、{$v.q_stem}</div>
+        <div class="layui-card-body">
+          {$v.q_select}
+        </div>
+      </div>
+    </div>
+	<table class="layui-table" lay-skin="line">
+	  	<colgroup>
+		    <col width="150">
+		    <col width="150">
+	  	</colgroup>
+	  	<tbody>
+	    <tr>
+	      	<th>正确答案</th>
+	      	<th>{$v.q_answer}</th>
+	    </tr> 
+		    <tr>
+		      	<td>答案解析</td>
+		      	<td>{$v.q_describe}</td>
+		    </tr>
+	  	</tbody>
+	</table>
+	{/volist}
+	{/volist}
+	<div class="layui-tab layui-tab-card">
+	  <ul class="layui-tab-title">
+	    <li>题帽题</li>
+	  </ul>
+	</div>
+	{volist name="newQuestionrowsList" id="value" empty="暂无数据"}
+		<!-- <div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header">{$value.question_sort}</div>
+			</div>
+		</div> -->
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header">{$value.question_sort}、{$value.qr_question}</div>
+			</div>
+		</div>
+		{volist name="$value['son']" id="v" key="k"}
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header pr">{$k}、{$v.q_stem}</div>
+					<div class="layui-card-body">{$v.q_select}</div>
+				</div>
+			</div>
+			<table class="layui-table" lay-skin="line">
+				<colgroup>
+					<col width="150">
+					<col width="150">
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>正确答案</th>
+						<th>{$v.q_answer}</th>
+					</tr> 
+					<tr>
+						<td>答案解析</td>
+						<td>{$v.q_describe}</td>
+					</tr>
+				</tbody>
+			</table>
+			{/volist}
+		{/volist}
+	<script type="text/javascript" src="__LAY__layui.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/testPaper/randMakePaper.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/jquery-3.2.0.min.js"></script>
+</body>
+</body>
+</html>

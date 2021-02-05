@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="__LAY__css/layui.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+  <style>
+    ul,li{
+      list-style: none;
+    }
+    .clearfix:after{content:".";clear:both;display:block;height:0;overflow:hidden;visibility:hidden;}
+	.clearfix{zoom:1;}
+   .personl-weekly-contain{
+    width:991px;
+    background: #F2F3F5;
+    position: relative;
+    background:rgba(255,255,255,1);
+    /* box-shadow:0px 0px 20px 0px rgba(225,225,225,1); */
+    margin:0 auto;
+  }
+  .personl-weekly-top{
+    width:100%;
+  }
+  .personl-weekly-top li{
+    width:23.5%;
+    height:150px;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 0px 20px 0px rgba(225,225,225,1);
+    border-radius:10px;
+    margin-right:19px;
+    float: left;
+  }
+  .personl-weekly-top li:last-child{
+    margin-right:0;
+  }
+  .personl-weekly-title{
+    width:89%;
+    margin: 0 25px;
+    position: relative;
+  }
+  .personl-weekly-title h5{
+    display: inline-block;
+    font-size:18px;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height:45px;
+    margin-top:5px;
+  }
+  .personl-weekly-title i{
+    display: inline-block;
+    width:20px;
+    height:20px;
+    line-height: 20px;
+    text-align: center;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 0px 7px 0px rgba(190,190,190,0.81);
+    border-radius:50%;
+    position: relative;
+    right:-35%;
+  }
+  .personl-weekly-title::after{
+    content:'';
+    position: absolute;
+    bottom:0;
+    left:0;
+    width:190px;
+    /* height:1px; */
+    border-top:1px solid rgba(230,230,230,1);
+  }
+  .personl-weekly-num{
+    font-size:28px;
+    font-weight:300;
+    color:rgba(232,81,74,1);
+    line-height:45px;
+    margin:11px 0 0 25px;
+  }
+  .personl-weekly-num span{
+    font-size:14px;
+  }
+  .personl-weekly-contrast{
+    font-size:14px;
+    font-weight:300;
+    color:rgba(112,192,98,1);
+    margin:9px 0 0 25px;
+  }
+  .personl-weekly-contrast i{
+    margin-right:10px;
+  }
+  .personl-weekly-contrast span{
+    color:#C0C0C0;
+    margin-left:10px;
+  }
+  .personl-weekly-echarts{
+    width:100%;
+    margin:26px auto;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 0px 20px 0px rgba(225,225,225,1);
+    border-radius:10px;
+    position: relative;
+  }
+  .personl-weekly-echarts-container{
+    width: 94%;
+    height: 70%;
+    margin:0 auto;
+    padding-top:26px;
+  }
+  .personl-weekly-echarts-select{
+    position: absolute;
+    top: 26px;
+    right:30px;
+  }
+  .personl-weekly-echarts-select .layui-input-inline:first-child{
+    width:213px;
+  }
+  .personl-weekly-echarts-select .layui-form-select .layui-input, .layui-input, .personl-weekly-echarts-select .layui-textarea{
+    /* border:none */
+  }
+  .personl-weekly-echarts-select .layui-select-title {
+    float: right;
+  }
+  .personl-weekly-echarts-select .layui-form-select .layui-edge {
+    margin-top: 15px; 
+  }
+  .personl-weekly-echarts-select .layui-form-selected .layui-edge {
+    margin-top: 9px;
+  }
+  .personl-weekly-suggestions{
+    width:94%;
+    margin:0 auto;
+  }
+  .personl-weekly-suggestions h3{
+    font-size:20px;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height:82px;
+    position: relative;
+  }
+  .personl-weekly-suggestions h3::after{
+    content:'';
+    position: absolute;
+    bottom:0;
+    left:0;
+    width:913px;
+    border-top:1px solid rgba(230,230,230,1);
+  }
+  .personl-weekly-suggestions p{
+    font-size:16px;
+    font-weight:400;
+    color:rgba(136,136,136,1);
+    line-height:36px;
+    text-indent: 2em;
+    margin-top:10px;
+    padding-bottom:20px;
+  }
+  .personl-weekly-suggestions textarea{
+  	width:90%;
+  	min-height: 80px;
+  	resize: none;
+  }
+  </style>
+</head>
+
+<body>
+ <div class="personl-weekly-contain">
+            <ul class="personl-weekly-top clearfix">
+              <li>
+                <div class="personl-weekly-title">
+                  <h5>学习总时长</h5>
+                  <!-- <i>刷</i> -->
+                </div>
+                <p class="personl-weekly-num"><?php echo $data['studyTime'] ? ceil($data['studyTime']/60).'<span>分钟</span>' : '暂无数据'; ?></p>
+                <!-- <div class="personl-weekly-contrast"><i>[]</i>5.6%
+                  <span>对比上周增长</span>
+                </div> -->
+              </li>
+              <li>
+                <div class="personl-weekly-title">
+                  <h5>测验最高分</h5>
+                  <!-- <i>刷</i> -->
+                </div>
+                <p class="personl-weekly-num">{$data.maxFraction ? $data.maxFraction.'<span>分</span>': '暂无数据'}</p>
+                <!-- <div class="personl-weekly-contrast"><i>[]</i>5.6%
+                  <span>对比上周增长</span>
+                </div> -->
+              </li>
+              <li>
+                <div class="personl-weekly-title">
+                  <h5>测验最低分</h5>
+                  <!-- <i>刷</i> -->
+                </div>
+                <p class="personl-weekly-num">{$data.maxFraction ? $data.minFraction.'<span>分</span>': '暂无数据'}</p>
+                <!-- <div class="personl-weekly-contrast"><i>[]</i>5.6%
+                  <span>对比上周增长</span>
+                </div> -->
+              </li>
+              <li>
+                <div class="personl-weekly-title">
+                  <h5>测验平均分</h5>
+                  <!-- <i>刷</i> -->
+                </div>
+                <p class="personl-weekly-num">{$data.maxFraction ? ceil($data.avgFraction).'<span>分</span>': '暂无数据'}</p>
+                <!-- <div class="personl-weekly-contrast"><i>[]</i>5.6%
+                  <span>对比上周增长</span>
+                </div> -->
+              </li>
+            </ul>
+            <div class="personl-weekly-echarts">
+              <div id="container" class="personl-weekly-echarts-container" style="width:973px; height:535px;"></div>
+              <div class="personl-weekly-echarts-select layui-form">
+                <!-- <div class="layui-input-inline">
+                  <input type="text" class="layui-input" id="date1">
+                </div> -->
+                <div class="layui-input-inline">
+                  <select name="" lay-verify="required"  lay-filter="test">
+                    <!-- <option value=""></option> -->
+                    <option value="1">语文</option>
+                    <option value="2">数学</option>
+                    <option value="3">英语</option>
+                    <option value="4">物理</option>
+                    <option value="5">化学</option>
+                  </select>
+                </div>
+              </div>
+              <div class="personl-weekly-suggestions">
+                <h3>默认学习建议</h3>
+                <p>{$defaultAdvise ? $defaultAdvise['content'] : '暂无数据'}</p>
+              </div>
+              <div class="personl-weekly-suggestions layui-form">
+                <h3>老师学习建议</h3>
+                <p><textarea name='teacherAdvise' id="teacherAdvise" placeholder="请输入建议">{$teacherAdvise ? $teacherAdvise['content'] :''}</textarea></p>
+              </div>
+            </div>
+            <div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" type="button" lay-submit="" lay-filter="submitAdvise">立即提交</button>
+			    </div>
+			</div>
+            <input type="hidden" name="id" id="id" value="{$id}">
+            <input type="hidden" name="time" id="time" value="{$time}">
+            <input type="hidden" name="defaultAdviseId" id="defaultAdviseId" value="{$teacherAdvise ? $teacherAdvise['id'] : ''}">
+          </div>
+</body>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script>
+  var max;
+  layui.use(['form','jquery','laydate'], function(){
+    var form = layui.form
+        ,$ = layui.$;
+    var layer = layui.layer;
+    var laydate = layui.laydate;
+    var dom = document.getElementById("container");
+	var myChart = echarts.init(dom);
+	var app = {};
+
+
+	var myChart1 = {$datalist.myChart};
+	var testDataList = {$datalist.testDataList};
+	option = null;
+	option = {
+		title: {
+			text: '学习周报'
+		},
+		tooltip: {
+			trigger: 'axis'
+		},
+		// legend: {
+		//     data: ['语文', '数学', '英语']
+		// },
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		toolbox: {
+			show:false,
+			feature: {
+			saveAsImage: {}
+			}
+		},
+		xAxis: {
+			type: 'category',
+			boundaryGap: false,
+			data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+		},
+		yAxis: {
+			type: 'value',
+			name:'分钟',
+			splitLine:{
+			show:true,
+			lineStyle:{
+			type:'dashed'
+			}
+		},
+		axisLine:{
+			show:false
+		},
+		axisTick:{
+			show:false
+		}
+		},
+		series: [
+			{
+				name: '观看视频时长',
+				type: 'line',
+				stack: '总量1',
+				data: myChart1,
+				color:'#00A0E9'
+			},
+			{
+				name: '科目平均分',
+				type: 'line',
+				stack: '总量2',
+				data: testDataList,
+				color:'#E8514A'
+			},
+		]
+	};
+	if (option && typeof option === "object") {
+		myChart.setOption(option, true);
+	}
+
+
+    laydate.render({
+      elem: '#date1',
+      format: "yyyy/MM/dd-yyyy/MM/dd"
+      ,value: '2018/08/18-2020/04/26'
+      ,btns: ['clear', 'now'],
+      trigger: 'click',
+      done: function(value, date, endDate){
+          if(value!="" && value.length>0){
+                var today=new Date(value.substring(0,10));
+              var weekday=today.getDay();
+              var monday;
+              var sunday;
+              if (weekday==0) {
+                  monday=new Date(1000*60*60*24*(weekday-6) + today.getTime());
+              }  else {
+                  monday=new Date(1000*60*60*24*(1-weekday) + today.getTime());
+              }
+              if (weekday==0) {
+                  sunday=today;
+              }  else {
+                  sunday=new Date(1000*60*60*24*(7-weekday) + today.getTime());
+              }
+              var month = monday.getMonth()+1;
+              if(month<10)
+              {
+                  month = "0"+month;
+              }
+              var day1 = monday.getDate();
+              if(day1<10)
+              {
+                  day1 = "0"+day1;
+              }
+              var start = ""+monday.getFullYear()+"/"+month+"/"+day1;
+              var month2 = sunday.getMonth()+1;
+              if(month2<10)
+              {
+                  month2 = "0"+month2;
+              }
+              var day2 = sunday.getDate();
+              if(day2<10)
+              {
+                  day2 = "0" + day2;
+              }
+              var end = ""+sunday.getFullYear()+"/"+month2+"/"+day2;
+              $("#date1").val(start+"-"+end);
+          }else{
+                $("#date1").val('');
+          }
+
+        }
+    });
+
+    var id = $('#id').val();
+    var time = $('#time').val();
+    form.on('select(test)', function(data){
+    	var subject_id = data.value;
+	  	$.post('/manage/WeeklyReport_controller/myChartDate',{id:id,subject_id:subject_id,time:time},function(data){
+			if(data.error_code==1){
+                var myChart1 = data.data;
+  				var testDataList = data.count;
+  				console.log(typeof(myChart1))
+  				console.log(myChart1)
+  				console.log(testDataList)
+  				console.log(typeof(testDataList))
+    			myChart.setOption({        //加载数据图表
+                    series: [
+						{
+							name: '观看视频时长',
+							type: 'line',
+							stack: '总量1',
+							data: myChart1,
+							color:'#00A0E9'
+						},
+						{
+							name: '科目平均分',
+							type: 'line',
+							stack: '总量2',
+							data: testDataList,
+							color:'#E8514A'
+						},
+					]
+                });
+
+			}
+		})
+  	});
+  	form.on('submit(submitAdvise)', function(data){
+  		var teacherAdvise = $('#teacherAdvise').val();
+  		var defaultAdviseId = '';
+  		 var defaultAdviseId = $('#defaultAdviseId').val();
+		$.post('/manage/WeeklyReport_controller/submitTeacherAdvise',{person_id:id,teacherAdvise:teacherAdvise,defaultAdviseId:defaultAdviseId},function(data){
+			if(data.error_code==1){
+				layer.msg('修改完成',{icon:6,time:800},function(){
+                    window.parent.location.reload();
+				});
+			}
+
+		})
+	});
+  });
+    
+</script>
+
+</html>

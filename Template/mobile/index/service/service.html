@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="__mobile__/js/mui.min.js"></script>
+    <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__mobile__/css/style.css">
+    <title>E点就通名校名师同步课堂</title>
+    <style>
+      html{
+        width: 100%;
+        height: 100%;
+        background: url("__mobile__/images/service.jpg")no-repeat center;
+        background-size:cover;
+      }
+      body{
+        background-color:transparent;
+      }
+    </style>
+</head>
+<body>
+  <div class="service-page">
+    <h5 class="service-h5">官方微信客服查询系统</h5>
+    <form action="" class="service-form">
+      <div class="service-form-item">
+        <input type="text" class="service-form-input" placeholder="请输入微信客服号码   如：ydt0516">
+      </div>
+      <div class="service-form-item">
+        <button type="button" class="service-submit-btn" id="service-submit-btn">查询</button>
+      </div>
+    </form>
+    <div class="check-success">已为您查询到结果，ydt007是我们的客服老师</div>
+  </div>
+  <!-- footer -->
+  {include file="index/public/footer"}
+</body>
+</html>
+ <script src="__mobile__/js/jquery-2.2.3.js"></script>
+ <script src="__mobile__/js/fastclick.js"></script>
+<script src="__mobile__/js/iconfont/iconfont.js"></script>
+<script src="__mobile__/js/public.js"></script>
+<script>
+  mui.init();
+  // mui('.mui-input-row input').input(); 
+  //iphoneX兼容
+  function isIphoneX() {
+    return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+  } 
+  if(isIphoneX()) {
+    $(".service-h5").css({"padding":"70% 0 4%"})
+  }
+  //点击查询客服信息验证客服身份
+  $("#service-submit-btn").click(function() {
+    var weixin=$('.service-form-input').val();
+    $.post('/index/service/getServerWeiXin',{weixin:weixin},function(data){
+        if(data.msg=='success'){
+          $(".check-success").html(data.data);
+        }else{
+          $(".check-success").html(data.msg);
+        }
+    });
+    $(".check-success").fadeIn()
+  })
+</script>

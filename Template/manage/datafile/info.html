@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta charset="utf-8">
+  	<title></title>
+  	<meta name="renderer" content="webkit">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+		<link rel="stylesheet" href="__LAY__css/admin.css" media="all" />
+
+		
+	<style type="text/css">
+		.layui-upload-drag{
+		float: left;;
+		}
+		.layui-form-div-video{
+		width: 243px;
+		margin-top: -136px;
+		float: left;
+		margin-left: 461px;
+		display: none;
+		}
+		.layui-tree-line .layui-tree-pack {
+			padding-left: 135px;
+		}
+	</style>
+<script type="text/javascript" charset="utf-8" src="__UE__ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__UE__ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__UE__lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+	<form class="layui-form">
+	<div class="layui-form" style="padding: 20px 30px 0 0; width: 1000px;">
+		<div class="layui-form-item">
+			<label class="layui-form-label">名称</label>
+			<div class="layui-input-block">
+				<input type="text" name="name" autocomplete="off" class="layui-input" disabled value="{$info.name}">
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">类型</label>
+			<div class="layui-input-block">
+				<input type="radio" name="type" value="1" title="资料" disabled {if condition="$info.type eq 1"} checked {/if}>
+				<input type="radio" name="type" value="2" title="新闻" disabled {if condition="$info.type eq 2"} checked {/if}>
+			</div>
+		</div>
+
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">年级</label>
+			<div class="layui-input-block">
+				<select name="grade_id" id="grade_id" lay-filter="grade_id" disabled>
+					{if condition="$gradeList"}
+						{volist name="gradeList" id="v"}
+						<option value="{$v.id}" {if condition="$info.type eq $v.id"} selected {/if} >{$v.grade}</option>
+						{/volist}
+					{/if}
+				</select>
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">学期</label>
+			<div class="layui-input-block">
+				<select name="semester" id="semester" lay-filter="semester" disabled>
+					<option value="1" {if condition="$info.semester eq 1"}  selected {/if}>上学期</option>
+					<option value="2" {if condition="$info.semester eq 2"}  selected {/if}>下学期</option>
+					<option value="3" {if condition="$info.semester eq 3"}  selected {/if}>全册</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">课程</label>
+			<div class="layui-input-block">
+				<select name="video_class_id" id="video_class" lay-search='' lay-filter="video_class" disabled>
+					{if condition="$courseList"}
+						{volist name="courseList" id="v"}
+						<option value="{$v.id}" {if condition="$info.video_class_id eq $v.id"} selected {/if} >{$v.name}</option>
+						{/volist}
+					{/if}
+				</select>
+			</div>
+		</div>
+
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">章节</label>
+			<div class="layui-input-block" id="tag_ids1"></div>
+		</div>
+
+		<!-- 多选标签 -->
+		<div class="layui-form-item">
+			<label class="layui-form-label">标签</label>
+			<div class="layui-input-block" id="tag_ids2"></div>
+		</div>
+
+
+		<!-- <div class="layui-form-item">
+			<label class="layui-form-label">课件资料上传</label>
+			<div class="site-demo-upload">
+				<div class="layui-upload-drag" id="coursewarefile">
+					<i class="layui-icon"></i>
+					<p>点击上传，或将文件拖拽到此处</p>
+				</div>
+				<input type="hidden" name="link"  id="link" value="{$info.link}">
+			</div>
+		</div> -->
+
+		<!-- 多文件上传 -->
+		<div class="layui-form-item">
+			
+			<div class="layui-upload-list">
+				<table class="layui-table">
+				<thead>
+					<tr><th>文件名</th>
+					<th>大小</th>
+					<th>状态</th>
+					<th>操作</th>
+				</tr></thead>
+				<tbody id="demoList"></tbody>
+				</table>
+			</div>
+			
+		</div> 
+
+
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">课程简介</label>
+			<div class="layui-input-block">
+				<span>{$info.content}</span>
+			</div>
+		</div>
+	</div>
+	</form>
+</body>
+</html>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript" src="__MANAGE__/js/datafile/edit.js"></script>
+<script type="text/javascript" src="__MANAGE__/js/jquery-3.2.0.min.js"></script>
+
+
+<script>
+	var ue = UE.getEditor('editor',{initialFrameWidth:"90.8%",initialFrameHeight:300});
+</script>
+
+<script type="text/javascript">
+
+	layui.config({
+		base : '/static/manage/layui/js/'
+	}).extend({
+		selectN: 'selectN',
+		selectM: 'selectM',
+	});
+
+	// 标签栏
+	var tagData;
+	$(function() {
+		var video_class = $("#video_class").val();
+		$.ajax({
+			type:'post',
+			async:false,
+			url:'/manage/datafile_controller/getVideoList?video_class='+ video_class,
+			success:function(da) {
+				tagData = da.data;
+				if (da.error_code == 0) {
+					if (da.data.length == 0) {
+						$("#video").html('');
+						var html = '<option value="">没有课程</option>';
+						$("#video").append(html);
+						form.render('select');
+					} else {
+						$("#video").html('');
+						var html = '<option value="">请选择</option>';
+						for(var i= 0; i<da.data.length; i++) {
+							html += '<option value="'+ da.data[i].id +'">'+ da.data[i].name +'</option>'
+						}
+
+						$("#video").append(html);
+					}
+				} else {
+					layer.msg(data.msg,{time:400});
+				}
+			}
+			
+		})
+
+		// 章节多选
+		layui.use(['layer','form','jquery','selectN','selectM'],function(){
+			$ = layui.jquery;	
+			var form = layui.form
+			,selectN = layui.selectN
+			,selectM = layui.selectM;
+
+			//多选标签-基本配置
+			var tagIns1 = selectM({
+				//元素容器【必填】
+				elem: '#tag_ids1'
+				//候选数据【必填】
+				,data: tagData
+
+				,selected: video
+				,width: 900
+				,max: 200  // 默认不填5个，这里需填入足够大数
+				//添加验证
+				,verify: 'required'      
+			}); 
+		})
+
+		// 标签多选
+		layui.use(['layer','form','jquery','selectN','selectM'],function(){
+			$ = layui.jquery;	
+			var form = layui.form
+			,selectN = layui.selectN
+			,selectM = layui.selectM;
+			$.ajax({
+				type: 'post',
+				url:'/manage/datafile_controller/getTagList',
+				data:'',
+				async:false,
+				success:function(e) {
+					tagData = e;
+				}
+			});
+
+			//多选标签-基本配置
+			var tagIns1 = selectM({
+				//元素容器【必填】
+				elem: '#tag_ids2'
+				//候选数据【必填】
+				,data: tagData	
+				
+				//最多选中个数，默认5
+				,max : 200
+				
+				// 默认值
+				,selected:tag
+				//input的name 不设置与选择器相同(去#.)
+				,name: 'tag2'
+				
+				//值的分隔符
+				,delimiter: ','
+		
+				//候选项数据的键名
+				,field: {idName:'id',titleName:'title'}    
+			}); 
+		})
+	});
+
+	tagData = [];
+
+	var tag = [{$info.tag_id}]; // 标签默认值
+	var video = [{$info.video_id}]; // 章节默认值
+	
+
+	layui.use(['layer','code','form','upload','layedit'],function() {
+		var $ = layui.$
+			,form = layui.form
+			,layer = layui.layer
+			,upload = layui.upload
+			,layedit = layui.layedit
+			,selfid = $('#selfid').val()
+			,_index;
+
+		// 选择年级执行事件
+		form.on('select(grade_id)', function(data) {
+			var grade_id = data.value;
+			if (!grade_id) {
+				return false;
+			}
+			var semester = $('#semester').val();
+			$.ajax({
+				type:'post',
+				url:'/manage/datafile_controller/getVideoClassList?grade_id='+ grade_id + '&semester='+ semester,
+				success:function(da) {
+					if (da.error_code == 0) {
+						if (da.data.length == 0) {
+							$("#video_class").html('');
+							$("#tag_ids1").html('');
+							var html = '<option value="">没有课程</option>';
+							$("#video_class").append(html);
+							form.render('select');
+						} else {
+							$("#video_class").html('');
+							$("#tag_ids1").html('');
+							var html = '<option value="">请选择</option>';
+							for(var i= 0; i<da.data.length; i++) {
+								html += '<option value="'+ da.data[i].id +'">'+ da.data[i].name +'</option>'
+							}
+
+							$("#video_class").append(html);
+							form.render('select');
+						}
+					} else {
+						layer.msg(data.msg,{time:400});
+					}
+				}
+				
+			})
+		})
+
+
+		// 选择学期执行事件
+		form.on('select(semester)', function(data) {
+			var grade_id = $('#grade_id').val();
+			if (!grade_id) {
+				return false;
+			}
+
+			var semester = data.value;
+			$.ajax({
+				type:'post',
+				url:'/manage/datafile_controller/getVideoClassList?grade_id='+ grade_id + '&semester='+ semester,
+				success:function(da) {
+					if (da.error_code == 0) {
+						if (da.data.length == 0) {
+							$("#video_class").html('');
+							$("#tag_ids1").html('');
+							var html = '<option value="">没有课程</option>';
+							$("#video_class").append(html);
+							form.render('select');
+						} else {
+							$("#video_class").html('');
+							$("#tag_ids1").html('');
+							var html = '<option value="">请选择</option>';
+							for(var i= 0; i<da.data.length; i++) {
+								html += '<option value="'+ da.data[i].id +'">'+ da.data[i].name +'</option>'
+							}
+
+							$("#video_class").append(html);
+							form.render('select');
+						}
+					} else {
+						layer.msg(data.msg,{time:400});
+					}
+				}
+				
+			})
+		})
+
+
+		// 选择课程执行事件
+		form.on('select(video_class)', function(data) {
+			var video_class = data.value;
+			if (!video_class) {
+				return false;
+			}
+			
+			$.ajax({
+				type:'post',
+				async:false,
+				url:'/manage/datafile_controller/getVideoList?video_class='+ video_class,
+				success:function(da) {
+					tagData = da.data;
+					if (da.error_code == 0) {
+						if (da.data.length == 0) {
+							
+							$("#video").html('');
+							$("#tag_ids1").html('');
+							var html = '<option value="">没有课程</option>';
+							$("#video").append(html);
+							form.render('select');
+						} else {
+							$("#video").html('');
+							$("#tag_ids1").html('');
+							var html = '<option value="">请选择</option>';
+							for(var i= 0; i<da.data.length; i++) {
+								html += '<option value="'+ da.data[i].id +'">'+ da.data[i].name +'</option>'
+							}
+
+							$("#video").append(html);
+							form.render('select');
+						}
+					} else {
+						layer.msg(data.msg,{time:400});
+					}
+				}
+				
+			})
+
+			// 章节多选
+			layui.use(['layer','form','jquery','selectN','selectM'],function(){
+				$ = layui.jquery;	
+				var form = layui.form
+				,selectN = layui.selectN
+				,selectM = layui.selectM;
+
+				//多选标签-基本配置
+				var tagIns1 = selectM({
+					//元素容器【必填】
+					elem: '#tag_ids1'
+					//候选数据【必填】
+					,data: tagData
+					,selected: video
+					,width: 900
+					,max: 200  // 默认不填5个，这里需填入足够大数
+					//添加验证
+					,verify: 'required'      
+				}); 
+			})
+			
+		})
+	})
+</script>

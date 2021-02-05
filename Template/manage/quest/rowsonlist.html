@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>题库列表</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/admin.css" media="all" />
+</head>
+<body>
+	<input type="hidden" id="gradeId" value="{$gradeId}">
+  <input type="hidden" id='q_parent' value="{$q_parent?:0}">
+  <div class="layui-fluid">
+    <div class="layui-card">
+      <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+        <div class="layui-form-item">
+
+          <div class="layui-inline">
+            <label class="layui-form-label">题干:</label>
+            <div class="layui-input-block">
+                <p>{$qr_question?:'题干'}</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="layui-card-body">
+        <div style="padding-bottom: 10px;">
+          <button class="layui-btn layuiadmin-btn-useradmin" data-type="batchdel">删除</button>
+          <button class="layui-btn layuiadmin-btn-useradmin" data-type="addtest" data-isadd='1'>添加试题</button>
+        </div>
+        
+        <table id="LAY-user-manage" id='LAY-user-manage' lay-filter="LAY-user-manage" ></table>
+        <script type="text/html" id="imgTpl"> 
+          <img style="display: inline-block; width: 50%; height: 100%;" src= {{ d.这里是图片的模板 }}>
+        </script> 
+        <script type="text/html" id="table-useradmin-webuser">
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="addtest" data-isadd='0'><i class="layui-icon layui-icon-edit"></i>编辑</a>
+          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="batchdel"><i class="layui-icon layui-icon-delete"></i>删除</a>
+        </script>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript" src="__MANAGE__/js/quest/quest.js"></script>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="__LAY__css/layui.css">
+	<link rel="stylesheet" type="text/css" href="__LAY__css/admin.css">
+</head>
+<body>
+	<input type="hidden" id="subject" value="{$subject}">
+	<input type="hidden" id="grade" value="{$grade}">
+	<button type="button" class="layui-btn layui-btn-primary layui-btn-sm add-button" data-subject="{$subject}" data-grade="{$grade}">添加</button>
+	<table class="layui-table layui-form" id="treetables" lay-size="sm"></table>
+</body>
+</html>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript">
+	layui.config({
+		base: '/static/manage/layui/js/',
+	})
+	layui.use(['treeTable','layer','code','form','util','layedit','tree'],function(){
+		var $ = layui.$
+			,treeTable = layui.treeTable
+			,form = layui.form
+			,tree = layui.tree
+			,o = layui.$
+			,util = layui.util
+			,layedit = layui.layedit
+			,subject = $('#subject').val()
+			,grade = $('#grade').val();
+			
+		var re = treeTable.render({
+			elem: '#treetables'
+			,url: '/manage/videos/videotree?g_type='+grade+'&s_type='+subject
+			,icon_key: 'title'
+			// ,is_checkbox: true
+			,end :function(e){
+				//form.render();
+			}
+			,cols: [
+				{
+					key: 'title',title: '名称',width: '120px',template: function(item){
+					if(item.level == 0){
+						return '<span style="color:red;">'+item.title+'</span>';
+					}else if(item.level == 1){
+						return '<span style="color:green;">'+item.title+'</span>';
+					}else if(item.level == 2){
+						return '<span style="color:#aaa;">'+item.title+'</span>';
+					}else if(item.level == 3){
+						return '<span style="color:#aaa;">'+item.title+'</span>';
+					}else if(item.level == 4){
+						return '<span style="color:#aaa;">'+item.title+'</span>';
+					}else if(item.level == 5){
+						return '<span style="color:#aaa;">'+item.title+'</span>';
+					}
+
+				}},
+				{
+					title: '学科', width: '30px', template: function(item){
+						
+						if(item.level == 0){
+							return '<span style="color:red;">'+item.subject+'</span>';
+						}else{
+							return '<span style="color:red;">-</span>';
+						}
+					}
+				},
+				{
+					key: 'price',title: '价格', width: '40px',template: function(item){
+						if(item.level == 0){
+							return '<span style="color:red;">'+item.price+'</span>';
+						}else{
+							return '<span style="color:red;">-</span>';
+						}
+					},
+				},
+				{
+					key: 'Discount',title: '折扣', width: '20px',template: function(item){
+						if(item.level == 0){
+							return '<span style="color:red;">'+item.Discount+'</span>';
+						}else{
+							return '<span style="color:red;">-</span>';
+						}
+					},
+				},
+				{
+					key: 'edition_id',title: '教材版本', width: '40px',template: function(item){
+						if(item.level == 0){
+							return '<span style="color:red;">'+item.edition_id+'</span>';
+						}else{
+							return '<span style="color:red;">-</span>';
+						}
+					},
+				},
+				{
+					title: '折后价', width: '30px',align: 'center',template: function(item){
+						if(item.level == 0){
+							return '<span style="color:red;">'+Math.floor(parseFloat(item.price) * parseFloat(item.Discount) * 100)/100+'</span>';
+						}else{
+							return '<span style="color:red;">-</span>';
+						}
+					}
+				},
+				{
+					title: '教师姓名',
+					width: '40px',
+					align: 'center',
+					template: function(item){
+						if(item.level == 0){
+							return '<span style="color:#aaa;">'+item.sname+'</span>';
+						}else if(item.part == 2){
+							return '<span style="color:#aaa;">'+item.sname+'</span>';
+						}else{
+				              //禁止显示
+				              return '';
+				        }
+					}
+				},
+				{
+					title: '试听状态',
+					width: '50px',
+					align: 'center',
+					template: function(item){
+						if(item.level == 0){
+							var check = item.audi == 1?'checked=""':'';
+							return '<input type="checkbox" name="close" data-table="video_class" data-id="'+item.vid+'" lay-filter="cbox" lay-skin="switch" lay-text="ON|OFF"'+check+'>';
+						}else if(item.part == 2){
+							var check = item.audi == 1?'checked=""':'';
+							return '<input type="checkbox" name="close" data-table="video" data-id="'+item.vid+'" lay-filter="cbox" lay-skin="switch" lay-text="ON|OFF"'+check+'>';
+						}else{
+				              //禁止显示
+				              return '';
+				        }
+					}
+				},
+				{
+					title: '操作',
+					width: '100px',
+					align: 'center',
+					template: function(item){
+						var btn = '',part = '0',_function = '',_add = '',_edit = 'edit_c',upart = 0,_table = 'video';
+						if(item.level == 0 && item.part == undefined){
+							_table = 'video_class';
+							_function = 'addchapter';
+							_add = 'add';
+							_edit = 'edit_v_c'
+							btn = '添加章节'
+						}else if(item.part == 0){
+							part = '1';
+							_add = 'add_c';
+							_edit = 'edit'
+							_function = 'addchapteres';
+							btn = '添加模块'
+						}else if(item.part == 1){
+							part = '2';
+							_add = 'add_c';
+							_edit = 'edit'
+							btn = '添加课时'
+						}else if(item.part == 2){
+							part = '2';
+							_add = 'add_k';
+							btn = '添加标签'
+						}else{
+							return '<div class="layui-btn-group"><button type="button" class="layui-btn layui-btn-primary layui-btn-sm" lay-active="edit_k" data-table="knowledge" data-id="'+item.vid+'">编辑</button><button type="button" class="layui-btn layui-btn-primary layui-btn-sm" lay-active="delete" data-table="knowledge" data-id="'+item.vid+'">删除</button></div>';
+							return false;
+						}
+						return '<div class="layui-btn-group"><button type="button" class="layui-btn layui-btn-primary layui-btn-sm" lay-active="'+_add+'" data-id="'+item.vid+'" data-part="'+part+'">'+btn+'</button><button type="button" class="layui-btn layui-btn-primary layui-btn-sm" lay-active="'+_edit+'" data-part="'+part+'" data-id="'+item.vid+'">编辑</button><button type="button" class="layui-btn layui-btn-primary layui-btn-sm" lay-active="delete" data-table="'+_table+'" data-id="'+item.vid+'">删除</button></div>';
+					}
+				},
+				{
+					title: '排序',
+					width: '100px',
+					align: 'center',
+					template: function(item){
+						var _table;
+						if(item.level == 0 && item.part == undefined){
+							_table = 'video_class';
+						}else if(item.part == 0){
+							_table = 'video';
+						}else if(item.part == 1){
+							_table = 'video'
+						}else if(item.part == 2){
+							_table = 'video'
+						}else{
+							_table = 'knowledge'
+						}
+						return '<div class="layui-btn-group">'+
+							   '<button type="button" class="layui-btn layui-btn-primary" data-table="'+_table+'" data-id="'+item.vid+'" data-v="1" lay-active="k_sort"><i class="layui-icon layui-icon-up"></i>上移</button>'+
+							   '<button type="button" class="layui-btn layui-btn-primary" data-table="'+_table+'" data-id="'+item.vid+'" data-v="-1" lay-active="k_sort"><i class="layui-icon layui-icon-down"></i>下移</button>'+
+							   '</div>';
+					}
+				}
+
+			]
+		});
+
+		var handleFunction = function(_this, _type){
+			var table = $(_this).attr('data-table')
+				,id = $(_this).attr('data-id')
+				,title = $(_this).text()
+				,part = $(_this).attr('data-part');
+				switch(_type){
+					case 'add':
+					case 'edit':
+						var content = '/manage/videos/addchapter?';
+						content += _type == 'add' ? 'cid='+id : 'sid='+id
+						layer.open({
+				              type: 2
+				              ,title: title
+				              ,content: content
+				              ,area: ['62%', '80%']
+				              ,btn: ['确定', '取消']
+				              ,yes: function(index, layero){
+
+				                  var iframeWindow = window['layui-layer-iframe'+ index]
+				                  ,submitID = 'LAY-user-back-submit'
+				                  ,submit = layero.find('iframe').contents().find('#'+ submitID);
+				                  //监听提交
+				                  iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
+				                    var field = data.field; //获取提交的字段
+				                    //提交 Ajax 成功后，静态更新表格中的数据
+				                    if(field.kid == 0) delete field.kid
+				                    if(field.id == 0) delete field.id
+				                   	var trees = iframeWindow.layui.tree.getChecked('demoId');
+                          			field.ids = gettreeval(trees);
+                          			delete field.layuiTreeCheck
+				                    $.ajax({
+				                      url: '/manage/videos/chapteredit'
+				                      ,type: 'post'
+				                      ,dataType: 'json'
+				                      ,data: field
+				                      ,async: false
+				                      ,success: function(res){
+				                      	if(res.code == 0){
+				                      		treeTable.render(re) //数据刷新
+				                			layer.close(index); //关闭弹层
+				                      	}else{
+				                      		layer.msg(res.msg,{icon:2,time:2000},function(){
+				                      			layer.close(index);
+				                      		})
+				                      	}
+				                      			
+				                      }
+				                    });
+				                  });  
+				                  submit.trigger('click');
+				              }
+				            })
+					break;
+
+					case 'add_c':
+					case 'edit_c':
+						var content = '/manage/videos/addclasshour?';
+						content += _type == 'add_c' ? 'cid='+id : 'sid='+id;
+						content += '&part='+part;
+						layer.open({
+				              type: 2
+				              ,title: title
+				              ,content: content
+				              ,area: ['62%', '87%']
+				              ,btn: ['确定', '取消']
+				              ,yes: function(index, layero){
+
+				                  var iframeWindow = window['layui-layer-iframe'+ index]
+				                  ,submitID = 'LAY-user-back-submit'
+				                  ,submit = layero.find('iframe').contents().find('#'+ submitID);
+				                  //监听提交
+				                  iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
+				                    var field = data.field; //获取提交的字段
+				                    var trees = iframeWindow.layui.tree.getChecked('demoId');
+                          			field.ids = gettreeval(trees);
+                          			delete field.layuiTreeCheck
+				                    //提交 Ajax 成功后，静态更新表格中的数据
+				                    $.ajax({
+				                      url: '/manage/videos/addclassinterferce'
+				                      ,type: 'post'
+				                      ,dataType: 'json'
+				                      ,data: field
+				                      ,async: false
+				                      ,success: function(res){
+				                      	if(res.code == 0){
+				                      		layer.msg(res.msg,{icon:6,time:1000});
+				                      		treeTable.render(re) //数据刷新
+				                			layer.close(index); //关闭弹层
+				                      	}else{
+				                      		layer.msg(res.msg,{icon:2,time:2000},function(){
+				                      			layer.close(index);
+				                      		})
+				                      	}
+				                      			
+				                      }
+				                    });
+				                  });  
+				                  submit.trigger('click');
+				              }
+				            })
+					break;
+
+					case 'add_k':
+					case 'edit_k':
+						var content = '/manage/videos/addknowlenge?';
+						content += _type == 'add_k' ? 'sid='+id : 'cid='+id;
+						layer.open({
+				              type: 2
+				              ,title: title
+				              ,content: content
+				              ,area: ['62%', '87%']
+				              ,btn: ['确定', '取消']
+				              ,yes: function(index, layero){
+
+				                  var iframeWindow = window['layui-layer-iframe'+ index]
+				                  ,submitID = 'LAY-user-back-submit'
+				                  ,submit = layero.find('iframe').contents().find('#'+ submitID);
+				                  //监听提交
+				                  iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
+									 
+				                    var field = data.field; //获取提交的字段
+				                    //提交 Ajax 成功后，静态更新表格中的数据
+				                    $.ajax({
+				                      url: '/manage/videos/knowlengeedit'
+				                      ,type: 'post'
+				                      ,dataType: 'json'
+				                      ,data: field
+				                      ,async: false
+				                      ,success: function(res){
+				                      	if(res.code == 0){
+											layer.msg('成功',{icon:6,time:1000});
+				                      		treeTable.render(re) //数据刷新
+				                			layer.close(index); //关闭弹层
+				                      	}else{
+				                      		layer.msg(res.msg,{icon:2,time:3000},function(){
+												
+											})
+											return false;
+				                      	}
+				                      			
+				                      }
+				                    });
+				                  });  
+				                  submit.trigger('click');
+				              }
+				            })
+
+						
+					break;
+
+					case 'edit_v_c':
+						var content = '/manage/videos/addcurriculum?id='+id;
+						layer.open({
+				              type: 2
+				              ,title: title
+				              ,content: content
+				              ,area: ['68%', '89%']
+				              ,btn: ['确定', '取消']
+				              ,yes: function(index, layero){
+
+				                  var iframeWindow = window['layui-layer-iframe'+ index]
+				                  ,submitID = 'LAY-user-back-submit'
+				                  ,submit = layero.find('iframe').contents().find('#'+ submitID);
+				                  //监听提交
+				                  iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
+				                    var field = data.field; //获取提交的字段
+				                    //提交 Ajax 成功后，静态更新表格中的数据
+				                    field.content = iframeWindow.layui.layedit.getContent(field.layeditindex);
+				                    delete field.layeditindex;
+				                    var trees = iframeWindow.layui.tree.getChecked('demoId');
+				          			field.ids = gettreeval(trees);
+				          			delete field.layuiTreeCheck;
+				                    $.ajax({
+				                      url: '/manage/videos/curriculumedit'
+				                      ,type: 'post'
+				                      ,dataType: 'json'
+				                      ,data: field
+				                      ,async: false
+				                      ,success: function(res){
+				                      	if(res.code == 0){
+				                      		layer.msg('成功',{icon:6,time:1000});
+				                      		treeTable.render(re) //数据刷新
+				                			layer.close(index); //关闭弹层
+				                      	}else{
+				                      		layer.msg(res.msg,{icon:2,time:2000},function(){
+				                      			layer.close(index);
+				                      		})
+				                      	}
+				                      			
+				                      }
+				                    });
+				                  });  
+				                  submit.trigger('click');
+				              }
+				            })
+					break;
+
+					case 'delete':
+						 layer.confirm('<span style="color:red">删除后该节点下所有节点（节点视频、图片）都会被删除，请谨慎操作！</span>', function(index){
+						 	layer.close(index);
+						 	var index = layer.load(1, {time: 10*1000});
+						 	$.ajax({
+				            		url: '/manage/videos/recursiondel'
+				            		,data: {t_name:table,del_id:id}
+				            		,dataType: 'json'
+				            		,type: 'post'
+				            		,async: true
+				            		,success: function(e){
+				            			layer.close(index);
+				            			if(e.code == 1001){
+				            				layer.msg(e.msg,{icon:5,time:1200});
+				            				return false;
+				            			}
+				            			layer.msg(e.msg,{icon:6,time:1200},function(){
+				            				treeTable.render(re) //数据刷新
+				            			});
+				            			
+				            		},error: function(e,y,o){
+				            			layer.close(index)
+				            			layer.msg('error',{icon:5,time:1200});
+				            		}
+				            	})
+					     });
+					break;
+
+					case 'k_sort':
+						var status = $(_this).attr('data-v');
+						$.ajax({
+							url: '/manage/videos/sorting'
+							,data: {t_name:table,s_id:id,status:status}
+							,dataType: 'json'
+							,type: 'post'
+							,async: false
+							,success: function(e){
+								if(e.code == 1001){
+									layer.msg(e.msg,{icon:5,time:1500});
+									return false;
+								}
+								layer.msg(e.msg,{icon:6,time:800},function(){
+									treeTable.render(re) //数据刷新
+								});
+							}
+						})
+					break;
+				}
+		}
+		//监听右侧菜单 点击
+		util.event('lay-active',{
+			add: function(){
+				handleFunction(this,'add')
+			},edit: function(){
+				handleFunction(this,'edit')
+			},delete: function(){
+				handleFunction(this,'delete')
+			},add_c: function(){
+				handleFunction(this,'add_c')
+			},edit_c: function(){
+				handleFunction(this,'edit_c')
+			},add_k: function(){
+				handleFunction(this,'add_k')
+			},edit_k: function(){
+				handleFunction(this,'edit_k')
+			},edit_v_c: function(){
+				handleFunction(this,'edit_v_c')
+			},k_sort: function(){
+				handleFunction(this,'k_sort')
+			}
+		})
+
+		//监听开关
+		form.on('switch(cbox)',function(data){
+			// console.log(data.elem);
+			var id = o(data.elem).attr('data-id')
+				,table = o(data.elem).attr('data-table')
+				,val = data.elem.checked?1:2;
+			$.ajax({
+            		url: '/manage/videos/updswitch'
+            		,data: {id:id,table:table,v:val}
+            		,dataType: 'json'
+            		,type: 'post'
+            		,async: false
+            		,success: function(res){
+            			if(res.code != 0){
+            				layer.msg(res.msg,{icon:5,time:2000},function(){
+            					treeTable.render(re);
+            				})
+            			}
+            		}
+            	})
+		})
+
+		// 监听添加
+		treeTable.on('tree(add)',function(data){
+			layer.msg(JSON.stringify(data));
+			var pid = data.item.id;
+			addedit(pid);
+			
+		})
+
+		// 监听编辑
+		treeTable.on('tree(edit)',function(data){
+			layer.msg(JSON.stringify(data));
+			var pid = data.item.id;
+			addedit(pid,1);
+		})
+
+		//监听删除
+		treeTable.on('tree(del)',function(data){
+			layer.msg(JSON.stringify(data));
+			layer.confirm('<span style="color:red;">删除后该节点下面所有子节点将会被删除！您确定要删除嘛？</span>', function(index){
+            	var id = data.item.id;
+            	$.ajax({
+            		url: '/manage/admins/deltree'
+            		,data: {id:id}
+            		,dataType: 'json'
+            		,type: 'post'
+            		,async: false
+            		,success: function(res){
+            			if(res.code == 0){
+            				treeTable.render(re)
+            				layer.close(index);
+            			}else{
+            				layer.msg(res.msg,{icon:5,time:2000},function(){
+            					layer.close(index);
+            				});
+            			}
+            		}
+            	})
+		     });
+		})
+		//监听导航栏添加
+		$('.add-button').click(function(){
+			var subject = $(this).attr('data-subject'), grade = $(this).attr('data-grade');
+			layer.open({
+              type: 2
+              ,title: '添加'
+              ,content: '/manage/videos/addcurriculum?s_type='+subject+'&g_type='+grade
+              ,area: ['62%', '87%']
+              ,btn: ['确定', '取消']
+              ,yes: function(index, layero){
+
+                  var iframeWindow = window['layui-layer-iframe'+ index]
+                  ,submitID = 'LAY-user-back-submit'
+                  ,submit = layero.find('iframe').contents().find('#'+ submitID);
+                  //监听提交
+                  iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
+                    var field = data.field; //获取提交的字段
+                    //提交 Ajax 成功后，静态更新表格中的数据
+                    field.content = iframeWindow.layui.layedit.getContent(field.layeditindex);
+                    delete field.layeditindex;
+                    var trees = iframeWindow.layui.tree.getChecked('demoId');
+          			field.ids = gettreeval(trees);
+          			delete field.layuiTreeCheck;
+                    $.ajax({
+                      url: '/manage/videos/curriculumedit'
+                      ,type: 'post'
+                      ,dataType: 'json'
+                      ,data: field
+                      ,async: false
+                      ,success: function(res){
+                      	if(res.code == 0){
+                      		treeTable.render(re) //数据刷新
+                			layer.close(index); //关闭弹层
+                      	}else{
+                      		layer.msg(res.msg,{icon:2,time:2000},function(){
+                      			layer.close(index);
+                      		})
+                      	}
+                      			
+                      }
+                    });
+                  });  
+                  submit.trigger('click');
+              }
+            })
+		})
+
+		function gettreeval(trees){
+            var ids = '';
+            $.each(trees,function(i,v){
+               ids += v.id + ',';
+               if(v.children != undefined){
+                   $.each(v.children,function(i1,v1){
+                      ids += v1.id + ',';
+                      if(v1.children != undefined){
+                          $.each(v1.children,function(i2,v2){
+                              ids += v2.id + ',';
+                          })
+                      }
+                   })
+               }
+            })
+            return ids;
+        }
+
+		//刷新权限树
+		//treeTable.render(re);
+	})
+</script>

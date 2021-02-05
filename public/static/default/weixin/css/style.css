@@ -1,0 +1,117 @@
+@import "./iconfont/iconfont.css";
+body {font-family: "SourceHanSansCN-Regula",;background-color:#fff;color: #333;font-size: 12px;line-height: 1;-webkit-text-size-adjust: none;height: 100%;}
+html {overflow-x: hidden;-webkit-tap-highlight-color: transparent;font-size:100px;height: 100%;}
+body,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,figure,form,fieldset,legend,input,textarea,button,p,blockquote,th,td,pre,xmp{margin:0;padding:0}
+body,input,textarea,button,select{line-height:1.5;}
+h1,h2,h3,h4,h5,h6,small,big,input,textarea,button,select{font-size:100%}
+table{border-collapse:collapse;border-spacing:0;text-align:left}
+ul,ol,menu{list-style:none}
+fieldset,img{border:0}
+img,object,input,textarea,button,select{vertical-align:middle}
+textarea{overflow:auto;resize:vertical}
+input,textarea,button,select,a{outline:0 none;border:none;}
+button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}
+a{text-decoration:none}
+hr {height: .02rem;margin: .1rem 0;border: medium none;border-top: .02rem solid #cacaca;}
+a {color: #fff;text-decoration: none;}
+.clearfix:after{content:".";clear:both;display:block;height:0;overflow:hidden;visibility:hidden;}
+.clearfix{zoom:1;}
+/*火狐去掉按钮、连接的虚线*/
+/* a:focus, a:active,
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {border: 0;outline : 0;} 
+:-moz-placeholder { color: #b4b4b4;  }
+::-moz-placeholder { color: #b4b4b4;}
+a {-webkit-tap-highlight-color: rgba(0,0,0,0);}
+input:-ms-input-placeholder,textarea:-ms-input-placeholder { color: #b4b4b4;}
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {color: #b4b4b4;} */
+.bind-code-page{
+  width:100%;
+  height:100%;
+  overflow: hidden;
+}
+.page-logo{
+  width: 32.86%;
+  margin: 27.5% auto 0;
+}
+.page-logo img{
+  width:100%;
+}
+.bind-form{
+  width:85.1%;
+  margin:11% auto;
+  background:rgba(255,255,255,1);
+  box-shadow:0rem .04rem .12rem 0rem rgba(235,235,235,1);
+  border-radius:.14rem;
+}
+.bind-form-form{
+  width:80%;
+  margin:0 auto;
+  padding-top:13%;
+}
+.bind-form-item{
+  width:100%;
+  clear: both;
+  *zoom: 1;
+  position: relative;
+}
+.iconwebicon205, .iconsuozi{
+  position: absolute;
+  top:7%;
+  left:2%;
+  font-size:.2rem;
+  color:rgba(197,197,197,1);
+  z-index:2;
+}
+.bind-form-input{
+  width:90%;
+  height:.4rem;
+  line-height: .4rem;
+  font-size:.14rem;
+  font-weight:400;
+  color:#666;
+  border:none;
+  border-bottom:1px solid #E3E3E3;
+  text-indent: 2em;
+  padding: .02rem .15rem;
+  margin-bottom: .2rem;
+  position: relative;
+}
+.bind-pwd-code {
+  position: absolute;
+  top: 0%;
+  right: 1%;
+  width: 38%;
+  height: .36rem;
+  background: rgba(117,124,158,1);
+  border-radius: .18rem;
+  line-height: .36rem;
+  font-size: .14rem;
+  color: #fff;
+}
+.bind-submit-btn{
+  width:90%;
+  margin: 12% 0 22% 4%;
+  height:.44rem;
+  background:#0a3e82;
+  border-radius:.22rem;
+  text-align: center;
+  line-height:.44rem;
+  font-size:.18rem;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  padding:0;
+  border:none;
+}
+.toast{
+  width:90%;
+  margin: 0 auto;
+  text-align: center;
+  font-size:.14rem;
+  color:#0a3e82;
+  display: none;
+}

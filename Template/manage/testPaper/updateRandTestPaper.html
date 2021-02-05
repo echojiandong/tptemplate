@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>生成随机试卷</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+</head>
+<body class="childrenBody" style="margin-top: 2em">
+	<form class="layui-form">
+		<input name="id" type="hidden" class="layui-input newsName" lay-verify="title" value="{$testPaperList.id}">
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">试卷名称</label>
+				<div class="layui-input-block">
+				<input name="title" type="text" class="layui-input newsName" lay-verify="title" value="{$testPaperList.title}">
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">总分数</label>
+				<div class="layui-input-block">
+				<input name="score" type="text" class="layui-input newsName" lay-verify="score" value="{$testPaperList.score}">
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">考试时间</label>
+				<div class="layui-input-block">
+				<input name="testTime" type="text" class="layui-input" lay-verify="testTime" value="{$testPaperList.testTime}">
+				</div>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<div class="layui-inline">
+				<label class="layui-form-label">年级</label>
+				<div class="layui-input-block">
+					<select name="grade_id" lay-verify="required" lay-search="">
+			          <option value="">请选择年级</option>
+			          {volist name="gradeList" id="list"}
+				          <option value="{$list.id}" {if($testPaperList.grade_id == $list.id)}selected{/if}>{$list.grade}</option>
+				      {/volist}
+			        </select>
+				</div>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<div class="layui-inline">
+				<label class="layui-form-label">学期</label>
+				<div class="layui-input-block">
+					<select name="semester" lay-verify="required" lay-search="">
+			          	<option value="">请选泽学期</option>
+				        <option value="1" {if($testPaperList.semester == 1)}selected{/if}>上学期</option>
+				        <option value="2" {if($testPaperList.semester == 2)}selected{/if}>下学期</option>
+			        </select>
+				</div>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<div class="layui-inline">
+			    <label class="layui-form-label">课程</label>
+			    <div class="layui-input-block">
+			    	<select name="subject_id" lay-verify="required" lay-search="">
+				        <option value="">请选择年级</option>
+				        {volist name="subjectList" id="list"}
+					        <option value="{$list.id}" {if($testPaperList.subject_id == $list.id)}selected{/if}>{$list.subject}</option>
+					    {/volist}
+			        </select>
+			    </div>
+			</div>
+	  	</div>
+		<div class="layui-form-item" style="width:90%;margin: 0 auto;">
+		<table class="layui-table">
+			<colgroup>
+				<col width="10%">
+				<col width="10%">
+				<col width="10%">
+				<col width="10%">
+				<col width="10%">
+				<col width="10%">
+				<col width="10%">
+			</colgroup>
+			<thead>
+			<tr>
+				<th>题型</th>
+				<th>题数</th>
+				<th>分值</th>
+				<th>排序</th>
+				<th>简单</th>
+				<th>中等</th>
+				<th>难</th>
+			</tr> 
+			</thead>
+			<tbody>
+				{volist name="questionTypeList" id="val"}
+					<tr>
+						<td>{$val.questype}</td>
+						<td><input name="num_{$val.quest_id}" type="text" class="layui-input newsName" lay-verify="score" value="{$val.count? $val.count : 0}" placeholder="题数"></td>
+						<td><input name="everyScore_{$val.quest_id}" type="text" class="layui-input newsName" lay-verify="score" value="{$val.score? $val.score : 0}" placeholder="分值"></td>
+						<td><input name="sort_{$val.quest_id}" type="text" class="layui-input newsName" lay-verify="score" value="{$val.sort? $val.sort :0}" placeholder="排序"></td>
+						<td><input name="easy_{$val.quest_id}" type="text" class="layui-input newsName" lay-verify="score" value="{$val.easy_num? $val.easy_num :0}" placeholder="简单题数"></td>
+						<td><input name="mid_{$val.quest_id}" type="text" class="layui-input newsName" lay-verify="score" value="{$val.mid_num? $val.mid_num :0}" placeholder="中等题数"></td>
+						<td><input name="difficulty_{$val.quest_id}" type="text" class="layui-input newsName" lay-verify="score" value="{$val.difficulty_num? $val.difficulty_num :0}" placeholder="困难题数"></td>
+					</tr>
+				{/volist}
+			</tbody>
+		</table>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="updateRandTestPaper">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		    </div>
+		</div>
+	</form>
+	<script type="text/javascript" src="__LAY__layui.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/testPaper/randMakePaper.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/jquery-3.2.0.min.js"></script>
+</body>
+</html>

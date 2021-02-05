@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>图片总数--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<style>
+		.input-width {
+			width: 300px;
+		}
+	</style>
+</head>
+
+<body class="winui-window-body">
+<form class="layui-form" action="{:url('index/index/addbanner_handle')}" enctype="multipart/form-data" method="post" style="margin-top: 20px;">
+	<div class="layui-form-item">
+		{if condition="isset($info.is_forbidden) && $info.is_forbidden eq 3"}
+		<div class="layui-form-item">
+			<label class="layui-form-label"></label>
+			<div class="layui-input-block input-width">
+				<span style="color: red;">注：该订单已发起作废</span>
+			</div>
+		</div>
+		{elseif condition="isset($info.is_forbidden) && $info.is_forbidden eq 1" /}
+		<div class="layui-form-item">
+			<label class="layui-form-label"></label>
+			<div class="layui-input-block input-width">
+				<span style="color: red;">注：该订单已作废</span>
+			</div>
+		</div>
+		{/if}
+		<div class="layui-form-item">
+			<label class="layui-form-label">订单号：</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="price" class="layui-input newsAuthor"  lay-verify="price" disabled autocomplete="off"  value="{$info.order}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">所属管理员：</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="lecturer" class="layui-input newsAuthor"  lay-verify="required" disabled autocomplete="off" value="{if(!empty($info.username))}{$info.username}{/if}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">管理员联系方式</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="userPhone" class="layui-input newsAuthor"  lay-verify="sex" disabled autocomplete="off"  value="{$info.userphone}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">用户昵称</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="nickName" class="layui-input newsAuthor"  lay-verify="sex" disabled autocomplete="off"  value="{$info.nickName}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">用户联系方式</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="personPhone" class="layui-input newsAuthor"  lay-verify="sex" disabled autocomplete="off"  value="{$info.personphone}">
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">所属媒体</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="to_media" class="layui-input newsAuthor"  lay-verify="sex" disabled autocomplete="off"  value="{$info.medianame}">
+			</div>
+		</div>
+		<!-- {if($info.order_type == 1)} -->
+		<!-- <div class="layui-form-item">
+			<label class="layui-form-label">卡号</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="card" class="layui-input newsAuthor"  lay-verify="required" disabled autocomplete="off" value="{$info.card}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">卡号是否激活</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="code_status" class="layui-input newsAuthor"  lay-verify="required" disabled autocomplete="off" value="{$info.code_status}">
+			</div>
+		</div> -->
+		<!-- {/if} -->
+		<div class="layui-form-item">
+			<label class="layui-form-label">订单价格：</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="moeny" class="layui-input newsAuthor"  lay-verify="sex" disabled autocomplete="off"  value="{$info.money}元">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">优惠金额：</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="payMoney" class="layui-input newsAuthor"  lay-verify="sex" disabled autocomplete="off"  value="{$info.discount_price}元">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">实际支付金额：</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="payMoney" class="layui-input newsAuthor"  lay-verify="sex" disabled autocomplete="off"  value="{$info.payMoney}元">
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">订单状态：</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="state" class="layui-input newsAuthor"  lay-verify="address" disabled autocomplete="off"  value="{$info.state}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">看课权限：</label>
+			<div class="layui-input-block" style="width: 800px">
+				<!-- <input type="text" name="grade" class="layui-input newsAuthor"  lay-verify="address" disabled autocomplete="off"  value="{$info.orderType}"> -->
+				<table id="test"></table>
+			</div>
+		</div>
+		{if condition="$paytype"}
+		<div class="layui-form-item">
+			<label class="layui-form-label">支付详情</label>
+			<div class="layui-input-block" style="width:800px">
+				<table class="layui-table">
+					<thead>
+						<tr>
+						<th>支付类型</th>
+						<th>支付金额</th>
+						<th>支付时间</th>
+						</tr> 
+					</thead>
+					<tbody>
+						{volist name="$paytype" id="vo"}
+						<tr>
+							<td>{$vo.pay_type}</td>
+							<td>{$vo.money}</td>
+							<td>{$vo.strtime}</td>
+						</tr>
+						{/volist}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		{/if}
+		<div class="layui-form-item">
+			<label class="layui-form-label">订单时间：</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="rebate" class="layui-input newsAuthor" lay-verify="rebate" id="rebate"  disabled value="{$info.strtime}" >
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">审核状态：</label>
+			<div class="layui-input-block input-width">
+				<input type="text" name="rebate" class="layui-input newsAuthor" lay-verify="rebate" id="rebate"  disabled value="{$info.orderCheck}" >
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">备注：</label>
+			<div class="layui-input-block input-width">
+				 <textarea name="remark" placeholder="" disabled class="layui-textarea">{$info.remark}</textarea>
+			</div>
+		</div>
+	</div>
+
+</form>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script>
+	layui.use(['form','layer','laypage','table','jquery','laytpl'], function(data) {
+		var $ = layui.$, form = layui.form;
+		table = layui.table;
+		laytpl = layui.laytpl;
+		table.render({
+			elem: '#test'
+			,url:'/manage/order_contorller/checkCourseListByOrderId?order_id='+{$info.order}
+			,cols: [[
+				{field:'courseName', title: '课程名称'}
+				,{field:'isActive', title: '是否激活'}
+				,{field:'remTime', title: '剩余时间'}
+			]]
+			,id: 'testReload'
+		});
+	})
+</script>
+<!-- <script type="text/javascript" src="__MANAGE__/js/consumer/orderList.js"></script> -->
+</body>
+</html>

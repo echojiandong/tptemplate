@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>添加默认建议--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__MANAGE__/css/menu.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__ueditor.config.js"></script> -->
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__ueditor.all.min.js"> </script> -->
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__lang/zh-cn/zh-cn.js"></script> -->
+</head>
+<body class="childrenBody" style="padding: 20px 30px 0 0;">
+	<form class="layui-form" action="javascript:">
+		<input type="hidden" name="id" value="{$info.id}">
+		<input type="hidden" name="lastids" value="{$info.tagId}">
+		<div class="layui-form-item">
+			<label class="layui-form-label">产品名称</label>
+			<div class="layui-input-block">
+				<input name="name" type="text" class="layui-input" lay-verify="required" value="{$info.name}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">产品副标题</label>
+			<div class="layui-input-block">
+				<input name="title" type="text" class="layui-input" lay-verify="required" value="{$info['title']}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">价格</label>
+			<div class="layui-input-block">
+				<input name="price" type="text" class="layui-input" lay-verify="required" value="{$info.price}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">购买人数</label>
+			<div class="layui-input-block">
+				<input name="purchase" type="text" class="layui-input" lay-verify="required" value="{$info.purchase}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">阶段</label>
+			<div class="layui-input-block">
+				<select name="learn_id" id="learn_id" lay-verify="required" lay-search="">
+					<option value="">请选择阶段</option>
+					{volist name="learnList" id="learn"}
+					<option value="{$learn.id}" {if $learn.id == $info.learn_id}selected{/if}>{$learn.learn}</option>
+					{/volist}
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">年级</label>
+			<div class="layui-input-block">
+				<select name="gradeId" id="gradeId" lay-verify="required" lay-search="">
+			          <option value="">请选择年级</option>
+			          {volist name="gradeList" id="grade"}
+				          <option value="{$grade.id}" {if $grade.id == $info.grade_id}selected{/if}>{$grade.grade}</option>
+				      {/volist}
+			    </select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">科目</label>
+			<div class="layui-input-block">
+				<select name="subject_id" id="subject_id" lay-verify="required" lay-search="">
+			          <option value="">请选择科目</option>
+			          {volist name="subjectList" id="grade"}
+				          <option value="{$grade.id}" {if $grade.id == $info.subject_id}selected{/if}>{$grade.subject}</option>
+				      {/volist}
+			    </select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">版本</label>
+			<div class="layui-input-block">
+				<select name="edition_id" id="edition_id" lay-verify="required" lay-search="">
+					<option value="">请选择版本</option>
+					{volist name="textbookList" id="textbook"}
+					<option value="{$textbook.id}" {if $textbook.id == $info.edition_id}selected{/if}>{$textbook.textbook}</option>
+					{/volist}
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">教师</label>
+			<div class="layui-input-block">
+				<select name="teacher" id="teacher" lay-verify="required" lay-search="">
+					<option value="">请选择教师</option>
+					{volist name="teacherList" id="teacher"}
+					<option value="{$teacher.id}-{$teacher.name}" <?php if($teacher['id']==$info['teacherId']){echo 'selected';} ?>>{$teacher.name}</option>
+					{/volist}
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">学期</label>
+			<div class="layui-input-block">
+				<select name="Semester" id="Semester" lay-verify="required" lay-search="">
+					<option value="">请选择学期</option>
+					<option value="1" <?php if($info['Semester']==1){echo 'selected';} ?>>上学期</option>
+					<option value="2" <?php if($info['Semester']==2){echo 'selected';} ?>>下学期</option>
+					<option value="3" <?php if($info['Semester']==3){echo 'selected';} ?>>全册</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">是否可试听</label>
+				<div class="layui-input-block">
+					<input type="radio" name="audi" value="1" title="可试听" <?php if($info['audi']==1){echo 'checked';} ?>>
+					<input type="radio" name="audi" value="2" title="不可试听"  <?php if($info['audi']==2){echo 'checked';} ?>>
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">试听价格</label>
+			<div class="layui-input-block">
+				<input name="audition_price" type="text" class="layui-input"  value="{$info['audition_price']}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">课程标签</label>
+			<div class="layui-input-block">
+				<div id="test1"></div>
+			</div>
+	    </div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">课件资料上传</label>
+			<div class="site-demo-upload">
+				<div class="layui-upload-drag" id="coursewarefile">
+					<i class="layui-icon"></i>
+					<p>点击上传，或将文件拖拽到此处</p>
+				</div>
+				{if $info.courseware}
+				<div class="layui-upload-drag" id="coursewarefile_href">
+					<i class="layui-icon layui-icon-file"></i>
+					<a href="{$info.courseware}">点击下载课件资料</a>
+				</div>
+				{/if}
+				<input type="hidden" name="courseware"  id="courseware" lay-verify='courseware' value="{$info.courseware1}">
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">课件资料上传（1）</label>
+			<div class="site-demo-upload">
+				<div class="layui-upload-drag" id="coursewarefile1">
+					<i class="layui-icon"></i>
+					<p>点击上传，或将文件拖拽到此处</p>
+				</div>
+				{if $info.courseware1}
+				<div class="layui-upload-drag" id="coursewarefile_href1" >
+					<i class="layui-icon layui-icon-file"></i>
+					<a href="{$info.courseware1}">点击下载课件资料</a>
+				</div>
+				{/if}
+				<input type="hidden" name="courseware1"  id="courseware1" lay-verify='courseware1' value="{$info.courseware1}">
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">课件资料上传（2）</label>
+			<div class="site-demo-upload">
+				<div class="layui-upload-drag" id="coursewarefile2">
+					<i class="layui-icon"></i>
+					<p>点击上传，或将文件拖拽到此处</p>
+				</div>
+				{if $info.courseware2}
+				<div class="layui-upload-drag" id="coursewarefile_href2">
+					<i class="layui-icon layui-icon-file"></i>
+					<a href="{$info.courseware2}">点击下载课件资料</a>
+				</div>
+				{/if}
+				<input type="hidden" name="courseware2"  id="courseware2" lay-verify='courseware2' value="{$info.courseware2}">
+			</div>
+		</div>
+	    <div class="layui-form-item">
+			<label class="layui-form-label" style="display: block">产品主图</label>
+			<div class="site-demo-upload">
+				<div class="layui-upload-drag" id="test10">
+					<i class="layui-icon"></i>
+					<p>点击上传，或将文件拖拽到此处</p>
+				</div>
+				{if $info.productUrl}
+				<img id="testImg" style="width: 300px; height: 135px;  margin-top: -60px;" src="{$info.productUrl}"/>
+				{/if}
+				<input type="hidden" name="litpic"  id="image" lay-verify="image"  value="{$info.productUrl}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="display: block">主图(未购买)</label>
+			<div class="site-demo-upload">
+				<div class="layui-upload-drag" id="test9">
+					<i class="layui-icon"></i>
+					<p>点击上传，或将文件拖拽到此处</p>
+				</div>
+				{if $info.imgNo}
+				<img id="testImgs" style="width: 300px; height: 135px;  margin-top: -60px;" src="{$info.imgNo}"/>
+				{/if}
+				<input type="hidden" name="imgNo"  id="imageNo" lay-verify="image" value="{$info.imgNo}">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">产品简介</label>
+			<div class="layui-input-block">
+				<textarea name="content" placeholder="请输入内容" class="layui-textarea" lay-verify="required">{$info.content}</textarea>
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="add" >立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		    </div>
+		</div>
+	</form>
+	<script type="text/javascript" src="__LAY__layui.js"></script>
+</body>
+<script type="text/javascript">
+// 树扩展
+	layui.config({
+		base: '/static/manage/layui/js/',
+	})
+	layui.use(['treeSelect','layer','code','form','upload','tree'],function(){
+		var $ = layui.$
+			,form = layui.form
+			,layer = layui.layer
+			,upload = layui.upload
+			,tree = layui.tree
+			,datas = '';
+			//初始化 视频标签树 
+	      	$.ajax({
+	        url: '/manage/product_controller/videoTagTree?id='+{$id}
+		        //type:1 video_class标签 type:2 video标签
+		        ,type: 'post'
+		        ,dataType: 'json'
+		        ,async: false
+		        ,success: function(res){
+		          if(res.code == 0){
+		              datas = res.data
+		          }
+		              
+		        }
+	      	})
+	      	//初始化树
+	      	tree.render({
+		        elem: '#test1'
+		        ,data: datas
+		        ,id: 'demoId'
+		        ,showCheckbox: true
+		        ,accordion: true
+		        ,click: function(obj){
+		            //节点点击后的回调
+		            console.log(obj.data); //得到当前点击的节点数据
+		            console.log(obj.state); //得到当前节点的展开状态：open、close、normal
+		            console.log(obj.elem); //得到当前节点元素
+		            console.log(obj.data.children); //当前节点下是否有子节点
+		        }
+		        ,oncheck: function(){
+		          //复选框被点击后的回调
+		          
+		        }
+	    	})
+	    	//拖拽上传
+		    upload.render({
+		        elem: '#test10'
+		        ,url: '/manage/teacher_contorller/upload',
+		        size:'60000'
+		        ,done: function(res){
+		            if(res.error_code==0){
+		                layer.msg('上传成功',{time:800},function(){
+		                    $("#testImg").attr("src",res.data);
+		                    $("#image").attr("value",res.data);
+		                    $("#testImg").show();
+		                });
+		            }else{
+		                layer.msg('上传失败',{time:800});
+		            }
+		        }
+		    });
+//拖拽上传(未购买)
+		upload.render({
+			elem: '#test9'
+			,url: '/manage/videos/uploadimg'
+			,size:'60000'
+			,exts:'jpg|png|jpeg'
+			,done: function(res){
+				if(res.code==0){
+					layer.msg(res.msg,{time:1200},function(){
+						var img = res.data;
+						var img = img.replace("\\","/");
+						$("#testImgs").attr("src",img).show();
+						$("#imageNo").attr("value",img);
+					});
+				}else{
+					layer.msg(res.msg,{time:1200});
+				}
+			}
+		});
+// 课件上传
+		upload.render({
+			elem: '#coursewarefile'
+			,url: '/manage/videos/uploadimg'
+			,size:'100000'
+			,accept:'file'
+			,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+				layer.load(); //上传loading
+			},done: function(res){
+				layer.closeAll('loading'); //关闭loading
+				if(res.code==0){
+					layer.msg(res.msg,{time:1200},function(){
+						var file = res.data;
+						file = file.replace("\\","/");
+						$('input[name="courseware"]').attr('value',file);
+						$('#coursewarefile_href').children('a').attr('href',file);
+						$('#coursewarefile_href').show();
+
+					});
+				}else{
+					layer.msg(res.msg,{time:1200});
+				}
+			}
+		});
+
+		//   临时 文件上传  将就用
+		// 课件上传1
+		upload.render({
+			elem: '#coursewarefile1'
+			,url: '/manage/videos/uploadimg'
+			,size:'100000'
+			,accept:'file'
+			,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+				layer.load(); //上传loading
+			},done: function(res){
+				layer.closeAll('loading'); //关闭loading
+				if(res.code==0){
+					layer.msg(res.msg,{time:1200},function(){
+						var file = res.data;
+						file = file.replace("\\","/");
+						$('input[name="courseware1"]').attr('value',file);
+						$('#coursewarefile_href1').children('a').attr('href',file);
+						$('#coursewarefile_href1').show();
+
+					});
+				}else{
+					layer.msg(res.msg,{time:1200});
+				}
+			}
+		});
+
+		// 课件上传2
+		upload.render({
+			elem: '#coursewarefile2'
+			,url: '/manage/videos/uploadimg'
+			,size:'100000'
+			,accept:'file'
+			,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+				layer.load(); //上传loading
+			},done: function(res){
+				layer.closeAll('loading'); //关闭loading
+				if(res.code==0){
+					layer.msg(res.msg,{time:1200},function(){
+						var file = res.data;
+						file = file.replace("\\","/");
+						$('input[name="courseware2"]').attr('value',file);
+						$('#coursewarefile_href2').children('a').attr('href',file);
+						$('#coursewarefile_href2').show();
+
+					});
+				}else{
+					layer.msg(res.msg,{time:1200});
+				}
+			}
+		});
+		    form.on("submit(add)",function(data) {
+				var checkData = tree.getChecked('demoId');
+				data.field.ids = gettreeval(checkData);
+		        $.post("/manage/product_controller/editProduct",data.field,function(data) {
+		            
+		            if (data.error_code==0) {
+		                layer.msg(data.msg, {icon: 6,time:1500},function(){
+		                    window.parent.location.reload();//刷新父页面
+		                });
+		            } else {
+		                layer.msg(data.msg, {icon: 5,time:1500});
+		            }
+		        })
+		    });
+
+		    function gettreeval(trees){
+	            var ids = '';
+	            $.each(trees,function(i,v){
+	               // ids += v.id + ',';
+	               if(v.children != undefined){
+	                   $.each(v.children,function(i1,v1){
+	                      ids += v1.id + ',';
+	                      if(v1.children != undefined){
+	                          $.each(v1.children,function(i2,v2){
+	                              ids += v2.id + ',';
+	                          })
+	                      }
+	                   })
+	               }
+	            })
+	            return ids;
+	        }
+    })
+</script>
+</html>

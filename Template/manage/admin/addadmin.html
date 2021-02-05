@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>添加管理员--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__/css/layui.css" media="all" />
+</head>
+<body class="childrenBody" style="margin-top: 2em">
+<form class="layui-form">
+	<div class="layui-form-item">
+		<label class="layui-form-label">管理员名称</label>
+		<div class="layui-input-block">
+			<input type="text" name="username"   lay-verify="username" placeholder="请输入管理员名称" class="layui-input" value="">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">管理员密码</label>
+		<div class="layui-input-block">
+			<input type="password" name="password"   lay-verify="password" placeholder="请输入管理员密码"  class="layui-input" value="">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">管理员昵称</label>
+		<div class="layui-input-block">
+			<input type="text" name="nickName"   lay-verify="nickName" placeholder="请输入管理员昵称" class="layui-input" value="">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">管理员联系方式</label>
+		<div class="layui-input-block">
+			<input type="text" name="phone"  placeholder="请输入管理员联系方式"  class="layui-input" value="">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">管理员微信号</label>
+		<div class="layui-input-block">
+			<input type="text" name="wechat_num" placeholder="请输入管理员微信号"  class="layui-input" value="">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">管理员地址</label>
+		<div class="layui-input-block">
+			<input type="text" name="address" placeholder="请输入管理员地址" class="layui-input" value="">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">分组列表</label>
+		<div class="layui-input-inline">
+			<select name="newsType" class="newsLook" lay-filter="browseLook">
+			{volist name="group" id="data"}
+			<option value="{$data.id}"  selected = "selected">{$data.title}</option>	
+			{/volist}
+		    </select>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">收款方式</label>
+		<div class="layui-input-inline">
+			<select name="paytype" class="newsLook" lay-filter="browseLook">
+			{volist name="paytype" id="data"}
+			<option value="{$data.id}"  selected = "selected">{$data.name}</option>	
+			{/volist}
+		    </select>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label" style="display: block">收款二维码</label>
+		<div class="site-demo-upload">
+			<div class="layui-upload-drag" id="test10">
+				<i class="layui-icon"></i>
+				<p>点击上传，或将文件拖拽到此处</p>
+			</div>
+			<img id="testImg" style="width: 300px; height: 135px; display: none;  margin-top: -60px;" src=""/>
+			<input type="hidden" name="payImg"  id="image" lay-verify="image">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">管理员简介</label>
+		<div class="layui-input-block">
+			<textarea name="remark" placeholder="" class="layui-textarea"></textarea>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+			<button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+		</div>
+	</div>
+
+
+</form>
+<script type="text/javascript" src="__LAY__/layui.js"></script>
+<script type="text/javascript" src="__MANAGE__/js/addadmin.js"></script>
+<script type="text/javascript" src="__MANAGE__/js/jquery-3.2.0.min.js"></script>
+</body>
+</html>

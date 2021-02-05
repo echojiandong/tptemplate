@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章添加--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__MANAGE__/css/menu.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__ueditor.config.js"></script> -->
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__ueditor.all.min.js"> </script> -->
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__lang/zh-cn/zh-cn.js"></script> -->
+</head>
+<style>
+	.site-doc-icon li {
+		display: inline-block;
+		vertical-align: middle;
+		width: 127px;
+		line-height: 25px;
+		padding: 20px 0;
+		margin-right: -1px;
+		margin-bottom: -1px;
+		border: 1px solid #e2e2e2;
+		font-size: 14px;
+		text-align: center;
+		color: #666;
+		transition: all .3s;
+		-webkit-transition: all .3s;
+	}
+	.site-doc-icon li .layui-icon {
+		display: inline-block;
+		font-size: 30px;
+	}
+	.boxcourse {
+		width: 500px;
+	}
+
+	/*.layui-input, .layui-textarea {
+	    display: block;
+	    width: 50%;
+	    padding-left: 10px;
+	}*/
+	/* td中hover */
+	.layui-table tbody tr td:hover,
+    .layui-table thead tr td,
+    .layui-table-click,
+    .layui-table-header,
+    .layui-table-hover,
+    .layui-table-mend,
+    .layui-table-patch,
+    .layui-table-tool,
+    .layui-table-total,
+    .layui-table-total tr td{
+	background: #F2F2F2;
+}
+.layui-table tr td{
+	transition:all 0.3s ease 0s;
+}
+
+.layui-table tbody tr:hover,
+         .layui-table thead tr,
+        .layui-table-click,
+        .layui-table-header,
+        .layui-table-hover,
+        .layui-table-mend,
+        .layui-table-patch,
+        .layui-table-tool,
+        .layui-table-total,
+        .layui-table-total tr{
+	background: #fff;
+}
+ .layui-table thead tr{
+	background-color: #f2f2f2;
+}		
+</style>
+	<style>
+		.layui-form-item .layui-form-checkbox {
+			border-left: 1px solid #e2e2e2;
+		}
+		.input-width {
+			width: 150px;
+		}
+		.top {
+			margin-top: 20px;
+			float: left;
+		}
+		.top-user{
+			width:100%;
+			margin-top: 10px;
+    		margin-left: 114px;
+		}
+		.tab-top {
+			padding-top: 20px;
+		}
+		.top-pay{
+			width:100%;
+			margin:20px 0 20px 30px;
+		}
+		.layui-table{
+			width: 96%;
+			margin: 0 auto;
+		}
+		.layui-table thead tr th{
+			text-align: center;
+		}
+		.layui-table tbody tr td{
+			text-align: left;
+			padding-left:3%;
+		}
+		.layui-table tbody tr td:first-child{
+			text-align: center;
+		}
+		.layui-form-radio{
+			padding-right: 0;
+			margin: 0;
+		}
+		.layui-btn-lg{
+			float: left;
+			margin-left: 40px;
+			width:107px;
+			height:37px;
+			background:rgba(0,150,136,1);
+			border-radius:2px;
+			line-height: 37px;
+		}
+		.btn_input{
+			float:left;
+			margin-left: 0;
+		}	
+		.input-pay{
+			width: 100px;
+			height: 30px;
+			line-height: 1.3;
+			line-height: 38px\9;
+			border-width: 1px;
+			border-style: solid;
+			background-color: #fff;
+			font-size: 14px;
+			border-radius: 2px;
+			text-indent: 5%;
+			margin-right: 60px;
+			border: 1px solid #fefefe;
+		}
+	</style>
+<body class="childrenBody">
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">学生手机号</label>
+			<div class="layui-input-block btn_input" style="width: 200px;">
+				<input name="phone" type="text" class="layui-input" lay-verify="phone" width="100px"  value="{$phone|default=''}">
+			</div>
+			<button class="layui-btn layui-btn-lg" lay-submit="" id="select">查询</button>
+		</div>
+		<!-- 暂时注释掉 -->
+		<!-- <div class="layui-input-inline top-user" >
+			{if condition="isset($personStatus) && $personStatus eq 3"}
+			<span style="color: red;" id="personcheck">该账号已禁用，不能下单， 只能修改个人信息</span>
+			{else /}
+			<span style="color: red;" id="personcheck">{if condition="$isBool"}老用户续费{else /} 新用户注册及下单{/if}</span>
+			{/if}
+		</div> -->
+
+	<form class="layui-form">
+		<div class="layui-input-inline top" >
+			<label class="layui-form-label">学生姓名</label>
+			<div class="layui-input-block input-width">
+				<input name="nickName" type="text" class="layui-input newsName" lay-verify="userName" value="{$info.nickName|default=''}" placeholder="">
+			</div>
+		</div>
+		<div class="layui-input-inline top" style="position: relative;">
+			<label class="layui-form-label">手机号码</label>
+			<div class="layui-input-block input-width" >
+				<input name="phone" type="text" required class="layui-input newsName" lay-verify="phone" value="{$info.phone|default=''}" placeholder="请输入手机号码">
+				<i style="color: red;font-size: 28px;position: absolute;right: 12px;top: 10px;">*</i>
+			</div>
+		</div>
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">密码</label>
+			<div class="layui-input-block" style="width: 200px;">
+				<input name="password" type="password" class="layui-input newsName" placeholder="不输入默认为手机号码后6位" lay-verify="password" value="">
+			</div>
+		</div>
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">学校</label>
+			<div class="layui-input-block input-width">
+				<input name="school" type="text" class="layui-input newsName"  value="{$info.school|default=''}">
+				<!-- <i style="color: red;font-size: 28px;position: absolute;right: 12px;top: 10px;">*</i> -->
+			</div>
+		</div>
+
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">年级</label>
+			<div class="layui-input-block input-width">
+				<select name="grade_id" required lay-verify="grade_id">
+					<option value="">请选择年级</option>
+					<option value="7" {if condition="isset($info.grade_id) && $info.grade_id eq 7"} selected {/if} >七年级</option>
+					<option value="8" {if condition="isset($info.grade_id) && $info.grade_id eq 8"} selected {/if}>八年级</option>
+					<option value="9" {if condition="isset($info.grade_id) && $info.grade_id eq 9"} selected {/if}>九年级</option>
+				</select>
+				<i style="color: red;font-size: 28px;position: absolute;right: 12px;top: 10px;">*</i>
+			</div>
+		</div>
+
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">媒体</label>
+			<div class="layui-input-block input-width">
+				<select name="to_media" required lay-verify="to_media">
+					<option value="0">请选择媒体</option>
+					{if condition="isset($mediaList) && $mediaList"} 
+						{volist name="$mediaList" id="v"}
+
+						<option value="{$v.id}" {if condition="isset($info.to_media) && $info.to_media && $v.id eq $info.to_media"} selected {/if} >{$v.name}</option>
+
+						{/volist}
+					{/if}
+				</select>
+				<i style="color: red;font-size: 28px;position: absolute;right: 12px;top: 10px;">*</i>
+			</div>
+		</div>
+
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">微信号</label>
+			<div class="layui-input-block input-width">
+				<input name="wechat" type="text" class="layui-input newsName" lay-verify="wechat" value="{$info.wechat|default=''}">
+			</div>
+		</div>
+
+		<div class="layui-input-inline top">
+		    <div class="layui-inline">
+		      	<label class="layui-form-label">生日</label>
+		      	<div class="layui-input-block input-width">
+					<input name="birthday" type="text" class="layui-input" autocomplete="off" id="test27" readonly="" placeholder="yyyy-MM-dd" value="{$info.birthday|default=''}">
+		     	</div>
+		    </div>
+		</div>
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">性别</label>
+			<div class="layui-input-block input-width">
+				<input type="radio" name="gender" value="1" title="男" {if condition="isset($info.gender) && $info.gender eq 1"} checked {/if} checked >
+				<input type="radio" name="gender" value="2" title="女" {if condition="isset($info.gender) && $info.gender eq 2"} checked {/if} >
+			</div>
+		</div>
+	
+		<div class="layui-form layui-inline top" id="area-picker">
+			<label class="layui-form-label">地区</label>
+			<div class="layui-input-inline" style="width: 150px;">
+				<select name="province" class="province-selector" data-value="{$info.province|default=''}" lay-filter="province-1">
+					
+				</select>
+			</div>
+			<div class="layui-input-inline" style="width: 150px;">
+				<select name="city" class="city-selector" data-value="{$info.city|default=''}" lay-filter="city-1">
+				
+				</select>
+			</div>
+			<div class="layui-input-inline" style="width: 150px;">
+				<select name="county" class="county-selector" data-value="{$info.country|default=''}" lay-filter="county-1">
+				
+				</select>
+			</div>
+		</div>
+
+
+		<div class="layui-input-inline top">
+		    <div class="layui-inline">
+		      	<label class="layui-form-label">备注</label>
+		      	<div class="layui-input-block" style="width: 400px; ">
+					<textarea name="remark" class="layui-textarea">{$info.remark|default=''}</textarea>
+		     	</div>
+		    </div>
+		</div>
+
+		<!-- 老用户续费 -->
+		{if condition="$isBool"}
+		<div class="layui-form-item tab-top">
+			<table class="layui-table" id="add-person-price">
+				<thead>
+					<tr>
+					<th>学科</th>
+					<th>七上册</th>
+					<th>七下册</th>
+					<th>八上册</th>
+					<th>八下册</th>
+					<th>九上册</th>
+					<th>九下册</th>
+					<th>九全册</th>
+					</tr> 
+				</thead>
+				<tbody>
+					{for start="1" end="11" step="1" name="vo"}
+						{if $vo>5&&$vo!=10}
+						<?php continue;?>
+						{/if}
+						<tr>
+							<!-- 课程名 -->
+						<td>{$list[$vo]['subject']}</td> 
+						<!-- 七年级语文上学期 -->
+						{for start="7" end="10" step="1" name="v"}
+							{for start="1" end="3" name="vv"}
+								{if condition="$list[$vo][$v][$vv]['exist']"} <!--判断是否有这个课程-->
+									<td>
+									{if condition="$isAdmin"} <!--判断是否是管理员-->
+										{if condition="isset($list[$vo][$v][$vv]['isOrder']) && $list[$vo][$v][$vv]['isOrder']"} <!--判断是否有订单-->
+											{if condition="$list[$vo][$v][$vv]['orderCheck'] eq 1"}
+												订单待审核
+											{elseif condition="$list[$vo][$v][$vv]['orderCheck'] eq 2 && $list[$vo][$v][$vv]['type'] eq 0" /}
+												订单待激活
+											{elseif condition="$list[$vo][$v][$vv]['orderCheck'] eq 2 && $list[$vo][$v][$vv]['type'] eq -1" /}
+												课程被停用
+											{elseif condition="$list[$vo][$v][$vv]['is_audition'] eq 1 && $list[$vo][$v][$vv]['orderCheck'] eq 2" /}
+												<input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][$v][$vv]['price']}" lay-filter='filter' value="0"/>正式课<br />
+												<!-- {if condition="$list[$vo][$v][$vv]['type'] eq 0"}
+													试听课程待激活
+												{else /}
+													试听剩余{$list[$vo][$v][$vv]['suplerTime']}
+												{/if} -->
+											{else /}
+												{if condition="$list[$vo][$v][$vv]['suplerTime'] elt 0"}
+												<input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][$v][$vv]['price']}" lay-filter='filter' value="0"/>正式课<br />
+												{else /}
+												课程剩余{$list[$vo][$v][$vv]['suplerTime']}
+												{/if}
+											{/if}
+										{else /}
+											<input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" data-checked='true' {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-price="{$list[$vo][$v][$vv]['price']}" lay-filter='filter' value="0"/>正式课<br />
+											<!-- <input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" data-checked='true' data-price="{$list[$vo][$v][$vv]['audit_price']}" lay-filter='audi' value="1" />试听课 -->
+										{/if}
+									{else /}
+										{if condition="isset($list[$vo][$v][$vv]['isOrder']) && $list[$vo][$v][$vv]['isOrder']"} <!--判断是否有订单-->
+											{if condition="$list[$vo][$v][$vv]['orderCheck'] eq 1"}
+												订单待审核
+											{elseif condition="$list[$vo][$v][$vv]['orderCheck'] eq 2 && $list[$vo][$v][$vv]['type'] eq 0" /}
+												订单待激活
+											{elseif condition="$list[$vo][$v][$vv]['orderCheck'] eq 2 && $list[$vo][$v][$vv]['type'] eq -1" /}
+												课程被停用
+											{elseif condition="$list[$vo][$v][$vv]['is_audition'] eq 1 && $list[$vo][$v][$vv]['orderCheck'] eq 2" /}
+											<input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} {if condition="$list[$vo][$v][$vv]['audition'] elt 0"} disabled {/if} data-checked='true' data-price="{$list[$vo][$v][$vv]['price']}" lay-filter='filter' value="0"/>正式课({$list[$vo][$v][$vv]['audition'] ? $list[$vo][$v][$vv]['audition'] : 0})<br />
+												<!-- {if condition="$list[$vo][$v][$vv]['type'] eq 0"}
+													试听课程待激活
+												{else /}
+													试听剩余{$list[$vo][$v][$vv]['suplerTime']}
+												{/if} -->
+											{else /}
+													{if condition="$list[$vo][$v][$vv]['suplerTime'] elt 0"}
+													<input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} {if condition="$list[$vo][$v][$vv]['audition'] elt 0"} disabled {/if} data-checked='true' data-price="{$list[$vo][$v][$vv]['price']}" lay-filter='filter' value="0"/>正式课({$list[$vo][$v][$vv]['audition'] ? $list[$vo][$v][$vv]['audition'] : 0})<br />
+
+													{else /}
+													课程剩余{$list[$vo][$v][$vv]['suplerTime']}
+													{/if}
+													
+											{/if}
+										{else /}
+											<input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' {if condition="$list[$vo][$v][$vv]['audition'] elt 0"} disabled {/if} data-price="{$list[$vo][$v][$vv]['price']}" lay-filter='filter' value="0" />正式课({$list[$vo][$v][$vv]['audition'] ? $list[$vo][$v][$vv]['audition'] : 0})<br />
+											<!-- <input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" data-checked='true' data-price="{$list[$vo][$v][$vv]['audit_price']}" lay-filter='audi' value="1" />试听课({$list[$vo][$v][$vv]['noaudition'] ? $list[$vo][$v][$vv]['noaudition'] : 0}) -->
+										{/if}
+									{/if}
+									</td>
+								{else /}
+									<!-- 无当前版本 -->
+									<td class="no-background"></td>
+								{/if}
+							{/for}
+						{/for}
+								{if condition="$vo eq 3"}
+									{if condition="$list[$vo][9][3]['exist']"} <!--判断是否有这个课程-->
+										<td>
+										{if condition="$isAdmin"} <!--判断是否是管理员-->
+											{if condition="isset($list[$vo][9][3]['isOrder']) && $list[$vo][9][3]['isOrder']"} <!--判断是否有订单-->
+												{if condition="$list[$vo][9][3]['orderCheck'] eq 1"}
+													订单待审核
+												{elseif condition="($list[$vo][9][3]['orderCheck'] eq 2) && ($list[$vo][9][3]['type'] eq 0)" /}
+													订单待激活
+												{elseif condition="($list[$vo][9][3]['orderCheck'] eq 2) && ($list[$vo][9][3]['type'] eq -1)" /}
+													课程被禁用
+												{elseif condition="($list[$vo][9][3]['is_audition'] eq 1) && ($list[$vo][9][3]['orderCheck'] eq 2)" /}
+													<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" lay-filter='filter' value="0" />正式课<br />
+													<!-- {if condition="$list.3.9.3.type eq 0"}
+														试听课程待激活
+													{else /}
+														试听剩余{$list.3.9.3.suplerTime}
+													{/if} -->
+												{else /}
+													
+													{if condition="$list.3.9.3.suplerTime elt 0"}
+													<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" lay-filter='filter' value="0" />正式课<br />
+													{else /}
+													课程剩余{$list.3.9.3.suplerTime}
+													{/if}
+												{/if}
+											{else /}
+												<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" lay-filter='filter' value="0" />正式课<br />
+												<!-- <input type="radio" name="subject_id[9][3][{$vo}][isAudition]" data-checked='true' data-price="{$list[$vo][9][3]['audit_price']}" lay-filter='audi' value="1" />试听课 -->
+											{/if}
+										{else /}
+											{if condition="isset($list[$vo][9][3]['isOrder']) && $list[$vo][9][3]['isOrder']"} <!--判断是否有订单-->
+												{if condition="$list[$vo][9][3]['orderCheck'] eq 1"}
+													订单待审核
+												{elseif condition="$list[$vo][9][3]['orderCheck'] eq 2 && $list[$vo][9][3]['type'] eq 0" /}
+													订单待激活
+												{elseif condition="$list[$vo][9][3]['orderCheck'] eq 2 && $list[$vo][9][3]['type'] eq -1" /}
+													课程被禁用
+												{elseif condition="$list[$vo][9][3]['is_audition'] eq 1 && $list[$vo][9][3]['orderCheck'] eq 2" /}
+												<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" {if condition="$list[$vo][9][3]['audition'] elt 0"} disabled {/if} lay-filter='filter' value="0" />正式课({$list[$vo][9][3]['audition'] ? $list[$vo][9][3]['audition'] : 0})<br />
+													<!-- {if condition="$list.3.9.3.type eq 0"}
+														试听课程待激活
+													{else /}
+														试听剩余{$list.3.9.3.suplerTime}
+													{/if} -->
+												{else /}
+													{if condition="$list[$vo][9][3]['suplerTime'] elt 0"}
+													<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" {if condition="$list[$vo][9][3]['audition'] elt 0"} disabled {/if} lay-filter='filter' value="0" />正式课({$list[$vo][9][3]['audition'] ? $list[$vo][9][3]['audition'] : 0})<br />
+													{else /}
+													课程剩余{$list[$vo][9][3]['suplerTime']}
+													{/if}
+												{/if}
+											{else /}
+												<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" {if condition="$list[$vo][9][3]['audition'] elt 0"} disabled {/if} lay-filter='filter' value="0" />正式课({$list[$vo][9][3]['audition'] ? $list[$vo][9][3]['audition'] : 0})<br />
+												<!-- <input type="radio" name="subject_id[9][3][{$vo}][isAudition]" data-checked='true' data-price="{$list[$vo][9][3]['audit_price']}" lay-filter='audi' value="1" />试听课({$list.3.9.3.noaudition ? $list.3.9.3.noaudition : 0}) -->
+											{/if}
+										{/if}
+										</td>
+									{else /}
+										<!-- 无当前版本 -->
+										<td class="no-background"></td>
+									{/if}
+								{elseif condition="$vo eq 4"}
+									{if condition="$list[$vo][9][3]['exist']"} <!--判断是否有这个课程-->
+										<td>
+										{if condition="$isAdmin"} <!--判断是否是管理员-->
+											{if condition="isset($list[$vo][9][3]['isOrder']) && $list[$vo][9][3]['isOrder']"} <!--判断是否有订单-->
+												{if condition="$list[$vo][9][3]['orderCheck'] eq 1"}
+													订单待审核
+												{elseif condition="$list[$vo][9][3]['orderCheck'] eq 2 && $list[$vo][9][3]['type'] eq 0" /}
+													订单待激活
+												{elseif condition="$list[$vo][9][3]['orderCheck'] eq 2 && $list[$vo][9][3]['type'] eq -1" /}
+													课程被禁用
+												{elseif condition="$list[$vo][9][3]['is_audition'] eq 1 && $list[$vo][9][3]['orderCheck'] eq 2" /}
+													<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" lay-filter='filter' value="0" />正式课<br />
+													<!-- {if condition="$list.4.9.3.type eq 0"}
+														试听课程待激活
+													{else /}
+														试听剩余{$list.4.9.3.suplerTime}
+													{/if} -->
+												{else /}
+													
+													{if condition="$list.4.9.3.suplerTime elt 0"}
+													<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" lay-filter='filter' value="0" />正式课<br />
+
+													{else /}
+													课程剩余{$list.4.9.3.suplerTime}
+													{/if}
+												{/if}
+											{else /}
+												<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" lay-filter='filter' value="0" />正式课<br />
+												<!-- <input type="radio" name="subject_id[9][3][{$vo}][isAudition]" data-checked='true' data-price="{$list[$vo][9][3]['audit_price']}" lay-filter='audi' value="1" />试听课 -->
+											{/if}
+										{else /}
+											{if condition="isset($list[$vo][9][3]['isOrder']) && $list[$vo][9][3]['isOrder']"} <!--判断是否有订单-->
+												{if condition="$list[$vo][9][3]['orderCheck'] eq 1"}
+													订单待审核
+												{elseif condition="$list[$vo][9][3]['orderCheck'] eq 2 && $list[$vo][9][3]['type'] eq 0" /}
+													订单待激活
+												{elseif condition="$list[$vo][9][3]['orderCheck'] eq 2 && $list[$vo][9][3]['type'] eq -1" /}
+													课程被禁用
+												{elseif condition="$list[$vo][9][3]['is_audition'] eq 1 && $list[$vo][9][3]['orderCheck'] eq 2" /}
+												<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" {if condition="$list[$vo][9][3]['audition'] elt 0"} disabled {/if} lay-filter='filter' value="0" />正式课({$list[$vo][9][3]['audition'] ? $list[$vo][9][3]['audition'] : 0})<br />
+													<!-- {if condition="$list.4.9.3.type eq 0"}
+														试听课程待激活
+													{else /}
+														试听剩余{$list.4.9.3.suplerTime}
+													{/if} -->
+												{else /}
+													{if condition="$list[$vo][9][3]['suplerTime'] elt 0"}
+													<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" {if condition="$list[$vo][9][3]['audition'] elt 0"} disabled {/if} lay-filter='filter' value="0" />正式课({$list[$vo][9][3]['audition'] ? $list[$vo][9][3]['audition'] : 0})<br />													
+													{else /}
+													课程剩余{$list[$vo][9][3]['suplerTime']}
+													{/if}
+												{/if}
+											{else /}
+												<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" {if condition="$list[$vo][9][3]['audition'] elt 0"} disabled {/if} lay-filter='filter' value="0" />正式课({$list[$vo][9][3]['audition'] ? $list[$vo][9][3]['audition'] : 0})<br />
+												<!-- <input type="radio" name="subject_id[9][3][{$vo}][isAudition]" data-checked='true' data-price="{$list[$vo][9][3]['audit_price']}" lay-filter='audi' value="1" />试听课({$list.4.9.3.noaudition ? $list.4.9.3.noaudition : 0}) -->
+											{/if}
+										{/if}
+										</td>
+									{else /}
+										<!-- 无当前版本 -->
+										<td class="no-background"></td>
+									{/if}
+								{else /}
+								<!-- 无当前版本 -->
+								<td class="no-background"></td>
+								{/if}
+						</tr>
+					{/for}
+				</tbody>
+				</table>
+		</div>
+
+		{/if}
+		<!-- // 添加新用户 -->
+		{if condition="!$isBool"}
+		<div class="layui-form-item tab-top">
+			<table class="layui-table" id="add-person-price">
+			<thead>
+				<tr>
+				<th>学科</th>
+				<th>七上册</th>
+				<th>七下册</th>
+				<th>八上册</th>
+				<th>八下册</th>
+				<th>九上册</th>
+				<th>九下册</th>
+				<th>九全册</th>
+				</tr> 
+			</thead>
+
+			<tbody>
+				{for start="1" end="11" step="1" name="vo"}
+					{if $vo>5&&$vo!=10}
+						<?php continue;?>
+					{/if}
+					<tr>
+						<!-- 课程名 -->
+						<td>{$list[$vo]['subject']}</td>
+						<!-- 七年级语文上学期 -->
+					{for start="7" end="10" step="1" name="v"}
+						{for start="1" end="3" name="vv"}
+						
+							{if condition="$list[$vo][$v][$vv]['exist']"} <!--判断是否有这个课程-->
+							<td class="add-price-td">
+								{if condition="$isAdmin"} <!--判断是否是管理员-->
+									<input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][$v][$vv]['price']}" lay-filter='filter' value="0" />正式课<br />
+									<!-- <input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" data-checked='true' data-price="{$list[$vo][$v][$vv]['audit_price']}" lay-filter='audi' value="1" />试听课 -->
+								{else /}
+									<input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][$v][$vv]['price']}" {if condition="$list[$vo][$v][$vv]['audition'] elt 0"} disabled {/if} lay-filter='filter' value="0" />正式课2({$list[$vo][$v][$vv]['audition'] ? $list[$vo][$v][$vv]['audition'] : 0})<br />
+									<!-- <input type="radio" name="subject_id[{$v}][{$vv}][{$vo}][isAudition]" data-checked='true' data-price="{$list[$vo][$v][$vv]['audit_price']}" lay-filter='audi' value="1" />试听课({$list[$vo][$v][$vv]['noaudition'] ? $list[$vo][$v][$vv]['noaudition'] : 0}) -->
+								{/if}
+							</td>
+							{else /}
+							<!-- 没有课程 -->
+							<td style="background-color:#F2F2F2"></td>
+							{/if}
+						{/for}
+					{/for}
+						{if condition="$vo eq 3"}
+							{if condition="$list[$vo][9][3]['exist']"} <!--判断是否有这个课程-->
+								<td  class="add-price-td">
+								{if condition="$isAdmin"} <!--判断是否是管理员-->
+									<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" lay-filter='filter' value="0" />正式课<br />
+									<!-- <input type="radio" name="subject_id[9][3][{$vo}][isAudition]" data-price="{$list[$vo][9][3]['audit_price']}" data-checked="true" lay-filter="audi" value="1" />试听课 -->
+								{else /}
+									<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-checked='true' data-price="{$list[$vo][9][3]['price']}" {if condition="$list[$vo][9][3]['audition'] elt 0"} disabled {/if} lay-filter='filter' value="0" />正式课({$list[$vo][9][3]['audition'] ? $list[$vo][9][3]['audition'] : 0})<br />
+									<!-- <input type="radio" name="subject_id[9][3][{$vo}][isAudition]" data-price="{$list[$vo][9][3]['audit_price']}" data-checked="true" lay-filter="audi" value="1" />试听课({$list.3.9.3.noaudition ? $list.$vo.9.3.noaudition : 0}) -->
+								{/if}
+								</td>
+							{else /}
+							<td style="background-color:#F2F2F2"></td>
+							{/if}
+						{elseif condition="$vo eq 4"}
+							{if condition="$list[$vo][9][3]['exist']"} <!--判断是否有这个课程-->
+								<td class="add-price-td">
+								{if condition="$isAdmin"} <!--判断是否是管理员-->
+									<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-price="{$list[$vo][9][3]['price']}" data-checked='true' lay-filter='filter' value="0" />正式课<br />
+									<!-- <input type="radio" name="subject_id[9][3][{$vo}][isAudition]" data-price="{$list[$vo][9][3]['audit_price']}" data-checked="true" lay-filter="audi" value="1" />试听课 -->
+								{else /}
+									<input type="radio" name="subject_id[9][3][{$vo}][isAudition]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} data-price="{$list[$vo][9][3]['price']}" data-checked='true' {if condition="$list[$vo][9][3]['audition'] elt 0"} disabled {/if} lay-filter='filter' value="0" />正式课({$list[$vo][9][3]['audition'] ? $list[$vo][9][3]['audition'] : 0})<br />
+									<!-- <input type="radio" name="subject_id[9][3][{$vo}][isAudition]" data-price="{$list[$vo][9][3]['audit_price']}" data-checked="true" lay-filter="audi" value="1" />试听课({$list.4.9.3.noaudition ? $list.4.9.3.noaudition : 0}) -->
+								{/if}
+								</td>
+							{else /}
+							<td style="background-color:#F2F2F2"></td>
+							{/if}
+						{else /}
+							<td style="background-color:#F2F2F2"></td>
+						{/if}
+					</tr>
+				{/for}
+			</tbody>
+		
+			</table>
+		</div>
+		{/if}
+
+
+		<style>
+			.label_on{
+				width: 300px;display:inline-block;font-size: 18px;font-weight: 500;color: red;
+			}
+		</style>
+
+		<div class="" style="font-size: 16px;margin: 20px 100px;">
+			<div class="layui-inline" style="text-align: center;">
+				<div class="" >
+					{if condition="$isAdmin"}
+					是否购买试听:
+					{else /}
+					是否购买试听(剩余{$audiNum ? $audiNum : 0})：
+					{/if}
+					<input type="radio" name="isAudi" id="isAudi" data-price="<?php echo config('audition_price');?>" {if condition="!$isAdmin && $audiNum elt 0"} disabled {/if} data-checked='true' lay-filter='audiPrice' value="1" {if condition="isset($isBuyAudi) && $isBuyAudi"} disabled {/if} />
+					<!-- <input type="radio" name="isAudi" value="1" />否 -->
+					{if condition="isset($isBuyAudi) && $isBuyAudi"}
+					&nbsp;&nbsp;<span style="color: red; font-size: 14px;">您已购买试听课程，已经可以观看所有试听课程</span>
+					{else /}
+					&nbsp;&nbsp;<span style="color: red; font-size: 14px;">购买试听课后，所有课程的试听课可以试听学习</span>
+					{/if}
+					
+					<input type="hidden" name="audiPrice" id="audiPrice" value="" />
+				</div>
+			</div>
+		</div>
+		
+		<div class="layui-input-inline top" style="margin: 20px 0;">
+			<div class="layui-inline" style="text-align: center;">
+				<div class="label_on">
+					订单金额： <span id="total-price">0</span>
+				</div>
+				<div class="label_on" >
+					优惠金额： <input type="text" class="layui-input" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} style="width: 100px;display: inline-block;font-weight: 400;" name="dicount" id="dicount" value="0" />
+				</div>
+				<div class="label_on">
+					最终支付金额：<span id="final" style="color: red;"></span>
+				</div>
+				<input type="hidden" name="final" value="">
+				<input type="hidden" name="totalPrice" value="">
+			</div>
+		</div>
+
+		{if condition="$paytypelist"}
+		<div class="layui-input-inline top-pay">
+			<div class="layui-inline" style="text-align: center;">
+				{volist name="$paytypelist" id="vo"}
+				<input type="checkbox" name="paytype[{$vo.id}][id]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} title="{$vo.pay_type}" value="{$vo.id}">
+				<input type="text" name="paytype[{$vo.id}][money]" {if condition="isset($personStatus) && $personStatus eq 3"} disabled {/if} value="0" class="input-pay"/>
+				{/volist}
+			</div>
+		</div>
+		{/if}
+
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="addPerson" >立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
+		    </div>
+		</div>
+	</form>
+	<script type="text/javascript" src="__LAY__layui.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/person/addPerson.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/jquery-3.2.0.min.js"></script>
+</body>
+
+</html>
+<script>
+	layui.config({
+		base: '/static/manage/layui/js/',
+	})
+	layui.use(['laydate', 'layer', 'form', 'layarea'], function(){
+		var laydate = layui.laydate
+			,form = layui.form
+			,layarea = layui.layarea
+			,layer = layui.layer;
+		var myDate = new Date();//获取系统当前时间
+		var nowTime = myDate.toLocaleDateString();
+	    laydate.render({
+			elem: '#test27'
+			,trigger: 'click'
+			,max: nowTime
+		  });
+		  
+		layarea.render({
+			elem: '#area-picker',
+			change: function (res) {
+				
+			}
+		});
+
+	})
+
+	// 老用户查询
+	$('#select').click(function(){
+		var phone = $("input[name='phone']").val();
+
+		if (!phone) {
+			layer.msg('手机号码不能为空',{icon: 5,time:1500});
+			return false;
+		}
+		// 验证手机号码格式
+		var reg= /^1[3456789]{1}\d{9}$/;
+		var res = reg.test(phone);
+		if (res) {
+			window.location.href="/manage/person_controller/isPersonExist?phone="+phone
+		} else {
+			layer.msg('手机号码格式错误',{icon: 5,time:1500});
+		}
+	
+	})
+
+
+
+	$('#reset').click(function() {
+		$("#final").html('');
+		$("#total-price").html('');
+	})
+
+	$("#dicount").blur(function() {
+		var dicountVal = $('#dicount').val();
+		if (dicountVal == '') {
+			dicountVal = 0;
+			$('#dicount').val(0);
+		}
+		var totalprice = $('#total-price').html();
+		
+		var orderPrice = (parseFloat(totalprice) - parseFloat(dicountVal)).toFixed(2);
+		if (orderPrice < 0 ) {
+			layer.msg('优惠金额不能大于订单总额',{icon: 5,time:1500});
+			// return false;
+		}
+		
+		$("#final").html(orderPrice);
+		$("[name='final']").val(orderPrice);
+	})
+	
+	layui.use('form', function(data) {
+		var form = layui.form;
+		form.on('checkbox(num)', function(data){
+			if (data.elem.checked == true) {
+				data.elem.value = 1;
+			} else {
+				data.elem.value = 0;
+			}
+		});   
+		form.verify({
+			to_media: function (value){
+					if(value == 0){
+							return '请选择媒体查询！';
+					}
+			}
+		});
+		var total = 0;
+
+		// 正式课单选按钮选择与取消
+		form.on('radio(filter)', function(data) {
+			// 正式课的价格
+			var price = $(this).attr('data-price');
+			// 正式课复选框是否选中， data-checked == true 没选中
+			var is_checked = $(data.elem).attr('data-checked');
+			// 试听课选择框是否选中
+			var audiCheck = $(this).siblings('input').attr('data-checked');
+			// 试听课价格
+			var audiPrice = $(this).siblings('input').attr('data-price');
+
+			if (audiCheck == 'false') {
+				$(this).siblings('input').attr('data-checked', 'true');
+				total = Number(total) - Number(audiPrice);
+				// $(this).siblings('input').prop('checked',false);
+			}
+
+
+			if (is_checked == 'false') {
+				total = Number(total) - Number(price);
+				$(data.elem).prop('checked',false);
+				$(data.elem).attr('data-checked','true');
+			} else {
+				total = Number(total) + Number(price);
+				$(data.elem).attr('data-checked','false');
+			}
+
+			
+			
+			// 价格总和
+			// $(".total-price #total-price").html(sum.toFixed(2));
+			$("#total-price").html(total);
+			$("[name='totalPrice']").val(total);
+			// 最后价格
+			var dicount = $("[name='dicount']").val();
+			var final = Number(total) - Number(dicount);
+
+			$("[name='final']").val(final);
+			$("#final").html(final);
+			
+			form.render()
+		});  
+
+		// 试听课单选按钮选择与取消
+        form.on('radio(audi)', function(data){
+
+			// 试听课价格
+			var price = $(this).attr('data-price');
+			// 试听课是否选中
+			var is_checked = $(data.elem).attr('data-checked');
+
+			// 正式课选择框是否选中
+			var formalCheck = $(this).siblings('input').attr('data-checked');
+			// 正式课价格
+			var formalPrice = $(this).siblings('input').attr('data-price');
+			
+			if (formalCheck == 'false') {
+				$(this).siblings('input').attr('data-checked', 'true')
+				total = Number(total) - Number(formalPrice);
+				// $(this).siblings('input').prop('checked',false);
+			
+			}
+
+			if (is_checked == 'false') {
+				total = Number(total) - Number(price);
+				$(data.elem).prop('checked',false);
+				$(data.elem).attr('data-checked','true');
+			} else {
+				total = Number(total) + Number(price);
+				$(data.elem).attr('data-checked','false');
+			}
+
+			
+			// 价格总和
+			$("#total-price").html(total);
+			$("[name='totalPrice']").val(total);
+
+			// 最后价格
+			var dicount = $("[name='dicount']").val();
+			var final = Number(total) - Number(dicount);
+			$("[name='final']").val(final);
+			$("#final").html(final);
+			form.render()
+		});
+
+
+		// 试听课选择按钮
+		form.on('radio(audiPrice)', function(data) {
+			// 价格
+			var price = $(this).attr('data-price');
+			// 正式课复选框是否选中， data-checked == true 没选中
+			var is_checked = $(data.elem).attr('data-checked');
+			
+			if (is_checked == 'false') {
+				total = Number(total) - Number(price);
+
+				$(data.elem).prop('checked',false);
+				$(data.elem).attr('data-checked','true');
+				$("#audiPrice").val('')
+				
+			} else {
+				total = Number(total) + Number(price);
+				$(data.elem).attr('data-checked','false');
+				$("#audiPrice").val(Number(price))
+			}
+
+			// 价格总和
+			// $(".total-price #total-price").html(sum.toFixed(2));
+			$("#total-price").html(total);
+			$("[name='totalPrice']").val(total);
+
+			// 最后价格
+			var dicount = $("[name='dicount']").val();
+			var final = Number(total) - Number(dicount);
+
+			$("[name='final']").val(final);
+			$("#final").html(final);
+			
+			form.render()
+		});  
+
+	})
+		 
+	
+</script>

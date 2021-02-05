@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>E点就通名校名师同步课堂</title>
+    <script src="__mobile__/js/mui.min.js"></script>
+    <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__mobile__/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mescroll.js@1.4.1/mescroll.min.css">
+    <style type="text/css">
+      .my-select-contain{
+        margin-top: 0;
+      }
+    </style>
+</head>
+<body>
+  <!-- header -->
+  <header class="mui-bar mui-bar-nav common-header">
+		<div class="header-back iconfont iconxiangzuojiantou"><a href="javascript:;"></a></div>
+		<h1 class="common-title">我的收藏</h1>
+		<div class="my-select-edit">编辑</div>
+  </header>
+  <!-- 顶部导航栏选择年级弹出部分 -->
+  <!-- content -->
+  <div class="mui-content clearfix nav-item-all">
+    <!-- 滚动条导航部分 -->
+    <div class="nav-item-left nav-item-now" data-val='0'>全部</div>
+    <div class="wrapper">
+      <ul class="js-navlist nav-list">
+        {volist name='res' id='v'}
+        <li class="nav-item" data-val='{$v.id}'>{$v.subject}</li>
+        {/volist}
+      </ul>
+    </div>
+    <!-- content -->
+    <div id="mescroll" class="mescroll mescroll-select">
+      <ul id="OA_task_1" class="mui-table-view my-select-contain">
+      </ul>
+    </div>
+  </div>
+  <div class="select-delect-all select-delect-this">
+    <div class="select-all select-this">全选</div>
+    <div class="select-delect">删除</div>
+  </div>
+</body>
+</html>
+ <script src="__mobile__/js/jquery-2.2.3.js"></script>
+ <script src="__mobile__/js/fastclick.js"></script>
+<script src="__mobile__/js/public.js"></script>
+<script src="__mobile__/js/iconfont/iconfont.js"></script>
+<script src="__mobile__/js/bscroll.min.js"></script>
+<script>
+  mui.init();
+
+   //iphoneX兼容
+ function isIphoneX() {
+    return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+  } 
+  if(isIphoneX()) {
+    $(".mescroll-select").css({"top":"13%"})
+  }
+
+    const scroll = new BScroll('.wrapper',{
+      scrollX: true,
+      eventPassthrough:'vertical',
+      probeType: 3
+    })
+  //页面回退
+  $('.header-back').click(function(){
+    window.history.back(-1);
+  })
+
+  $(".swiper-slide").mouseenter(function() {
+    $(".index-swiper-teachers-lis").removeClass("active")
+    $(".index-swiper-teachers-lis").eq($(this).index()).addClass("active")
+    return;
+  })
+
+  //全选按钮
+  $('.select-all').click(function(){
+      $('.select-delect-cycle').removeClass('cycle-current');
+      $('.select-delect-cycle').addClass('cycle-current');
+  })
+  //删除按钮
+  $('.select-delect').click(function(){
+      var div_arr = $('.select-delect-cycle')
+          ,bool = 'false'
+          ,id_arr = new Array();
+      $.each(div_arr,function(i,v){
+        if($('.select-delect-cycle').eq(i).hasClass('cycle-current')){
+          bool = 'true';
+          id_arr[i] = $('.select-delect-cycle').eq(i).attr('data-id');
+        }
+      })
+      if(bool == 'false'){
+        mui.alert('请选择要删除的数据！','');
+        return false;
+      }
+      var btnArray = ['否', '是'];
+      mui.confirm('删除后不可恢复！确定删除吗？', '谨慎操作', btnArray, function(e) {
+          if (e.index == 1) {
+              var id_str = id_arr.join(',')
+                  ,subject = $('.nav-item-now').attr('data-val');
+                  delCollection(id_str,subject);
+                  $(".my-select-edit").click();
+          } else {
+
+          }
+      })
+  })
+  //单删
+  function singleDel(id, _this){
+      var subject = $('.nav-item-now').attr('data-val');
+      delCollection(id,subject,1);
+      $(_this).parents('li').remove();
+  }
+  // 点击编辑事件
+  $(".my-select-edit").click(function() {
+    let html = $(".my-select-edit").html(),
+        edit = "编辑",
+        cancel = "取消";
+    if ( html == edit) {
+      $(".my-select-edit").html(cancel)
+      $(".select-delect-all").removeClass("select-delect-this")
+      $(".select-delect-position").show()
+      // $(".select-delect-cycle").show()
+      $(".mui-delete-btn").hide()
+      $(".mui-slider-handle").animate({"marginLeft":"6%"},500)
+    } else {
+      $(".my-select-edit").html(edit)
+      $(".select-delect-all").addClass("select-delect-this")
+      $(".select-delect-position").hide()
+      // $(".select-delect-cycle").hide()
+      $(".mui-delete-btn").show()
+      $(".mui-slider-handle").animate({"marginLeft":"0%"},500)
+    }
+    
+  })
+  $(document).on('click',".select-delect-cycle",function() {
+    if($(this).hasClass("cycle-current")){
+        $(this).removeClass('cycle-current');
+    }else{
+        $(this).addClass("cycle-current")
+    }
+  })
+  //课程列表选择
+  $(".nav-list").on('click','.nav-item',function() {
+    $(".nav-item").removeClass("nav-item-now")
+    $(".nav-item-left").removeClass("nav-item-now")
+    $(this).addClass("nav-item-now")
+    var subject = $(this).attr('data-val')
+        ,edit = "编辑"
+        ,cancel = "取消"
+        ,html = $(".my-select-edit").html();
+    if(html == cancel){
+        $(".my-select-edit").click();
+    }
+    myCollection(subject)
+  })
+  // 点击全部按钮样式
+  $(".nav-item-all").on('click','.nav-item-left',function() {
+    $(".nav-item-left").addClass("nav-item-now")
+    $(".nav-item").removeClass("nav-item-now")
+    var subject = $(this).attr('data-val')
+        ,edit = "编辑"
+        ,cancel = "取消"
+        ,html = $(".my-select-edit").html();
+    if(html == cancel){
+        $(".my-select-edit").click();
+    }
+    myCollection(0)
+  })
+
+  myCollection(0)
+  //mySelect
+  //我的收藏部分
+  function myCollection(subject)
+  {
+    $.post('/index/person/mySelect',{subject:subject},function(res){
+        if(res.error_code==1){
+          var data=res.data;
+          var html='';
+          for(x in data){
+            html+='<li class="mui-table-view-cell"><div class="select-delect-position"><div class="select-delect-cycle" data-id="'+data[x].id+'"></div></div><div class="mui-slider-right mui-disabled mui-delete-btn"><a class="mui-btn mui-btn-red" onclick="singleDel('+data[x].id+','+this+')">删除</a></div><div class="mui-slider-handle clearfix"><a href="/index/course/goWx">';
+            if(data[x].collectImg != null){
+              html+='<img class="mui-media-object mui-pull-left" src="'+data[x].collectImg+'">';
+            }else{
+              html+='<img class="mui-media-object mui-pull-left" src="'+data[x].img+'">';
+            }
+            html+='<div class="mui-media-body"><span class="select-content-title"> '+data[x].ctitle+'</span><span class="select-content-subject subject-chinese">'+data[x].subject+'</span><p class="mui-ellipsis">'+data[x].title+'</p></div></a></div></li>';
+          }
+          $('#OA_task_1').html(html);
+        }else{
+          $('#OA_task_1').html(res.msg)
+        }
+    })
+  }
+  function delCollection(id,subject,delstatus = 0){
+    mui.post('/index/person/delMyCollection',{id:id},function(data){
+          if(data.error_code == 1 && delstatus == 0){
+              mui.alert('删除成功','',function(){
+                  $.ajaxSettings.async = false;
+                  myCollection(subject);
+              });
+          }else if(data.error_code == 1 && delstatus == 1){
+          }else{
+              mui.alert('系统繁忙，请稍后重试！')
+          }
+        },'json'
+      );
+  }
+</script>

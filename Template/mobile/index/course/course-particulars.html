@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>E点就通名校名师同步课堂</title>
+    <script src="__mobile__/js/mui.min.js"></script>
+    <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+    <!-- <link rel="stylesheet" href="__mobile__/css/jquery.mCustomScrollbar.css"> -->
+    <link rel="stylesheet" href="__mobile__/css/style.css">
+    <link href="__mobile__/css/DPlayer.min.css" rel="stylesheet"/>
+</head>
+<body>
+  <input type="hidden" value="{$courseInfo.link}" id="courseInfo"/>
+  <input type="hidden" value="{$start_time}" id="start_time">
+  <input type="hidden" value="{$person_id}" id="person_id">
+  <input type="hidden" value="{$id}" name="video_class" id="video_class"/>
+  <input type="hidden" value="{$videoId}" name="video" id="video"/>
+  <input type="hidden" value="{$getCrumbs.subject_id}" name="subject_id" id="subject_id">
+  <!-- header -->
+  <header class="mui-bar mui-bar-nav common-header">
+		<div class="header-back iconfont iconxiangzuojiantou"><a href="javascript:;"></a></div>
+		<h1 class="common-title">视频播放</h1>
+  </header>
+  <!-- 顶部导航栏选择年级弹出部分 -->
+  <!-- content -->
+  <div class="mui-content clearfix">
+    <div class="course-particulars-top clearfix">
+      <div class="course-particulars-video">
+        <!-- <div class="course-particulars-play" id="player"  controlsList="nodownload"></div> -->
+        <div class="course-particulars-play" id="dplayer" controlsList="nodownload"></div>
+        <!-- <video class="course-particulars-play" id="player" controls controlsList="nodownload">
+          <source src="" />
+        </video> -->
+      </div>
+      <div class="clearfix course-particulars-video-title-all">
+        <p class="course-particulars-video-title clearfix">
+          {$courseInfo.testclass}{$courseInfo.outline}
+          <div class="course-particulars-video-right"> 
+            <span class="course-particulars-video-note"><i class="iconfont iconbianqian-"></i></span>
+            <span class="course-particulars-collect" title="收藏"><i class="iconfont iconshoucang"></i></span>
+          </div>
+        </p>
+      </div>
+      <div class="course-particulars-label-all clearfix">
+        <span class="course-particulars-label-title">标签:</span>
+        <dl class="course-particulars-label clearfix">
+          {volist name="knowLedge" id="v" key="k"}
+            <dd class="course-particulars-label-lis" title="{$v.k_name}" onclick="startplay({$v.start_time},{$v.end_time})">{$k}. {$v.k_name}</dd>
+          {/volist}
+        </dl>
+        <i class="iconfont iconxiala"></i>
+      </div>
+    </div>
+    <!-- tab切换栏 -->
+    <div class="course-particulars-tab clearfix">
+      <div class="course-particulars-tab-lis course-particulars-tab-current">课程列表</div>
+      <!-- <div class="course-particulars-tab-lis">课程介绍</div>
+      <div class="course-particulars-tab-lis">教师介绍</div> -->
+    </div>
+    <!-- content -->
+    <ol class="course-particulars-change clearfix">
+      <!-- 课程目录 -->
+      <li class="course-particulars-change-lis active">
+        <ul class="mui-table-view course-list-content course-particulars-content">
+          {volist name="courseCatalogList" id="v" key="k"}
+          <li class="mui-table-view-cell mui-collapse course-list-unit {if condition='$k eq 1'}mui-active{/if}">
+            <a class="mui-navigate-right" href="#">{$v['testclass']}</a>
+            <div class="mui-collapse-content">
+              <!-- 目录 -->
+              {volist name="v['son']" id="vo"}
+              <dl class="personal-course-container clearfix">
+                {if(!empty($vo['son']))}
+                <dt class="personal-course-container-title">{$vo.testclass}<!-- 阅读 --></dt>
+                {volist name="vo['son']" id="vol"}
+                <dd class="personal-course-container-lis clearfix">
+                  <div class="particulars-container-lis-div clearfix">
+                    <div class="particulars-container-lis-name">
+                      <span class="particulars-container-lis-title">
+                        <i class="iconfont icon-bofang11"></i>
+                        {$vol['testclass']} {$vol['outline']}<!--  1. 沁园春·雪/毛泽东 -->
+                      </span>
+                      <i class="iconfont iconbianqian-"></i>
+                    </div>
+                    <!-- 便签 -->
+                    <div class="particulars-contain-note">
+                      <!-- <div class="particulars-contain-note-drag">
+                        <div class="particulars-note-close">x</div>
+                        <div class="particulars-container-note">
+                          <h3 class="particulars-study-note">学习便签</h3>
+                          <dl class="particulars-note-list">
+                              {volist name="vol['skill']" id="vl" key="kl"}
+                              <dt class="particulars-note-lis">
+                                {$vl['k_name']}
+                              </dt>
+                              <dd class="particulars-note-dts">
+                                {$vl['k_content']}
+                              </dd>
+                              {/volist}
+                          </dl>
+                        </div>
+                      </div>
+                    </div> -->
+                    
+                      {if(!empty($vol['videoLog']))}
+                        {if condition="$vol['videoLog']['video_status'] eq 2 || $vol['videoLog']['video_status'] eq 3"}
+                          <span class="personal-container-lis-frequency">已学{$vol['videoLog']['study_num']}次</span>
+                        {else}
+                          <span class="personal-container-lis-frequency">未学</span>
+                        {/if}
+                      {/if}
+                  </div>
+                  <ul class="particulars-container-position-contain clearfix">
+                      {volist name="vol['skill']" id="vl" key="kl"}
+                        <li class="particulars-position-container-lis" onclick="courseListKnow({$vol['id']},{$vol['kid']},{$vl['k_id']},{$vl.start_time},{$kl})">
+                          <i class="iconfont iconlocation"></i>{$vl['k_name']}
+                        </li>
+                      {/volist}
+                  </ul>
+                </dd>
+                {/volist}
+                {else}
+                <dd class="personal-course-container-lis clearfix">
+                  <div class="particulars-container-lis-div clearfix">
+                    <div class="particulars-container-lis-name">
+                      <span class="particulars-container-lis-title">
+                        <i class="iconfont icon-bofang11"></i>
+                        {$vo['testclass']} {$vo['outline']}<!-- 2.  我爱这土地/艾青 -->
+                      </span>
+                      <i class="iconfont iconbianqian- click_particulars_menu_select"></i>
+                    </div>
+                    <!-- 便签 -->
+                    <!-- <div class="particulars-contain-note">
+                      <div class="particulars-contain-note-drag">
+                        <div class="particulars-note-close">x</div>
+                        <div class="particulars-container-note">
+                          <h3 class="particulars-study-note">学习便签</h3>
+                          <dl class="particulars-note-list">
+                              {volist name="vo['skill']" id="vl" key="kl"}
+                              <dt class="particulars-note-lis">
+                                {$vl['k_name']}
+                              </dt>
+                              <dd class="particulars-note-dts">
+                                {$vl['k_content']}
+                              </dd>
+                              {/volist}
+                          </dl>
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <div class="particulars_menu_select">
+                      <div class="particulars_menu_select_top">
+                        <h3 class="particulars_select_title">学习便签</h3>
+                        <i class="iconfont iconxiala maodian"></i>
+                      </div>
+                      <dl class="particulars_select_menu">
+                        {volist name="knowLedge" id="v" key="k"}
+                          <dt class="particulars_select_menu_dt">{$k}. {$v.k_name}</dt>
+                          <dd class="particulars_select_menu_dd"> {$v.k_content}</dd>
+                        {/volist}
+                      </dl>
+                    </div>
+
+                    {if(!empty($vo['videoLog']))}
+                      {if condition="$vo['videoLog']['video_status'] eq 2 || $vo['videoLog']['video_status'] eq 3"}
+                        <span class="personal-container-lis-frequency">已学{$vo['videoLog']['study_num']}次</span>
+                      {else}
+                        <span class="personal-container-lis-frequency">未学</span>
+                      {/if}
+                    {/if}
+                  </div>
+                  <ul class="particulars-container-position-contain clearfix">
+                      {volist name="vo['skill']" id="vl" key="kl"}
+                        <li class="particulars-position-container-lis" onclick="courseListKnow({$vo['id']},{$vo['kid']},{$vl['k_id']},{$vl.start_time},{$kl})">
+                          <i class="iconfont iconlocation"></i>{$vl['k_name']}
+                        </li>
+                      {/volist}
+                  </ul>
+                </dd>
+                {/if}
+              </dl>
+              {/volist}
+            </div>
+          </li>
+          {/volist}
+        </ul>
+      </li>
+      <!-- 课程介绍 -->
+      <!-- <li class="course-particulars-change-lis">
+        <div class="course-introduce-contain">
+          <p>
+            {$getCrumbs.content}       
+          </p>
+        </div>
+      </li> -->
+      <!-- 教师介绍 -->
+      <!-- <li class="course-particulars-change-lis">
+        <div class="course-particulars-video-play">
+          <div class="course-particulars-video-top clearfix">
+            <a href="javascript:;">
+              <div class="course-particulars-img">
+                <img src="{$teacherInfo.litpic}" alt="">
+              </div> 
+              <div class="course-particulars-teachers-right">
+                <h4 class="course-particulars-teachers-title">{$teacherInfo.name}</h4>
+                <p class="course-particulars-teachers-ranks">{$teacherInfo.teacherPosition}</p>
+                <p class="course-particulars-teachers-introduce">
+                  {$teacherInfo.content}
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class="course-particulars-teachers-video clearfix">
+            <p class="course-particulars-teachers-p">精彩视频</p>
+            <video controls>
+              <source src="{$teacherInfo.Audition_video}">
+            </video>
+          </div>
+        </div>
+      </li> -->
+    </ol>
+
+  </div>
+
+  <!-- 视频播放便签 -->
+  <!-- <div class="particulars-contain-outsisde-note">
+    <div class="contain-outsisde-absolute">
+      <div class="particulars-contain-note-drag">
+        <div class="particulars-note-close particulars-note-outside-close">x</div>
+        <div class="particulars-container-note">
+          <h3 class="particulars-study-note">学习便签</h3>
+          <dl class="particulars-note-list">
+            {volist name="knowLedge" id="v" key="k"}
+              <dt class="particulars-note-lis">{$k}. {$v.k_name}</dt>
+              <dd class="particulars-note-dts"> {$v.k_content}</dd>
+            {/volist}
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="particulars_select">
+    <div class="particulars_select_top">
+      <h3 class="particulars_select_title">学习便签</h3>
+      <i class="iconfont iconxiala maodian" id="particulars_select_top_cancel"></i>
+    </div>
+    <dl class="particulars_select_menu">
+      {volist name="knowLedge" id="v" key="k"}
+        <dt class="particulars_select_menu_dt">{$k}. {$v.k_name}</dt>
+        <dd class="particulars_select_menu_dd"> {$v.k_content}</dd>
+      {/volist}
+    </dl>
+  </div>
+
+</body>
+<script src="__mobile__/js/jquery-2.2.3.js"></script>
+<script src="__mobile__/js/fastclick.js"></script>
+<script src="__mobile__/js/public.js"></script>
+<script src="__mobile__/js/drag-mobile.js"></script>
+<!-- <script src="https://sdk-release.qnsdk.com/qiniu-web-player-1.0.0.js"></script> -->
+<script src="__mobile__/js/DPlayer.min.js"></script>
+</html>
+<script>
+  mui.init();
+ //iphoneX兼容
+ function isIphoneX() {
+    return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+  } 
+  if(isIphoneX()) {
+    // $(".particulars-container-note").css({"margin":"80% auto 0"})
+    // $(".particulars-note-close").css({"top":"34%","right":"23%"})
+  }
+  // 七牛云视频播放
+  var link=$('#courseInfo').val();
+  // var container = document.getElementById("player");
+  $(".course-particulars-play").attr("src",link)
+  const player = new DPlayer({
+    container: document.getElementById('dplayer'),
+    screenshot: true,
+    autoplay: false,
+    theme: '#FADFA3',
+    loop: false,
+    lang: 'zh-cn',
+    hotkey: true,
+    preload: 'auto',
+    volume: 0.7,
+    mutex: true,
+    video: {
+      url: link,
+    },
+    highlight: [
+      {
+        time: 20,
+        text: '这是第 20 秒'
+      },
+      {
+        time: 120,
+        text: '这是 2 分钟'
+      }
+    ]
+});
+var setTimer = null;
+var setTimer1 = null;
+var timer;
+window.onload = function(){
+  var start=$('#start_time').val();
+  // videoPlay.currentTime =start;
+  player.on('play',playPlayer);//注册播放器开始播放事件
+  player.on('pause',pausePlayer);//注册播放器暂停播放事件
+  player.on("ended", handleReady);//注册视频播放完成事件
+
+}
+  window.onbeforeunload=function(){
+    var video_class_id=$('#productStatus).val();
+    var videoid=$('#video').val();
+    var nowTime=Math.ceil(player.video.currentTime);
+    nowTime = Math.floor(nowTime/60)+':'+(nowTime%60);
+    var person_id=$('#person_id').val();
+    $.post('/index/course/closeUpdateCourseLog',{video_class_id:video_class_id,videoid:videoid,nowTime:nowTime,person_id:person_id})
+  }
+  //视频播放器点击开始播放事件
+var a=1,b = 1;
+function playPlayer()
+{
+  console.log(timer);
+  console.log(timer!=undefined && timer !=0 &&(a%2)==1&&b==2);
+  if(timer != undefined && timer != 0 && (a%2) == 1 && b == 2){
+    setTimer1=setInterval(function(){
+      timer++;
+      var timerNow = formatSeconds(timer);
+      $(".course-particulars-collect").html(timerNow)
+    },1000);
+    $(".course-particulars-collect").attr('title','停止')  //小浮框显示停止
+  } 
+  b=1;
+  a++;
+}
+
+
+//视频播放器暂停事件
+function pausePlayer()
+{
+  if(setTimer != null)b=2
+  if(setTimer1 != null)b=2
+  clearInterval(setTimer);
+  clearInterval(setTimer1);
+}
+  //视频播放完成触发事件
+  function handleReady(){
+    console.log("ended")
+    var video_class_id=$('#video_class').val();
+    var videoid=$('#video').val();
+    $.post('/index/course/updateCourseLog',{video_class_id:video_class_id,videoid:videoid})
+  }
+  // 标签的全部显示与部分隐藏
+  $(".course-particulars-label-all i").click(function() {
+    var JoinFisher = $(".course-particulars-label-all"),
+    currentHeight = JoinFisher .height(),
+    autoHeight = JoinFisher.css('height', '100%').height();
+    if ($(".course-particulars-label-all i").hasClass("iconxiala")) {
+      $(".course-particulars-label-all i").removeClass("iconxiala").addClass("iconxiangshangjiantou")
+      JoinFisher.height(currentHeight).animate({height: autoHeight},500);
+    } else {
+      $(".course-particulars-label-all i").addClass("iconxiala").removeClass("iconxiangshangjiantou")
+      $(".course-particulars-label-all").animate({
+        height:".4rem"
+      },500)
+    }
+  })
+// tab切换
+$(".course-particulars-tab-lis").click(function() {
+  $(".course-particulars-tab-lis").removeClass("course-particulars-tab-current")
+  $(this).addClass("course-particulars-tab-current")
+  $(".course-particulars-change-lis").removeClass("active")
+  $(".course-particulars-change-lis").eq($(this).index()).addClass("active")
+})
+
+//  课程目录便签部分
+  //  点击便签事件
+  // 便签滚动条
+// $(".iconbianqian-").click(function() {
+//   $("body, html").css({"overflow":"hidden"})
+//   $(this).parent(".particulars-container-lis-name")
+//          .siblings()
+//          .find(".particulars-contain-note")
+//          .show()
+// })
+// // $(document).on('click','.personal-course-container-lis .iconbianqian-',function() {
+//   $('.personal-course-container-lis .iconbianqian-').click(function(){
+//   $("body, html").css({"overflow":"hidden"})
+//   drag($(this).parent().next().children(".particulars-contain-note-drag"));//便签拖拽事件
+//   $(this).parent(".particulars-container-lis-name")
+//           .next()
+//           .show()
+//           .end()
+//           .parent(".personal-course-container-lis")
+//           .siblings()
+//           .children()
+//           .find(".particulars-contain-note")
+//           .hide()
+// })
+
+  //点击列表便签显示
+  $('.click_particulars_menu_select').click(function(){
+    $('.particulars_menu_select').animate({ height:'40%'},500);
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    // document.body.style.position = 'fixed';
+    $('.mui-content').css({ 'position':'fixed','top':'0' })
+    // $('body,html').animate({ scrollTop:0 },500);
+    // $(document).scrollTop(0)
+  })
+  //点击下拉消失便签
+  $('.particulars_menu_select_top i').click(function(){
+    $('.particulars_menu_select').animate({ height:'0'},500);
+    document.documentElement.style.overflow = "scroll";
+    document.body.style.overflow = "scroll";
+    document.body.style.position = 'static';
+    $('.mui-content').css({ 'position':'static' })
+  })
+
+// $(document).on("click",".particulars-note-close",function() {
+  $('.particulars-note-close').click(function(){
+  $(this).parents(".particulars-contain-note")
+          .hide()
+          // .siblings(".particulars-container-note")
+          // .hide()
+          .end()
+          $("body, html").css({"overflow":"auto"})       
+})
+// 点击标题出现知识点
+// $(document).on('click','.particulars-container-lis-name',function() {
+  $('.particulars-container-lis-name').click(function(){
+  $(this).addClass("personal-learn-now")
+         .parents(".particulars-container-lis-div")
+         .siblings(".particulars-container-position-contain")
+         .toggle()
+         .end()
+         .parent(".personal-course-container-lis")
+         .siblings()
+         .find(".particulars-container-lis-name")
+         .removeClass("personal-learn-now")
+  
+})
+// 知识点点击事件
+$('.particulars-position-container-lis').click(function(){
+// $(document).on('click','.particulars-position-container-lis',function() {
+  $(this).addClass("current-now").siblings().removeClass("current-now")
+})
+    // 
+// var customComponents = "<div class='course-particulars-knowledge' title='知识点'><i class='iconfont icongengduo-2'></i></div>"+
+//                         "<div class='course-particulars-note' title='便签'><i class='iconfont iconbianqian-'></i></div>"+
+//                         "<div class='course-particulars-collect' title='收藏'><i class='iconfont iconshoucang'></i></div>";
+
+// $(".dplayer-controller").after(customComponents)
+// 全屏事件
+player.on('fullscreen', function () {
+  console.log('player fullscreen');
+  $(".course-fullscreen-list").show()
+  // $(".course-particulars-note").show()
+  // $(".course-particulars-collect").show()
+  // $(".course-particulars-knowledge").show()
+  sessionStorage.setItem("fullItem",1)
+});
+// 退出全屏事件
+player.on('fullscreen_cancel', function () {
+  console.log('player fullscreen_cancel');
+  $(".course-fullscreen-list").hide()
+  // $(".course-particulars-note").hide()
+  // $(".course-particulars-collect").hide()
+  // $(".course-particulars-knowledge").hide()
+});
+// 全屏之后的样式
+// var fullscreenStyle = `<div class="course-fullscreen-list">
+//                         <div class="course-fullscreen-list-btn"><i class="iconfont iconfanhui-copy-copy"></i></div>
+//                         <dl class="course-fullscreen-list-contain clearfix">
+//                           <dt class="course-particulars-position-title">本节知识点</dt>
+//                           <dd class="course-particulars-position-lis course-particulars-current">知识点</dd>
+//                           <dd class="course-particulars-position-lis">知识点知识点知识点</dd>
+//                           <dd class="course-particulars-position-lis">知识点知识点</dd>
+//                           <dd class="course-particulars-position-lis">知识点知识点知识点知识点</dd>
+//                           <dd class="course-particulars-position-lis">知识点</dd>
+//                           <dd class="course-particulars-position-lis">知识点知识点</dd>
+//                           <dd class="course-particulars-position-lis">知识点知识点知识点知识点</dd>
+//                           <dd class="course-particulars-position-lis">知识点</dd>
+//                         </dl>
+//                       </div>`;
+// $(".dplayer-controller").append(fullscreenStyle)
+// window.onresize = function() {
+//   // fullscreenchange()
+// }
+// fullscreenchange()
+// function fullscreenchange() {
+//   if (player.config.view.player.fullscreenController.isFullScreen == true) {
+//     // console.log(111)
+//     $(".course-fullscreen-list").show()
+//     $(".course-particulars-note").show()
+//     $(".course-particulars-collect").show()
+//     $(".course-particulars-knowledge").show()
+//   } else if (player.config.view.player.fullscreenController.isFullScreen == false) {
+//     // console.log(222)
+//     $(".course-fullscreen-list").hide()
+//     $(".course-particulars-note").hide()
+//     $(".course-particulars-collect").hide()
+//     $(".course-particulars-knowledge").hide()
+//   }
+// }
+  //  全屏之后本章知识点点击事件
+$(".course-particulars-knowledge").click(function() {
+  // $(".course-particulars-note").hide()//便签按钮处于隐藏状态
+  // $(".course-particulars-collect").hide()//收藏视频按钮处于隐藏状态
+  // $(".course-particulars-knowledge").hide()//本章知识点表展开按钮处于隐藏状态
+  //请求接口加载知识点
+      // var video_id=$('#video').val();
+      // var a=$('.course-knowledge-points-current').index();
+      // $.post('/index/course/videoSkillKnow',{video_id:video_id},function(res){
+      //     var skill=res.data;
+      //     var fullscreenStyle = '<div class="course-fullscreen-list">'+
+      //                   '<div class="course-fullscreen-list-btn"><i class="iconfont iconfanhui-copy-copy"></i></div><dl class="course-fullscreen-list-contain clearfix">'+
+      //                     '<dt class="course-particulars-position-title">本节知识点</dt>';
+      //     for(x in skill){
+      //         if(x==a){
+      //           fullscreenStyle += '<dd class="course-particulars-position-lis course-particulars-current" onclick="startplay('+skill[x].start_time+','+skill[x].end_time+')">'+parseInt(x)+1+'. '+skill[x].k_name+'</dd>';
+      //         }else{
+      //           fullscreenStyle += '<dd class="course-particulars-position-lis" onclick="startplay('+skill[x].start_time+','+skill[x].end_time+')">'+parseInt(x)+1+'. '+skill[x].k_name+'</dd>';
+      //         }
+      //       }
+      //       //播放器全屏的时候的知识点内容列表
+      //       fullscreenStyle += '</dl></div>';
+      //     $(".dplayer-controller").html(fullscreenStyle)
+      // })
+})
+ //全屏时知识点的展开与隐藏
+// $(".dplayer-controller").on('click','.course-fullscreen-list-btn',function() {
+// //知识点展开状态
+//   if ($(".course-fullscreen-list-btn i").hasClass("iconxiangzuojiantou")) {
+//     $(".course-fullscreen-list-btn i").addClass("iconfanhui-copy-copy")
+//                                     .removeClass("iconxiangzuojiantou")
+//     $(".course-fullscreen-list").removeClass("course-fullscreen-list-current")
+//     $(".course-particulars-note").hide()//便签按钮处于隐藏状态
+//     $(".course-particulars-collect").hide()//收藏视频按钮处于隐藏状态
+//   } else {
+//     ///知识点闭合状态（在最右侧隐藏）
+//    $(".course-fullscreen-list-btn i").removeClass("iconfanhui-copy-copy")
+//                                     .addClass("iconxiangzuojiantou")
+//    $(".course-fullscreen-list").addClass("course-fullscreen-list-current")
+//    setTimeout(function() {
+//       $(".course-particulars-note").show()//便签按钮处于展现状态
+//       $(".course-particulars-collect").show()//收藏视频按钮处于展现状态
+//     },500)
+//   }
+// })
+// 全屏时的知识点样式
+// $(".course-particulars-position-lis").click(function() {
+//   $(this).addClass("course-particulars-current")
+//          .siblings().removeClass("course-particulars-current");
+// })
+
+// 点击知识点跳转到指定视频播放时间点事件
+  var videoPlay = document.getElementsByClassName("dplayer-video-wrap")[0].children[0];
+  console.log(videoPlay.currentTime)
+  var cur = 0;
+  var flag = 0;
+  var func = function () {
+    if (cur > 0 && videoPlay.currentTime >= cur) {
+      cur = 0;
+      videoPlay.pause();
+      videoPlay.removeEventListener("timeupdate", func);
+    }
+  };
+  function startplay(starttime, endtime) {
+    if (flag == 0) {
+      flag = 1;
+      videoPlay.autoplay = "autoplay";
+      videoPlay.load();
+    }
+    videoPlay.currentTime = starttime;
+    cur = endtime;
+    videoPlay.addEventListener("timeupdate", func);
+    videoPlay.play();
+  }
+  // 点击收藏录制视频事件
+  $('.course-particulars-collect').click(function(){
+  let collectVal = $(".course-particulars-collect").attr('title');//点击的时候获取页面文本
+  let timer = Math.ceil(player.video.currentTime);
+  if (collectVal == '收藏') {
+  //点击收藏之前 此时页面值为 '收藏'
+    sessionStorage.setItem("startTime",timer);//点击收藏记录开时收藏的时间点
+    console.log(timer)
+    setTimer=setInterval(function(){
+      timer++;
+      var timerNow = formatSeconds(timer);
+      $(".course-particulars-collect").html(timerNow);
+    },1000);
+     $(".course-particulars-collect").attr('title','停止');  //小浮框显示停止
+     player.play();
+  }else{
+    // 此时页面值为时长 此时鼠标滑过标签title为停止
+    player.pause();
+    clearInterval(setTimer);
+    endTime = Math.ceil(player.video.currentTime);
+    sessionStorage.setItem("endTime",endTime);
+    var selectStartTime = sessionStorage.getItem("startTime");
+    sessionStorage.setItem("allTime",(endTime-selectStartTime));
+    var width = Math.ceil($(window).width()*0.724);
+    var height = Math.ceil($(window).height()*0.2);
+    console.log(width, height)
+    var videoLink = $("#courseInfo").val()
+    var courseReName = '<div class="course-name-model"><div class="course-name-change">'+
+                          '<div class="course-rename-img"><img src="'+videoLink+'?vframe/jpg/offset/'+selectStartTime+'/w/'+width+'/h/'+height+'"/></div>'+
+                          '<form class="layui-form course-name-form" action="" onkeydown="if(event.keyCode==13){return false}">'+
+                            '<div class="course-rename-form-item"><div class="layui-input-block">'+
+                                '<input type="text" name="newName" required placeholder="请输入标题" class="course-rename-input">'+
+                              '</div></div><div class="course-rename-form-item">'+
+                              '<button class="course-rename-btn course-exit-select" type="button">取消收藏</button>'+
+                              '<button class="course-rename-btn course-rename-btn-current course-ok-select" type="button">确定收藏</button>'+
+                            '</div></form><p class="course-toast">请输入收藏视频的新名称</p></div></div>';
+    $("body").append(courseReName)
+    $(".course-name-model").show()  
+    // $('.course-particulars-video').css('visiblity','hidden')
+    $(".course-rename-img").css({width:width,height:height})
+    //判断视频显示隐藏
+    if($('.course-name-model').css("display")=="block"){
+      $('.course-particulars-video').css('visibility','hidden');
+    }else{
+      $('.course-particulars-video').css('visibility','visible');
+    }
+  }
+});
+// 重命名弹窗按钮点击样式变化
+$('.course-rename-btn').click(function(){
+  $(".course-rename-btn").removeClass("course-rename-btn-current")
+  $(this).addClass("course-rename-btn-current")
+
+})
+// 取消收藏
+  $(document).on('click','.course-exit-select',function(){
+    $('.course-particulars-video').css('visibility','visible');
+    // alert('显示')
+  $(".course-name-model").hide()
+  $(".course-particulars-collect").html("<i class='iconfont iconshoucang'></i>")
+    $(".course-particulars-collect").attr('title','收藏')
+})
+
+
+
+// x号按钮
+$('.course-name-close').click(function(){
+  $(".course-name-model").hide()
+})
+// 确定收藏
+ $(document).on('click','.course-ok-select',function(){
+  var data = {};
+    $(".course-particulars-collect").html("<i class='iconfont iconshoucang'></i>")
+    $(".course-particulars-collect").attr('title','收藏')
+    data.newName = $(".course-rename-input").val()
+    data.video_class = $("#video_class").val();
+    data.video = $("#video").val()
+    data.subject_id = $("#subject_id").val()
+    data.startTime=sessionStorage.getItem("startTime");//收藏视频开始的时间
+    data.endTime=sessionStorage.getItem("endTime");//收藏视频结束的时间
+    data.countTime=sessionStorage.getItem("allTime");//收藏视频总时间
+    if(data.newName.length != 0) {
+      $.ajax({
+      url: '/index/course/courseCollections',
+      type: 'post',
+      data: data,
+      async:false,
+      success: function (res) {
+        if(res.error_code==1){
+          mui.toast(res.msg);
+        }else{
+          mui.toast(res.msg)
+        }
+        timer = 0;
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(errorThrown)
+      }
+    })
+    $(".course-name-model").hide()
+    $('.course-particulars-video').css('visibility','visible');
+    // $(".course-toast").show()
+    return false;
+    } else {
+      $(".course-rename-input").css({border:"1px solid #0a3e82"})
+      $(".course-toast").show()
+    }
+})
+//传入秒数转化成时分秒格式数据
+function formatSeconds(value) {
+    var theTime = parseInt(value);// 秒
+    var theTime1 = 0;// 分
+    var theTime2 = 0;// 小时
+    if(theTime > 60) {
+        theTime1 = parseInt(theTime/60);
+        theTime = parseInt(theTime%60);
+        if(theTime1 > 60) {
+          theTime2 = parseInt(theTime1/60);
+          theTime1 = parseInt(theTime1%60);
+        }
+    }
+    var result = ""+parseInt(theTime)+"秒";
+    if(theTime1 > 0) {
+      result = ""+parseInt(theTime1)+"分"+result;
+    }
+    if(theTime2 > 0) {
+      result = ""+parseInt(theTime2)+"小时"+result;
+    }
+    return result;
+}
+
+// 视频播放部分的便签点击事件
+$('.course-particulars-video-note').click(function(){
+  $('.particulars_select').animate({ height: '40%', },500);
+  document.documentElement.style.overflow = "hidden";
+  document.body.style.overflow = "hidden";
+  // $('body,html').animate({ scrollTop:0 },500);
+  // document.body.style.position = 'fixed';
+  $('.mui-content').css({ 'position':'fixed','top':'0' })
+})
+//点击取消视频播放部分的便签点击事件
+$('#particulars_select_top_cancel').click(function(){
+  $('.particulars_select').animate({ height: '0', },500);
+  document.body.style.overflow = "scroll";
+  document.documentElement.style.overflow = "scroll";
+  // document.body.style.position = 'static';
+  $('.mui-content').css({ 'position':'static' })
+})
+
+//判断盒子取消可以滑动
+document.querySelector('body').addEventListener('touchmove', function(e) {
+    if (!document.querySelector('.mui-content').contains(e.target)){
+            e.preventDefault();
+    }
+})
+
+
+//   $('.course-particulars-video-title-all span.course-particulars-video-note').click(function(){
+//   $(".particulars-contain-outsisde-note").show()
+//   drag($(".particulars-contain-note-drag"))
+// })
+// $(".particulars-note-outside-close").click(function() {
+//   $(".particulars-contain-outsisde-note").hide()
+// })
+ //课程播放页面点击课程列表知识点事件
+function courseListKnow(videoid,video_class_id,k_id,start_time,kl)
+{
+  var video_id=$('#video').val();//请求接口判断本视频用户是否可以直接观看
+  if(video_id==videoid){
+      videoPlay.currentTime =start_time;
+  }else{
+    var nowTime=Math.ceil(player.currentTime);
+      $.post('/index/course/courseVerification',{videoid:videoid,video_class_id:video_class_id,k_id:k_id,nowTime:nowTime,video_id:video_id},function(res){
+        var data=res.data;
+        if(res.error_code==1){
+          $('#video').val(videoid);//本视频用户具有观看权限
+          videoPlay.src=data.link;
+          videoPlay.addEventListener('play', function(){
+            videoPlay.currentTime =start_time;
+            // var customComponents = "<div class='course-particulars-note course-particulars-video-note' title='便签'><i class='iconfont icon-bianqian-'></i><span>便签</span></div>"+
+            //                     "<div class='course-particulars-collect course-particulars-video-collection' title='收藏'><i class='iconfont icon-shoucang'></i><span>收藏</span></div>";
+            // $(".course-particulars-note").remove();
+            // $(".course-particulars-collect").remove();
+            // $(".qplayer-controlbtns").before(customComponents)
+          })
+          // $('.course-particulars-video-title').html(data.testclass+' '+data.outline);
+          $('.course-particulars-knowledge-title').html('<h5>'+data.testclass+' '+data.outline+'</h5>')
+          var skill=data.skill;
+          var html='';
+          var fullscreenStyle = '<div class="course-fullscreen-list"><div class="course-fullscreen-list-btn"><i class="icon-arrow-right"></i><p> 本章知识点 </p></div><dl class="course-fullscreen-list-contain clearfix"><dt class="course-particulars-position-title">本节知识点</dt>';
+          var htmlNote='';
+          for(x in skill){
+            if((parseInt(x)+1)==kl){
+              html+='<dd class="course-particulars-knowledge-points course-knowledge-points-current" title="'+skill[x].k_name+'" onclick="startplay('+skill[x].start_time+','+skill[x].end_time+')">'+parseInt(x)+1+'. '+skill[x].k_name+'</dd>';
+              fullscreenStyle += '<dd class="course-particulars-position-lis course-particulars-current" onclick="startplay('+skill[x].start_time+','+skill[x].end_time+')">'+parseInt(x)+1+'. '+skill[x].k_name+'</dd>';
+            }else{
+              html+='<dd class="course-particulars-knowledge-points" title="'+skill[x].k_name+'" onclick="startplay('+skill[x].start_time+','+skill[x].end_time+')">'+parseInt(x)+1+'. '+skill[x].k_name+'</dd>';
+              fullscreenStyle += '<dd class="course-particulars-position-lis" onclick="startplay('+skill[x].start_time+','+skill[x].end_time+')">'+parseInt(x)+1+'. '+skill[x].k_name+'</dd>';
+            }
+            htmlNote+='<dt class="particulars-note-lis">'+skill[x].k_name+'</dt><dd class="particulars-note-dts">'+skill[x].k_content+'</dd>';
+            
+          }
+          $('#skill').html(html);
+          $('#htmlNote').html(htmlNote);
+          //播放器全屏的时候的知识点内容列表
+          fullscreenStyle += '</dl></div>';
+        $(".dplayer-controller").html(fullscreenStyle)
+        }else{
+          mui.toast(res.msg);//本视频用户不具有观看权限
+        }
+      })
+  } 
+}
+//传入秒数转化成时分秒格式数据
+function formatSeconds(value) {
+    var theTime = parseInt(value);// 秒
+    var theTime1 = 0;// 分
+    var theTime2 = 0;// 小时
+    if(theTime > 60) {
+        theTime1 = parseInt(theTime/60);
+        theTime = parseInt(theTime%60);
+        if(theTime1 > 60) {
+          theTime2 = parseInt(theTime1/60);
+          theTime1 = parseInt(theTime1%60);
+        }
+    }
+    var result = ""+parseInt(theTime)+"秒";
+    if(theTime1 > 0) {
+      result = ""+parseInt(theTime1)+"分"+result;
+    }
+    if(theTime2 > 0) {
+      result = ""+parseInt(theTime2)+"小时"+result;
+    }
+    return result;
+}
+
+// 视频播放部分的便签点击事件
+// $('.course-particulars-video-title span.course-particulars-video-note').click(function(){
+// $(".particulars-contain-outsisde-note").show()
+// })
+// $(".particulars-note-outside-close").click(function() {
+//   $(".particulars-contain-outsisde-note").hide()
+// })
+
+
+// 全屏时便签点击事件
+// $(".course-particulars-play").on('click','.course-particulars-note i',function() {
+//   var video_class_id=$('#video_class').val();
+//   var videoid=$('#video').val();
+//   fullItem = sessionStorage.getItem("fullItem");
+//   if (fullItem == 1) {
+//     $.ajax({
+//       type: "post",
+//       url: "/index/course/jsGetKnowLedge",
+//       data: {k_id:video_class_id,s_id:videoid},
+//       async:false,
+//       success: function (res) {
+//         console.log(res)
+//         var data = res.data;
+//         var html = '';
+//         html += '<div class="particulars-contain-note-fixed"><div class="particulars-contain-note-drag">'+
+//                     '<div class="particulars-note-close">x</div><div class="particulars-container-note">'+
+//                       '<h3 class="particulars-study-note">学习便签</h3><dl class="particulars-note-list">';
+//           for (json in data) {
+//             html +='<dt class="particulars-note-lis">'+data[json].k_name+'</dt>'+
+//                     '<dd class="particulars-note-dts">'+data[json].k_content+'</dd>';
+//           }
+//           html += '</dl></div></div></div></div>';
+//           $(".particulars-contain-note-fixed").remove()
+//         $(".dplayer-controller").append(html)
+//         $(".particulars-contain-note-fixed").show()
+//       }
+//     });
+//     var dragFull = $(".particulars-contain-note-drag")
+//     drag(dragFull);//便签拖拽事件
+//   }
+// })
+$('.particulars-note-close').click(function(){
+  $(this).parents(".particulars-contain-note-fixed")
+          .hide()
+          // .siblings(".particulars-container-note")
+          // .hide()
+          .end()
+  $("body, html").css({"overflow":"auto"})
+})
+//页面回退
+$('.header-back').click(function(){
+  window.history.back(-1);
+})
+
+$(function(){
+  //动态给video设置属性
+  $('.dplayer-video').attr({
+    // 'controls':'controls',
+    'x5-playsinline':'""',
+    'x-webkit-airplay':"true",
+    'x5-video-player-type':"h5",
+    'x5-video-player-fullscreen':"",
+    'x5-video-orientation':"portraint",
+  })
+})
+
+
+</script>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<button onclick="test()">video</button>
+	<ul id="ulVideo" style="display:none">
+		{volist name="videoList" id="vo"}
+			<li data-id="{$vo.id}">{$vo.link}</li>
+		{/volist}
+	</ul>
+	<video style="display:none" controls="controls"  name="media" id="divVideo">
+		<source type="video/mp4">
+	</video>
+</body>
+<script>
+	var interval;
+	var length = 0;
+	var index = 0;
+	var list = <?php echo $list; ?>;
+	var array=[];
+	var arrayTime=[];
+	function test(){
+		document.getElementById("divVideo").src=$("ul li").eq(index).text();
+		interval = setInterval(test2,2000)
+	}
+	function test2(){
+		 if(document.getElementById("divVideo").readyState == 4){
+			length=parseInt($("#divVideo").get(0).duration);
+			var id=$("ul li").eq(index).attr('data-id');
+			arrayTime=[id,length];
+			array.push(arrayTime)
+		}
+		clearInterval(interval);
+		index++;
+		if(index < list){
+			test();
+		 }else{
+		 	updaTime();
+		 }
+	}
+	function updaTime()
+	{
+		$.post('/index/course/courseUpdaTime',{arrayList:array},function(res){
+
+		})
+	}
+</script>
+</html>

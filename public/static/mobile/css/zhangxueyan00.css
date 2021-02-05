@@ -1,0 +1,457 @@
+/*  */
+body {font-family: "SourceHanSansCN-Regula", "Microsoft Yahei", "Helvetica Neue";background-color:#fff;color: #333;font-size: 12px;line-height: 1;-webkit-text-size-adjust: none;height: 100%;}
+html {overflow-x: hidden;-webkit-tap-highlight-color: transparent;font-size:100px;height: 100%;}
+body,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,figure,form,fieldset,legend,input,textarea,button,p,blockquote,th,td,pre,xmp{margin:0;padding:0}
+body,input,textarea,button,select,pre,xmp,tt,code,kbd,samp{line-height:1.5;}
+h1,h2,h3,h4,h5,h6,small,big,input,textarea,button,select{font-size:100%}
+h1,h2,h3,h4,h5,h6,b,strong{font-weight:normal}
+address,cite,dfn,em,i,optgroup,var{font-style:normal}
+table{border-collapse:collapse;border-spacing:0;text-align:left}
+caption,th{text-align:inherit}
+ul,ol,menu{list-style:none}
+fieldset,img{border:0}
+img,object,input,textarea,button,select{vertical-align:middle}
+article,aside,footer,header,section,nav,figure,figcaption,hgroup,details,menu{display:block}
+audio,canvas,video{display:inline-block;*display:inline;*zoom:1}
+blockquote:before,blockquote:after,q:before,q:after{content:"\0020"}
+textarea{overflow:auto;resize:vertical}
+input,textarea,button,select,a{outline:0 none;border:none;}
+button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}
+mark{background-color:transparent}
+a,ins,s,u,del{text-decoration:none}
+sup,sub{vertical-align:baseline}
+hr {height: .02rem;margin: .1rem 0;border: medium none;border-top: .02rem solid #cacaca;}
+a {color: #fff;text-decoration: none;}
+.clearfix:after{content:".";clear:both;display:block;height:0;overflow:hidden;visibility:hidden;}
+.clearfix{zoom:1;}
+
+.mui-plus header.mui-bar {
+  display: none;
+}
+
+.mui-plus .mui-bar-nav~.mui-content {
+  padding: 0;
+}
+
+/*hm开头的表示仅为 Hello MUI示例定义*/
+.hm-description {
+  margin: .5em 0;
+}
+
+.hm-description>li {
+  font-size: 14px;
+  color: #8f8f94;
+}
+
+/* banner */
+.zhang-banner {
+  width: 100%;
+  height: 100%;
+}
+
+.zhang-banner img {
+  width: 100%;
+  height: 100%;
+}
+
+/* tab */
+.zhang-tab-ul {
+  width: 100%;
+  height: .4rem;
+  padding-top: .18rem;
+  background: #fff;
+  position: relative;
+  top: -.3rem;
+  border-radius: .3rem .3rem 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid rgba(245, 245, 245, 1);
+  color: #333333;
+  font-size: .16rem;
+}
+
+.current {
+  color: #DF4A43;
+  position: relative;
+}
+
+.current::after {
+  content: "";
+  position: absolute;
+  bottom: -.09rem;
+  left: 40%;
+  width: .17rem;
+  height: .04rem;
+  background: rgba(223, 74, 67, 1);
+  border-radius: .04rem;
+}
+
+.zhang-content {
+  width: 90%;
+  margin: 0 auto 0;
+  position: relative;
+  top: -.5rem;
+}
+
+.content-introuce {
+  width: 100%;
+}
+
+.introduce-box {
+  margin-top: .3rem;
+}
+.introduce-box:first-child {
+  margin-top: .45rem;
+}
+
+.introduce-title,
+.famouse-title {
+  font-size: .18rem;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 1);
+  margin-bottom: .16rem;
+}
+
+.teacher-img {
+  display: inline-block;
+  width: .14rem;
+  height: .14rem;
+  background: url(../images/person-1.png)no-repeat center;
+  background-size: 100% 100%;
+  margin-right: .1rem;
+}
+
+.famouse-title .teacher-img {
+  background: url(../images/book-2.png)no-repeat center;
+  background-size: 100% 100%;
+}
+
+.book-title .teacher-img {
+  background: url(../images/slice-3.png)no-repeat center;
+  background-size: 100% 100%;
+}
+
+.course-title .teacher-img {
+  background: url(../images/page-4.png)no-repeat center;
+  background-size: 100% 100%;
+}
+
+.introduce-ul li {
+  font-size: .14rem;
+  color: #444;
+  line-height: .22rem;
+}
+
+.introduce-ul-i {
+  display: inline-block;
+  width: .06rem;
+  height: .06rem;
+  margin-right: .1rem;
+  background: url(../images/dot-6.png)no-repeat center;
+  background-size: 100% 100%;
+}
+
+.famouse-ul .introduce-ul-i {
+  background: url(../images/star-5.png)no-repeat center;
+  background-size: 100% 100%;
+}
+
+.book-img-ul {
+  width: 96%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.book-img-ul li {
+  width: 2.19rem;
+  font-size: .28rem;
+  color: #444;
+  line-height: .44rem;
+  text-align: center;
+}
+
+.book-img-ul li img {
+  width: 100%;
+  /* height: 1.35rem; */
+}
+
+.course-img-ul {
+  width: 100%;
+}
+
+.course-img-ul li {
+  width: 49%;
+  margin-right: .06rem;
+  float: left;
+}
+
+.course-img-ul li:nth-child(2n) {
+  margin-right: 0;
+}
+
+.course-img-ul li:last-child {
+  width: 100%;
+}
+
+.course-img-ul li img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 课程页面 */
+.course-list {
+  width: 90%;
+  margin: .52rem auto;
+}
+
+.course-lis {
+  width: 100%;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px .03px .17rem 0px rgba(0, 0, 0, 0.15);
+  border-radius: .2rem;
+  margin-bottom: .42rem;
+  padding-bottom:.05rem;
+}
+
+.course-lis-title {
+  font-size: .16rem;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 1);
+  padding: .21rem 0 .16rem .23rem;
+}
+
+.course-lis-item {
+  font-size: .12rem;
+  font-weight: 500;
+  color: rgba(223, 74, 67, 1);
+  padding: .02rem .1rem;
+  border: 1px solid rgba(223, 74, 67, 1);
+  border-radius: .05rem;
+  margin-left: .23rem;
+}
+
+.course-lis-img {
+  margin: .17rem 0 .15rem .23rem;
+  display: flex;
+}
+
+.course-lis-img img {
+  width: .37rem;
+  height: .37rem;
+}
+
+.course-lis-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: .24rem;
+}
+
+.course-lis-teacher {
+  font-size: .1rem;
+  color: #666;
+  line-height: .15rem;
+}
+
+.course-lis-name {
+  font-size: .12rem;
+  color: #666;
+  line-height: .18rem;
+}
+
+.line {
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid rgba(245, 245, 245, 1);
+}
+
+.course-lis-num {
+  width: 88%;
+  margin: .13rem auto .14rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.course-lis-num span {
+  font-size: .12rem;
+  color: rgba(102, 102, 102, 1);
+}
+
+.course-lis-listen {
+  display: inline-block;
+  width: .1rem;
+  height: .1rem;
+  background: url(../images/listen-111.png)no-repeat center;
+  background-size: 100% 100%;
+}
+
+.course-lis-num a {
+  display: inline-block;
+  font-size: .12rem;
+  font-weight: 500;
+  color: rgba(254, 254, 254, 1);
+  padding: .02rem .09rem;
+  background: rgba(223, 74, 67, 1);
+  box-shadow: 0px .01rem .07rem 0px rgba(0, 0, 0, 0.2);
+  border-radius: .1rem;
+}
+
+.course-lis-arrow {
+  display: inline-block;
+  width: .06rem;
+  height: .1rem;
+  background: url(../images/arrow-1.png)no-repeat center;
+  background-size: 100% 100%;
+}
+@media (min-width: 768px){
+  .zhang-tab-ul {
+    height: .6rem;
+    padding-top: .28rem;
+    font-size: .28rem;
+  }
+  .current::after {
+    bottom: -.1rem;
+    width: .34rem;
+    height: .07rem;
+  }
+  .teacher-img {
+    width: .28rem;
+    height: .28rem;
+    margin-right: .19rem;
+    position: relative;
+    top:.05rem;
+  }
+  .introduce-title, .famouse-title {
+    font-size: .28rem;
+    font-weight: bold;
+    color: rgba(51, 51, 51, 1);
+    margin-bottom: .32rem;
+  }
+  .introduce-ul li {
+    font-size: .22rem;
+    line-height: .44rem;
+  }
+  .introduce-ul-i {
+    display: inline-block;
+    width: .12rem;
+    height: .12rem;
+    margin-right: .19rem;
+  }
+  .book-img-ul li p{
+    font-size: .2rem;
+    line-height: .44rem;
+  }
+  .course-img-ul li img {
+    width: 100%;
+    height: 2.16rem;
+  }
+  .course-img-ul li{
+    margin-bottom:.1rem;
+  }
+  /*  */
+  .course-lis-title {
+    font-size: .26rem;
+    padding: .41rem 0 .2rem .43rem;
+  }
+  .course-lis-item {
+    font-size: .18rem;
+    font-weight: 500;
+    color: rgba(223, 74, 67, 1);
+    padding: .04rem .17rem;
+    border: 2px solid rgba(223, 74, 67, 1);
+    border-radius: .05rem;
+    margin-left: .43rem;
+  }
+  .course-lis-img {
+    margin: .34rem 0 .31rem .43rem;
+    display: flex;
+  }
+  
+  .course-lis-img img {
+    width: .74rem;
+    height: .74rem;
+  }
+  
+  .course-lis-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: .24rem;
+  }
+  
+  .course-lis-teacher {
+    font-size: .2rem;
+    color: #666;
+    line-height: .3rem;
+  }
+  
+  .course-lis-name {
+    font-size: .22rem;
+    color: #666;
+    line-height: .36rem;
+  }
+  
+  .line {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid rgba(245, 245, 245, 1);
+  }
+  
+  .course-lis-num {
+    width: 88%;
+    margin: .25rem auto .27rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .course-lis-num span {
+    font-size: .2rem;
+    color: rgba(102, 102, 102, 1);
+  }
+  
+  .course-lis-listen {
+    display: inline-block;
+    width: .19rem;
+    height: .19rem;
+    background: url(../images/listen-111.png)no-repeat center;
+    background-size: 100% 100%;
+  }
+  
+  .course-lis-num a {
+    font-size: .18rem;
+    padding: .05rem .17rem;
+  }
+  
+  .course-lis-arrow {
+    width: .1rem;
+    height: .16rem;
+  }
+}
+@media (min-width: 1028px) {
+  .zhangxueyan-content {
+    width: 640px;
+    margin: 0 auto;
+  }
+
+  .current::after {
+    bottom: -.25rem;
+  }
+
+  .book-img-ul li p {
+    font-size: .28rem;
+  }
+  .course-img-ul li img {
+    width: 100%;
+    height: 2.16rem;
+  }
+  .course-img-ul li{
+    margin-bottom:.1rem;
+  }
+}
+@media (max-width: 320px) {
+  .course-img-ul li {
+    width: 48%;
+  }
+}

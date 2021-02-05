@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/admin.css" media="all" />
+</head>
+<body>
+  <div class="layui-form" lay-filter="layuiadmin-form-admin" id="layuiadmin-form-admin" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="id" id="id" value="{$id}">
+    <input type="hidden" name="type" id="type" value="{$type}">
+    <div class="layui-form-item">
+    	<label class="layui-form-label">角色名称</label>
+	    <div class="layui-input-block">
+	     	<input type="text" name="name" lay-verify="required" placeholder="请输入管理员名称" autocomplete="off" class="layui-input">
+	    </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">所属父级</label>
+      <div class="layui-input-inline">
+          <select name='pid'>
+            {if condition="$groupList"}
+            {volist name='groupList' id='v'}
+            {if condition="isset($v['level'])"}
+              <option value="{$v.id}"><?php echo str_repeat('—', $v['level'])?>{$v.title}</option>
+            {else /}
+              <option value="{$v.id}">{$v.title}</option>
+            {/if}
+            {/volist}
+            {/if}
+          </select>
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">角色备注</label>
+      <div class="layui-input-block">
+        <textarea name="remarks" placeholder="请输入角色备注" class="layui-textarea"></textarea>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">菜单列表</label>
+      <div class="layui-input-block">
+        <div id="test1"></div>
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-user-back-submit" id="LAY-user-back-submit" value="确认">
+    </div>
+  </div>
+</body>
+</html>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript">
+	layui.use(['tree','layer','code','form'],function(){
+		var $ = layui.$
+			,form = layui.form
+			,layer = layui.layer
+      ,tree = layui.tree
+      ,id = $('#id').val()
+      ,type = $('#type').val()
+      ,datas = '';
+
+      $.ajax({
+        url: '/manage/admins/rolemenutree'
+        ,data: {id:id}
+        ,type: 'post'
+        ,dataType: 'json'
+        ,async: false
+        ,success: function(res){
+          console.log(res);
+          if(res.code == 0){
+              datas = res.data
+          }
+              
+        }
+      })
+      //初始化树
+      tree.render({
+        elem: '#test1'
+        ,data: datas
+        ,id: 'demoId'
+        ,showCheckbox: true
+        ,accordion: true
+        ,click: function(obj){
+            //节点点击后的回调
+            console.log(obj.data); //得到当前点击的节点数据
+            console.log(obj.state); //得到当前节点的展开状态：open、close、normal
+            console.log(obj.elem); //得到当前节点元素
+            console.log(obj.data.children); //当前节点下是否有子节点
+        }
+        ,oncheck: function(){
+          //复选框被点击后的回调
+          
+        }
+      })
+      //获得选中的节点
+      // var checkData = tree.getChecked('demoId');
+      //表单初始赋值
+      if(type == 2){
+          $.ajax({
+            url: '/manage/admins/setgroupval'
+            ,data: {id:id}
+            ,type: 'post'
+            ,dataType: 'json'
+            ,async: false
+            ,success: function(res){
+                if(res.code == 0){
+                  form.val('layuiadmin-form-admin',res.data);
+                }
+            }
+          })
+      }
+	})
+
+</script>

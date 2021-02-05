@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>订单列表</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+</head>
+<body class="childrenBody" style="margin-top: 1em">
+<div class="demoTable">
+	搜索：
+	<div class="layui-inline">
+		<input class="layui-input" name="keyword" id="demoReload" autocomplete="off" placeholder="昵称或手机号搜索">
+	</div>
+	<div class="layui-inline">
+		订单状态：
+		<div class="layui-input-inline">
+			<select name="state" class="newsLook layui-input" lay-filter="browseLook" lay-verify="Type">
+				<option value="">请选择</option>
+				<option value="1">待支付</option>
+				<option value="2">已支付</option>
+				<option value="3">支付失败</option>
+				<option value="4">取消支付</option>
+			</select>
+		</div>
+	</div>
+	<div class="layui-inline">
+		审核状态：
+		<div class="layui-input-inline">
+			<select name="orderCheck" class="newsLook layui-input" lay-filter="browseLook" lay-verify="Type">
+				<option value="">请选择</option>
+				<option value="1">待审核</option>
+				<option value="2">审核通过</option>
+				<option value="3">审核不通过</option>
+			</select>
+		</div>
+	</div>
+	<div class="layui-inline">
+		开始：
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="orderStartTime" autocomplete="off" name="orderStartTime" placeholder="yyyy-MM-dd">
+		</div>
+	</div>
+	<div class="layui-inline">
+		结束：
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" id="orderEndTime" autocomplete="off" name="orderEndTime" placeholder="yyyy-MM-dd">
+		</div>
+	</div>
+	<button class="layui-btn" data-type="reload" id="sousuo">搜索</button>
+</div>
+
+
+		<table class="layui-hide" id="test" lay-filter="demo" ></table>
+
+		<script type="text/html" id="state">
+			{{laytpl.toState(d.state)}}
+		</script>
+		<script type="text/html" id="orderCheck">
+			{{laytpl.toOrderCheck(d.orderCheck)}}
+		</script>
+		<script type="text/html" id="grade_id">
+			{{laytpl.toGrade_id(d.grade_id)}}
+		</script>
+		<script type="text/html" id="timestamp">
+			<!-- {{laytpl.toDateString(d.strtime)}} -->
+			{{d.strtime}}
+		</script>
+
+		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+			<a class="layui-btn layui-btn-xs" lay-event="editOrderPerson">还原</a>
+			<a class="layui-btn layui-btn-xs" lay-event="delOrderPerson">删除</a>
+		</script>
+
+	<script type="text/javascript" src="__LAY__layui.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/recycle/recyclePersonOrder.js"></script>
+<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#orderStartTime' //指定元素
+  });
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#orderEndTime' //指定元素
+  });
+});
+</script>
+</body>
+</html>

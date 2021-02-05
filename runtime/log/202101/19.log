@@ -1,0 +1,1183 @@
+---------------------------------------------------------------
+[ 2021-01-19T17:46:39+08:00 ] 127.0.0.1 GET ywd100.com/
+[运行时间：1.074062s] [吞吐率：0.93req/s] [内存消耗：2,477.61kb] [文件加载：44]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=o81juqi6ie57dd5n6r070gkt12',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\index\controller\Index->index[ E:\phpStudy\WWW\ywd100\application\index\controller\Index.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ VIEW ] E:\phpStudy\WWW\ywd100\application/../Template/default/index\index\index.html [ array (
+  0 => 'personInfo',
+  1 => 'teacherList',
+  2 => 'videoList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.021001s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_visitors` [ RunTime:0.171010s ]
+[ sql ] [ SQL ] INSERT INTO `guard_visitors` (`is_wx` , `froms` , `ip` , `add_time` , `system` , `browser` , `pageview` , `source_link`) VALUES (0 , '内网ip' , '127.0.0.1' , 1611049599 , 'Windows 7' , 'Chrome 87.0.4280.141' , '//' , ' ') [ RunTime:0.040002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_subject` [ RunTime:0.027001s ]
+[ sql ] [ SQL ] SELECT `subject` FROM `guard_subject` WHERE  `id` IN (1,2,3,10) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_video_class` [ RunTime:0.016001s ]
+[ sql ] [ SQL ] SELECT `id` FROM `guard_video_class` WHERE  `grade_id` = '7' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_video` [ RunTime:0.032002s ]
+[ sql ] [ SQL ] SELECT `s`.`subject`,`v`.*,vc.img as image FROM `guard_video` `v` INNER JOIN `guard_video_class` `vc` ON `vc`.`id`=`v`.`kid` INNER JOIN `guard_subject` `s` ON `s`.`id`=`vc`.`subject_id` INNER JOIN `guard_grade` `g` ON `g`.`id`=`vc`.`grade_id` WHERE  (  v.audi=1 and v.outline != ''  )  AND `v`.`display` = 1  AND (  vc.grade_id in (7) ) GROUP BY vc.subject_id,vc.Semester LIMIT 0,4 [ RunTime:0.025002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_teacher` [ RunTime:0.011000s ]
+[ sql ] [ SQL ] SELECT `t`.* FROM `guard_teacher` `t` INNER JOIN `guard_subject` `s` ON `s`.`id`=`t`.`subject_id` WHERE  (  t.is_show = 1 ) GROUP BY `t`.`name` ORDER BY `t`.`type` DESC,`t`.`schoolid` DESC,`t`.`subject_id`,`t`.`grade_id`,`t`.`sort` [ RunTime:0.003001s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:46:40+08:00 ] 127.0.0.1 POST ywd100.com/index/index/auditionlist
+[运行时间：0.072004s] [吞吐率：13.89req/s] [内存消耗：2,246.54kb] [文件加载：41]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'index',
+    2 => 'auditionlist',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=o81juqi6ie57dd5n6r070gkt12',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/',
+  'origin' => 'http://ywd100.com',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'content-length' => '3',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+)
+[ info ] [ PARAM ] array (
+  'v' => '7',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\index\controller\Index->auditionlist[ E:\phpStudy\WWW\ywd100\application\index\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_subject` [ RunTime:0.010001s ]
+[ sql ] [ SQL ] SELECT `subject` FROM `guard_subject` WHERE  `id` IN (1,2,3,10) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_video` [ RunTime:0.011000s ]
+[ sql ] [ SQL ] SELECT `s`.`subject`,`v`.*,vc.img as image,vc.popularity as popu FROM `guard_video` `v` INNER JOIN `guard_video_class` `vc` ON `vc`.`id`=`v`.`kid` INNER JOIN `guard_subject` `s` ON `s`.`id`=`vc`.`subject_id` INNER JOIN `guard_grade` `g` ON `g`.`id`=`vc`.`grade_id` WHERE  (  v.audi=1 and v.outline != ''  )  AND `v`.`display` = 1  AND `vc`.`grade_id` = '7' GROUP BY vc.Semester,vc.subject_id LIMIT 0,8 [ RunTime:0.012001s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:46:41+08:00 ] 127.0.0.1 GET ywd100.com/index/Login/judgeLogin
+[运行时间：0.050003s] [吞吐率：20.00req/s] [内存消耗：2,082.88kb] [文件加载：39]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'Login',
+    2 => 'judgeLogin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=o81juqi6ie57dd5n6r070gkt12',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\index\controller\Login->judgeLogin[ E:\phpStudy\WWW\ywd100\application\index\controller\Login.php ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2021-01-19T17:46:49+08:00 ] 127.0.0.1 POST ywd100.com/index/index/closeBrowserIpLog
+[运行时间：0.093005s] [吞吐率：10.75req/s] [内存消耗：2,309.37kb] [文件加载：46]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'index',
+    2 => 'closeBrowserIpLog',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/',
+  'origin' => 'http://ywd100.com',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'accept' => '*/*',
+  'content-length' => '0',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\index\controller\Index->closeBrowserIpLog[ E:\phpStudy\WWW\ywd100\application\index\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001001s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_subject` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT `subject` FROM `guard_subject` WHERE  `id` IN (1,2,3,10) [ RunTime:0.000000s ]
+[ error ] [8]未定义数组索引: uid[E:\phpStudy\WWW\ywd100\application\index\controller\Index.php:777]
+---------------------------------------------------------------
+[ 2021-01-19T17:46:49+08:00 ] 127.0.0.1 GET ywd100.com/manage
+[运行时间：0.024001s] [吞吐率：41.67req/s] [内存消耗：1,483.63kb] [文件加载：35]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2021-01-19T17:46:49+08:00 ] 127.0.0.1 GET ywd100.com/manage/login/showlogin
+[运行时间：0.073004s] [吞吐率：13.70req/s] [内存消耗：1,467.02kb] [文件加载：36]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'login',
+    2 => 'showlogin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\manage\controller\Login->showlogin[ E:\phpStudy\WWW\ywd100\application\manage\controller\Login.php ]
+[ info ] [ VIEW ] E:\phpStudy\WWW\ywd100\application/../Template/manage/login\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2021-01-19T17:46:49+08:00 ] 127.0.0.1 GET ywd100.com/static/manage/css/images/overlay.svg
+[运行时间：0.035002s] [吞吐率：28.57req/s] [内存消耗：1,171.70kb] [文件加载：28]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'static',
+    1 => 'manage',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/static/manage/css/style.css',
+  'accept' => 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'images' => 'overlay.svg',
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2021-01-19T17:46:49+08:00 ] 127.0.0.1 GET ywd100.com/static/manage/css/images/overlay-pattern.png
+[运行时间：0.040002s] [吞吐率：25.00req/s] [内存消耗：1,171.73kb] [文件加载：28]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'static',
+    1 => 'manage',
+    2 => 'css',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/static/manage/css/style.css',
+  'accept' => 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'images' => 'overlay-pattern.png',
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2021-01-19T17:46:53+08:00 ] 127.0.0.1 POST ywd100.com/manage/login/login
+[运行时间：0.099006s] [吞吐率：10.10req/s] [内存消耗：2,220.45kb] [文件加载：40]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'login',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/login/showlogin',
+  'origin' => 'http://ywd100.com',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => '*/*',
+  'content-length' => '28',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'admin',
+  'userpwd' => 'admin',
+)
+[ info ] [ RUN ] app\manage\controller\Login->login[ E:\phpStudy\WWW\ywd100\application\manage\controller\Login.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_user` [ RunTime:0.017001s ]
+[ sql ] [ SQL ] SELECT `uid`,`username`,`loginname`,`phone`,`role_id`,`create_date`,`user_type`,`user_key`,`is_del`,`status`,`ip`,`login_time`,`login_address`,`role`,`group_id`,`parent_id`,`agent_id`,`all_code_num`,`paytype`,`payImg`,`code_num`,`address`,`nickName`,`remark`,`wechat_num`,`org_id` FROM `guard_user` WHERE  `username` = 'admin'  AND `password` = 'c3284d0f94606de1fd2af172aba15bf3'  AND `role_id` = 2  AND `status` = 1 LIMIT 1 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:46:55+08:00 ] 127.0.0.1 GET ywd100.com/manage/index/index
+[运行时间：0.168010s] [吞吐率：5.95req/s] [内存消耗：2,531.62kb] [文件加载：45]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/login/showlogin',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Index->index[ E:\phpStudy\WWW\ywd100\application\manage\controller\Index.php ]
+[ info ] [ VIEW ] E:\phpStudy\WWW\ywd100\application/../Template/manage/index\index.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.045002s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.058004s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:46:55+08:00 ] 127.0.0.1 GET ywd100.com/manage/index/main
+[运行时间：0.573033s] [吞吐率：1.75req/s] [内存消耗：2,225.90kb] [文件加载：47]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'index',
+    2 => 'main',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Index->main[ E:\phpStudy\WWW\ywd100\application\manage\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.020002s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.024001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.020001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_user` [ RunTime:0.010001s ]
+[ sql ] [ SQL ] SELECT `uid` FROM `guard_user` WHERE  (  1=1 ) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_person` [ RunTime:0.038002s ]
+[ sql ] [ SQL ] SELECT `id` FROM `guard_person` WHERE  (  1=1 ) [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_order_person` [ RunTime:0.016001s ]
+[ sql ] [ SQL ] SELECT `person_id` FROM `guard_order_person` WHERE  (  1=1 ) GROUP BY `person_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_audition_log` [ RunTime:0.026002s ]
+[ sql ] [ SQL ] SELECT `person_id` FROM `guard_audition_log` WHERE  (  1=1 ) GROUP BY `person_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_visitors` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT `id`,`add_time` FROM `guard_visitors` [ RunTime:0.076004s ]
+[ error ] [10501]SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ydtkt_new.guard_ip_log' doesn't exist[E:\phpStudy\WWW\ywd100\thinkphp\library\think\db\Connection.php:385]
+---------------------------------------------------------------
+[ 2021-01-19T17:46:56+08:00 ] 127.0.0.1 GET ywd100.com/manage/index/getnavs
+[运行时间：0.102006s] [吞吐率：9.80req/s] [内存消耗：2,492.10kb] [文件加载：43]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'index',
+    2 => 'getnavs',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/index/index',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'accept' => '*/*',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Index->getnavs[ E:\phpStudy\WWW\ywd100\application\manage\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.010001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.014001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  (  m.status = 1 and u.groupid = 1 ) ORDER BY `m`.`menuid` ASC [ RunTime:0.016001s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:01+08:00 ] 127.0.0.1 GET ywd100.com/manage/person_controller/index
+[运行时间：0.259015s] [吞吐率：3.86req/s] [内存消耗：2,870.02kb] [文件加载：49]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'person_controller',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\PersonController->index[ E:\phpStudy\WWW\ywd100\application\manage\controller\PersonController.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ VIEW ] E:\phpStudy\WWW\ywd100\application/../Template/manage/person\index.html [ array (
+  0 => 'userList',
+  1 => 'type',
+  2 => 'isAdmin',
+  3 => 'mediaList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.006001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.013000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_user` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  `user_type` = 1  AND `status` = 1  AND `group_id` NOT IN (1,2) [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_to_media` [ RunTime:0.016001s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_to_media` [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:02+08:00 ] 127.0.0.1 GET ywd100.com/manage/person_controller/getPersonList?type=2&isAdmin=1&page=1&limit=10
+[运行时间：0.154009s] [吞吐率：6.49req/s] [内存消耗：2,611.94kb] [文件加载：44]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'person_controller',
+    2 => 'getPersonList',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/person_controller/index',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'type' => '2',
+  'isAdmin' => '1',
+  'page' => '1',
+  'limit' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\PersonController->getPersonList[ E:\phpStudy\WWW\ywd100\application\manage\controller\PersonController.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.016001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_person` [ RunTime:0.010001s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_person` ORDER BY `addtime` DESC LIMIT 0,10 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `guard_person` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_grade` [ RunTime:0.006001s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_grade` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_user` [ RunTime:0.009000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  (  uid = 0 ) LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  (  uid = 24 ) LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  (  uid = 24 ) LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  (  uid = 24 ) LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  (  uid = 0 ) LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  (  uid = 0 ) LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  (  uid = 0 ) LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  (  uid = 0 ) LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  (  uid = 0 ) LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  (  uid = 0 ) LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  `uid` = 24 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  `uid` = 24 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  `uid` = 24 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_order_person_son` [ RunTime:0.011000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `guard_order_person_son` WHERE  `person_id` = 341  AND `type` <> 0 LIMIT 1 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_to_media` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT `name` FROM `guard_to_media` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `guard_order_person_son` WHERE  `person_id` = 340  AND `type` <> 0 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `guard_to_media` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `guard_order_person_son` WHERE  `person_id` = 339  AND `type` <> 0 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `guard_to_media` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `guard_order_person_son` WHERE  `person_id` = 338  AND `type` <> 0 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `guard_to_media` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `guard_order_person_son` WHERE  `person_id` = 335  AND `type` <> 0 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `guard_to_media` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `guard_order_person_son` WHERE  `person_id` = 334  AND `type` <> 0 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `guard_to_media` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `guard_order_person_son` WHERE  `person_id` = 333  AND `type` <> 0 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `guard_to_media` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `guard_order_person_son` WHERE  `person_id` = 331  AND `type` <> 0 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `guard_to_media` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `guard_order_person_son` WHERE  `person_id` = 330  AND `type` <> 0 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `guard_to_media` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `guard_order_person_son` WHERE  `person_id` = 329  AND `type` <> 0 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `guard_to_media` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:05+08:00 ] 127.0.0.1 GET ywd100.com/manage/order_contorller/getMyUserCode
+[运行时间：0.137008s] [吞吐率：7.30req/s] [内存消耗：2,475.53kb] [文件加载：45]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'order_contorller',
+    2 => 'getMyUserCode',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\OrderContorller->getMyUserCode[ E:\phpStudy\WWW\ywd100\application\manage\controller\OrderContorller.php ]
+[ info ] [ VIEW ] E:\phpStudy\WWW\ywd100\application/../Template/manage/order\orderAuth.html [ array (
+  0 => 'assignList',
+  1 => 'acceptList',
+  2 => 'userCodeList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011001s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.010001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.012000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_user_code` [ RunTime:0.010001s ]
+[ sql ] [ SQL ] SELECT uc.*,concat(g.grade, s.subject, 
+                                    case vc.Semester
+                                        when 1 then '上'
+                                        when 2 then '下'
+                                        when 3 then '全册'
+                                    end
+                                ) as title, 
+                                case uc.type 
+                                      when 1 then '正式课数量'    
+                                      when 2 then '试听课数量'
+                                      end as type_name FROM `guard_user_code` `uc` LEFT JOIN `guard_video_class` `vc` ON `vc`.`id`=`uc`.`video_class_id` INNER JOIN `guard_subject` `s` ON `s`.`id`=`vc`.`subject_id` INNER JOIN `guard_grade` `g` ON `g`.`id`=`vc`.`grade_id` WHERE  `uc`.`user_id` = 24 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user_code` WHERE  `video_class_id` = 0  AND `user_id` = 24 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_user_assign_log` [ RunTime:0.009001s ]
+[ sql ] [ SQL ] SELECT `ua`.*,`u`.`username` FROM `guard_user_assign_log` `ua` INNER JOIN `guard_user` `u` ON `u`.`uid`=`ua`.`accept_user_id` WHERE  (  ua.assign_user_id = 24 ) ORDER BY `ua`.`add_time` DESC [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `u`.`username`,`ua`.* FROM `guard_user_assign_log` `ua` INNER JOIN `guard_user` `u` ON `u`.`uid`=`ua`.`accept_user_id` WHERE  (  ua.accept_user_id = 24 ) ORDER BY `ua`.`add_time` DESC [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:06+08:00 ] 127.0.0.1 GET ywd100.com/manage/textbook_contorller/textbook
+[运行时间：0.098005s] [吞吐率：10.20req/s] [内存消耗：2,577.06kb] [文件加载：46]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'textbook_contorller',
+    2 => 'textbook',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\TextbookContorller->TextBook[ E:\phpStudy\WWW\ywd100\application\manage\controller\TextbookContorller.php ]
+[ info ] [ VIEW ] E:\phpStudy\WWW\ywd100\application/../Template/manage/textbook\TextBook.html [ array (
+  0 => 'title',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010001s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.014001s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:07+08:00 ] 127.0.0.1 GET ywd100.com/manage/textbook_contorller/GetTextBookList?page=1&limit=10
+[运行时间：0.112006s] [吞吐率：8.93req/s] [内存消耗：2,271.71kb] [文件加载：44]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'textbook_contorller',
+    2 => 'GetTextBookList',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/textbook_contorller/textbook',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'limit' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\TextbookContorller->GetTextBookList[ E:\phpStudy\WWW\ywd100\application\manage\controller\TextbookContorller.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.008001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.014000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_textbook` [ RunTime:0.038002s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_textbook` LIMIT 0,10 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `guard_textbook` LIMIT 1 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:09+08:00 ] 127.0.0.1 GET ywd100.com/manage/admins/menuManagement
+[运行时间：0.117007s] [吞吐率：8.55req/s] [内存消耗：2,467.39kb] [文件加载：44]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'admins',
+    2 => 'menuManagement',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Admins->menuManagement[ E:\phpStudy\WWW\ywd100\application\manage\controller\Admins.php ]
+[ info ] [ VIEW ] E:\phpStudy\WWW\ywd100\application/../Template/manage/admins\menu_management.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.006001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.019001s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:09+08:00 ] 127.0.0.1 GET ywd100.com/manage/admins/getreelist
+[运行时间：0.066004s] [吞吐率：15.15req/s] [内存消耗：2,545.45kb] [文件加载：43]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'admins',
+    2 => 'getreelist',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/admins/menuManagement',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'accept' => '*/*',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Admins->getreelist[ E:\phpStudy\WWW\ywd100\application\manage\controller\Admins.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.014001s ]
+[ sql ] [ SQL ] SELECT `id`,parentid as pid,`href`,`title`,`status` FROM `guard_menu` ORDER BY `menuid` ASC [ RunTime:0.003000s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:12+08:00 ] 127.0.0.1 GET ywd100.com/manage/admins/userManagement
+[运行时间：0.098006s] [吞吐率：10.20req/s] [内存消耗：2,481.95kb] [文件加载：44]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'admins',
+    2 => 'userManagement',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Admins->userManagement[ E:\phpStudy\WWW\ywd100\application\manage\controller\Admins.php ]
+[ info ] [ VIEW ] E:\phpStudy\WWW\ywd100\application/../Template/manage/admins\user_management.html [ array (
+  0 => 'isAdmin',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.011001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.012001s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:13+08:00 ] 127.0.0.1 GET ywd100.com/manage/admins/usertreetable?page=1&limit=10
+[运行时间：0.118007s] [吞吐率：8.47req/s] [内存消耗：2,392.20kb] [文件加载：43]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'admins',
+    2 => 'usertreetable',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/admins/userManagement',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'limit' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Admins->usertreetable[ E:\phpStudy\WWW\ywd100\application\manage\controller\Admins.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.014001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.020001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_user` [ RunTime:0.013000s ]
+[ sql ] [ SQL ] SELECT `u`.`uid`,`u`.`username`,`u`.`phone`,`u`.`org_id`,`u`.`parent_id`,`u`.`paytype`,`u`.`wechat_num`,`u`.`status`,`u`.`address`,`u`.`agent_id`,g.title as group_id,b.name as orgname FROM `guard_user` `u` LEFT JOIN `guard_group` `g` ON `u`.`group_id`=`g`.`id` LEFT JOIN `guard_user_organization` `b` ON `u`.`org_id`=`b`.`id` WHERE  (  u.user_type = 1 ) LIMIT 0,10 [ RunTime:0.014001s ]
+[ sql ] [ SQL ] SELECT count(1) as counts FROM `guard_user` `u` WHERE  (  u.user_type = 1 ) LIMIT 1 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:14+08:00 ] 127.0.0.1 GET ywd100.com/manage/admins/roleManagement
+[运行时间：0.100006s] [吞吐率：10.00req/s] [内存消耗：2,479.39kb] [文件加载：44]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'admins',
+    2 => 'roleManagement',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Admins->roleManagement[ E:\phpStudy\WWW\ywd100\application\manage\controller\Admins.php ]
+[ info ] [ VIEW ] E:\phpStudy\WWW\ywd100\application/../Template/manage/admins\role_management.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.010001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.012001s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:14+08:00 ] 127.0.0.1 GET ywd100.com/manage/admins/roletable?page=1&limit=10
+[运行时间：0.084005s] [吞吐率：11.90req/s] [内存消耗：2,129.04kb] [文件加载：41]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'admins',
+    2 => 'roletable',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/admins/roleManagement',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'limit' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Admins->roletable[ E:\phpStudy\WWW\ywd100\application\manage\controller\Admins.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001001s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.015000s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.015001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_group` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT `a`.*,b.title as pidName FROM `guard_group` `a` LEFT JOIN `guard_group` `b` ON `a`.`pid`=`b`.`id` WHERE  `a`.`agent_id` = 24 LIMIT 0,10 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(1) AS tp_count FROM `guard_group` WHERE  `agent_id` = 24 LIMIT 1 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:16+08:00 ] 127.0.0.1 GET ywd100.com/manage/organization/organization
+[运行时间：0.081005s] [吞吐率：12.34req/s] [内存消耗：2,409.94kb] [文件加载：44]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'organization',
+    2 => 'organization',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Organization->organization[ E:\phpStudy\WWW\ywd100\application\manage\controller\Organization.php ]
+[ info ] [ VIEW ] E:\phpStudy\WWW\ywd100\application/../Template/manage/organization\organization.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.009001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.013001s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:16+08:00 ] 127.0.0.1 GET ywd100.com/manage/organization/getOrganizationalList
+[运行时间：0.065004s] [吞吐率：15.38req/s] [内存消耗：2,076.22kb] [文件加载：41]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'organization',
+    2 => 'getOrganizationalList',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/organization/organization',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'accept' => '*/*',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Organization->getOrganizationalList[ E:\phpStudy\WWW\ywd100\application\manage\controller\Organization.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.008000s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.014001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_user_organization` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT `uo`.`id`,`uo`.`pid`,`uo`.`status`,uo.name as title,u.username as user_name FROM `guard_user_organization` `uo` INNER JOIN `guard_user` `u` ON `u`.`uid`=`uo`.`agent_id` WHERE  `uo`.`agent_id` = 24 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:18+08:00 ] 127.0.0.1 GET ywd100.com/manage/admins/employeeAccount
+[运行时间：0.119007s] [吞吐率：8.40req/s] [内存消耗：2,304.66kb] [文件加载：44]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'admins',
+    2 => 'employeeAccount',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Admins->employeeAccount[ E:\phpStudy\WWW\ywd100\application\manage\controller\Admins.php ]
+[ info ] [ VIEW ] E:\phpStudy\WWW\ywd100\application/../Template/manage/admins\employee_account.html [ array (
+  0 => 'orgList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.011001s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.014000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_user` [ RunTime:0.008001s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`agent_id` FROM `guard_user` `a` INNER JOIN `guard_group` `b` ON `a`.`group_id`=`b`.`id` WHERE  `a`.`uid` = 24 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_user_organization` [ RunTime:0.008000s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user_organization` WHERE  `agent_id` = 24 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2021-01-19T17:47:18+08:00 ] 127.0.0.1 GET ywd100.com/manage/admins/usertreetable?type=2&page=1&limit=10
+[运行时间：0.077004s] [吞吐率：12.99req/s] [内存消耗：2,389.18kb] [文件加载：43]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manage',
+    1 => 'admins',
+    2 => 'usertreetable',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=6sum7ifvpmcstffljcheu9np50; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ywd100.com/manage/admins/employeeAccount',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'type' => '2',
+  'page' => '1',
+  'limit' => '10',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\manage\controller\Admins->usertreetable[ E:\phpStudy\WWW\ywd100\application\manage\controller\Admins.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;port=3306;dbname=ydtkt_new;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_menu` [ RunTime:0.008000s ]
+[ sql ] [ SQL ] SELECT `m`.* FROM `guard_menu` `m` INNER JOIN `guard_user_group` `u` ON `m`.`id`=`u`.`menu_id` WHERE  `u`.`groupid` = 1 ORDER BY `m`.`menuid` ASC [ RunTime:0.015001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `guard_user` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `guard_user` WHERE  `agent_id` = 24  AND `user_type` = 2 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `u`.`uid`,`u`.`username`,`u`.`phone`,`u`.`org_id`,`u`.`parent_id`,`u`.`paytype`,`u`.`wechat_num`,`u`.`status`,`u`.`address`,`u`.`agent_id`,g.title as group_id,b.name as orgname FROM `guard_user` `u` LEFT JOIN `guard_group` `g` ON `u`.`group_id`=`g`.`id` LEFT JOIN `guard_user_organization` `b` ON `u`.`org_id`=`b`.`id` WHERE  (   user_type = 2  and  u.uid = 24 ) LIMIT 0,10 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT count(1) as counts FROM `guard_user` `u` WHERE  (   user_type = 2  and  u.uid = 24 ) LIMIT 1 [ RunTime:0.001000s ]

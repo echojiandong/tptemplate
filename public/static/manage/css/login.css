@@ -1,0 +1,263 @@
+body{overflow:hidden;}
+
+.video-player{background-color: transparent;display: block;position: absolute;z-index: 1;top:0;}
+.video_mask{ width:100%; height:100%; position:absolute; left:0; top:0; z-index:90; background-color:rgba(0,0,0,0.5); }
+.login{ width:394px;
+  height:452px;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 1px 40px 0px rgba(0,0,0,0.09);padding: 20px;position:absolute;right: 83px;top: -55px;z-index:99;}
+.login h1{ text-align:center; color:#26ADA1; font-size:30px;
+  font-family:SourceHanSansCN-Heavy;
+  font-weight:800;margin:56px 0 55px;
+ }
+ .login-form{
+  width:315px;
+  margin:0 auto;
+  border-radius:19px;
+ }
+ .login-form .layui-form-item input{
+  width:315px;
+  height:38px;
+  background:rgba(249,252,255,1);
+  border-radius:19px;
+  border:none;
+  font-size:16px;
+font-family:SourceHanSansCN-Regular;
+font-weight:400;
+color:rgba(152,157,170,1);
+ }
+ .layui-form-item{
+  margin-bottom: 32px;
+ }
+ .login-form .layui-form-item input.login-form-user{
+   background:rgba(249,252,255,1) url(../css/images/icon-user.png)no-repeat;
+   background-size:13px 15px;
+   background-position: 23px 47%;
+   text-indent: 12%;
+ }
+ .layui-form-checkbox{
+  float: right;
+ }
+ .login-form .layui-form-item input.login-form-pwd{
+  background:rgba(249,252,255,1) url(../css/images/icon-pwd.png)no-repeat;
+  background-size:12px 16px;
+  background-position: 23px 47%;
+  text-indent: 12%;
+ }
+ .login_btn{
+  width:315px;
+  height:41px;
+  background:rgba(38,173,161,1);
+  border-radius:20px;
+ }
+ .layui-form-item-remember{
+  margin: -29px 0 60px;
+ }
+.form_code{ position:relative; }
+.form_code .code{ position:absolute; right:0; top:1px; cursor:pointer; }
+.login_btn{ width:100%; }
+.logo{position: fixed;top:47px;left:83px;width:166px;height:50px;}
+.logo img{
+    width:100%;
+}
+.login-contain{
+    position: absolute;
+    top:0;right:0;bottom:0;left: 0;margin:auto;
+    width:915px;
+height:428px;
+background:rgba(42,182,170,0.75);
+}
+.login-contain-left{
+    width:438px;
+    height:428px;
+    
+}
+.login-contain-left h3{
+  font-size:70px;
+  font-family:SourceHanSansCN-Heavy;
+  font-weight:800;
+  color:rgba(255,255,255,1);
+  text-align: left;
+  margin: 100px 0 0 79px;
+}
+.login-contain-left p{
+  font-size:16px;
+  font-family:SourceHanSansCN-Regular;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  line-height:24px;
+  text-align: left;
+  margin: 18px 0 0 79px;
+}
+/* 适配移动端 */
+
+@media (max-width:768px) {
+  #bg {
+    display: none;
+  }
+  .logo {
+    position: fixed;
+    top: 8%;
+    left: 39%;
+    width: 166px;
+    height: 50px;
+  }
+  #main {
+    background: url(../images//bg-wep.png)no-repeat;
+    background-size:100% 100%;
+  }
+  .login-contain {
+    width:100%;
+    height: auto;
+    background: transparent;
+  }
+  .login h1 {
+    color: #484949;
+    margin: 60px 0 186px;
+  }
+  .login-contain-left {
+    display: none;
+  }
+  .login {
+    width: 90%;
+    background: transparent; 
+    box-shadow:none;
+    right: 5%;
+    top: 9%;
+    padding:0;
+  }
+  .login-form {
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 19px;
+  }
+  .login-form .layui-form-item input {
+    width: 100%;
+    height: 60px;
+    color: rgba(152,157,170,1);
+    border-radius: 30px;
+    font-size: 20px;
+  }
+  .layui-form-checkbox[lay-skin=primary] span {
+    color: #26ADA1;
+  }
+  .layui-form-checkbox span {
+    font-size: 18px;
+  }
+  .login-form .layui-form-item input.login-form-user {
+    background: rgba(249,252,255,0.4) url(../css/images/icon-user.png)no-repeat;
+    background-size: 23px 25px;
+    background-position: 23px 47%;
+    text-indent:8%;
+    color:#989DAA;
+  }
+  .login-form .layui-form-item input.login-form-pwd {
+    background: rgba(249,252,255,0.4) url(../css/images/icon-pwd.png)no-repeat;
+    background-size: 22px 26px;
+    background-position: 23px 47%;
+    text-indent: 8%;
+    color:#989DAA;
+  }
+  .layui-form-item-remember {
+    margin: -29px 0 42%;
+  }
+  .login_btn {
+    width: 100%;
+    height: 60px;
+    background: rgba(38,173,161,1);
+    border-radius: 30px;
+    font-size: 22px;
+  }
+}
+@media (max-width:414px) {
+  .logo {
+    position: fixed;
+    top: 8%;
+    left: 29%;
+    width: 166px;
+    height: 50px;
+  }
+  #main {
+    background: url(../images//bg-wep.png)no-repeat;
+    background-size:100% 100%;
+  }
+  .login-contain {
+    width:100%;
+    height: auto;
+    background: transparent;
+  }
+  .login h1 {
+    color: #484949;
+    margin: 56px 0 116px;
+  }
+  .login-contain-left {
+    display: none;
+  }
+  .login {
+    width: 90%;
+    background: transparent; 
+    box-shadow:none;
+    right: 5%;
+    top: 9%;
+    padding:0;
+  }
+  .login-form {
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 19px;
+  }
+  .login-form .layui-form-item input {
+    width: 100%;
+    height: 45px;
+    color: rgba(152,157,170,1);
+    font-size: 16px;
+  }
+  .layui-form-checkbox[lay-skin=primary] span {
+    color: #26ADA1;
+  }
+  .layui-form-checkbox span {
+    font-size: 11px;
+  }
+  .login-form .layui-form-item input.login-form-user {
+    background: rgba(249,252,255,0.4) url(../css/images/icon-user.png)no-repeat;
+    background-size: 13px 15px;
+    background-position: 23px 47%;
+    text-indent: 12%;
+    color:#989DAA;
+  }
+  .login-form .layui-form-item input.login-form-pwd {
+    background: rgba(249,252,255,0.4) url(../css/images/icon-pwd.png)no-repeat;
+    background-size: 12px 16px;
+    background-position: 23px 47%;
+    text-indent: 12%;
+    color:#989DAA;
+  }
+  .layui-form-item-remember {
+    margin: -29px 0 37%;
+  }
+  .login_btn {
+    width: 100%;
+    height: 45px;
+    background: rgba(38,173,161,1);
+    border-radius: 25px;
+    font-size: 22px;
+  }
+}
+
+@media (min-width:320px) and (max-width:360px) {
+  .logo {
+    left: 25%;
+  }
+  .login h1 {
+    margin: 56px 0 24%;
+  }
+  .layui-form-item-remember {
+    margin: -29px 0 17%;
+  }
+}
+@media (min-width:361px) and (max-width:375px) {
+  .layui-form-item-remember {
+    margin: -29px 0 20%;
+  }
+}
+

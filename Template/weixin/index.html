@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="__PUBLIC__/weixin//css/style.css">
+    <script src="__PUBLIC__/weixin/js/jquery-2.2.3.js"></script>
+    <title>E点就通名校名师同步课堂</title>
+</head>
+<body>
+  <div class="bind-code-page">
+    <div class="page-logo"><img src="__PUBLIC__/weixin//images/logo.png" alt=""></div>
+    <div class="bind-form">
+      <form action="" class="bind-form-form">
+        <div class="bind-form-item">
+          <i class="iconfont iconwebicon205"></i>
+          <input type="text" class="bind-form-input iconfont bind-form-name" id="bind-code-phone" placeholder="请输入手机号">
+        </div>
+        <div class="bind-form-item">
+          <i class="iconfont iconsuozi"></i>
+          <input type="text" class="bind-form-input iconfont bind-form-pwd" id="bind-code-verify" placeholder="请输入验证码">
+          <button type="button" class="bind-pwd-code" id="bind-code-btn">获取验证码</button>
+        </div>
+        <div class="bind-form-item">
+          <button type="button" class="mui-btn bind-submit-btn" id="bind-submit">绑定</button>
+        </div>
+        <input name="openid" type="hidden" id="openid"  value="{$userinfo['openid']}"/>
+        <input name="nickname" type="hidden" id="nickname" value="{$userinfo['nickname']}"/>
+        <input name="sex" type="hidden" id="sex" value="{$userinfo['sex']}"/>
+        <input name="city" type="hidden" id="city" value="{$userinfo['city']}"/>
+        <input name="province" type="hidden" id="province" value="{$userinfo['province']}"/>
+        <input name="country" type="hidden" id="country" value="{$userinfo['country']}"/>
+        <input name="headimgurl" type="hidden" id="headimgurl" value="{$userinfo['headimgurl']}"/>
+        <input name="unionid" type="hidden" id="unionid" value="{$userinfo['unionid']}"/>
+      </form>
+    </div>
+    <!-- 吐司 -->
+    <div class="toast"></div>
+  </div>
+</body>
+</html>
+
+<script type="text/javascript">
+  var ua = navigator.userAgent.toLowerCase();
+  var isWeixin = ua.indexOf('micromessenger') != -1;
+  if (!isWeixin) {
+      document.head.innerHTML = '<title>抱歉，出错了</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"><link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/open/libs/weui/0.4.1/weui.css">';
+      document.body.innerHTML = '<div class="weui_msg"><div class="weui_icon_area"><i class="weui_icon_info weui_icon_msg"></i></div><div class="weui_text_area"><h4 class="weui_msg_title">请在微信客户端打开链接</h4></div></div>';
+  }
+</script>
+<script>
+   function isIphoneX() {
+    return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+  } 
+  if(isIphoneX()) {
+    $(".page-logo").css({"margin":"40.5% auto 0"})
+  }
+  let data = {
+    bindCodePhone   : '',
+    bindCodeVerify  : '',
+    bindOpenid      : '',
+    bindnickname    : '',
+    bindsex         : '',
+    bindcity        : '',
+    bindprovince    : '',
+    bindcountry     : '',
+    bindheadimgurl  : ''
+
+  }
+  // 格式输入错误表框提示
+  $('#bind-code-phone, #bind-code-verify').blur(function() {
+    if ( $(this).val() != '' ) {
+      $(this).css({borderBottom:"1px solid #E3E3E3"})
+    } else {
+      $(this).css({borderBottom:"1px solid #0a3e82"})
+    }
+  })
+  // 获取验证码
+  $("#bind-code-btn").on('click', function() {
+    let bindCodePhone = $("#bind-code-phone").val()
+    if (bindCodePhone.length == '' || bindCodePhone.length != 11) {
+      $(".toast").fadeIn().text('您的格式有误，请输入正确手机号！').fadeOut(2500);
+    } else {
+    $.ajax({
+      type:"post",
+      url:"/weixin/weixing/wechatVerifyCode",
+      data:{
+        phone: bindCodePhone
+      },
+      success:function(res) {
+        if(res.error_code==0) {
+          var time=60;
+          $('#bind-code-btn').text("已发送("+time+"s)")
+          var interval=setInterval(function () {
+              if (time >=1 && time <= 60 ) {
+                time--;
+                $('#bind-code-btn').text("已发送("+time+"s)").attr('disabled', true)
+              } else {
+                $('#bind-code-btn').text("重新获取").attr('disabled', false)
+                clearInterval(interval);
+              }
+          }, 1000);
+        }else{
+          mui.toast(res.msg);
+        }
+      },
+      error:function(res) {
+        console.log(res);
+      }    
+    }) 
+  }
+});
+// 点击绑定按钮
+$("#bind-submit").on('click', function(data) {
+  let bindCodeVerify      = $("#bind-code-verify").val(),
+      bindCodePhone       = $("#bind-code-phone").val(),
+      bindOpenid          = $("#openid").val(),
+      bindnickname        = $("#nickname").val(),
+      bindsex             = $("#sex").val(),
+      bindcity            = $("#city").val(),
+      bindprovince        = $("#province").val(),
+      bindcountry         = $("#country").val(),
+      bindheadimgurl      = $("#headimgurl").val()
+      bindunionid      = $("#unionid").val()
+
+      data.bindCodeVerify = bindCodeVerify
+      data.bindCodePhone  =  bindCodePhone
+      data.bindOpenid     =  bindOpenid
+      data.bindnickname   =  bindnickname
+      data.bindsex        =  bindsex
+      data.bindcity       =  bindcity
+      data.bindprovince   =  bindprovince
+      data.bindcountry    =  bindcountry
+      data.bindheadimgurl =  bindheadimgurl
+      data.bindunionid    =  bindunionid
+      
+  // if ( bindCodeVerify.length == '' ) {
+  //   $(".toast").fadeIn().text('您的信息不完整，请输入完整信息！').fadeOut(2500);
+  // } else {
+    $.ajax({
+      type:"post",
+      url:"/weixin/weixing/bindUserInfo",
+      data:{
+        phone: bindCodePhone,
+        code: bindCodeVerify,
+        openid: bindOpenid,
+        nickname: bindnickname,
+        sex: bindsex,
+        city: bindcity,
+        province: bindprovince,
+        country: bindcountry,
+        headimgurl: bindheadimgurl,
+        unionid:bindunionid
+      },
+      success:function(res) {
+        window.location.href = 'http://www.ydtkt.com/';
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        alert('绑定失败');
+      }  
+    }) 
+  // }
+})
+
+</script>

@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>学员分配</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+  	<link rel="stylesheet" href="__PUBLIC__/css/style.css">
+</head>
+<style>
+.clearfix:after{content:".";clear:both;display:block;height:0;overflow:hidden;visibility:hidden;}
+.clearfix{zoom:1;}
+    ul,li{
+      list-style: none;
+    }
+    .evaluation-particular-content{
+      width:991px;
+      padding-bottom:20px;
+      background: #F2F3F5;
+      position: relative;
+      background:rgba(255,255,255,1);
+      box-shadow:0px 0px 20px 0px rgba(225,225,225,1);
+      margin:0 auto;
+    }
+    .evaluation-particular-list{
+      width:100%;
+      margin:31px auto;
+      background: #fff;
+      padding-bottom:50px
+    }
+    .evaluation-particular-list-title{
+      font-size: 18px;
+      color:#333;
+      text-align: center;
+      padding-top:26px;
+    }
+    .evaluation-particular-ul{
+      width:913px;
+      margin: 30px auto;
+    }
+    .evaluation-particular-lis{
+      padding:30px 0 0;
+    }
+    .evaluation-particular-lis-menu{
+      width:100%;
+      /* height: 30px; */
+      line-height: 30px;
+      font-size:16px;
+      color:#666;
+      position: relative;
+      background: #F5F5F5;
+      padding-left:18px;
+      word-break: break-all;
+      /* white-space : pre-wrap; */
+    }
+    .evaluation-particular-lis-menu::before{
+      content:"";
+      position: absolute;
+      top:0;
+      left:0;
+      width:4px;
+      height:30px;
+      background:rgba(223,74,67,1);
+    }
+   
+    .evaluation-particular-lis-chiose{
+      width:100%;
+      margin:20px 0 23px;
+    }
+    .evaluation-particular-lis-chiose .layui-form-radio{
+      width:100%;
+      
+    }
+    .layui-input-left-img .layui-form-radio{
+      text-align: center;
+    }
+    
+    .evaluation-particular-lis-chiose .layui-form-radio *{
+      font-size:16px;
+      color:#666;
+    }
+    .evaluation-particular-lis-chiose .layui-form-radioed>i {
+      color: #5FB878;
+    }
+    .evaluation-particular-lis-chiose .layui-input-block {
+      margin-left: 55px;
+    }
+    .evaluation-particular-tips-right{
+      font-size:14px;
+      color:#57C07A;
+      background:rgba(216,237,213,1);
+      border:1px solid rgba(187,220,184,1);
+      border-radius:3px;
+      padding:6px 10px;
+      margin-left:55px;
+    }
+    .evaluation-particular-tips-error{
+      font-size:14px;
+      color:#DF4A43;
+      background:rgba(238,204,203,1);
+      border:1px solid rgba(223,142,138,1);
+      border-radius:3px;
+      padding:6px 10px;
+      margin-left:55px;
+    }
+    .evaluation-particular-lis-answer{
+      font-size:16px;
+      line-height: 28px;
+      color:#666;
+      margin:19px 0 15px 54px;
+      /* white-space : pre-wrap; */
+    }
+    .evaluation-particular-lis-answer p{
+      display: inline;
+      white-space : pre-wrap;
+    }
+    .evaluation-particular-lis-answer-application{
+      width:653px;
+      background:rgba(250,250,250,1);
+      border:1px solid rgba(224,224,224,1);
+      border-radius:5px;
+      margin: 30px auto;
+      padding:10px 20px;
+      font-size:16px;
+      color:#666;
+      line-height: 30px;
+    }
+
+
+
+  /* 3-5新增 */
+  .layui-input-left{
+    width:72%;
+    float: left;
+  }
+  .layui-input-right{
+    width:20%;
+    float: left;
+  }
+  .layui-input-right img{
+  	width:100%;
+  }
+  .layui-input-block .layui-input-block{
+    margin-left:0;
+  }
+  .layui-input-blanks{
+    width:100%;
+    font-size:16px;
+    color:#666666;
+    margin:5px 0 10px;
+  }
+  .layui-input-blanks img{
+    width: 26px;
+    height: 19px;
+  }
+  .layui-input-blanks .layui-input{
+    display: inline;
+    margin:0 5px;
+    font-size:14px;
+    text-align: center;
+    width:20%;
+    height:28px;
+    padding-left:0;
+    border: none;
+    border-bottom: 1px solid #666;
+  }
+  .layui-input-yn  .layui-input{
+    width:5%;
+    border: none;
+    margin:0 15px;
+    text-align: center;
+  }
+  .evaluation-particular-lis-menu-content{
+    width:90%;
+    font-size:16px;
+    color:#555555;
+    /* text-align: center; */
+    word-break: break-all;
+    white-space : pre-wrap;
+    line-height: 32px;
+    margin:0 auto;
+  }
+  .evaluation-particular-lis-block{
+    width:96%;
+    margin-left:4%;
+  }
+  .evaluation-particular-lis-name{
+    font-size:16px;
+    color:#333333;
+    margin-top:30px;
+    line-height: 28px;
+  }
+  .evaluation-particular-lis-solution{
+    width:96%;
+    padding:10px 2%;
+    background:#FAFAFA ;
+    border:1px solid #DEDEDE;
+    position: relative;
+    margin-top:25px;
+    font-size:16px;
+    color:#666666;
+    line-height: 26px;
+  }
+  .evaluation-particular-lis-solution::after{
+    content:"";
+    position: absolute;
+    top: -7px;
+    left: 45px;
+    width:10px;
+    height: 10px;
+    border-left:1px solid #DEDEDE;
+    border-top:1px solid #DEDEDE;
+    background: #FAFAFA;
+    transform: rotate(45deg);
+  }
+  .valuation-particular-lis-list, .evaluation-particular-lis-upload{
+    width:100%;
+    margin-bottom:30px;
+  }
+  .evaluation-particular-lis-subject{
+    width:90%;
+    margin:15px auto 0;
+    font-size:16px;
+    color:#333;
+    line-height: 33px;
+  }
+  .evaluation-particular-lis-upload{
+    margin-top:20px;
+  }
+  .evaluation-particular-lis-left{
+    width:410px;
+    height: auto;
+    padding:10px 20px;
+    background:#FAFAFA;
+    border:1px solid #DEDEDE;
+    position: relative;
+    font-size: 16px;
+    color:#666;
+    float: left;
+  }
+  .evaluation-particular-lis-left::before{
+    content:"";
+    position: absolute;
+    top: -7px;
+    left: 45px;
+    width:10px;
+    height: 10px;
+    border-left:1px solid #DEDEDE;
+    border-top:1px solid #DEDEDE;
+    background: #FAFAFA;
+    transform: rotate(45deg);
+  }
+  .evaluation-particular-lis-loadimg{
+    width:45px;
+    height: 45px;
+    font-size:16px;
+    color:#C8584E;
+    text-align: center;
+    line-height: 45px;
+    /* border:1px dashed #666; */
+    background:#FDFFFF;
+    margin-top:10px;
+  }
+  .evaluation-particular-lis-img{
+    margin-top:10px;
+    float: right;
+  }
+  .evaluation-particular-lis-topicimg{
+    width:90%;
+    margin:20px auto;
+  }
+  .evaluation-particular-lis-img-show{
+    width:80%;
+    height: auto;
+    padding: 15px 20px;
+    background:#FAFAFA;
+    border:1px solid #DEDEDE;
+    margin-bottom:30px;
+    position: relative;
+  }
+  .evaluation-particular-lis-img-close{
+    width:17px;
+    height: 17px;
+    background: #F5F5F5;
+    color:#555;
+    font-size:16px;
+    text-align: center;
+    line-height: 17px;
+    border-radius: 50%;
+    transform: rotate(45deg);
+    position: absolute;
+    top:4px;
+    left:12px;
+  }
+  .evaluation-particular-lis-img-show img{
+    width:50%;
+    height: auto;
+  }
+  /* 3-9 */
+  .evaluation-particular-lis-menu-title{
+    font-size:16px;
+    line-height: 28px;
+    color:#333;   
+  }
+  .evaluation-particular-lis-menu-title img{
+    width:26px;
+    height: 19px;
+  }
+  .evaluation-particular-lis-menu-title img.evaluation-particular-application-img{
+    /* float: right; */
+    width:135px;
+    height: 119px;
+  }
+  .evaluation-particular-lis-list{
+    width:96%;
+    margin:26px 0 0 4%;
+  }
+  .layui-input-left-img{
+    width:15%;
+    margin-right:5%;
+    float: left;
+  }
+  .layui-input-left-img img{
+    width:100%;
+  }
+  .layui-input-yn .layui-form-radio{
+    display: inline;
+  }
+  .evaluation-particular-lis-english{
+    margin:0;
+  }
+  .evaluation-particular-lis-english span{
+    display: inline-block;
+    width:23px;
+    font-size: 16px;
+    color:#333;
+    line-height: 26px;
+    float: left;
+  }
+  .evaluation-particular-lis-english .layui-input-yn{
+    float: left;
+  }
+  </style>
+<body style="margin-top: 2em;margin-left: 4em;">
+	
+<div class="evaluation-particular-content" id ="paperInfo">
+    <div class="evaluation-particular-list">
+      <h4 class="evaluation-particular-list-title">学员得分：100分</h4>
+      <ul class="evaluation-particular-ul">
+        <li class="evaluation-particular-lis">
+          <p class="evaluation-particular-lis-menu">
+            一、【单选题】选择正确的答案。
+          </p>
+          <!-- 每一个模块下的列表 -->
+          <div class="evaluation-particular-lis-list  layui-form">
+            <p class="evaluation-particular-lis-menu-title">
+              1、正方形的周长是边长的几倍？
+            </p>
+            <div class="evaluation-particular-lis-chiose layui-form clearfix">
+              <div class="layui-input-block layui-input-left">
+                <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                <input type="radio" name="sex" value="B" title="B、3倍">
+                <input type="radio" name="sex" value="C" title="C、2倍">
+              </div>
+            </div>
+            <span class="evaluation-particular-tips-right">恭喜你，答对啦</span>
+            <!-- evaluation-particular-tips-error -->
+            <div class="evaluation-particular-lis-answer">
+              解答：
+              <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+              答：正方形的周长是边长的4倍.
+              故选：A.</p>
+            </div>
+          </div>
+
+          <div class="evaluation-particular-lis-list  layui-form">
+            <p class="evaluation-particular-lis-menu-title">
+              2、—位数乘两位数，商可以是 ？
+            </p>
+            <div class="evaluation-particular-lis-chiose layui-form clearfix">
+              <div class="layui-input-block layui-input-left">
+                <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                <input type="radio" name="sex" value="B" title="B、3倍">
+                <input type="radio" name="sex" value="C" title="C、2倍">
+              </div>
+            </div>
+            <span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：c</span>
+            <!-- evaluation-particular-tips-error -->
+            <div class="evaluation-particular-lis-answer">
+              解答：
+              <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+              答：正方形的周长是边长的4倍.
+              故选：A.</p>
+            </div>
+          </div>
+
+          <div class="evaluation-particular-lis-list layui-form">
+            <p class="evaluation-particular-lis-menu-title">
+              3、—位数乘两位数，商可以是 ？
+            </p>
+            <div class="evaluation-particular-lis-chiose layui-form  clearfix">
+              <div class="layui-input-block layui-input-left">
+                <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                <input type="radio" name="sex" value="B" title="B、3倍">
+                <input type="radio" name="sex" value="C" title="C、2倍">
+              </div>
+            </div>
+            <span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：c</span>
+            <!-- evaluation-particular-tips-error -->
+            <div class="evaluation-particular-lis-answer">
+              解答：
+              <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+              答：正方形的周长是边长的4倍.
+              故选：A.</p>
+            </div>
+          </div>
+
+          <div class="evaluation-particular-lis-list layui-form">
+            <p class="evaluation-particular-lis-menu-title">
+              4、如图，反比例函数y1＝ 和正比例函数y2＝k2x的图象交于A(－1，－3)，B(1，3)两点，若 >k2x，则x的取值范围是？
+            </p>
+            <div class="evaluation-particular-lis-chiose layui-form clearfix">
+              <div class="layui-input-block layui-input-left">
+                <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                <input type="radio" name="sex" value="B" title="B、3倍">
+                <input type="radio" name="sex" value="C" title="C、2倍">
+              </div>
+              <div class="layui-input-right">
+                <img src="__MANAGE__/images/math.png" alt="">
+              </div>
+            </div>
+            <span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：c</span>
+            <!-- evaluation-particular-tips-error -->
+            <div class="evaluation-particular-lis-answer">
+              解答：
+              <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+              答：正方形的周长是边长的4倍.
+              故选：A.</p>
+            </div>
+          </div>
+
+          <div class="evaluation-particular-lis-list layui-form">
+            <p class="evaluation-particular-lis-menu-title">
+              5、如图是一个放置在水平实验台上的锥形瓶，则它的俯视图为（     ）
+            </p>
+            <div class="evaluation-particular-lis-chiose layui-form clearfix">
+              <div class="layui-input-block layui-input-left">
+                <div class="layui-input-left-img">
+                  <img src="math.png" alt="">
+                  <input type="radio" name="sex" value="A" title="A" checked>
+                </div>
+                <div class="layui-input-left-img">
+                  <img src="math.png" alt="">
+                  <input type="radio" name="sex" value="B" title="B">
+                </div>
+                <div class="layui-input-left-img">
+                  <img src="math.png" alt="">
+                  <input type="radio" name="sex" value="C" title="C">
+                </div> 
+                <div class="layui-input-left-img">
+                  <img src="math.png" alt="">
+                  <input type="radio" name="sex" value="D" title="D">
+                </div> 
+              </div>
+              <div class="layui-input-right">
+                <img src="math.png" alt="">
+              </div>
+            </div>
+            <span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：c</span>
+            <!-- evaluation-particular-tips-error -->
+            <div class="evaluation-particular-lis-answer">
+              解答：
+              <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+              答：正方形的周长是边长的4倍.
+              故选：A.</p>
+            </div>
+          </div>
+
+        </li>
+
+        <li class="evaluation-particular-lis">
+          <p class="evaluation-particular-lis-menu">
+            二、【填空题】在空白处填写正确的答案。
+          </p>
+          <!-- 每一个模块下的列表 -->
+          <div class="evaluation-particular-lis-chiose  layui-form clearfix">
+            <div class="layui-input-block">
+              <div class="layui-input-blanks">
+                1. Look! Lisa is<input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">(看书) now. 
+              </div>
+              <div class="layui-input-blanks">
+                2. My house is<input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">(紧邻) the big park.
+              </div>
+              <div class="layui-input-blanks">
+                3. I eat breakfast at <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input"> (家里).
+              </div>
+            </div>
+          </div>
+          <div class="evaluation-particular-lis-answer">
+            解答：
+            <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+            答：正方形的周长是边长的4倍.
+            故选：A.</p>
+          </div>
+
+        </li>
+
+        <li class="evaluation-particular-lis">
+          <p class="evaluation-particular-lis-menu">
+            三 、【判断题】判断正确的答案。
+          </p>
+          <div class="evaluation-particular-lis-chiose clearfix">
+            <div class="layui-input-block">
+              <div class="layui-input-blanks layui-input-yn  layui-form">
+                1．一个非零的自然数，不是质数就是合数。<input type="radio" name="yes" value="是" title="是"> <input type="radio" name="no" value="否" title="否">  
+              </div>
+              <div class="layui-input-blanks layui-input-yn  layui-form">
+                2．用16个棱长为1 cm的小正方体可以拼成一个大正方体。 <input type="radio" name="yes" value="是" title="是"> <input type="radio" name="no" value="否" title="否">                
+              </div>
+              <div class="layui-input-blanks layui-input-yn  layui-form">
+                3. 27的分子加上6，分母加上21，分数的大小不变。<input type="radio" name="yes" value="是" title="是"> <input type="radio" name="no" value="否" title="否">           
+              </div>
+            </div>
+          </div>
+          <div class="evaluation-particular-lis-answer">
+            解答：
+            <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+            答：正方形的周长是边长的4倍.
+            故选：A.</p>
+          </div>
+
+        </li>
+
+        <li class="evaluation-particular-lis">
+          <p class="evaluation-particular-lis-menu">
+            四 、【计算题】求下列图形的表面积和体积。
+          </p>
+          <div class="evaluation-particular-lis-topicimg">
+            <img src="math.png" alt="">
+            <img src="math.png" alt="">
+          </div>
+           <div class="evaluation-particular-lis-upload clearfix">
+             <div class="evaluation-particular-lis-left">
+               上传答案
+               <div class="evaluation-particular-lis-loadimg" id="">+</div>
+             </div>
+             <div class="evaluation-particular-lis-img">
+               <img src="math.png" alt="">
+             </div>
+           </div>
+           <div class="evaluation-particular-lis-img-show">
+             <div class="evaluation-particular-lis-img-close">+</div>
+             <img src="math.png" alt="">
+           </div>
+
+        </li>
+
+        <li class="evaluation-particular-lis">
+          <p class="evaluation-particular-lis-menu">
+            五 、【应用题】走进生活，解决问题。
+          </p>
+
+          <div class="valuation-particular-lis-list clearfix">
+            <div class="evaluation-particular-lis-block">
+              <p class="evaluation-particular-lis-name">1.选文第②段画线部分，主要运用了哪种描写方法？有何效果？(4分）</p>
+              <div class="evaluation-particular-lis-solution">主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。</div>
+            </div>
+
+            <div class="evaluation-particular-lis-block">
+              <p class="evaluation-particular-lis-name">1.选文第②段画线部分，主要运用了哪种描写方法？有何效果？(4分）</p>
+              <div class="evaluation-particular-lis-solution">主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。</div>
+            </div>
+            <div class="evaluation-particular-lis-block">
+              <p class="evaluation-particular-lis-name">3、一块长35 cm、宽30 cm的铁皮，从四个角各切掉一个边长为5 cm的正方形，然后做成无盖盒子。这个盒子用了多少铁皮？它的容积是多少？</p>
+              <!--上传文件 -->
+              <div class="evaluation-particular-lis-upload clearfix">
+                <div class="evaluation-particular-lis-left">
+                  上传答案
+                  <div class="evaluation-particular-lis-loadimg" id="">+</div>
+                </div>
+                <div class="evaluation-particular-lis-img">
+                  <img src="flower.png" alt="">
+                </div>
+              </div>
+              <div class="evaluation-particular-lis-img-show">
+                <div class="evaluation-particular-lis-img-close">+</div>
+                <img src="flower.png" alt="">
+              </div>
+            </div>
+          </div>
+
+        </li>
+
+        <li class="evaluation-particular-lis">
+          <p class="evaluation-particular-lis-menu">
+            六、【阅读理解】阅读下面的文章，回答问题。
+          </p>
+          <p class="evaluation-particular-lis-menu-content"> 
+            父亲数钱              
+            李书霞              
+            ①每个月父亲发饷的那天，家里就像过节一样，洋溢着欢乐的气氛。
+            ②父亲踏进家门时，晚饭都已经准备好了。父亲坐下来，先不动筷子，而是伸手去怀里，掏出今天发的工资，他将几张薄薄的钞票捏在手里，抖上两抖，把食指和拇指伸到嘴边，哈一哈气，开始一张张地数。当时的钱，最大面额是十块，主要是五块、两块和一块的，还有角币和分币。工资虽少，但细细地数起来，仍然要花费两三分钟。父亲数毕，报出数目，递给母亲。母亲笑眯眯地接了，走进卧房，把钱锁进一个隐秘的柜子里。她坐回饭桌旁，对着我们两个小人儿说：“存着，给你们交学费。”                              
+          </p>
+          <div class="valuation-particular-lis-list clearfix">
+            <div class="evaluation-particular-lis-block">
+              <p class="evaluation-particular-lis-name">1.选文第②段画线部分，主要运用了哪种描写方法？有何效果？(4分）</p>
+              <div class="evaluation-particular-lis-solution">主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。</div>
+            </div>
+
+            <div class="evaluation-particular-lis-block">
+              <p class="evaluation-particular-lis-name">1.选文第②段画线部分，主要运用了哪种描写方法？有何效果？(4分）</p>
+              <div class="evaluation-particular-lis-solution">主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。主要运用了动作描写。形象地表现了父亲当年挣钱的不易和对来之不易的收入的珍惜及兴奋满足之情。</div>
+            </div>
+          </div>
+
+        </li>
+
+        <li class="evaluation-particular-lis">
+          <p class="evaluation-particular-lis-menu">
+            七 、【阅读理解】阅读短文，选择正确的答案。
+          </p>
+          <p class="evaluation-particular-lis-menu-content"> 
+            It’s warm in spring. The trees turn green and the flowers start to grow. I often go boating in the park. In summer, the weather is vey hot and it often rains. I often go swimming with my friends. In autumn, the days get shorter and the nights get longer. It’s often sunny, but not to hot. I like winter best. In winter, the days are short and the nights are long. It’s not very cold. I often go jogging after school.
+          </p>
+
+          <div class="evaluation-particular-lis-list">
+            <div class="evaluation-particular-lis-block  layui-form">
+              <p class="evaluation-particular-lis-menu-title">
+                1. What’s the weather like in spring?
+              </p>
+              <div class="evaluation-particular-lis-chiose clearfix">
+                <div class="layui-input-block">
+                  <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                  <input type="radio" name="sex" value="B" title="B、3倍">
+                  <input type="radio" name="sex" value="C" title="C、2倍">
+                  <input type="radio" name="sex" value="C" title="C、2倍">
+                </div>
+              </div>
+            </div>
+
+            <div class="evaluation-particular-lis-block  layui-form">
+              <p class="evaluation-particular-lis-menu-title">
+                2. Does it often rain in summer?
+              </p>
+              <div class="evaluation-particular-lis-chiose layui-form clearfix">
+                <div class="layui-input-block">
+                  <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                  <input type="radio" name="sex" value="B" title="B、3倍">
+                  <input type="radio" name="sex" value="C" title="C、2倍">
+                  <input type="radio" name="sex" value="C" title="C、2倍">
+                </div>
+              </div>
+          </div>
+            <div class="evaluation-particular-lis-answer">
+              解答：
+              <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+              答：正方形的周长是边长的4倍.
+              故选：A.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="evaluation-particular-lis">
+          <p class="evaluation-particular-lis-menu">
+            八 、【完形填空】完形填空。
+          </p>
+          <p class="evaluation-particular-lis-menu-content"> 
+            A Move to Safety
+            The Turners sat at the kitchen table. The sun was shining and filed the kitchen with a warm light. It was a perfect day for having a picnic or going surfing. But in the Turners' kitchen, no one seemed to be paying attention to the      .
+            "Okay, girls," said Mrs. Turner. "I can tell by the expressions on your faces that you have a pretty good idea of why we need to have this family                      
+            "Okay, girls," said Mrs. Turner. "I can tell by the expressions on your faces that you have a pretty good idea of why we need to have this family                          
+            "Okay, girls," said Mrs. Turner. "I can tell by the expressions on your faces that you have a pretty good idea of why we need to have this family                           
+            "Okay, girls," said Mrs. Turner. "I can tell by the expressions on your faces that you have a pretty good idea of why we need to have this family                                             
+          </p>
+          
+          <div class="evaluation-particular-lis-list">
+            <div class="evaluation-particular-lis-block">
+              <div class="evaluation-particular-lis-chiose evaluation-particular-lis-english clearfix">
+                <span>1.</span>
+                <div class="layui-input-block layui-input-yn  layui-form">                 
+                  <input type="radio" name="sex" value="A" title="A. kitchen" checked>
+                  <input type="radio" name="sex" value="B" title="B. tablepicnic">
+                  <input type="radio" name="sex" value="C" title="C. picnicpicnic">
+                  <input type="radio" name="sex" value="C" title="D. weatherweather">
+                </div>
+              </div>
+            </div>
+
+            <div class="evaluation-particular-lis-block">
+              <div class="evaluation-particular-lis-chiose evaluation-particular-lis-english clearfix">
+                <span>20.</span>
+                <div class="layui-input-block layui-input-yn layui-form">   
+                  <input type="radio" name="sex" value="A" title="A、4倍" checked>
+                  <input type="radio" name="sex" value="B" title="B、3倍">
+                  <input type="radio" name="sex" value="C" title="C、2倍">
+                  <input type="radio" name="sex" value="C" title="C、2倍">
+                </div>
+              </div>
+          </div>
+            <div class="evaluation-particular-lis-answer">
+              解答：
+              <p>解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+              答：正方形的周长是边长的4倍.
+              故选：A.</p>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+<input type="hidden" id="person_id" value="{$res.person_id}">
+<input type="hidden" id="parper_id" value="{$res.id}">
+	<script type="text/javascript" src="__LAY__layui.js"></script>
+	<!-- <script type="text/javascript" src="__MANAGE__/js/testPaper/makePaper.js"></script> -->
+	<script type="text/javascript" src="__MANAGE__/js/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript">
+		layui.use(['form', 'layedit', 'laydate','table',"upload",'jquery'], function(){
+		    var form = layui.form;
+		        layer = layui.layer;
+		        layedit = layui.layedit;
+		        laydate = layui.laydate;
+		        upload = layui.upload;
+		        var person_id = $('#person_id').val();
+		        var t_id = $('#parper_id').val();
+		        var sort =0;//定义判断对错
+		    $.post('/manage/studentPaper_controller/getReviewStudentPaperInfo',{person_id:person_id,t_id:t_id},function(res){
+		    	if(res.error_code == 1){
+	                // var data = e.data;
+	                var newList = res.data.newList;   //普通试题列表
+	                var newQuestionrowsList = res.data.newQuestionrowsList;   //题帽题
+	                var count = parseInt(res.data.newList.length);   //数组的长度
+	                var bit = res.count;
+	                var bit_sort = 0;
+	                var html = "";
+	                // html +='<h3 class="evaluation-particular-title">第十一章 三角形 '+
+	                //           '<span>测试中</span> '+
+	                //           '<div class="evaluation-particular-close">+</div> '+
+	                //        '</h3>';
+	                html += '<div class="evaluation-particular-list layui-form">'+
+	                		'<h4 class="evaluation-particular-list-title">学员得分：'+res.data.log_fraction+'分</h4>';
+	                          html += '<ul class="evaluation-particular-ul">';
+	                for(x in newList){
+	                  var sonList = newList[x]['son'];
+	                  if(newList[x].q_type == 1){   //选择题
+	                    html+='<li class="evaluation-particular-lis">'+
+	                    '<p class="evaluation-particular-lis-menu">'+
+	                      ''+bit[bit_sort]+'、【'+newList[x]['questype']+'】选择正确的答案'+
+	                    '</p>';
+	                        // <!-- 每一个模块下的列表 -->
+	                        for(i in sonList){
+	                          var regExp = /<p>(.*?)<\/p>/gi;
+	                          res = sonList[i]['q_select'].match(regExp);
+	                          var k = parseInt(i)+1;
+	                          var q_stem = sonList[i]['q_stem'].replace(/<p>/gm,'');
+	                          var q_stem1 = q_stem.replace(/<\/p>/gm,'');
+	                          html+='<div class="evaluation-particular-lis-list  layui-form">'+
+	                            '<p class="evaluation-particular-lis-menu-title">'+
+	                              ''+k+'、'+q_stem1+'';
+	                            html += '</p>'+
+	                            '<div class="evaluation-particular-lis-chiose clearfix ">'+
+	                              '<div class="layui-input-block layui-input-left">';
+	                                for(m in res){
+	                                  var str = res[m].replace(/<p>/gm,'');
+	                                  var str1 = str.replace(/<\/p>/gm,'');
+	                                  var q_select = str1.substring(0,1).toLocaleUpperCase();
+	                                  if(sonList[i]['log_answer'] != null){
+	                                    var log_answer = sonList[i]['log_answer'].toLocaleUpperCase();
+	                                  }else{
+	                                    var log_answer ='';
+	                                  }
+	                                  if(q_select == log_answer){
+	                                  	html+='<input type="radio" name="select'+sonList[i]['id']+'" value="'+str1+'" title="'+str1+'" checked>';
+	                                  }else{
+	                                  	html+='<input type="radio" name="select'+sonList[i]['id']+'" value="'+str1+'" title="'+str1+'" >';
+	                                  }
+	                                  
+	                                }
+	                              html+='</div>'+
+	                                  '<div class="layui-input-right">'+
+	                                    '<img src="'+sonList[i]['q_stem_img']+'" alt="">'+
+	                                  '</div>'+
+	                                '</div>';
+	                             	if(sonList[i]['log_status'] == 1){
+	                             	//学员本题答对了
+	                                    html+= '<span class="evaluation-particular-tips-right">恭喜你，答对啦</span>';
+	                                }else{
+	                                	html +='<span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：'+sonList[i].q_answer+'</span>';
+	                                }
+	                                
+                                  html+= '<div class="evaluation-particular-lis-answer">'+
+                                            '解答：'+sonList[i].q_describe+
+                                              '所以正确答案：'+sonList[i].q_answer+
+                                          '</div>';
+	                              html += '</div>';
+	                        }
+	                        html+='</li>';
+	                  }else if(newList[x].q_type == 2){ //多选题
+	                      html+='<li class="evaluation-particular-lis">'+
+	                        '<p class="evaluation-particular-lis-menu">'+
+	                          ''+bit[bit_sort]+'、【'+newList[x]['questype']+'】选择正确的答案'+
+	                        '</p>';
+	                        // <!-- 每一个模块下的列表 -->
+	                        for(i in sonList){
+	                          var regExp = /<p>(.*?)<\/p>/gi;
+	                          res = sonList[i]['q_select'].match(regExp);
+	                          var k = parseInt(i)+1;
+	                          var q_stem = sonList[i]['q_stem'].replace(/<p>/gm,'');
+	                          var q_stem1 = q_stem.replace(/<\/p>/gm,'');
+	                          html+='<div class="evaluation-particular-lis-list  layui-form">'+
+	                            '<p class="evaluation-particular-lis-menu-title">'+
+	                              ''+k+'、'+q_stem1+'';
+	                            html += '</p>'+
+	                            '<div class="evaluation-particular-lis-chiose clearfix ">'+
+	                              '<div class="layui-input-block layui-input-left">';
+	                                for(m in res){
+	                                  var str = res[m].replace(/<p>/gm,'');
+	                                  var str1 = str.replace(/<\/p>/gm,'');
+	                                  var q_select = str1.substring(0,1).toLocaleUpperCase();
+	                                  if(sonList[i]['log_answer'] != null){
+	                                    var log_answer = sonList[i]['log_answer'].toLocaleUpperCase();
+	                                  }else{
+	                                    var log_answer ='';
+	                                  }
+
+	                                  if(log_answer.search(q_select) != -1){
+	                                  	html+='<div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="select'+sonList[i].id+'" value="'+str1+'" title="'+str1+'" checked></div>';
+	                                  }else{
+	                                  	html+='<div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="select'+sonList[i].id+'" value="'+str1+'" title="'+str1+'" ></div>';
+	                                  }
+	                                  //html+='<input type="radio" name="sex" value="'+str1+'" title="'+str1+'" {if condition="'+q_select+' == '+log_answer+'"}checked{/if}>';
+	                                }
+	                              html+='</div>'+
+	                                  '<div class="layui-input-right">'+
+	                                    '<img src="'+sonList[i]['q_stem_img']+'" alt="" style="width:100%">'+
+	                                  '</div>'+
+	                                '</div>';
+	                                if(sonList[i]['log_status'] == 1){
+	                                //学员本题答对了
+	                                    html+= '<span class="evaluation-particular-tips-right">恭喜你，答对啦</span>';
+	                                }else{
+	                                	html +='<span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：'+sonList[i].q_answer+'</span>';
+	                                }
+	                                  html+= '<div class="evaluation-particular-lis-answer">'+
+	                                            '解答：'+sonList[i].q_describe+
+	                                              '所以正确答案：'+sonList[i].q_answer+
+	                                          '</div>';
+	                              html += '</div>';
+	                        }
+	                        html+='</li>';
+	                  }else if(newList[x].q_type == 3){    //判断题
+	                      html+='<li class="evaluation-particular-lis">'+
+	                            '<p class="evaluation-particular-lis-menu">'+
+	                              ''+bit[bit_sort]+'、【'+newList[x]['questype']+'】选择正确的答案'+
+	                            '</p>';
+	                      for(i in sonList){
+	                          var k = parseInt(i)+1;
+	                          var q_stem = sonList[i]['q_stem'].replace(/<p>/gm,'');
+	                          var q_stem1 = q_stem.replace(/<\/p>/gm,'');
+	                          html+='<div class="evaluation-particular-lis-chiose layui-form clearfix">'+
+	                                '<div class="layui-input-block">'+
+	                                  '<div class="layui-input-blanks layui-input-yn">'+
+	                                    ''+k+'、'+q_stem1+'';
+	                                    if(sonList[i].log_answer == 'A'){
+		                                  	html+='<input type="radio" name="yes'+sonList[i].id+'" value="A" title="是" checked>'+
+			                                      '<input type="radio" name="yes'+sonList[i].id+'" value="B" title="否">';
+		                                  }else{
+		                                  	html+='<input type="radio" name="yes'+sonList[i].id+'" value="A" title="是">'+
+			                                      '<input type="radio" name="yes'+sonList[i].id+'" value="B" title="否" checked>';
+		                                  }
+	                                  html+='</div>'+
+	                                '</div>'+
+	                              '</div>';
+	                              if(sonList[i]['log_status'] == 1){
+	                              //学员本题答对了
+	                                    html+= '<span class="evaluation-particular-tips-right">恭喜你，答对啦</span>';
+	                                }else{
+	                                	html +='<span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：'+sonList[i].q_answer+'</span>';
+	                                }
+	                              html+='<div class="evaluation-particular-lis-answer">';
+	                                  html+= '解答：'+sonList[i].q_describe+
+	                                          '所以正确答案：'+sonList[i].q_answer;
+	                              html += '</div>';
+	                        }
+	                        html+='</li>';
+	                  }else if(newList[x].q_type == 5){   //填空题
+	                        html+='<li class="evaluation-particular-lis">'+
+	                              '<p class="evaluation-particular-lis-menu">'+
+	                                ''+bit[bit_sort]+'、【'+newList[x]['questype']+'】在空白处填写正确的答案'+
+	                              '</p>';
+	                        // <!-- 每一个模块下的列表 -->
+	                        for(i in sonList){
+	                          var k = parseInt(i)+1;
+	                          //替换p标签
+	                          var q_stem = sonList[i]['q_stem'].replace(/<p>/gm,'');
+	                          var q_stem1 = q_stem.replace(/<\/p>/gm,'');
+	                          //替换括号，换为可输入的input
+	                          var q_stem1 = q_stem1.replace(/（/gm,'(');    //将中文括号换位英文括号
+	                          var q_stem1 = q_stem1.replace(/）/gm,')');    //将中文括号换位英文括号
+	                          var q_stem1 = q_stem1.replace(/(\([^\)]*\))/gm,'<input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input" value="'+sonList[i]['log_answer']+'">');  //将括号换位input框
+	                          html+='<div class="evaluation-particular-lis-chiose  layui-form clearfix">'+
+	                            '<div class="layui-input-block">'+
+	                              '<div class="layui-input-blanks">'+
+	                               ''+k+'、'+q_stem1+''+
+	                              '</div>'+
+	                            '</div>'+
+	                          '</div>';
+	                           if(sonList[i]['log_status'] == 1){
+	                           //学员本题答对了
+	                           		html+='<div class="layui-input-block layui-form" style="margin-left:52px;">'+
+			                                    '请判题：<input type="radio" name="judge'+sort+'" value="true-'+sonList[i].id+'" title="正确" checked >'+
+			                                    '<input type="radio" name="judge'+sort+'" value="false" title="错误">'+
+				                           '</div>';
+                                    html+= '<span class="evaluation-particular-tips-right">恭喜你，答对啦</span>';
+                                }else{
+                                	html+='<div class="layui-input-block layui-form" style="margin-left:52px;">'+
+			                                    '请判题：<input type="radio" name="judge'+sort+'" value="true" title="正确">'+
+			                                    '<input type="radio" name="judge'+sort+'" value="false-'+sonList[i].id+'" title="错误" checked>'+
+				                           '</div>';
+                                	html +='<span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：'+sonList[i].q_answer.replace(/<[^>]+>/g,"")+'</span>';
+                                }
+	                          html+='<div class="evaluation-particular-lis-answer">';
+	                                  html+= '解答：'+sonList[i].q_describe+
+	                                          '所以正确答案：'+sonList[i].q_answer;
+	                          html += '</div>';
+	                          sort++;
+	                        }
+
+	                      html+='</li>';
+	                  }else if(newList[x].q_type == 6){  //问答题   、【应用题】
+	                      html+='<li class="evaluation-particular-lis">'+
+	                                '<p class="evaluation-particular-lis-menu">'+
+	                                  ''+bit[bit_sort]+'、【'+newList[x]['questype']+'】在空白处填写正确的答案'+
+	                                '</p>';
+	                      for(i in sonList){
+	                            var k = parseInt(i)+1;
+	                            //替换p标签
+	                            var q_stem = sonList[i]['q_stem'].replace(/<p>/gm,'');
+	                            var q_stem1 = q_stem.replace(/<\/p>/gm,'');
+	                            html+='<div class="evaluation-particular-lis-block">'+
+	                                  '<p class="evaluation-particular-lis-name">'+
+	                                  ''+k+'、'+q_stem1+'</p>'+
+	                                  '<div class="evaluation-particular-lis-upload clearfix">'+
+	                                    '<div class="layui-input-right">'+
+	                                      '<img src="'+sonList[i]['q_stem_img']+'" alt="" style="width:100%;margin-left:20px">'+
+	                                    '</div>'+
+	                                  '</div>'+
+	                                  '<div class="evaluation-particular-lis-img-show">'+
+	                                    '<img src="'+sonList[i]['log_answer']+'" alt="">'+
+	                                  '</div>';
+	                                  if(sonList[i]['log_status'] == 1){
+	                                  //学员本题答对了
+			                           		html+='<div class="layui-input-block layui-form" style="margin-left:52px;">'+
+					                                    '请判题：<input type="radio" name="judge'+sort+'" value="true-'+sonList[i].id+'" title="正确" checked>'+
+					                                    '<input type="radio" name="judge'+sort+'" value="false" title="错误">'+
+						                           '</div>';
+		                                    html+= '<span class="evaluation-particular-tips-right">恭喜你，答对啦</span>';
+		                                }else{
+		                                	html+='<div class="layui-input-block layui-form" style="margin-left:52px;">'+
+					                                    '请判题：<input type="radio" name="judge'+sort+'" value="true" title="正确">'+
+					                                    '<input type="radio" name="judge'+sort+'" value="false-'+sonList[i].id+'" title="错误" checked>'+
+						                           '</div>';
+		                                	html +='<span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：'+sonList[i].q_answer.replace(/<[^>]+>/g,"")+'</span>';
+		                                }
+	                                  html += '<div class="evaluation-particular-lis-answer">';
+	                                    html+= '解答：'+sonList[i].q_describe+
+	                                            '所以正确答案：'+sonList[i].q_answer;
+	                                html += '</div>';
+	                        sort++;
+	                      }
+	                      html+='</li>';
+	                  }
+	                  bit_sort++
+	                }
+	                for(x in newQuestionrowsList){
+	                  if(newQuestionrowsList[x].qr_type == 7){   //完形填空
+	                      html += '<li class="evaluation-particular-lis">'+
+	                        '<p class="evaluation-particular-lis-menu">'+
+	                          ''+bit[bit_sort]+' 、【完形填空】完形填空。'+
+	                        '</p>'+
+	                        '<div class="evaluation-particular-lis-menu-content">'+newQuestionrowsList[x].qr_question+'</div>'+
+	                        
+	                        '<div class="evaluation-particular-lis-list">';
+	                        var sonList = newQuestionrowsList[x].son;
+	                            for(i in sonList){
+	                              var regExp = /<p>(.*?)<\/p>/gi;
+	                              res = sonList[i]['q_select'].match(regExp);
+	                              var num=parseInt(i)+1;
+	                              html += '<div class="evaluation-particular-lis-block">'+
+	                                '<div class="evaluation-particular-lis-chiose evaluation-particular-lis-english clearfix">'+
+	                                  '<span>'+num+'.</span>';
+	                                  html += '<div class="layui-input-block layui-input-yn  layui-form" style="margin-left:0px">';
+	                                  for(m in res){
+	                                    var str = res[m].replace(/<p>/gm,'');
+	                                    var str1 = str.replace(/<\/p>/gm,'');
+	                                    var q_select = str1.substring(0,1).toLocaleUpperCase();
+	                                    if(sonList[i]['log_answer'] != null){
+	                                      var log_answer = sonList[i]['log_answer'].toLocaleUpperCase();
+	                                    }else{
+	                                      var log_answer ='';
+	                                    }
+										if(q_select == log_answer){
+											html+='<input type="radio" name="select'+sonList[i].id+'" value="'+str1+'" title="'+str1+'" checked>';
+										}else{
+											html+='<input type="radio" name="select'+sonList[i].id+'" value="'+str1+'" title="'+str1+'" >';
+										}
+	                                    //html+='<input type="radio" name="sexthree" value="'+str1+'" title="'+str1+'" {if condition="'+q_select+' == '+log_answer+'"}checked{/if}>';
+	                                  }
+	                                  html += '</div>'+
+	                                '</div>'+
+	                              '</div>';
+	                              	if(sonList[i]['log_status'] == 1){
+			                            //学员本题答对了
+		                                    html+= '<span class="evaluation-particular-tips-right">恭喜你，答对啦</span>';
+		                                }else{
+		                                	html +='<span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：'+sonList[i].q_answer+'</span>';
+		                                }
+			                          html += '<div class="evaluation-particular-lis-answer">';
+			                                html+= '解答：'+sonList[i].q_describe+
+			                                        '所以正确答案：'+sonList[i].q_answer;
+			                          html += '</div>';
+	                            }
+			                            
+	                        html +='</div>';
+	                      html +='</li>';
+	                  }else if(newQuestionrowsList[x].qr_type == 8){   //语文阅读理解
+	                      html += '<li class="evaluation-particular-lis">'+
+	                                  '<p class="evaluation-particular-lis-menu">'+
+	                                    ''+bit[bit_sort]+'、【阅读理解】</p>'+
+	                                  '<div class="evaluation-particular-lis-menu-content"> '+newQuestionrowsList[x].qr_question+'</div>'+
+	                                  '<div class="valuation-particular-lis-list clearfix">';
+	                                var sonList = newQuestionrowsList[x].son;
+	                                for(i in sonList){
+	                                  var num=parseInt(i)+1;
+	                                  html += '<div class="evaluation-particular-lis-block">'+num+'、'+sonList[i].q_stem.replace(/<[^>]+>/g,"")+
+	                                            '<div class="evaluation-particular-lis-img-show">'+
+	                                              '<img src="'+sonList[i]['log_answer']+'" alt="">'+
+	                                            '</div>'+
+	                                          '</div>';
+	                                          if(sonList[i]['log_status'] == 1){
+	                                          //学员本题答对了
+					                           		html+='<div class="layui-input-block layui-form" style="margin-left:52px;">'+
+							                                    '请判题：<input type="radio" name="judge'+sort+'" value="true-'+sonList[i].id+'" title="正确" checked>'+
+							                                    '<input type="radio" name="judge'+sort+'" value="false" title="错误">'+
+								                           '</div>';
+				                                    html+= '<span class="evaluation-particular-tips-right">恭喜你，答对啦</span>';
+				                                }else{
+				                                	html+='<div class="layui-input-block layui-form" style="margin-left:52px;">'+
+							                                    '请判题：<input type="radio" name="judge'+sort+'" value="true" title="正确">'+
+							                                    '<input type="radio" name="judge'+sort+'" value="false-'+sonList[i].id+'" title="错误" checked>'+
+								                           '</div>';
+				                                	html +='<span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：'+sonList[i].q_answer.replace(/<[^>]+>/g,"")+'</span>';
+				                                }
+	                                            html+='<div class="evaluation-particular-lis-answer">';
+	                                                html+= '解答：'+sonList[i].q_describe+
+	                                                        '所以正确答案：'+sonList[i].q_answer;
+	                                            html +='</div>';
+	                                          // '</div>';
+	                                  sort++;
+	                                }
+	                                html += '</div>';
+	                      html += '</li>';
+	                  }else if(newQuestionrowsList[x].qr_type == 9){   //英语阅读理解
+	                      html += '<li class="evaluation-particular-lis">'+
+	                        '<p class="evaluation-particular-lis-menu">'+
+	                          ''+bit[bit_sort]+' 、【阅读理解】阅读短文，选择正确的答案。'+
+	                        '</p>'+
+	                        '<div class="evaluation-particular-lis-menu-content">'+newQuestionrowsList[x].qr_question+'</div>'+
+
+	                        '<div class="evaluation-particular-lis-list">';
+	                        var sonList = newQuestionrowsList[x].son;
+	                        for(i in sonList){
+	                          var regExp = /<p>(.*?)<\/p>/gi;
+	                          res = sonList[i]['q_select'].match(regExp);
+	                          var num=parseInt(i)+1;
+	                          html += '<div class="evaluation-particular-lis-block  layui-form">'+
+	                            '<div class="evaluation-particular-lis-menu-title">'+num+'、'+sonList[i].q_stem.replace(/<[^>]+>/g,"")+'</div>'+
+	                            '<div class="evaluation-particular-lis-chiose clearfix">'+
+	                              '<div class="layui-input-block">';
+	                              for(m in res){
+	                                var str = res[m].replace(/<p>/gm,'');
+	                                var str1 = str.replace(/<\/p>/gm,'');
+	                                var q_select = str1.substring(0,1).toLocaleUpperCase();
+	                                if(sonList[i]['log_answer'] != null){
+	                                  var log_answer = sonList[i]['log_answer'].toLocaleUpperCase();
+	                                }else{
+	                                  var log_answer ='';
+	                                }
+	                                if(q_select == log_answer){
+										html+='<input type="radio" name="select'+sonList[i].id+'" value="'+str1+'" title="'+str1+'" checked>';
+									}else{
+										html+='<input type="radio" name="select'+sonList[i].id+'" value="'+str1+'" title="'+str1+'" >';
+									}
+	                                //html+='<input type="radio" name="sex" value="'+str1+'" title="'+str1+'" {if condition="'+q_select+' == '+log_answer+'"}checked{/if}>';
+	                              }
+	                              html +='</div>'+
+	                            '</div>'+
+	                          '</div>';
+	                           if(sonList[i]['log_status'] == 1){
+		                        //学员本题答对了
+	                                html+= '<span class="evaluation-particular-tips-right">恭喜你，答对啦</span>';
+	                            }else{
+	                            	html +='<span class="evaluation-particular-tips-right  evaluation-particular-tips-error">很遗憾答错了，正确答案是：'+sonList[i].q_answer+'</span>';
+	                            }
+		                          html +='<div class="evaluation-particular-lis-answer">';
+	                                  html+= '解答：'+sonList[i].q_describe+
+	                                          '所以正确答案：'+sonList[i].q_answer;
+		                          html += '</div>';
+	                        }
+	                        
+	                        html += '</div>';
+	                      html += '</li>';
+	                  }
+	                  bit_sort++
+	                }
+	                html+='</ul><div class="evaluation-particular-submit" lay-submit lay-filter="formDemo">提交</div></div>';
+	                $('#paperInfo').html(html);
+	                form.render();
+	            }
+		    })
+			//提交答案
+			form.on('submit(formDemo)', function(data){
+				$.post('/manage/studentPaper_controller/updateReviewStudentPaperInfo',{person_id:person_id,t_id:t_id,sort:sort,data:data.field},function(res){
+					if(res.error_code == 1){
+						layer.msg(res.msg, {icon: 6,time:1000},function(){
+							location=location;
+						}); //提交评卷成功
+					}else{
+						layer.msg(res.msg, {icon: 5,time:1000},function(){
+							location=location;
+						}); //提交评卷失败
+					}	
+				})
+			});
+	    })
+	</script>
+</body>
+</html>

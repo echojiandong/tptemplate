@@ -1,0 +1,136 @@
+2019-08-21 15:40:12  {"out_trade_no":"1566268933309869","total_amount":"3980.00","timeout_express":"5m","subject":"七年级-语文-上学期","body":"七年级语文试听课"}
+2019-08-22 13:29:51  {"out_trade_no":"1566451791109","total_amount":"0.01","timeout_express":"5m","subject":"E点就通试听课程","body":"E点就通试听课程"}
+2019-08-22 13:30:29  {"out_trade_no":"1566451829560","total_amount":"0.01","timeout_express":"5m","subject":"E点就通试听课程","body":"E点就通试听课程"}
+2019-08-22 13:32:34  {"out_trade_no":"1566451954560","total_amount":"0.01","timeout_express":"5m","subject":"E点就通试听课程","body":"E点就通试听课程"}
+2019-08-22 13:37:39  {"out_trade_no":"1566452259209","total_amount":0,"timeout_express":"5m","subject":"E点就通试听课程","body":"E点就通试听课程"}
+2019-08-22 13:38:30  {"out_trade_no":"1566452310448","total_amount":0.01,"timeout_express":"5m","subject":"E点就通试听课程","body":"E点就通试听课程"}
+2019-08-23 10:53:48  {"product_code":"FAST_INSTANT_TRADE_PAY","body":"E点就通试听课程","subject":"E点就通试听课程","total_amount":"0.01","out_trade_no":"1566528828497"}
+2019-08-23 10:53:49  response: '<form id=\'alipaysubmit\' name=\'alipaysubmit\' action=\'https://openapi.alipay.com/gateway.do?charset=UTF-8\' method=\'POST\'><input type=\'hidden\' name=\'biz_content\' value=\'{"product_code":"FAST_INSTANT_TRADE_PAY","body":"E点就通试听课程","subject":"E点就通试听课程","total_amount":"0.01","out_trade_no":"1566528828497"}\'/><input type=\'hidden\' name=\'app_id\' value=\'2019081666212942\'/><input type=\'hidden\' name=\'version\' value=\'1.0\'/><input type=\'hidden\' name=\'format\' value=\'json\'/><input type=\'hidden\' name=\'sign_type\' value=\'RSA2\'/><input type=\'hidden\' name=\'method\' value=\'alipay.trade.page.pay\'/><input type=\'hidden\' name=\'timestamp\' value=\'2019-08-23 10:53:48\'/><input type=\'hidden\' name=\'alipay_sdk\' value=\'alipay-sdk-php-20161101\'/><input type=\'hidden\' name=\'notify_url\' value=\'http://www.yangydt.com/index/course_pay/successUrl\'/><input type=\'hidden\' name=\'return_url\' value=\'http://www.yangydt.com/index/course_pay/return_url\'/><input type=\'hidden\' name=\'charset\' value=\'UTF-8\'/><input type=\'hidden\' name=\'sign\' value=\'UTc/DK90jphhNSMBB6GxeOC+ryzvMvjlKUiWPiQ6bLs5s5uBUvRbZi60FwRduXS+RH6ASWUESL0orcklnvne0uf77fGpYvCe50QSEpzHSYrdwSo1TdBWV46SnlMruJ+TPRrZCpx3u3qklUR6BqN55AGYkfKmXlkrGkdmTyUmZA6djKEW3HFGerfcwMeznz30A7Hk01fnB5gxAvdBKTlhAIcpCHRUe5WpupmwZwbxW/v5HlFCaz1i8ZNAAhO0kkzsHZXjBlR3oOdhOkXPP9zU/zhJwoRiwLtwNTYs9ugQ4SHJjovhH2tBc1no0BJUSQh+kiTBKPY30htnh0gMPDA6Iw==\'/><input type=\'submit\' value=\'ok\' style=\'display:none;\'\'></form><script>document.forms[\'alipaysubmit\'].submit();</script>'
+2019-08-23 10:54:31  {"trade_no":"2019082322001457660531213950","out_trade_no":"1566528828497"}
+2019-08-23 10:54:31  response: stdClass::__set_state(array(
+   'alipay_trade_query_response' => 
+  stdClass::__set_state(array(
+     'code' => '10000',
+     'msg' => 'Success',
+     'buyer_logon_id' => '151******02',
+     'buyer_pay_amount' => '0.00',
+     'buyer_user_id' => '2088112586257661',
+     'invoice_amount' => '0.00',
+     'out_trade_no' => '1566528828497',
+     'point_amount' => '0.00',
+     'receipt_amount' => '0.00',
+     'send_pay_date' => '2019-08-23 10:52:49',
+     'total_amount' => '0.01',
+     'trade_no' => '2019082322001457660531213950',
+     'trade_status' => 'TRADE_SUCCESS',
+  )),
+   'sign' => 'VMUWflNdpPJXOHbv6QbYkvq8xMDBRTaP9Rv68UZUIaFIeCOynt9o8F/4a09iJiQAQ7b6E+hAq2N/0uikfmQQe1R6smnr/cN2KAC0YOviLB35Z0iDAu5yrmsjqMQtnLOxKFl42LHjQcAfXNMgxvcwPoQqmVcjdgvwl8xnW8cJcW9G5mn/HuM5WR343mJFn9MMGS7zDdIKbgX0U/qsZCPKKNhj+Q9+9mKe23lFshrfypQay1Xqp8XHMs8J29lfCwMSKX+1ty7QbR2ipBimrRTOWXhlKNfw7YReyXo0tNOG8dNEgZojxg4HOWiLZ+QnZmL6vCLq9sECkN+5uhCBtgwl+g==',
+))
+2019-08-23 11:02:40  {"trade_no":"2019082322001457660531213950","out_trade_no":"1566528828497"}
+2019-08-23 11:02:41  response: stdClass::__set_state(array(
+   'alipay_trade_query_response' => 
+  stdClass::__set_state(array(
+     'code' => '10000',
+     'msg' => 'Success',
+     'buyer_logon_id' => '151******02',
+     'buyer_pay_amount' => '0.00',
+     'buyer_user_id' => '2088112586257661',
+     'invoice_amount' => '0.00',
+     'out_trade_no' => '1566528828497',
+     'point_amount' => '0.00',
+     'receipt_amount' => '0.00',
+     'send_pay_date' => '2019-08-23 10:52:49',
+     'total_amount' => '0.01',
+     'trade_no' => '2019082322001457660531213950',
+     'trade_status' => 'TRADE_SUCCESS',
+  )),
+   'sign' => 'VMUWflNdpPJXOHbv6QbYkvq8xMDBRTaP9Rv68UZUIaFIeCOynt9o8F/4a09iJiQAQ7b6E+hAq2N/0uikfmQQe1R6smnr/cN2KAC0YOviLB35Z0iDAu5yrmsjqMQtnLOxKFl42LHjQcAfXNMgxvcwPoQqmVcjdgvwl8xnW8cJcW9G5mn/HuM5WR343mJFn9MMGS7zDdIKbgX0U/qsZCPKKNhj+Q9+9mKe23lFshrfypQay1Xqp8XHMs8J29lfCwMSKX+1ty7QbR2ipBimrRTOWXhlKNfw7YReyXo0tNOG8dNEgZojxg4HOWiLZ+QnZmL6vCLq9sECkN+5uhCBtgwl+g==',
+))
+2019-08-23 11:02:50  {"trade_no":"2019082322001457660531213950","out_trade_no":"1566528828497"}
+2019-08-23 11:02:50  response: stdClass::__set_state(array(
+   'alipay_trade_query_response' => 
+  stdClass::__set_state(array(
+     'code' => '10000',
+     'msg' => 'Success',
+     'buyer_logon_id' => '151******02',
+     'buyer_pay_amount' => '0.00',
+     'buyer_user_id' => '2088112586257661',
+     'invoice_amount' => '0.00',
+     'out_trade_no' => '1566528828497',
+     'point_amount' => '0.00',
+     'receipt_amount' => '0.00',
+     'send_pay_date' => '2019-08-23 10:52:49',
+     'total_amount' => '0.01',
+     'trade_no' => '2019082322001457660531213950',
+     'trade_status' => 'TRADE_SUCCESS',
+  )),
+   'sign' => 'VMUWflNdpPJXOHbv6QbYkvq8xMDBRTaP9Rv68UZUIaFIeCOynt9o8F/4a09iJiQAQ7b6E+hAq2N/0uikfmQQe1R6smnr/cN2KAC0YOviLB35Z0iDAu5yrmsjqMQtnLOxKFl42LHjQcAfXNMgxvcwPoQqmVcjdgvwl8xnW8cJcW9G5mn/HuM5WR343mJFn9MMGS7zDdIKbgX0U/qsZCPKKNhj+Q9+9mKe23lFshrfypQay1Xqp8XHMs8J29lfCwMSKX+1ty7QbR2ipBimrRTOWXhlKNfw7YReyXo0tNOG8dNEgZojxg4HOWiLZ+QnZmL6vCLq9sECkN+5uhCBtgwl+g==',
+))
+2019-08-23 11:06:58  {"product_code":"FAST_INSTANT_TRADE_PAY","body":"E点就通试听课程","subject":"E点就通试听课程","total_amount":"0.01","out_trade_no":"1566529618423"}
+2019-08-23 11:06:58  response: '<form id=\'alipaysubmit\' name=\'alipaysubmit\' action=\'https://openapi.alipay.com/gateway.do?charset=UTF-8\' method=\'POST\'><input type=\'hidden\' name=\'biz_content\' value=\'{"product_code":"FAST_INSTANT_TRADE_PAY","body":"E点就通试听课程","subject":"E点就通试听课程","total_amount":"0.01","out_trade_no":"1566529618423"}\'/><input type=\'hidden\' name=\'app_id\' value=\'2019081666212942\'/><input type=\'hidden\' name=\'version\' value=\'1.0\'/><input type=\'hidden\' name=\'format\' value=\'json\'/><input type=\'hidden\' name=\'sign_type\' value=\'RSA2\'/><input type=\'hidden\' name=\'method\' value=\'alipay.trade.page.pay\'/><input type=\'hidden\' name=\'timestamp\' value=\'2019-08-23 11:06:58\'/><input type=\'hidden\' name=\'alipay_sdk\' value=\'alipay-sdk-php-20161101\'/><input type=\'hidden\' name=\'notify_url\' value=\'http://www.yangydt.com/index/course_pay/successUrl\'/><input type=\'hidden\' name=\'return_url\' value=\'http://www.yangydt.com/index/course_pay/return_url\'/><input type=\'hidden\' name=\'charset\' value=\'UTF-8\'/><input type=\'hidden\' name=\'sign\' value=\'L7f6sw9XkoKLO3pFUjdYCXxaupx+Q+2qzi9kSk7lM0+VQJuRy7oNMUlqoNuSaoslSgovlQ0bzCMlO06RDmdfF2/rUG3FrQVYjmBpp6MKlDi0Eik5XIBc97MzL209uhJCCh1Kw1e83v2hqJmRcvh7vitunDixTTBQGMD4r7r+cDbXwFhuoNq8tfro7sc1/LIwZemIaktg989RgmCf+eOosLgIuYowq7nX7+84euphLgEmuYoE9uDQzgHTEQ1Q8is7OdtlBsqrcwpO8/MV3sK/TwZ3UEre1NthzVQ2BK00xXRQOR8AowgST1j4YQN9YvEGWRJ44zCSn24HwstzKCDhnQ==\'/><input type=\'submit\' value=\'ok\' style=\'display:none;\'\'></form><script>document.forms[\'alipaysubmit\'].submit();</script>'
+2019-08-23 11:07:34  {"trade_no":"2019082322001457660531807005","out_trade_no":"1566529618423"}
+2019-08-23 11:07:35  response: stdClass::__set_state(array(
+   'alipay_trade_query_response' => 
+  stdClass::__set_state(array(
+     'code' => '10000',
+     'msg' => 'Success',
+     'buyer_logon_id' => '151******02',
+     'buyer_pay_amount' => '0.00',
+     'buyer_user_id' => '2088112586257661',
+     'invoice_amount' => '0.00',
+     'out_trade_no' => '1566529618423',
+     'point_amount' => '0.00',
+     'receipt_amount' => '0.00',
+     'send_pay_date' => '2019-08-23 11:05:54',
+     'total_amount' => '0.01',
+     'trade_no' => '2019082322001457660531807005',
+     'trade_status' => 'TRADE_SUCCESS',
+  )),
+   'sign' => 'QYP6tTJAAe9sfXLG77c54BcY+h79M8dP18xVUayiFYXVxVQmuF8Pw1EdCKXprQwv75UL3J1KR4UbEie8t8JwuMYkJsuUNcXTA983QbCs63GdHYmx5EmGyN42e9vRpC3az+3Y42XGlGHxMrZ0cHK2Zu0zt75Pl5HLGq63IxXgRpmGEmdcVFKKTMSWvJ4ifx4Jlkq+eOYQAUaEMyxecKbUZ43dPbouoU7hjWgvtkHEuFs/4iSKO01JuriCjrpZSCgxfM3wl4zgol7/J8mgJwgSbk+T3VsLOc3aPyCJJaW63GxHYBEZdHfRcqsrEftgHjMSA4/uH7VBt7K2EVcIhvNmZQ==',
+))
+2019-08-23 11:14:06  {"product_code":"FAST_INSTANT_TRADE_PAY","body":"E点就通试听课程","subject":"E点就通试听课程","total_amount":"0.01","out_trade_no":"1566530046196"}
+2019-08-23 11:14:07  response: '<form id=\'alipaysubmit\' name=\'alipaysubmit\' action=\'https://openapi.alipay.com/gateway.do?charset=UTF-8\' method=\'POST\'><input type=\'hidden\' name=\'biz_content\' value=\'{"product_code":"FAST_INSTANT_TRADE_PAY","body":"E点就通试听课程","subject":"E点就通试听课程","total_amount":"0.01","out_trade_no":"1566530046196"}\'/><input type=\'hidden\' name=\'app_id\' value=\'2019081666212942\'/><input type=\'hidden\' name=\'version\' value=\'1.0\'/><input type=\'hidden\' name=\'format\' value=\'json\'/><input type=\'hidden\' name=\'sign_type\' value=\'RSA2\'/><input type=\'hidden\' name=\'method\' value=\'alipay.trade.page.pay\'/><input type=\'hidden\' name=\'timestamp\' value=\'2019-08-23 11:14:06\'/><input type=\'hidden\' name=\'alipay_sdk\' value=\'alipay-sdk-php-20161101\'/><input type=\'hidden\' name=\'notify_url\' value=\'http://www.yangydt.com/index/course_pay/successUrl\'/><input type=\'hidden\' name=\'return_url\' value=\'http://www.yangydt.com/index/course_pay/return_url\'/><input type=\'hidden\' name=\'charset\' value=\'UTF-8\'/><input type=\'hidden\' name=\'sign\' value=\'nYBNKvbZySl4hPnv/xJPYsOp28aemU2tNsPHW96eDN/YlDtElJeqxwYKrbguBkKKyzLM4K4c4+sUbJpU5HAKRjFEw9AARnJtOW+XyBqO83QFxzoOPC3L4TUdlznA2cdvkaicepiQYh7Gdld35vLpXhmL3m7/ktHDJU7g2+ENq2NtRQftwcwUrvWf/i0BBKTtO4Rf9MvvbWlEuetbl6mAoPblz3A8y1Jgbnsh5Z2MpFW8zxlvcR58W6DxNPE/bsKG9RzwYba9oGC5jGD7Fv9I04Di5/dw4K1EUc5zzf5vPjZAxOFYXboH8YiHLe4p3zOqmluvV7OqbGYiDnsiPJaHiw==\'/><input type=\'submit\' value=\'ok\' style=\'display:none;\'\'></form><script>document.forms[\'alipaysubmit\'].submit();</script>'
+2019-08-23 15:41:44  {"trade_no":"2019082322001457660531807005","out_trade_no":"1566529618423"}
+2019-08-23 15:41:45  response: stdClass::__set_state(array(
+   'alipay_trade_query_response' => 
+  stdClass::__set_state(array(
+     'code' => '10000',
+     'msg' => 'Success',
+     'buyer_logon_id' => '151******02',
+     'buyer_pay_amount' => '0.00',
+     'buyer_user_id' => '2088112586257661',
+     'invoice_amount' => '0.00',
+     'out_trade_no' => '1566529618423',
+     'point_amount' => '0.00',
+     'receipt_amount' => '0.00',
+     'send_pay_date' => '2019-08-23 11:05:54',
+     'total_amount' => '0.01',
+     'trade_no' => '2019082322001457660531807005',
+     'trade_status' => 'TRADE_SUCCESS',
+  )),
+   'sign' => 'QYP6tTJAAe9sfXLG77c54BcY+h79M8dP18xVUayiFYXVxVQmuF8Pw1EdCKXprQwv75UL3J1KR4UbEie8t8JwuMYkJsuUNcXTA983QbCs63GdHYmx5EmGyN42e9vRpC3az+3Y42XGlGHxMrZ0cHK2Zu0zt75Pl5HLGq63IxXgRpmGEmdcVFKKTMSWvJ4ifx4Jlkq+eOYQAUaEMyxecKbUZ43dPbouoU7hjWgvtkHEuFs/4iSKO01JuriCjrpZSCgxfM3wl4zgol7/J8mgJwgSbk+T3VsLOc3aPyCJJaW63GxHYBEZdHfRcqsrEftgHjMSA4/uH7VBt7K2EVcIhvNmZQ==',
+))
+2019-08-23 15:42:55  {"trade_no":"2019082322001457660535346420","out_trade_no":"1566546124377254"}
+2019-08-23 15:42:56  response: stdClass::__set_state(array(
+   'alipay_trade_query_response' => 
+  stdClass::__set_state(array(
+     'code' => '10000',
+     'msg' => 'Success',
+     'buyer_logon_id' => '151******02',
+     'buyer_pay_amount' => '0.00',
+     'buyer_user_id' => '2088112586257661',
+     'invoice_amount' => '0.00',
+     'out_trade_no' => '1566546124377254',
+     'point_amount' => '0.00',
+     'receipt_amount' => '0.00',
+     'send_pay_date' => '2019-08-23 15:41:15',
+     'total_amount' => '0.01',
+     'trade_no' => '2019082322001457660535346420',
+     'trade_status' => 'TRADE_SUCCESS',
+  )),
+   'sign' => 'tz/VxK27d9OL72oYaBMHrx0xS1dNDfhrm3Cx44c+NggQ1TaNt2FH0a+TMH+krATNqXvzNUhjGYiFHPBn6t/gPY7GDL5xwdADeI4W78AlETfyFqhzcKOW4eykM9vv6rMusAvKd1w7wUSSLPMXpbFjBgrXiTGLwyGWUarTAjwe+lQjluH096ElctKFPQMl6Lg7H9HloihnIUcHXSDNT9/HtHyNPacs0vmklyfE8E3V6FUwcIcS196EMFM873VNpDwYSIbcyOgj9Mt8zyW4YPHY74XyXgXnMtFHFhk09UtGfXAEo4FUpdjrmW+NPf8QEAJWmCpRZZ0aQKk2SZ4Fr9XBwA==',
+))
+2019-09-24 16:41:07  {"product_code":"FAST_INSTANT_TRADE_PAY","body":"E点就通试听课程","subject":"E点就通试听课程","total_amount":"0.01","out_trade_no":"1569314464107939"}
+2019-09-24 16:41:07  response: '<form id=\'alipaysubmit\' name=\'alipaysubmit\' action=\'https://openapi.alipay.com/gateway.do?charset=UTF-8\' method=\'POST\'><input type=\'hidden\' name=\'biz_content\' value=\'{"product_code":"FAST_INSTANT_TRADE_PAY","body":"E点就通试听课程","subject":"E点就通试听课程","total_amount":"0.01","out_trade_no":"1569314464107939"}\'/><input type=\'hidden\' name=\'app_id\' value=\'2019081666212942\'/><input type=\'hidden\' name=\'version\' value=\'1.0\'/><input type=\'hidden\' name=\'format\' value=\'json\'/><input type=\'hidden\' name=\'sign_type\' value=\'RSA2\'/><input type=\'hidden\' name=\'method\' value=\'alipay.trade.page.pay\'/><input type=\'hidden\' name=\'timestamp\' value=\'2019-09-24 16:41:07\'/><input type=\'hidden\' name=\'alipay_sdk\' value=\'alipay-sdk-php-20161101\'/><input type=\'hidden\' name=\'notify_url\' value=\'http://jun.ydtkt.com/index/course_pay/successUrl\'/><input type=\'hidden\' name=\'return_url\' value=\'http://jun.ydtkt.com/index/course_pay/return_url\'/><input type=\'hidden\' name=\'charset\' value=\'UTF-8\'/><input type=\'hidden\' name=\'sign\' value=\'o5mt20nTDcFYGyyr/wRfZpC5CPH3uDZpcB49uI7nT2len/vMhh83bwjhmyDBWCD0h+YQrgGtYGEsMRbN9dlIltv1G1vupThx9yEF9slrH51yr+xqoANh7GKVHQlGjx7CoSIXpdotmaOxReLTZ3d24GXUeuti+3cDFz37C+UNfHkKCl6WrtR6kVttVW/UCJ8eB8FGw+QK+6ZrWRL5iUL6X2SSz0/S0Hu435UbI5AdqXiE5dl0sglw0NChQctyjvxZDKO3w3d65bwYYQ0J6pE3vbGfTEDrIGseYAKrauRnJI9pgSOXRwXkfH4qNQTD5mNARQnLe4OhAe7alnpOec8ttA==\'/><input type=\'submit\' value=\'ok\' style=\'display:none;\'\'></form><script>document.forms[\'alipaysubmit\'].submit();</script>'
+2019-10-18 15:48:25  {"product_code":"FAST_INSTANT_TRADE_PAY","body":"E点就通试听课程","subject":"E点就通试听课程","total_amount":"0.01","out_trade_no":"1571384905888934"}
+2019-10-18 15:48:25  response: '<form id=\'alipaysubmit\' name=\'alipaysubmit\' action=\'https://openapi.alipay.com/gateway.do?charset=UTF-8\' method=\'POST\'><input type=\'hidden\' name=\'biz_content\' value=\'{"product_code":"FAST_INSTANT_TRADE_PAY","body":"E点就通试听课程","subject":"E点就通试听课程","total_amount":"0.01","out_trade_no":"1571384905888934"}\'/><input type=\'hidden\' name=\'app_id\' value=\'2019081666212942\'/><input type=\'hidden\' name=\'version\' value=\'1.0\'/><input type=\'hidden\' name=\'format\' value=\'json\'/><input type=\'hidden\' name=\'sign_type\' value=\'RSA2\'/><input type=\'hidden\' name=\'method\' value=\'alipay.trade.page.pay\'/><input type=\'hidden\' name=\'timestamp\' value=\'2019-10-18 15:48:25\'/><input type=\'hidden\' name=\'alipay_sdk\' value=\'alipay-sdk-php-20161101\'/><input type=\'hidden\' name=\'notify_url\' value=\'http://jun.ydtkt.com/index/course_pay/successUrl\'/><input type=\'hidden\' name=\'return_url\' value=\'http://jun.ydtkt.com/index/course_pay/return_url\'/><input type=\'hidden\' name=\'charset\' value=\'UTF-8\'/><input type=\'hidden\' name=\'sign\' value=\'kQ4t5q3pepb7fdTSFmCANNpz9qhsmblFE8HTJ8RaiIgJwMF3n/BLWtSLt1+wghGBiVTkr8DZdvay4AGfJDoufXDbOQhC5d585+sNapw06RWkUWInMmHf/OZO+/iRhJ1nxm9WyRgYm8bB8Vs4ROIrvSiqmOuKEAPp99xcqGXiqzgrsB27pP0DX2yoWNT2LaLw3adhvO7kgwQLekSvp3iTo/Mg/GTn0LpchXDP80eMuLEx6krF/1F5NFu5Npq5VbCR5OWijmaGukMLzz6dWWykh9AG3QDi4hByO8cd7n89DnUAjVpkmJaetqAdSYNoUkC6TskblVvmDCD5do3sVre7ag==\'/><input type=\'submit\' value=\'ok\' style=\'display:none;\'\'></form><script>document.forms[\'alipaysubmit\'].submit();</script>'

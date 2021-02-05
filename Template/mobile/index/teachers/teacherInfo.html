@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <title>E点就通名校名师同步课堂</title>
+  <script src="__mobile__/js/mui.min.js"></script>
+  <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="__mobile__/css/style.css">
+</head>
+<body>
+  <!-- header -->
+  {include file="index/public/header"}
+  <!-- 顶部导航栏选择年级弹出部分 -->
+  <!-- content -->
+  <div class="mui-content teachers-page clearfix">
+    <div class="teachers-info">
+      <div class="teachers-info-top clearfix">
+        <div class="teachers-info-img">
+          <img src="{$teacherList.0.litpic}" />
+        </div>
+        <div class="teachers-info-right clearfix">
+          <div class="teachers-info-title clearfix">
+            <span class="teachers-info-name">{$teacherList.0.name}</span>
+            <span class="teachers-info-position">[{$teacherList.0.subject}老师]</span>
+            <span class="teachers-info-star"></span>
+          </div>
+          <div class="teachers-info-age">{$teacherList.0.teacherPosition}</div>
+        </div>
+      </div>
+      <div class="teachers-info-introduce">
+        <div class="teachers-info-introduce-title">讲师简介</div>
+        <p class="teachers-info-introduce-p">
+            {$teacherList.0.content}
+        </p>
+      </div>
+    </div>
+  </div>
+{include file="index/public/footer"}
+</body>
+</html>
+ <script src="__mobile__/js/jquery-2.2.3.js"></script>
+ <script src="__mobile__/js/fastclick.js"></script>
+<script src="__mobile__/js/iconfont/iconfont.js"></script>
+<script src="__mobile__/js/public.js"></script>
+<script>
+  mui.init();
+  function isIphoneX() {
+    return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+  } 
+  if(isIphoneX()) {
+    $(".course-change-list:first-child").css({"margin":"20% 0 0 4%"})
+    $(".course-list-change").css({height:"94%"})
+  }
+  // $(".teachers-tab-lis").click(function() {
+  //   $(".teachers-tab-lis").removeClass("teachers-tab-current")
+  //   $(this).addClass("teachers-tab-current")
+  //   $(".teachers-lis").removeClass("active")
+  //   $(".teachers-lis").eq($(this).index()).addClass("active")
+  // })
+</script>

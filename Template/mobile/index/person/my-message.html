@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>E点就通名校名师同步课堂</title>
+    <script src="__mobile__/js/mui.min.js"></script>
+    <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__mobile__/css/style.css">
+</head>
+<body>
+  <!-- header -->
+  <header class="mui-bar mui-bar-nav common-header">
+		<div class="header-back iconfont iconxiangzuojiantou"><a href="javascript:;"></a></div>
+		<h1 class="common-title">消息中心</h1>
+		<div class="my-message-edit">编辑</div>
+  </header>
+  <!-- 顶部导航栏选择年级弹出部分 -->
+  <!-- content -->
+  <div class="mui-content clearfix nav-item-message">
+    <ol class="message-select">
+      <li class="message-unread" data-val="0">未读</li>
+      <li data-val="1">已读</li>
+      <!-- <li data-val="2">全部</li> -->
+    </ol>
+    <!-- content -->
+    <ul id="OA_task_1" class="mui-table-view message-content-all">
+    </ul>
+  </div>
+  <div class="message-delect-all message-delect-this">
+    <div class="message-all message-this">全选</div>
+    <div class="message-delect">删除</div>
+  </div>
+</body>
+</html>
+<script src="__mobile__/js/jquery-2.2.3.js"></script>
+<script src="__mobile__/js/fastclick.js"></script>
+<script src="__mobile__/js/public.js"></script>
+<script src="__mobile__/css/iconfont/iconfont.js"></script>
+<script>
+   mui.init();
+  //页面回退
+  $('.header-back').click(function(){
+    window.history.back(-1);
+  })
+  // 点击编辑事件
+  $(".my-message-edit").click(function() {
+    let html = $(".my-message-edit").html();
+    if ( html == "编辑") {
+      $(".my-message-edit").html("取消")
+      $(".message-delect-all").removeClass("message-delect-this")
+      $(".message-delect-cycle").show()
+      $(".mui-delete-btn").hide()
+    } else {
+      $(".my-message-edit").html("编辑")
+      $(".message-delect-all").addClass("message-delect-this")
+      $('.message-delect-cycle').removeClass('cycle-current');
+      $(".message-delect-cycle").hide()
+      $(".mui-delete-btn").show()
+    }
+  })
+  //删除按钮
+  $('.message-delect').click(function(){
+      var div_arr = $('.message-delect-cycle')
+          ,bool = 'false'
+          ,id_arr = new Array();
+      $.each(div_arr,function(i,v){
+        if($('.message-delect-cycle').eq(i).hasClass('cycle-current')){
+          bool = 'true';
+          id_arr[i] = $('.message-delect-cycle').eq(i).attr('data-id');
+        }
+      })
+      if(bool == 'false'){
+        mui.alert('请选择要删除的数据！','');
+        return false;
+      }
+      var btnArray = ['否', '是'];
+      mui.confirm('删除后不可恢复！确定删除吗？', '谨慎操作', btnArray, function(e) {
+          if (e.index == 1) {
+              var id_str = id_arr.join(',');
+              delMessage(id_str);
+          } else {
+
+          }
+      })
+  })
+  //单删
+  function singleDel(id,_this){
+      delMessage(id,1);
+      $(_this).parents('li').remove();
+  }
+  $(".nav-list").on('click','.nav-item',function() {
+    $(".nav-item").removeClass("nav-item-now")
+    $(".nav-item-left").removeClass("nav-item-now")
+    $(this).addClass("nav-item-now")
+  })
+  //全选按钮
+  $('.message-all').click(function(){
+      $('.message-delect-cycle').removeClass('cycle-current');
+      $('.message-delect-cycle').addClass('cycle-current');
+  })
+  //单个按钮选中
+  $(document).on('click',".message-delect-cycle",function() {
+    console.log($(this).hasClass("cycle-current"));
+    if($(this).hasClass("cycle-current")){
+        $(this).removeClass('cycle-current');
+    }else{
+        $(this).addClass("cycle-current")
+    }
+  })
+  $('.message-select li').click(function(){
+    $('.message-select li').removeClass('message-unread');
+    $(this).addClass('message-unread');
+    var status = $(this).attr('data-val');
+    message(status);
+  })
+  message(0);
+  //消息请求接口
+  function message(status)
+  {
+    mui.post('/index/person/myMessage',{status:status},function(res){
+      if(res.error_code==1){
+        var data=res.data;
+        var html='';
+        for(x in data){
+            html+='<li class="mui-table-view-cell"><div class="message-delect-cycle" data-id="'+data[x].id+'"></div><div class="mui-slider-right mui-disabled mui-delete-btn"><a class="mui-btn mui-btn-red" onclick="singleDel('+data[x].id+','+this+')">删除</a></div><div class="mui-slider-handle message-lis-contain message-content-new"><a href="/index/person/msgContent?id='+data[x].id+'"><div class="mui-media-body "><span class="message-content-title">'+data[x].title+'</span><span class="message-content-subject">'+data[x].create_time+'</span><p class="message-content-p">'+data[x].desc+'</p></div></a></div></li>';
+        }
+        $('#OA_task_1').html(html);
+        if($(".my-message-edit").html() == '取消'){
+          $(".message-delect-all").removeClass("message-delect-this")
+          $(".message-delect-cycle").show()
+          $(".mui-delete-btn").hide()
+        }
+      }else{
+        $('#OA_task_1').html(res.msg);
+      }
+      
+    }),
+  'json'}
+  //删除操作
+  function delMessage(ids, delStatus = 0){
+    // console.log(ids);
+    mui.post('/index/person/delMssage',{id:ids},function(res){
+        if(res.error_code == 1 && delStatus == 0){
+            $('.cycle-current').parent('li').remove();
+            if($('#OA_task_1').has('li').length <= 0){
+              $('#OA_task_1').html('暂无数据');
+            }
+        }
+        if(res.error_code == 1 && delStatus == 1){
+            return 1;
+        }
+    },'json')
+  }
+</script>

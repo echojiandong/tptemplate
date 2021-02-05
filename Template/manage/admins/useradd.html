@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/admin.css" media="all" />
+</head>
+<body>
+  <div class="layui-form" lay-filter="layuiadmin-form-admin" id="layuiadmin-form-admin" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="eid" id="eid" value="{$eid}">
+    <div class="layui-form-item" >
+    	<label class="layui-form-label">{$adminTxt}账号</label>
+	    <div class="layui-input-inline">
+	     	<!-- <input type="text" name="username" lay-verify="required" lay-reqText="请填写管{$adminTxt}" {if condition="$eid"} disabled {/if} placeholder="请输入{$adminTxt}名称" autocomplete="off" class="layui-input"> -->
+         <input type="text" name="username" lay-verify="required" lay-reqText="请填写管{$adminTxt}" placeholder="请输入{$adminTxt}名称" autocomplete="off" class="layui-input">
+      </div>
+        <label class="layui-form-label">{$adminTxt}密码</label>
+        <div class="layui-input-inline">
+          {if condition="$eid eq 0"}
+          <input type="password" name="password" lay-verify="required" lay-reqText="密码必填" placeholder="请输入{$adminTxt}密码" autocomplete="off" class="layui-input">
+          {else /}
+          <input type="password" name="password"  autocomplete="off" class="layui-input">
+          {/if}
+        </div>
+    </div>
+
+     <div class="layui-form-item">
+      <label class="layui-form-label">手机号</label>
+      <div class="layui-input-inline">
+        <input type="text" name="phone" lay-verify="phone" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+      </div>
+      <label class="layui-form-label">微信号</label>
+      <div class="layui-input-inline">
+        <input type="text" name="wechat_num" placeholder="请输入微信号" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      {if($id == 24)}
+          <label class="layui-form-label">所属代理商</label>
+          <div class="layui-form layui-input-inline">
+              <select name='u_id' lay-search>
+                {volist name='agentList' id='v'}
+                  <option value="{$v.uid}">{$v.username}</option>
+                {/volist}
+              </select>
+          </div>
+      {/if}
+      
+      <label class="layui-form-label">权限分组</label>
+      <div class="layui-input-inline">
+          <select name='group_id'>
+            {volist name='role_list' id='v'}
+              <option value="{$v.id}"><?php echo str_repeat('—', $v['level']); ?>{$v.title}</option>
+            {/volist}
+          </select>
+      </div>
+
+    </div>
+
+    {if condition="$type"}
+    <div class="layui-form-item">
+          <label class="layui-form-label">所属部门</label>
+          <div class="layui-input-inline">
+              <select name='org_id'>
+                <option value="">请选择所属部门</option>
+                {volist name='orgList' id='v'}
+                  <option value="{$v.id}" ><?php echo str_repeat('—', $v['level']);?>{$v.name}</option>
+                {/volist}
+              </select>
+          </div>
+    </div>
+    {/if}
+
+    {if condition="!$type"}
+    <div class="layui-form-item">
+      <label class="layui-form-label">地址</label>
+      <div class="layui-input-block">
+        <input type="text" name="address" lay-verify="required" lay-reqText="地址必填" placeholder="请输入地址" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">收款方式</label>
+      <div class="layui-input-block">
+        <select name="paytype">
+            <option value="1">微信</option>
+            <option value="2">支付宝</option>
+        </select>
+      </div>
+    </div>
+
+   <div class="layui-form-item">
+    <label class="layui-form-label" style="display: block">收款二维码</label>
+    <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="test10">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+        <img id="testImg" style="width: 300px; height: 135px; display: none;  margin-top: -60px;" src=""/>
+        <input type="hidden" name="payImg"  id="image" lay-verify="image">
+      </div>
+    </div>
+    {/if}
+
+
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">{$adminTxt}简介</label>
+      <div class="layui-input-block">
+        <textarea name="remark" placeholder="请输入内容" class="layui-textarea"></textarea>
+      </div>
+    </div>
+
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-user-back-submit" id="LAY-user-back-submit" value="确认">
+    </div>
+  </div>
+</body>
+</html>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript">
+	layui.use(['layer','code','form','upload'],function(){
+		var $ = layui.$
+			,form = layui.form
+			,layer = layui.layer
+      ,upload = layui.upload
+      ,eid = $('#eid').val();
+
+
+      //拖拽上传
+      upload.render({
+          elem: '#test10'
+          ,url: '/manage/admins/uploadimg'
+          ,size:'60000'
+          ,exts:'jpg|png|jpeg'
+          ,done: function(res){
+              if(res.code==0){
+                  layer.msg(res.msg,{time:800},function(){
+                      var img = res.data;
+                      var img = img.replace("\\","/");
+                      $("#testImg").attr("src",img);
+                      $("#image").attr("value",img);
+                      $("#testImg").show();
+
+                  });
+              }else{
+                  layer.msg(res.msg,{time:800});
+              }
+          }
+      });
+
+      //表单初始赋值
+      if(eid != 0){
+          $.ajax({
+            url: '/manage/admins/setuserval'
+            ,data: {id:eid}
+            ,type: 'post'
+            ,dataType: 'json'
+            ,async: false
+            ,success: function(res){
+                if(res.code == 0){
+                  form.val('layuiadmin-form-admin',res.data);
+                  if(res.data.payImg == null){
+                    return false;
+                  }
+                  $("#testImg").attr("src",res.data.payImg);
+                  $("#image").attr("value",res.data.payImg);
+                  $("#testImg").show();
+                }
+            }
+          })
+      }
+	})
+
+</script>

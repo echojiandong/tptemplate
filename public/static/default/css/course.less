@@ -1,0 +1,242 @@
+@import "./iconfont/iconfont.css";
+i{
+  font-family: "Microsoft YaHei" ! important;
+}
+.course-shows{
+  width:100%;
+  background: #FCFCFC;
+  margin-top: 83px;
+  .course-shows-top{
+    width:1200px;
+    margin: 0 auto;
+    .course-shows-position{
+      width:100%;
+      height:54px;
+      line-height: 54px;
+      a{
+        font-size:16px;
+        color:#333;
+      }
+      .course-shows-position-now{
+        color:#DF4A43;
+      }
+    }
+  }
+  .course-shows-introduce{
+    width:1200px;
+    margin:0 auto 46px;
+    border:1px solid #D9D9D9;
+    background: #fff;
+    .course-shows-introduce-top{
+      width:100%;
+      border-bottom:1px solid #D9D9D9;
+      .course-shows-top-img{
+        width:47.5%;
+        height: 349px;
+        margin:27px 43px 29px 27px;
+        float: left;
+        img{
+          width:100%;
+          height: 100%;
+        }
+      }
+      .course-shows-top-right{
+        width:41.75%;
+        margin:23px 0 0 0;
+        float: left;
+        .course-shows-right-title{
+          font-size:24px;
+          line-height: 36px;
+          color:rgba(51,51,51,1);
+        }
+        .course-shows-right-num{
+          width:100%;
+          margin-top:27px;
+          border-bottom:1px solid #D9D9D9;
+          .course-shows-right-course, .course-shows-right-study{
+            // width:30%;
+            float: left;
+            i{
+              display: inline-block;
+              width:68%;
+              text-align: center;
+              font-size:30px;
+              color:#DF4A43;
+              text-align: center;
+            }
+            .icon-renqun{
+              font-size:44px;
+              color:#26CA81;
+              margin-top:-6px;
+            }
+            span{
+              display: inline-block;
+              width:100%;
+              text-align: left;
+              line-height: 40px;
+              font-size:16px;
+              color:rgba(153,153,153,1);
+            }
+          }
+          .course-shows-right-study{
+            span{
+              line-height: 24px;
+            }
+          }
+        }
+        .course-shows-right-teachers{
+          width:100%;
+          font-size:22px;
+          color:rgba(51,51,51,1);
+          margin-top:26px;
+          p{
+            font-size:16px;
+            color:rgba(153,153,153,1);
+            line-height:24px;
+            margin-top:10px;
+          }
+        }
+        .course-shows-right-price{
+          width:60%;
+          position: relative;
+          left:71%;
+          font-size:14px;
+          color:#999999;
+          margin-top:54px;
+          .course-shows-right-price-now{
+            font-size:30px;
+            color:#DF4A43;
+          }
+          .old-price{
+            text-decoration: line-through;
+            margin-left:2%;
+          }
+        }
+        .course-shows-right-service{
+          width:60%;
+          height:23px;
+          line-height: 23px;
+          font-size:18px;
+          color:#565B67;
+          position: relative;
+          margin-top:23px;
+          left:52%;
+          span{
+            color:#fff;
+            background: #DF4A43;
+            padding:0 3px;
+            margin:-5px 5px 0 0;
+          }
+        }
+      }
+    }
+    // 课程列表
+    .course-shows-introduce-contain{
+      width:100%;
+      margin:0 auto;
+      .course-shows-introduce-contain-title{
+        width:100%;
+        height: 63px;
+        line-height: 63px;
+        border-bottom:1px solid #D9D9D9;
+        .course-list-style{
+          width:72px;
+          text-align: center;
+          font-size:18px;
+          color:#565B67;
+          margin-left:36px;
+          position: relative;
+        }
+        .course-list-style::after{
+          content:"";
+          position: absolute;
+          bottom: 0;
+          left:0;
+          width:71px;
+          height:4px;
+          background:#DF4A43;
+        }
+      }
+      .layui-tab-content{
+        .course-shows-introduce-list-title{
+          width:1132px;
+          border:none;
+          .layui-colla-item {
+            border-color:transparent;
+            margin-bottom: 15px;
+          }
+          .layui-colla-title{
+            background:rgba(234,234,237,1);
+            border:1px solid rgba(249,249,249,1);
+            border-radius:22px;
+            font-size:18px;
+            color:#565B67;
+          }
+          .layui-colla-content{
+            border-top:none;
+            border-color:none;
+            .shows-course-container-title{
+              font-size: 16px;
+              color: #565b67;
+            }
+            .shows-course-container{
+              width: 98%;
+              margin-bottom: 10px;
+              padding-left:2%;
+              float: left;
+              
+            }
+
+          }
+        }
+      }
+    }
+   }
+}
+.shows-course-container-lis{
+  width: 98%;
+  padding-left: 2%;
+  line-height: 33px;
+  position: relative;
+  .shows-container-lis-div{
+    width:100%;
+    .shows-container-lis-name{
+      display: inline-block;
+      width: 77%;
+      overflow: hidden;
+      font-size: 16px;
+      color: #565B67;
+      float: left;
+      cursor: pointer;
+      .icon-bofang11 {
+        font-size: 18px;
+      }
+    }
+    .shows-container-lis-frequency {
+      display: inline-block;
+      width: 12%;
+      overflow: hidden;
+      float: left;
+      text-align: right;
+      font-size: 16px;
+      color: #DF4A43;
+      cursor: pointer;
+    }
+    .shows-container-lis-duration {
+      display: inline-block;
+      width: 9%;
+      overflow: hidden;
+      font-size: 16px;
+      color: #B0B4BD;
+      float: right;
+      text-align: right;
+    }
+  }
+ 
+}
+.shows-course-container-lis:hover{
+  background:#fbfbfb;
+}
+.shows-course-container-lis:hover .shows-container-lis-title{
+  color:#DF4A43;
+}

@@ -1,0 +1,29 @@
+---------------------------------------------------------------
+[ 2020-12-24T15:50:50+08:00 ] 127.0.0.1 GET ywd100.com/
+[运行时间：0.194011s] [吞吐率：5.15req/s] [内存消耗：1,161.46kb] [文件加载：31]
+[ info ] [ LANG ] E:\phpStudy\WWW\ywd100\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=1fqh2ggvnubd9eota32oc82c42; manageinfo=8dZ7drvQ1xvYBn88AZc3u0g1tTBtstYnFUyqiAcV7FKIKeIXciSrOVR0QIt1KO1GHebzrdTeHJ0rveyOn%25252FiH94vzMj7u4fqKUd0ow0Za3%25252FqXZRI8PwszWK%252BWovJB1fkj5eC%25252FHPtsINxCF%25252F47n6OqdSuOoEBU48ai7HWxwuVL%252B7a3Rbq7jhGd2UlZCgsIZ1kz3C2%252Bl2UcqncgalFjNakbucGUQmd36e7p1kc6uVkxpzPWloqT5c7SPOfWTyuaKuyp0Yy9hFI9YrrUmccMPjyAQahrWeEJv%252BnZi%25252FIm%25252FWynOGBaW9nEqXvOISpezC1dJLU2Wu66oiaCsYIxUWGYst%25252FsZnC2R8WTgEWPfuWjkv%252Bmx4opgqYOWnTUgd%252Bh%25252FDdYTmNn5H%252BH%25252Ffa9h5dEPo5Mvxi8wPx9NcibS4smYSLE5Dk9Ttv35T9yaxICxth4aSHtcrsIBtofOZKQWTlXamsfg9lLNp3GE9F70ozS12vqrihVgIZdoYllaX%25252F6Xo%25252F8xj%252B8ZiTRIojOqfr4sidBuQA3F%252B%25252FoaDiz9b4u6qhZkyUgeujoeh4BM1yMPD8NhmnNK5CEgzdLFhtlwOUPOQ0Y8fxWyCUdLEMEi6fyXG6wTzFtU5lqDoDVFzjVwyD5lhpKnOfUMuwD%25252FkLrQ9wS9Qens3%252B8L6VyN4Czio2MZ6qrc1zzXMVGZUhZDv%25252FueGotvzlmVvs2SZPwZQCl6c06P87YrGWBJjzY3oEppM98b9GODmP9sHSD4qdXf5sHUFJAN5GVUSLI3yN1pHuBdFN3UfuZBk53Yj68h1X6kKqt1B0UYKezHDyf%252B9LK6d03Mqr9YcqQnmY8y4ZcyTUHc7UEsYtJrdqxQzJjB9PZZYhHxBtjVDOoPwqa%25252FyJZ8022YqxZleOAqHx%25252Fkx2O9wTD8qvDZb1ackfuwwZMsauJu8v4E1db',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'ywd100.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4]语法错误: unexpected '?'[E:\phpStudy\WWW\ywd100\application\index\controller\Index.php:525]

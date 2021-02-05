@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="applicable-device" content="pc">
+  <meta name="renderer" content="webkit"/>
+  <meta name="force-rendering" content="webkit"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <title>E点就通名校名师同步课堂</title>
+  <link rel="stylesheet" href="__PUBLIC__/css/layui.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+  <script src="__PUBLIC__/js/jquery-2.2.3.js"></script>
+</head>
+<body>
+  <!-- 公共头部 -->
+    {include file="index/public/header"}
+  <!-- 公共头部 -->
+  <!-- 修改头像 -->
+<div class="personal-center-modify clearfix">
+  <div class="personal-center-modify-position">
+    <a href="javascript:;">当前位置：个人中心 > 
+      <a class="personal-center-modify-changepic" href="javascript:;">修改头像</a>
+    </a>
+  </div>
+  <div class="personal-center-modify-contain">
+    <div class="personal-center-modify-username">
+      <img src="{$personInfo['litpic']|empty?'/upload/uploads/photo.jpg':'http://ydtvlitpic.ydtkt.com/'.$personInfo['litpic']}" alt="">
+      <p class="personal-modify-username-p" title="{$personInfo['nickName']}">{$personInfo['nickName']?:$personInfo['phone']}</p>
+    </div>
+    <form class="layui-form" action="" method="post" enctype="multipart/form-data">
+      <div class="avatar-inner">
+        <div class="avatar-current">
+          <!-- {empty name="$userinfo['litpic']"} -->
+            <img src="{$personInfo['litpic']|empty?'/upload/uploads/photo.jpg':'http://ydtvlitpic.ydtkt.com/'.$personInfo['litpic']}" alt="">
+          <!-- {else/} -->
+            <!-- <img src="{$userinfo.litpic}" alt=""> -->
+          <!-- {/empty} -->
+          <h3>当前头像</h3>
+        </div>
+        <div class="avatar-upload">
+          <img id="photo" src="__PUBLIC__/images/group.png" alt="">
+          <h3>修改头像</h3>
+          <div class="avatar-photo" id="test1"> 上传头像 </div>
+          <br/>
+          <!-- <p>(支持200kb以下JPG,PNG格式的图片)</p> -->
+          <div class="avatar-photo" id='setimg'>保存头像</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div> 
+</div>
+<!-- 底部导航  -->
+    {include file="index/public/footer"}
+<!-- 底部导航  -->
+</body>
+<script>
+layui.use(['element','layer', 'form','carousel','laypage','upload'], function(){
+  var layer = layui.layer
+      ,element = layui.element
+      ,form = layui.form
+      ,upload = layui.upload
+      ,carousel = layui.carousel
+      ,laypage = layui.laypage;
+
+      upload.render({
+        elem: '#test1'
+        ,url: 'setPersonImg' //必填项
+        ,method: 'post'  //可选项。HTTP类型，默认post
+        ,data: {} //可选项。额外的参数，如：{id: 123, abc: 'xxx'}
+        ,accept: 'images'
+        ,acceptMime:'image/*'
+        ,auto: false
+        ,bindAction: '#setimg'
+        ,drag:false
+        ,size:'6000'
+        ,choose:function(obj){
+            obj.preview(function(index,file,result){
+                $('#photo').attr('src',result);
+            })
+        },done:function(res,index,upload){
+            if(res.code == 0){
+                layer.msg('上传成功',{icon:1,time:2000},function(){
+                  window.location.href='/index/person/person';
+                });
+            }
+        },error:function(){
+            console.log('22');
+        }
+      });
+    
+
+});
+
+</script> 
+</html>

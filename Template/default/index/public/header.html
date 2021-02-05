@@ -1,0 +1,151 @@
+
+  <div class="common-header">
+    <div class="common-header-contain">
+      
+      <ul class="layui-nav common-header-list" lay-filter="">
+        <div class="logo"><a href="/"><img src="__PUBLIC__/images/logo.png" alt="" /></a></div>
+        <li class="layui-nav-item common-header-home layui-this"><a href="/">首页</a></li>
+        <li class="layui-nav-item"><a href="/index/course/course?pageNum=10">同步课程</a></li>
+        <li class="layui-nav-item"><a href="/index/teachers/teachersTeam">名校名师</a></li>
+        <!-- <li class="layui-nav-item"><a href="/index/service/service">客服验证</a></li>
+        <li class="layui-nav-item"><a href="javascript:;">答疑</a></li> -->
+        <li class="layui-nav-item"><a href="javascript:;">个人中心</a></li>
+        <li class="golobal-search">
+          <form class="layui-form index-nav-form" action="/index/index/glodalsearch">
+            <div class="layui-input-block nav-form-global">
+              <button class="layui-btn nav-button iconfont icon-sousuo" lay-submit lay-filter="searchMsg"></button>
+              <input type="text" name="gloalSearch" required  placeholder="课程名称" autocomplete="off" class="index-nav-search">
+            </div>
+          </form>
+        </li>
+      </ul>
+        <!-- 登录注册部分 -->
+        <div class="common-header-right">
+          <div class="login-register">
+             {if(!isset($user))}
+            <!-- 登录前 -->
+            <div class="common-before-login clearfix" style="display: block;">
+                <div class="header-login-btn">登录</div>
+                <div class="header-register-btn">注册</div>
+            </div>
+            {else}
+              <!-- 登录后 -->
+              <div class="common-after-login active clearfix">
+                <div class="after-login-message">
+                  <a class="after-login-message-news" href="/index/person/person?type=1"><i class="iconfont icon-xiaoxitongzhitixinglingshenglingdang"></i><span></span></a>
+                </div>
+                <div class="after-login-position">
+                  <input type="hidden" id="person_id" value="{$personInfo.id ? $personInfo.id : 0}"/>
+                  <a href="javascript:;" class="personal-id">
+                    <img src="{$personInfo['litpic']|empty?'/upload/uploads/photo.jpg':'http://ydtvlitpic.ydtkt.com/'.$personInfo['litpic']}" class="layui-nav-img">
+                    <!--  -->
+                  </a>
+                  <div class="exit-login">
+                    <div class="exit-login-div">
+                      <i class="iconfont icon-exit icon-tuichu"></i>
+                      退出登录
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {/if}
+          </div>
+        </div>
+
+    </div>
+  </div>
+  <!-- 登录注册模块 -->
+  <div class="login-register-modal"></div>
+  <div class="register-login-contain">
+    <div class="register-login-title clearfix">
+      <div class="register-login-button current">注册</div>
+      <div class="register-login-button">登录</div>
+      <!-- <div class="forget-password-title"><h5>学员登录</h5></div> -->
+    </div>
+    <ul class="register-login-content clearfix">
+      <!-- 注册 -->
+      <li class="register-login-content-lis">
+        <form class="layui-form register-form" action="">
+          <div class="layui-form-item">
+            <input type="text" name="registerPhone" id="register-phone-num" required  lay-verify="required|phone" placeholder="请输入手机号" autocomplete="off" class="layui-input index-register-input">
+          </div>
+          <div class="layui-form-item index-get-code">
+            <input type="text" name="registerCode" id="register-get-code" required maxlength="6" lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input index-register-input">
+            <input type="button" class="register-btncode get-phonecode-reg get-phonecode-reg1" data-id=1 value="获取验证码">
+          </div>
+          <div class="layui-form-item">
+            <input type="password" name="registerPwd" id="register-pwd" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input index-register-input">
+          </div>
+          
+          <div class="layui-form-item index-banner-button index-register-button">
+            <div class="index-layui-btn" lay-submit lay-filter="register" id='common-register'>注册</div>
+          </div>
+        </form>
+        <p class="register-xieyi">点击注册表示已阅读并同意<a href="/index/login/agreement">《用户协议》</a></p>
+      </li>
+      <!-- 登录 -->
+      <li class="register-login-content-lis">
+        <!-- 密码登录 -->
+        <div class="login-pwd active">
+          <form class="layui-form" action="" >
+            <div class="layui-form-item">
+              <input type="text" name="loginPhone" id="login-phone-num" required  lay-verify="required" placeholder="请输入手机号/卡号" autocomplete="off" class="layui-input index-login-input">
+            </div>
+            <div class="layui-form-item index-get-code">
+              <input type="password" name="loginPwd" id="login-pwd" required lay-verify="required"  placeholder="请输入密码" autocomplete="off" class="layui-input index-login-input">
+              <a class="login-methods " href="javascript:;">忘记密码？</a>
+              <a class="login-code-methods login-methods-active" href="javascript:;">使用验证码登录</a>
+            </div>
+            <div class="layui-form-item index-banner-button">
+              <div class="index-layui-btn" lay-submit lay-filter="pwdLogin" id='common-login'>登录</div>
+            </div>
+          </form>
+        </div>
+        <!-- 验证码登录 -->
+        <div class="login-code">
+          <form class="layui-form" action="" >
+            <div class="layui-form-item">
+              <input type="text" id="login-phone" name="loginCodePhone" id="login-phone-num" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input index-code-input">
+            </div>
+            <div class="layui-form-item index-get-code">
+              <input type="text" name="loginCode" id="login-get-code" required lay-verify="required" maxlength="6" placeholder="请输入验证码" autocomplete="off" class="layui-input index-code-input">
+              <input type="button" class="login-btncode get-phonecode get-phonecode2" data-id=2 value="获取验证码">
+              <!-- <a class="login-methods" href="javascript:;">忘记密码？</a> -->
+              <a class="login-pwd-methods login-methods-active" href="javascript:;">使用密码登录</a>
+            </div>
+            <div class="layui-form-item index-banner-button">
+              <div class="index-layui-btn" lay-submit lay-filter="codeLogin" id='common-login-code'>登录</div>
+            </div>
+          </form>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- 忘记密码 -->
+  <div class="forget-password">
+    <div class="forget-password-title"><h5>找回密码</h5></div>
+    <div class="forget-pwd"> 
+      <form class="layui-form forget-pwd-form" action="" >
+        <div class="layui-form-item">
+          <input type="text" id="forget-phone" name="forgetrPhone" id="register-phone-num" required  lay-verify="required|phone" placeholder="请输入手机号" autocomplete="off" class="layui-input index-forget-input">
+        </div>
+        <div class="layui-form-item index-get-code">
+          <input type="text" value="" name="forgetCode" id="forget-get-code" required lay-verify="required" maxlength="6" placeholder="请输入验证码"  autocomplete="new-password" class="layui-input index-forget-input">
+          <input type="button" class="forget-btncode get-phonecode get-phonecode3" data-id=3 value="获取验证码">
+        </div>
+        <div class="layui-form-item">
+          <input type="password" name="forgetPwd" id="forget-pwd" required  lay-verify="required" placeholder="请输入新密码"  autocomplete="new-password" class="layui-input index-forget-input">
+        </div>
+        <div class="layui-form-item index-banner-button">
+          <div class="index-layui-btn" lay-submit lay-filter="forget" id='common-login-forget'>提交</div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    window.onbeforeunload =function(){
+      var uid = $('#person_id').val();
+      $.post('/index/index/closeBrowserIpLog',{uid:uid})
+    }
+  </script>

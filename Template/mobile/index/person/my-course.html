@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>E点就通名校名师同步课堂</title>
+    <script src="__mobile__/js/mui.min.js"></script>
+    <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__mobile__/css/style.css">
+</head>
+<body>
+  <!-- header -->
+  <header class="mui-bar mui-bar-nav common-header">
+		<div class="header-back iconfont iconxiangzuojiantou"><a href="javascript:;"></a></div>
+		<h1 class="common-title">我的课程</h1>
+		<div class="my-course-select">筛选<i class="iconfont iconshaixuan"></i></div>
+  </header>
+  <!-- 顶部导航栏选择年级弹出部分 -->
+  <!-- content -->
+  <div class="mui-content clearfix">
+    <!-- 滚动条导航部分 -->
+    <div class="wrapper course-nav-item">
+      <ul class="js-navlist course-nav-list">
+        {volist name='subject' id='vo'}
+        <li class="nav-item  {$key == 0?'nav-item-current':''} {$vo['is_buy'] == 0?'nav-item-not-buy':''}" data-id='{$vo["id"]}'>{$vo.subject}</li>
+        {/volist}
+      </ul>
+    </div>
+    <!-- content -->
+    <div class="center-course-list-num">课程数{$list['counts']}节 &nbsp;&nbsp;&nbsp;</div>
+    <ul class="mui-table-view course-list-content"> 
+      {volist name='list["data_arr"][0]' id='vo'}
+        <li class="mui-table-view-cell mui-collapse course-list-unit {$key == 0?'mui-active':''}">
+          <a class="mui-navigate-right" href="#">{$vo['testclass']}</a>
+          <div class="mui-collapse-content">
+          <!-- 目录 -->
+          {volist name="vo['treelist']" id='vo1'}
+            <?php if(isset($vo1['treelist']) && $vo1['part'] == 1){ ?>
+          <dl class="personal-course-container clearfix">
+            <dt class="personal-course-container-title">{$vo1['testclass']}</dt>
+            <?php foreach($vo1['treelist'] as $k2 =>$vo2){?>
+            <dd class="personal-course-container-lis clearfix">
+              <div class="particulars-container-lis-div clearfix">
+                <div class="particulars-container-lis-name">
+                  <span class="particulars-container-lis-title">
+                    <i class="iconfont icon-bofang11"></i>
+                    {$vo2.testclass}{$vo2.outline}
+                  </span>
+                  <i class="iconfont iconbianqian-"></i>
+                </div>
+                <!-- 便签 -->
+                <div class="particulars-contain-note">
+                  <div class="particulars-contain-note-drag">
+                    <div class="particulars-note-close">x</div>
+                    <div class="particulars-container-note">
+                      <h3 class="particulars-study-note">学习便签</h3>
+                      <dl class="particulars-note-list">
+                        <?php if(isset($vo2['treelist_1'])){?>
+                        <?php foreach($vo2['treelist_1'] as $k3_1 =>$vo3_1){?>
+                        <dt class="particulars-note-lis">
+                          <?php echo $vo3_1['title'];?>
+                        </dt>
+                        <dd class="particulars-note-dts">
+                          <?php echo $vo3_1['content'];?>
+                        </dd>
+                        <?php } ?>
+                        <?php } ?>
+                      </dl>
+                    </div>
+                  </div>
+                </div>
+                <?php if(isset($vo2['study_num'])){?>
+                <span class="personal-container-lis-frequency">{$vo2['study_num']==0?'未学':'已学'}</span>
+                <?php }else{ ?>
+                <span class="personal-container-lis-frequency">未学</span>
+                <?php }?>
+              </div>
+              <ul class="particulars-container-position-contain clearfix">
+                <?php if(isset($vo2['treelist'])){?>
+                <?php foreach($vo2['treelist'] as $k3 =>$vo3){?>
+                <li class="particulars-position-container-lis"><!-- <a href="/index/course/courseParticulars?id={$vo2.kid}&videoid={$vo2.id}&startTime={$vo3.start_time}"> --><a href="/index/course/goWx"><i class="iconfont iconlocation"></i><?php echo $vo3['k_name']?></a></li>
+                <?php }?>
+                <?php }?>
+              </ul>
+            </dd>
+            <?php }?>
+          </dl>
+            <?php }else{?>
+          <dl class="personal-course-container clearfix">
+            <dd class="personal-course-container-lis current-now clearfix">
+              <div class="particulars-container-lis-div clearfix">
+                <div class="particulars-container-lis-name">
+                  <span class="particulars-container-lis-title">
+                    <i class="iconfont icon-bofang11"></i>
+                    {$vo1.testclass}{$vo1.outline}
+                  </span>
+                  <i class="iconfont iconbianqian-"></i>
+                </div>
+                <!-- 便签 -->
+                <div class="particulars-contain-note">
+                  <div class="particulars-contain-note-drag">
+                    <div class="particulars-note-close">x</div>
+                    <div class="particulars-container-note">
+                      <h3 class="particulars-study-note">学习便签</h3>
+                      <dl class="particulars-note-list">
+                        <?php if(isset($vo1['treelist_1'])){?>
+                        <?php foreach($vo1['treelist_1'] as $k3_1 =>$vo3_1){?>
+                        <dt class="particulars-note-lis">
+                          <?php echo $vo3_1['title'];?>
+                        </dt>
+                        <dd class="particulars-note-dts">
+                          <?php echo $vo3_1['content'];?>
+                        </dd>
+                        <?php } ?>
+                        <?php }?>
+                      </dl>
+                    </div>
+                  </div>
+                </div>
+                <?php if(isset($vo1['study_num'])){?>
+                <span class="personal-container-lis-frequency">{$vo1['study_num']==0?'未学':'已学'}</span>
+                <?php }else{ ?>
+                <span class="personal-container-lis-frequency">未学</span>
+                <?php }?>
+              </div>
+              <ul class="particulars-container-position-contain clearfix">
+                <?php if(isset($vo1['treelist'])){?>
+                <?php foreach($vo1['treelist'] as $k3 =>$vo3){?>
+                <li class="particulars-position-container-lis"><!-- <a href="/index/course/courseParticulars?id={$vo1.kid}&videoid={$vo1.id}&startTime={$vo3.start_time}"> -->
+                  <a href="/index/course/goWx"><i class="iconfont iconlocation"></i><?php echo $vo3['k_name']?></a></li>
+                <?php }?>
+                <?php }?>
+              </ul>
+            </dd>
+          </dl>
+            <?php }?>
+          {/volist}
+          </div>
+        </li>
+      {/volist}
+    </ul>
+    <!-- 点击筛选按钮出现的蒙版页面 -->
+    <div class="course-list-modal">
+      <div class="course-list-div">
+        <p class="course-list-p">点击此处返回<span class="iconfont iconxiala"></span></p>
+      </div>
+      <div class="course-list-change center-course-list-change">
+        <dl class="course-change-list course-change-item course-change-item-center clearfix">
+          <dt class="course-change-dt">学期</dt>
+          <!-- <dd class="course-change-lis course-change-current">全部</dd> -->
+          <dd class="course-change-lis course-change-current" data-val='1'>上学期</dd>
+          <dd class="course-change-lis" data-val='2'>下学期</dd>
+          <dd class="course-change-lis" data-val='3'>全册</dd>
+        </dl>
+        <!-- <dl class="course-change-list course-change-subject clearfix">
+          <dt class="course-change-dt">学科</dt>
+          <dd class="course-change-lis course-change-current">全部</dd>
+          <dd class="course-change-lis">语文</dd>
+          <dd class="course-change-lis">数学</dd>
+          <dd class="course-change-lis">英语</dd>
+        </dl> -->
+        <div class="course-change-btn course-change-btn-center">
+          <div class="course-change-reset">重置</div>
+          <div class="course-change-confirm reset-confirm-this">确定</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="__mobile__/js/jquery-2.2.3.js"></script>
+<script src="__mobile__/js/fastclick.js"></script>
+<script src="__mobile__/js/public.js"></script>
+<script src="__mobile__/js/iconfont/iconfont.js"></script>
+<script src="__mobile__/js/bscroll.min.js"></script>
+<script src="__mobile__/js/drag-mobile.js"></script>
+<script src="__mobile__/js/course-center.js"></script>
+
+</html>
+<script type="text/javascript">
+  // mui.init();
+  //页面回退
+  $('.header-back').click(function(){
+    window.history.back(-1);
+  })
+</script>

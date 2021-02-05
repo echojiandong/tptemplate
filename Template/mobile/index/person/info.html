@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>E点就通名校名师同步课堂</title>
+    <link href="__mobile__/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__mobile__/css/mui.picker.min.css">
+    <link rel="stylesheet" href="__mobile__/css/style.css">
+    <link rel="stylesheet" href="__mobile__/css/app.css">
+    <style>
+      body{
+        height: 100%;
+        /*overflow: hidden;*/
+        background: #F6F6F6;
+      }
+      @media screen and (orientation: landscape) {
+        body{
+        height: 100%;
+        overflow: auto;
+      }
+      .mui-bar-nav~.mui-content {
+        padding-top: .82rem;
+        padding-bottom: 14%;
+      }
+      @media (min-width:768px) {
+        .mui-bar-nav~.mui-content {
+          padding-top: .82rem;
+          padding-bottom: 34%;
+        }
+      }
+      }
+    </style>
+</head>
+<body>
+  <!-- header -->
+  <header class="mui-bar mui-bar-nav common-header">
+    <div class="header-back iconfont iconxiangzuojiantou"><a href="javascript:;"></a></div>
+    <h1 class="common-title" style="margin-right: 8%;">个人信息</h1>
+  </header>
+  <!-- 顶部导航栏选择年级弹出部分 -->
+  <!-- content -->
+  <div class="mui-content info-page clearfix">
+    <form action="" class="info-form clearfix">
+      <div class="info-form-div">
+        <label for="">姓名</label>
+        <div class="info-form-input">
+          <input type="text" placeholder="请输入姓名" id="info-nick-name" name="nickName" class="info-block-input info-input-name" value="{$personInfo['nickName']?:''}">
+        </div>
+      </div>
+      <div class="info-form-div">
+        <label for="" id="sex-info">性别</label>
+        <div class="info-form-input info-form-gender">
+          <div class="info-form-sex">
+            <input name="gender" type="radio" value="1" class="info-form-radio" {$personInfo['gender'] == 1?'checked':''}>  男
+          </div>
+          <div class="info-form-sex">
+            <input name="gender" type="radio" value="2" class="info-form-radio" {$personInfo['gender'] == 2?'checked':''}>  女
+          </div>
+        </div>
+      </div>
+      <div class="info-form-div">
+        <label for="">生日</label>
+        <div class="info-form-input">
+          <button id='info-birthday' data-options='{"type":"date"}' class="btn mui-btn mui-btn-block info-birthday">{$personInfo['birthday']|date='Y-m-d',###?:'生日'}</button>
+          <input type="hidden" name="birthday" id='birthday' value="{$personInfo['birthday']|date='Y-m-d',###?:''}">
+        </div>
+      </div>
+      <div class="info-form-div">
+        <label for="">年级</label>
+        <div class="info-form-input">
+            <button id='showUserPicker' class="mui-btn mui-btn-block info-input-grade" type='button'>
+            {switch name="$personInfo.grade_id" }
+              {case value="7"}初一{/case}
+              {case value="8"}初二{/case}
+              {case value="9"}初三{/case}
+              {default /}请选择年级{/switch}
+              </button>
+            <input type="hidden" name="grade_id" id='grade_id' value='{switch name="$personInfo.grade_id" }
+              {case value="7"}7{/case}
+              {case value="8"}8{/case}
+              {case value="9"}9{/case}
+              {default /}{/switch}'>
+        </div>
+      </div>
+      <div class="info-form-div">
+        <label for="">电话</label>
+        <div class="info-form-input">
+          <input type="text" placeholder="请输入电话号码" disabled class="info-block-input info-input-phone" value="{$personInfo['phone']?:''}">
+        </div>
+      </div>
+      <div class="info-form-div">
+        <label for="">邮箱</label>
+        <div class="info-form-input">
+          <input type="text" placeholder="请输入邮箱" class="info-block-input info-input-email" value="{$personInfo['email']?:''}">
+        </div>
+      </div>
+      <div class="info-form-div">
+        <label for="">微信号</label>
+        <div class="info-form-input">
+          <input type="text" placeholder="请输入微信号" class="info-block-input info-input-wechat" value="{$personInfo['wechat']?:''}">
+        </div>
+      </div>
+      <div class="info-form-div">
+        <label for="">学校</label>
+        <div class="info-form-input">
+          <input type="text" placeholder="请输入学校" class="info-block-input info-input-school" value="{$personInfo['school']?:''}">
+        </div>
+      </div>
+      <div class="info-form-div">
+        <label for="">所在地区</label>
+        <div class="info-form-input">
+            <button id='showCityPicker3' class="mui-btn mui-btn-block" type='button'>{if(!empty($personInfo['province']))}{$personInfo['province'].'-'.$personInfo['city'].'-'.$personInfo['country']}{else}{所在地区}{/if}</button>
+            <input type="hidden" name="area" id='area' value="{if(!empty($personInfo['province']))}{$personInfo['province'].'-'.$personInfo['city'].'-'.$personInfo['country']}{else}{所在地区}{/if}">
+        </div>
+      </div>
+      <div class="info-form-div">
+        <button type="button" class="info-submit" id="info-submit">保存</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+<script src="__mobile__/js/jquery-2.2.3.js"></script>
+<script src="__mobile__/js/mui.min.js"></script>
+<script src="__mobile__/js/mui.picker.min.js"></script>
+<script src="__mobile__/js/city.data-3.js"></script>
+<script src="__mobile__/js/fastclick.js"></script>
+<script src="__mobile__/js/public.js"></script>
+<script src="__mobile__/js/info.js"></script>
+<script src="__mobile__/css/iconfont/iconfont.js"></script>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="applicable-device" content="pc">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+    <title>E点就通名校名师同步课堂</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/layui.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+    <script src="__PUBLIC__/js/jquery-2.2.3.js"></script>
+    <style>
+      .b{
+        display:none;
+      }
+    </style>
+  </head>
+  <body>
+  <div class="all-pages">
+    <!-- header -->
+    {include file="index/public/header"}
+  <!-- 教师列表 -->
+  <div class="teachers-team-contain clearfix">
+      <!-- banner -->
+    <div class="teachers-team-banner" style="background:url(http://ydtvlitpic.ydtkt.com/teacher-banner.jpg)no-repeat center;"></div>
+    <!-- 教研老师列表 -->
+    <div class="teachers-team-container clearfix">
+      <!-- <div class="teachers-team-container-top"><h4 class="teachers-team-container-title">名校名师</h4></div> -->
+      <!-- tab切换 -->
+      <ul class="teachers_team_tab">
+        <li class="teachers_team_tab_active">教研团队</li>
+        <li>明星讲师</li>
+        <li>名师寄语</li>
+      </ul>
+
+      <div class="teachers_team_tab_content_all  clearfix">
+        <!-- 教研团队 -->
+        <div class="teachers_team_tab_content teachers_team_content_style active">
+          {volist name="data" id="vo"}
+              <div class="teachers_team_title">
+                <span class="teachers_team_title_line"></span>
+                <span class="teachers_team_title_name">{$vo.s_name}</span>
+              </div>
+              <ul class="teachers-team-list clearfix">
+                {volist name="vo.son" id="v"}
+                <li class="teachers-team-lis" data-id="{$v.id}">
+                  <div class="teachers-team-lis-img">
+                    <img src="{$v.litpic}" alt="{$v.name}">
+                    <p class="teachers-team-lis-name">{$v.name}</p>
+                  </div>
+                  <p class="teachers-team-lis-title1">{$v.title}</p>
+                  <p class="teachers-team-lis-msg">{$v.false_cont} </p>
+                </li>
+                {/volist}
+              </ul>
+            {/volist}
+        </div>
+          <!-- 教研团队  END -->
+          <!-- 明星讲师 -->
+          <div class="teachers-team-list-star teachers_team_content_style clearfix">
+            <div class="teachers-team-lis-star clearfix">
+              <ul class="teachers-team-lis-ul clearfix">
+                <li class="teachers-team-ul-subject">
+                  <ol class="teachers-team-ol clearfix">
+                    <li class="teachers-team-ol-subject">
+                      <p class="teachers-team-ol-subject-p">学科</p>
+                      <p class="teachers-team-ol-subject-p">年级</p>
+                    </li>
+                    <li class="teachers-team-ol-subject">语文</li>
+                    <li class="teachers-team-ol-subject">数学</li>
+                    <li class="teachers-team-ol-subject">英语</li>
+                    <li class="teachers-team-ol-subject">物理</li>
+                    <li class="teachers-team-ol-subject">化学</li>
+                  </ol>
+                </li>
+                <li class="teachers-team-ul-grade clearfix">
+    
+                  <ol class="teachers-team-ol-grade">
+                    <li class="teachers-team-ol-grade-left">初一</li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="61">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/lihua.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/lihua1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">李华</p>
+                      <p class="teachers-team-ol-grade-position">北京市骨干教师</p>
+                    </li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="65">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/wubo.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/wubo1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">吴波</p>
+                      <p class="teachers-team-ol-grade-position">统考命题组成员</p>
+                    </li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="63">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/yibo.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/yibo1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">易波</p>
+                      <p class="teachers-team-ol-grade-position">人大附英语教师</p>
+                    </li>
+                    <li class="teachers-team-ol-grade-introduce"></li>
+                    <li class="teachers-team-ol-grade-introduce"></li>
+                  </ol>
+                  
+                </li>
+                <li class="teachers-team-ul-grade clearfix">
+                  <ol class="teachers-team-ol-grade">
+                    <li class="teachers-team-ol-grade-left teachers-team-ol-grade-two">初二</li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="61">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/lihua.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/lihua1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">李华</p>
+                      <p class="teachers-team-ol-grade-position">北京市骨干教师</p>
+                    </li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="65">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/wubo.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/wubo1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">吴波</p>
+                      <p class="teachers-team-ol-grade-position">统考命题组成员</p>
+                    </li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="62">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/maxueling.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/maxueling1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">麻雪玲</p>
+                      <p class="teachers-team-ol-grade-position" style="left:34%;">海淀区青年骨干教师</p>
+                    </li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="66">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/jiaolei.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/jiaolei1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">焦磊</p>
+                      <p class="teachers-team-ol-grade-position">最酸的物理教师</p>
+                    </li>
+                    <li class="teachers-team-ol-grade-introduce"></li>
+                  </ol>
+                </li>
+                <li class="teachers-team-ul-grade clearfix">
+                  <ol class="teachers-team-ol-grade">
+                    <li class="teachers-team-ol-grade-left teachers-team-ol-grade-three">初三</li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="60">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/panhaiyan.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/panhaiyan1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">潘海燕</p>
+                      <p class="teachers-team-ol-grade-position">朝阳区学科带头人</p>
+                    </li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="64">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/zhangqin.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/zhangqin1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">张钦</p>
+                      <p class="teachers-team-ol-grade-position">海淀区学科带头人</p>
+                    </li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="62">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/maxueling.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/maxueling1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">麻雪玲</p>
+                      <p class="teachers-team-ol-grade-position" style="left:34%;">海淀区青年骨干教师</p>
+                    </li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="66">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/jiaolei.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/jiaolei1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">焦磊</p>
+                      <p class="teachers-team-ol-grade-position">最酸的物理教师</p>
+                    </li>
+                    <li class="teachers-team-ol-grade-introduce" data-id="69">
+                      <div class="teachers-team-ol-grade-img">
+                        <img src="__PUBLIC__/images/yuanchaole.png" alt="">
+                      </div>
+                      <div class="teachers-team-ol-grade-hover">
+                        <img src="__PUBLIC__/images/yuanchaole1.png" alt="">
+                      </div>
+                      <p class="teachers-team-ol-grade-name">袁朝乐</p>
+                      <p class="teachers-team-ol-grade-position">国务院特殊津贴专家</p>
+                    </li>
+                  </ol>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="teachers-team-waterfull teachers_team_content_style clearfix">
+            <ul class="teachers-team-waterfull-list clearfix">
+              <li class="teachers-team-waterfull-lis clearfix">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word1.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index763038515.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">王大绩</p>
+                    <p class="teachers-team-waterfull-position">国务院特殊津贴专家</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis clearfix">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word2.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index047618959.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">丁益祥</p>
+                    <p class="teachers-team-waterfull-position">国培项目主讲教师</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                  <div class="teachers-team-waterfull-img">
+                    <img src="__PUBLIC__/images/word3.png" alt="">
+                  </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index258866188.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">李俊和</p>
+                    <p class="teachers-team-waterfull-position">国培计划专家库成员</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word4.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index740886551.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">袁朝乐</p>
+                    <p class="teachers-team-waterfull-position">国务院特殊津贴专家</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word5.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index079502781.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">余燕</p>
+                    <p class="teachers-team-waterfull-position">黄冈市优秀学科带头人</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word6.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index711765256.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">李华</p>
+                    <p class="teachers-team-waterfull-position">北京市骨干教师</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word7.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index127451470.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">曹玉珍</p>
+                    <p class="teachers-team-waterfull-position">中考英语命题成员</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word8.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydtvideoimg.lxuemall.com/index127076497.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">孟祥征</p>
+                    <p class="teachers-team-waterfull-position">化学教研负责人</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word9.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index217678637.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">焦磊</p>
+                    <p class="teachers-team-waterfull-position">最酸的物理教师</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word10.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index267263171.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">吴波</p>
+                    <p class="teachers-team-waterfull-position">统考命题组成员</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word11.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index039334700.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">黄君</p>
+                    <p class="teachers-team-waterfull-position">黄冈市骨干教师</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                  <div class="teachers-team-waterfull-img">
+                <img src="__PUBLIC__/images/word12.png" alt="">
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydtvideoimg.lxuemall.com/index672771453.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">高拉明</p>
+                    <p class="teachers-team-waterfull-position">河北省骨干教师</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word13.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index765764414.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">朱珉</p>
+                    <p class="teachers-team-waterfull-position">黄冈市骨干教师</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word14.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index246591869.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">王学兵</p>
+                    <p class="teachers-team-waterfull-position">湖北优秀化学教师</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word15.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index527855682.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">潘海燕</p>
+                    <p class="teachers-team-waterfull-position">朝阳区学科带头人</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word16.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydtvideoimg.lxuemall.com/index763885338.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">樊清</p>
+                    <p class="teachers-team-waterfull-position">衡水优秀教研组长</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word17.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index077032983.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">易波</p>
+                    <p class="teachers-team-waterfull-position">人大附英语教师</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word18.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index736827323.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">方红梅</p>
+                    <p class="teachers-team-waterfull-position">湖北国培计划辅导教师</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word19.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index439111155.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">孙绪廷</p>
+                    <p class="teachers-team-waterfull-position">语文教研组负责人</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word20.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index475685893.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">项中心</p>
+                    <p class="teachers-team-waterfull-position">黄冈中学数学备课组长</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word21.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index606156724.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">王国恩</p>
+                    <p class="teachers-team-waterfull-position">物理教研组长</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img">
+                  <img src="__PUBLIC__/images/word22.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index614296978.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">凃秉清</p>
+                    <p class="teachers-team-waterfull-position">黄冈市骨干教师</p>
+                  </div>
+                </div>
+              </li>
+              <li class="teachers-team-waterfull-lis">
+                <div class="teachers-team-waterfull-img" style="width:98%;margin-left:1%;">
+                  <img src="__PUBLIC__/images/word23.png" alt="">
+                </div>
+                <div class="teachers-team-waterfull-content">
+                  <div class="teachers-team-waterfull-pic"><img src="http://ydttlitpic.ydtkt.com/index766566944.jpg" alt=""></div>
+                  <div class="teachers-team-waterfull-right">
+                    <p class="teachers-team-waterfull-name">吴援朝</p>
+                    <p class="teachers-team-waterfull-position">黄冈中学语文教研组长</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        <!-- 明星讲师  END -->
+        <!-- 名师寄语 -->
+      </div>
+      
+  </div>
+  <!-- 教师详情弹窗 -->
+  <div class="teachers-team-modal-all"></div>
+  <div class="teachers-team-modal">
+    <div class="teachers-team-modal-contain"></div>
+  </div>
+  <div class="teachers-waterfull-modal clearfix"></div>
+    <!-- footer -->
+    {include file="index/public/footer"}
+  </div>
+  </body>
+  <script>
+    $(".teachers-team-lis-msg").each(function() {
+      var maxwidth = 40;
+      if ($(this).text().length > maxwidth) {
+        $(this).text($(this).text().substring(0, maxwidth));
+        $(this).html($(this).html() + '...');
+      }
+    })
+    $(".teachers-team-lis-title1").each(function() {
+      var maxwidth = 10;
+      if ($(this).text().length > maxwidth) {
+        $(this).text($(this).text().substring(0, maxwidth));
+        $(this).html($(this).html() + '...');
+      }
+    })
+    // 点击教师出现教师详情
+    $("li.teachers-team-lis, .teachers-team-ol-grade-introduce").click(function() {
+      var teachersId = $(this).data("id")
+      if( teachersId != undefined ){
+        $.ajax({
+          url:"/index/Teachers/getTeacherInfo",
+          data:{id:teachersId},
+          type: 'post',
+          async: false,
+          dataType: 'json',
+          success:function(res) {
+            var data = res.data;
+            var html = '';
+            html = ' <div class="teachers-team-modal-close">x</div>'+
+                    '<div class="teachers-team-modal-img">'+
+                      '<img src="'+data[0].litpic+'">'+
+                    '</div>'+
+                    '<div class="teachers-team-modal-right">'+
+                      '<p class="teachers-team-modal-name">'+data[0].title+'</span>'+
+                      '<a href="/index/course/course?pageNum=10" class="go_study">去学习</a></p>'+
+                      '<p class="teachers-team-modal-msg">'+data[0].content+'</p>'+
+                    '</div>';
+            $(".teachers-team-modal-contain").html(html)
+          },
+          error:function(res) {
+            console.log(res)
+          }
+        })
+        $("div.teachers-team-modal-all").show().siblings("div.teachers-team-modal").show().end()
+      }else{
+        return false;
+      }
+    return false;
+  })
+    // 教师详情窗口关闭 
+    $(document).on("click",".teachers-team-modal-close",function() {
+      $(this).parents(".teachers-team-modal").hide().siblings("div.teachers-team-modal-all").hide()
+    })
+    layui.use(['element','layer', 'form','carousel','laypage'], function(){
+      var layer = layui.layer
+          ,element = layui.element
+          ,form = layui.form
+          ,carousel = layui.carousel
+          ,laypage = layui.laypage;
+
+
+    });
+
+    //tab切换
+    $('.teachers_team_tab li').click(function(){
+      var index = $(this).index();
+      $(this).addClass('teachers_team_tab_active').siblings().removeClass('teachers_team_tab_active');
+      $('.teachers_team_content_style').eq(index).show().siblings().hide();
+      itemWaterfull();
+    })
+    // 瀑布流
+  function itemWaterfull() {
+      var margin = 0;  
+      var items = $(".teachers-team-waterfull-lis"); 
+      var item_width = items[0].offsetWidth + margin; 
+      $(".teachers-team-waterfull-list").css("padding", "0"); 
+      var container_width = $(".teachers-team-waterfull-list")[0].offsetWidth; 
+      var n = parseInt(container_width / item_width); 
+      var container_padding = (container_width - (n * item_width)) / 2; 
+      $(".teachers-team-waterfull-list").css("padding", "0 " + container_padding + "px");
+      //寻找数组最小高度的下标
+      function findMinIndex(arr) {
+          var len = arr.length, min = 999999, index = -1;
+          for(var i = 0; i < len; i++) {
+              if(min > arr[i]) {
+                  min = arr[i];
+                  index = i;
+              }
+          }
+          return index;
+      }
+      //放置item
+      function putItem() {
+      var items_height = [];  
+      var len = items.length;  
+      for(var i = 0; i < len; i++) {
+          var item_height = items[i].offsetHeight; 
+          //放置在第一行的item
+          if(i < n) {
+              items_height[i] = item_height; 
+              items.eq(i).css("top", 0);
+              items.eq(i).css("left", i * item_width);
+
+          } else {    
+              var final_row_fir = parseInt(len / n) * n;
+              //处于最后一行
+              if(final_row_fir <= i) {
+                  var index = i - final_row_fir;  
+                  items.eq(i).css("top", items_height[index] + margin);
+                  items.eq(i).css("left", index * item_width);
+                  items_height[index] += item_height + margin;
+              } else {      
+                  var min_index = findMinIndex(items_height);  //寻找最小高度
+                  if(min_index == -1) {
+                      return ;
+                  }
+                  items.eq(i).css("top", items_height[min_index] + margin);
+                  items.eq(i).css("left", min_index * item_width);
+                  items_height[min_index] += item_height + margin;  //高度数组更新
+              }
+          }
+      }
+      var max_height = Math.max.apply(null, items_height);
+      $(".teachers-team-waterfull-list").css("height", max_height);   //最后更新容器高度
+  }
+      putItem();
+  }
+ 
+  window.onresize = function() {itemWaterfull();}; //在窗口大小改变后，item重新放置
+
+  $(".teachers-team-waterfull-lis").click(function() {
+    var index = $(this).index()+1;
+    var html = '';
+    html = '<div class="waterfull-close">x</div>'+
+          '<div class="waterfull-img">'+
+            '<img src="__PUBLIC__/images/word'+index+'.png" alt="">'+
+          '</div>';
+    $(".teachers-waterfull-modal").html(html).show()
+    $(".teachers-team-modal-all").show()
+  })
+  $(document).on('click','.waterfull-close',function() {
+    $(".teachers-waterfull-modal").hide()
+    $(".teachers-team-modal-all").hide()
+  })
+  </script> 
+  </html>

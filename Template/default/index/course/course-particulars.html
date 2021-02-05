@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="applicable-device" content="pc">
+  <meta name="renderer" content="webkit"/>
+  <meta name="force-rendering" content="webkit"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <title>E点就通名校名师同步课堂</title>
+  <link rel="stylesheet" href="__PUBLIC__/css/layui.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+  <script src="__PUBLIC__/js/jquery-2.2.3.js"></script>
+  <script src="__LAY__layui.js"></script>
+  <script src="https://sdk-release.qnsdk.com/qiniu-web-player-1.2.2.js"></script>
+  <style>
+    .card-activation-modal{
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 509;
+      display: none;
+    }
+    .card-activation-confirm{
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      height: auto;
+      margin: 0;
+      right: auto;
+      bottom: auto;
+    }
+    .card-activation-modal-confirm-btn{
+      margin-bottom: 40px !important;
+    }
+    .card-activation-power{
+      width: 100% !important;
+    }
+  </style>
+</head>
+<body>
+  <input type="hidden" value="{$courseInfo.link|default=''}" id="courseInfo"/>
+  <input type="hidden" value="{$start_time|default=''}" id="start_time">
+  <input type="hidden" value="{$person_id|default=''}" id="person_id">
+  <input type="hidden" value="{$id|default=''}" name="video_class" id="video_class"/>
+  <input type="hidden" value="{$id|default=''}" name="product_id" id="product_id"/>
+  <input type="hidden" value="{$videoId|default=''}" name="video" id="video"/>
+  <input type="hidden" value="{$videoStartTime|default=''}" name="videoStartTime" id="videoStartTime"/>
+  <input type="hidden" value="{$getCrumbs.subject_id|default=''}" name="subject_id" id="subject_id">
+  <input type="hidden" value="{$k_id|default=''}" name="k_id" id="k_id">
+  <input type="hidden" value="{$productStatus|default=0}" name="productStatus" id="productStatus">
+  <!-- 公共头部 -->
+    {include file="index/public/header"}
+  <!-- 公共头部 -->
+<!-- 课程详情 -->
+
+<!-- <div class="course-particulars-play" style="width:400px;height:200px;" id="player1" controlsList="nodownload"></div> -->
+<div class="course-particulars clearfix" id="course_maodian">
+    
+  <!-- 当前位置 -->
+  <div class="course-particulars-top clearfix">
+    <div class="course-particulars-position course-shows-position">
+      <a href="javascript:location.reload();">当前位置:</a>
+        <a href="../index/index.html">首页></a>
+        <a href="../course/course.html">同步课程></a>
+        <a href="javascript:location.reload();" class="course-particulars-position-now">{$getCrumbs.learn}{$getCrumbs.grade}{$getCrumbs.subject}{$getCrumbs.Semester}{$getCrumbs.textbook}</a>
+    </div>
+  </div>
+  <!-- 课程播放 -->
+  <style>
+  .qplayer-setting-listitem {
+    padding:6px;
+  }
+  </style>
+  <div class="course-particulars-video clearfix">
+        <div class="course-particulars-video-all">
+        <!-- 左边视频 -->
+        <div class="course-particulars-video-contain clearfix">
+          <!-- 左侧video播放 -->
+          <div class="course-particulars-video-play video-play clearfix">
+              <div class="course-particulars-play" id="player" controlsList="nodownload"></div>
+            <!-- 视频下方的章节提示信息 -->
+            <div class="course-particulars-video-msg clearfix">
+              <p class="course-particulars-video-title">{$courseInfo.testclass}{$courseInfo.outline}</p>
+              <div class="course-particulars-note-all course-particulars-video-note" title="笔记"><i class="iconfont icon-shenfen1"></i><span>笔记</span></div>
+              <div class="course-particulars-collect-all course-particulars-video-collection" title="收藏"><i class="iconfont icon-shoucang"></i><span>收藏</span></div>
+            </div>
+          </div>
+          <!-- 右侧课程目录 -->
+          <div class="course-particulars-video-catalog clearfix">
+            <!-- 新版 右侧知识点部分 -->
+            <div class="course-particulars-knowledge-title"><h5>{$courseInfo.testclass}{$courseInfo.outline}</h5></div>
+            <div class="course-particulars-knowledge-contain">
+              <ul class="course_contain_tab">
+                  <!-- <li class="course_contain_tab_active">知识点</li> -->
+                  <!-- <li>资料下载</li> -->
+              </ul>
+              <div class="course_contain_tab_content">
+                <!-- <div class="course-particulars-knowledge-dt" title="本节课 知识点"><i class="iconfont icon-dengpao"></i>本节课 知识点</div> -->
+                <div class="course-particulars-knowledge" style="display: block;" id=skill>
+                  {volist name="knowLedge" id="v" key="k"}
+                    <span class="course-particulars-knowledge-points {if condition='$k eq 1'}course-knowledge-points-current{/if}" id="kid2{$v['k_id']}" title="{$v.k_name}" data-id="{$k}" onclick="startplay({$v['start_time']},{$v['k_id']})">{$k}. {$v.k_name}</span>
+                  {/volist}
+                </div>
+                <!-- <div class="course-particulars-knowledge">
+                  {volist name="knowLedge" id="v" key="k"}
+                    <div class="knowledge_content {if condition='$k eq 1'}knowledge_content_current{/if}">
+                      <span class="" title="{$v.k_name}" onclick="startplay({$v.start_time},{$v.end_time})">{$k}. {$v.k_name}</span>
+                      <i class="iconfont icon-ordinarydownload-copy"></i>
+                    </div>
+                    {/volist}
+                </div> -->
+              </div>
+            </div> 
+          </div>
+            <!--新改 标签 部分 -->
+            <div class="course-particulars-bottom-note clearfix">
+              <div class="course-particulars-bottom-contain clearfix">
+                <div class="particulars_bottom_contain_cont_left clearfix">
+                  <div class="particulars_bottom_contain_left clearfix">
+                    <!-- <h5 class="course-particulars-bottom-title">标签:</h5>
+                    <dl class="course-particulars-bottom-list clearfix">
+                      {volist name="knowLedge" id="v" key="k"}
+                        <dd class="course-particulars-bottom-lis" title="数学" onclick="startplay({$v.start_time},{$v.end_time})">{$v.k_name}</dd>
+                      {/volist}
+                    </dl> -->
+                  </div>
+                  <div class="particulars_bottom_contain_right">
+                    <span class="contain_right_star_time" id="start-time">开始时间：
+                      <span>00:00</span>
+                    </span>
+                    <span class="contain_right_end_time" id="end-time">结束时间：
+                      <span>00:00</span>
+                    </span>
+                  </div>
+                </div>
+                
+                <!-- <div class="particulars_bottom_contain_cont_right"></div> -->
+              </div>
+            </div>
+        </div>
+        <!-- 右边笔记 -->
+        <div class="course_particulars_right_note">
+          <div class="right_note_top clearfix">
+            <div class="right_note_title">
+              <h2 class="right_note_title_name">写笔记</h2>
+              <span class="right_note_title_clone">×</span>
+            </div>
+            <div class="right_note_textarea_all">
+              <textarea name="" maxlength="500"  id="textArea" required lay-verify="required" placeholder="请输入" class="layui-textarea textarea_all_content"></textarea>
+              <!-- <span class="textarea_all_number"><span class="textarea_number">0</span>/500</span> -->
+            </div>
+            <div class="right_note_sumbit" onclick="addNote()">提交</div>
+          </div>
+          <!-- <div class="right_note_bottom" id="noteList"> -->
+
+            <!-- <div class="right_my_note">我的笔记记录</div>
+            <div class="right_note_user">
+              <div class="note_user_top">
+                <div class="user_top_left">
+                  <img src="" alt="" class="user_top_left_phone">
+                  <span class="user_top_left_name">Lorem ipsume</span>
+                </div>
+                <div class="user_top_right">2019/12/12</div>
+              </div>
+              <div class="note_user_content">
+                <p>fffffffffffffff</p>
+              </div>
+            </div> -->
+    
+          <!-- </div> -->
+        </div>
+      </div>
+  </div>
+  <!-- 点击停止视频记录的时候修改课程名字的弹窗 -->
+  <div class="course-name-model">
+    <div class="course-name-change">
+      <h4>收藏课程</h4>
+      <div class="course_name_model_top">
+        <span class="course_model_title">{$getCrumbs.learn}{$getCrumbs.grade}{$getCrumbs.subject}{$getCrumbs.Semester} : {$courseInfo.testclass}{$courseInfo.outline}</span>
+        <img src="{$sxh_img.img}" alt="" class="course_name_model_top_img">
+        <span class="course_name_model_top_text">总时长:<span>20:00</span></span>
+      </div> 
+      <form class="layui-form course-name-form" action="" onkeydown="if(event.keyCode==13){return false}">
+        <div class="course-name-title">请输入收藏名称:</div>
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <input type="text" name="newName" placeholder="请输入标题" required lay-verify="required" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button class="layui-btn" lay-submit type="button" lay-filter="courseRename">确定</button>
+          </div>
+        </div>
+      </form>
+      <div class="course-name-close">x</div>
+    </div>
+  </div>
+  <!-- 全屏之后的知识点列表 -->
+  <!-- 便签 -->
+  <!-- <div class="particulars-contain-note-fixed particulars-contain-note-fixed-outside">
+    <div class="particulars-contain-note particulars-contain-note0" id="personal-contain-note">
+      <div class="particulars-note-close">x</div>
+      <div class="particulars-container-note">
+        <h3 class="particulars-study-note">学习便签</h3>
+        <div class="particulars-study-scroll">
+          <dl class="particulars-note-list" id="htmlNote">
+            {volist name="knowLedge" id="v" key="k"}
+              <dt class="particulars-note-lis">
+                {$v.k_name}
+              </dt>
+              <dd class="particulars-note-dts">
+                {$v.k_content}
+              </dd>
+            {/volist}
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- 课程介绍 -->
+  <div class="course-particulars-introduce clearfix">
+    <div class="course-particulars-introduce-contain">
+      <div class="layui-tab">
+        <ul class="layui-tab-title">
+          <li class="layui-this">课程列表</li>
+          {if condition="$getCrumbs.courseware && $courseCatalogList[0]['isbay'] eq 1"}
+          <li class="layui-this-down-example">
+            <a href="{$getCrumbs.courseware}">
+              <i class="iconfont icon-ordinarydownload-copy" style="margin-right: 2px;"></i>
+            学习建议
+            </a>
+          </li>
+          {/if}
+
+          <!-- <li class="layui-this-down-data">下载资料</li> -->
+        </ul>
+        <div class="layui-tab-content clearfix">
+          <div class="layui-tab-item layui-show">
+            <!-- 课程目录 -->
+            <ol class="layui-collapse" lay-accordion>
+              {volist name="courseCatalogList" id="v" key="k"}
+                  <!-- 目录 -->
+                  {if(isset($v['son']))}
+                                <li class="layui-colla-item">
+                                  <h2 class="layui-colla-title">{$v['testclass']}
+                                      <div class="layui_collapse_down_top">
+                                        {if condition="$v['courseware'] && $v['isbay'] eq 1"}
+                                        <span class="layui_collapse_text"><a href="{$v['courseware']}" download="pdf">
+                                            <i class="iconfont icon-ordinarydownload-copy" style="font-size: 13px;padding-right: 2px;"></i>学习指导</a>
+                                          </span>
+                                        {/if}
+                                        {if condition="$v['courseware1'] && $v['isbay'] eq 1"}
+                                        <span class="layui_collapse_text"><a href="{$v['courseware1']}" download="pdf">
+                                            <i class="iconfont icon-ordinarydownload-copy" style="font-size: 13px;padding-right: 2px;"></i>习题答案</a>
+                                          </span>
+                                        {/if}
+                                        {if condition="$v['courseware2'] && $v['isbay'] eq 1"}
+                                        <span class="layui_collapse_text"><a href="{$v['courseware2']}" download="pdf">
+                                            <i class="iconfont icon-ordinarydownload-copy" style="font-size: 13px;padding-right: 2px;"></i>名师笔记</a>
+                                          </span>
+                                        {/if}
+                                          <!-- <span class="layui_collapse_down">
+                                            <i class="iconfont icon-ordinarydownload-copy"></i>
+                                            <span>下载例题</span>
+                                          </span>
+                                          <span class="layui_collapse_down">
+                                              <i class="iconfont icon-ordinarydownload-copy"></i>
+                                              <span>下载资料</span>
+                                            </span> -->
+                                        </div>
+                                    <!-- 第一单元-->
+                                  </h2>
+                                    <div class="layui-colla-content {if condition='$k eq 1'}layui-show{/if}">
+                                      {volist name="v['son']" id="vo"}
+                                      <dl class="particulars-course-container">
+                                        {if(!empty($vo['son']))}
+                                        <dt class="particulars-course-container-title">{$vo.testclass}<!-- 阅读--></dt>
+                                        {volist name="vo['son']" id="vol"}
+                                        <dd class="particulars-course-container-lis clearfix">
+                                          <div class="particulars-container-lis-div clearfix">
+                                            <div class="particulars-container-lis-name" data-isshow="{$vol.skill|empty?0:1}">
+                                              <span class="particulars-container-lis-title" {if(empty($vol.skill))} id="kid3{$vol['id']}" onclick="courseListKnow({$vol['id']},{$vol['kid']},0,0,0,{$productStatus},{$id})" {/if}>
+                                                {if(empty($vol.skill))} <a href="#course_maodian"> {/if}
+                                                <i class="iconfont icon-bofang11"></i>
+                                                {$vol['testclass']} {$vol['outline']}
+                                                {if(empty($vol.skill))} </a>   {/if}<!-- 1、秋天的怀念/史铁生 -->
+                                              </span>
+                                              <!-- <i class="iconfont icon-bianqian-"></i> -->
+                                            </div>
+                                            <!-- 便签 -->
+                                            <div class="particulars-contain-note-fixed">
+                                              <div class="particulars-contain-note particulars-contain-note1">
+                                                <div class="particulars-note-close">x</div>
+                                                <div class="particulars-container-note">
+                                                  <h3 class="particulars-study-note">学习便签</h3>
+                                                  <div class="particulars-study-scroll">
+                                                    <dl class="particulars-note-list">
+                                                      {volist name="vol['skill']" id="vl"}
+                                                        <dt class="particulars-note-lis">
+                                                          {$vl['k_name']}
+                                                        </dt>
+                                                        <dd class="particulars-note-dts">
+                                                          {$vl['k_content']}
+                                                        </dd>
+                                                      {/volist}
+                                                    </dl>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="layui_collapse_down_top layui_collapse_down_top_one">
+                                                {if condition="$vol['courseware'] && $v['isbay'] eq 1"}
+                                                  <span class="layui_collapse_down">
+                                                    <a href="{$vol['courseware']}" download="pdf">
+                                                      <i class="iconfont icon-ordinarydownload-copy"></i>
+                                                      <span>下载例题</span>
+                                                    </a>
+                                                  </span>
+                                                {/if}
+                                                {if condition="$vol['courseware1'] && $v['isbay'] eq 1"}
+                                                  <span class="layui_collapse_down">
+                                                    <a href="{$vol['courseware1']}" download="pdf">
+                                                      <i class="iconfont icon-ordinarydownload-copy"></i>
+                                                      <span>习题答案</span>
+                                                    </a>
+                                                  </span>
+                                                {/if}
+                                                {if condition="$vol['courseware2'] && $v['isbay'] eq 1"}
+                                                  <span class="layui_collapse_down">
+                                                    <a href="{$vol['courseware2']}" download="pdf">
+                                                      <i class="iconfont icon-ordinarydownload-copy"></i>
+                                                      <span>名师笔记</span>
+                                                    </a>
+                                                  </span>
+                                                {/if}
+                                                </div>
+                                                  <!-- <span class="layui_collapse_down">
+                                                      <i class="iconfont icon-ordinarydownload-copy"></i>
+                                                      <span>下载资料</span>
+                                                    </span> -->
+                                                
+                                            {if condition="!empty($vol['videoLog'])"}
+                                              {if condition="$vol['videoLog']['video_status'] eq 2 || $vol['videoLog']['video_status'] eq 3"}
+                                                {if condition="$vol['videoLog']['study_num'] eq 0"}
+                                                  <span class="particulars-container-lis-frequency">学习中</span>
+                                                {else}
+                                                <span class="particulars-container-lis-frequency">已学{$vol['videoLog']['study_num']}次</span>
+                                                {/if}
+                                              {else}
+                                                {if($vol['audi'] == 1 && $v['isbay']==0)}
+                                                  <span class="particulars-course-free-listen"  style="padding-left: 130px;">试听</span>
+                                                {else}
+                                                  <span class="particulars-course-not-learn">未学</span>
+                                                {/if}
+                                              {/if}
+                                            {else}
+                                              {if($vol['audi'] == 1 && $v['isbay']==0)}
+                                                  <span class="particulars-course-free-listen">试听</span>
+                                                {/if}
+                                            {/if}
+                                            <span class="particulars-container-lis-duration">{$vol.classhour}<!-- 2:45:05 --></span>
+                                          </div>
+                                          <ul class="particulars-container-position-contain clearfix">
+                                            {if(!empty($vol.skill))}
+                                              <li class="particulars-position-container-lis"  id="videoid_start{$vol['id']}" data-id="0"  onclick="courseListKnow({$vol['id']},{$vol['kid']},0,0,0,{$productStatus},{$id})">
+                                                <a href="#course_maodian">
+                                                  <i class="iconfont icon-location"></i>开始
+                                                </a> 
+                                              </li>
+                                            {volist name="vol['skill']" id="vl" key="kl"}
+                                              <li class="particulars-position-container-lis"  id="kid1{$vl['k_id']}" data-id="{$kl}" onclick="courseListKnow({$vol['id']},{$vol['kid']},{$vl['k_id']},{$vl.start_time},{$kl},{$productStatus},{$id})">
+                                               
+                                                <a href="#course_maodian">
+                                                  <i class="iconfont icon-location"></i>{$vl['k_name']}
+                                                </a>
+                                              </li>
+                                              <!-- <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>练习</li> -->
+                                            {/volist}
+                                            {/if}
+                                          </ul>
+                                        </dd>
+                                        {/volist}
+                                        {else}
+                                        <dd class="particulars-course-container-lis clearfix">
+                                          <div class="particulars-container-lis-div clearfix">
+                                              <div class="layui_collapse_down_bottom">
+                                                  <!-- <span class="layui_collapse_down">
+                                                    <i class="iconfont icon-ordinarydownload-copy"></i>
+                                                    <span>下载例题</span>
+                                                  </span>
+                                                  <span class="layui_collapse_down">
+                                                      <i class="iconfont icon-ordinarydownload-copy"></i>
+                                                      <span>下载资料</span>
+                                                    </span> -->
+                                                </div>
+                                            <div class="particulars-container-lis-name" data-isshow="{$vo.skill|empty?0:1}" >
+                                              
+                                              <span class="particulars-container-lis-title"  {if(empty($vo.skill))} id="kid3{$vo['id']}" onclick="courseListKnow({$vo['id']},{$vo['kid']},0,0,0,{$productStatus},{$id})" {/if}>
+                                                {if(empty($vo.skill))} <a href="#course_maodian"> {/if}
+                                                <i class="iconfont icon-bofang11"></i>
+                                                {$vo['testclass']} {$vo['outline']}<!-- 1、秋天的怀念/史铁生 -->
+                                                {if(empty($vo.skill))} </a> {/if}
+                                              </span>
+                                              <!-- <i class="iconfont icon-bianqian-"></i> -->
+                                            </div>
+                                            <!-- 便签 -->
+                                            <!-- <div class="particulars-contain-note-fixed">
+                                              <div class="particulars-contain-note particulars-contain-note2">
+                                                <div class="particulars-note-close">x</div>
+                                                <div class="particulars-container-note">
+                                                  <h3 class="particulars-study-note">学习便签</h3>
+                                                  <div class="particulars-study-scroll">
+                                                    <dl class="particulars-note-list">
+                                                      {volist name="vo['skill']" id="vl"}
+                                                        <dt class="particulars-note-lis">
+                                                          {$vl['k_name']}
+                                                        </dt>
+                                                        <dd class="particulars-note-dts">
+                                                          {$vl['k_content']}
+                                                        </dd>
+                                                      {/volist}
+                                                    </dl>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div> -->
+                                            <div class="layui_collapse_down_top layui_collapse_down_top_one">
+                                               {if condition="$vo['courseware'] && $v['isbay'] eq 1"}
+                                                <span class="layui_collapse_down">
+                                                  <a href="{$vo['courseware']}" download="pdf">
+                                                    <i class="iconfont icon-ordinarydownload-copy"></i>
+                                                    <span>下载例题</span>
+                                                  </a>
+                                                </span>
+                                                {/if}
+                                                {if condition="$vo['courseware1'] && $v['isbay'] eq 1"}
+                                                <span class="layui_collapse_down">
+                                                  <a href="{$vo['courseware1']}" download="pdf">
+                                                    <i class="iconfont icon-ordinarydownload-copy"></i>
+                                                    <span>习题答案</span>
+                                                  </a>
+                                                </span>
+                                                {/if}
+                                                {if condition="$vo['courseware2'] && $v['isbay'] eq 1"}
+                                                <span class="layui_collapse_down">
+                                                  <a href="{$vo['courseware2']}" download="pdf">
+                                                    <i class="iconfont icon-ordinarydownload-copy"></i>
+                                                    <span>名师笔记</span>
+                                                  </a>
+                                                </span>
+                                                {/if}
+                                                <!-- <span class="layui_collapse_down">
+                                                    <i class="iconfont icon-ordinarydownload-copy"></i>
+                                                    <span>下载资料</span>
+                                                  </span> -->
+                                              </div>
+                                            {if condition="!empty($vo['videoLog'])"}
+                                              {if condition="$vo['videoLog']['video_status'] eq 2 || $vo['videoLog']['video_status'] eq 3"}
+                                                {if condition="$vo['videoLog']['study_num'] eq 0"}
+                                                  <span class="particulars-container-lis-frequency">学习中</span>
+                                                {else}
+                                                <span class="particulars-container-lis-frequency">已学{$vo['videoLog']['study_num']}次</span>
+                                                {/if}
+                                              {else}
+                                                {if($vo['audi'] == 1 && $v['isbay']==0)}
+                                                  <span class="particulars-course-free-listen" style="padding-left: 130px;">试听</span>
+                                                {else}
+                                                  <span class="particulars-course-not-learn">未学</span>
+                                                {/if}
+                                              {/if}
+                                            {else}
+                                                {if($vo['audi'] == 1 && $v['isbay']==0)}
+                                                  <span class="particulars-course-free-listen shiting">试听</span>
+                                                {/if}
+                                            {/if}
+                                            <span class="particulars-container-lis-duration">{$vo.classhour}<!-- 2:45:05 --></span>
+                                          </div>
+                                          <ul class="particulars-container-position-contain clearfix">
+                                            {if(!empty($vo.skill))}
+                                              <li class="particulars-position-container-lis"  id="videoid_start{$vo['id']}" onclick="courseListKnow({$vo['id']},{$vo['kid']},0,0,0,{$productStatus},{$id})">
+                                                  <a href="#course_maodian" style="">
+                                                      <i class="iconfont icon-location"></i>开始
+                                                    </a> 
+                                                  </li>
+                                                {volist name="vo['skill']" id="vl" key="kl"}
+                                                  <li class="particulars-position-container-lis"  id="kid1{$vl['k_id']}" data-id="{$kl}" onclick="courseListKnow({$vo['id']},{$vo['kid']},{$vl['k_id']},{$vl.start_time},{$kl},{$productStatus},{$id})">
+                                                      
+                                                      <a href="#course_maodian">
+                                                        <i class="iconfont icon-location"></i>{$vl['k_name']}
+                                                      </a>
+                                                  </li>
+                                                  <!-- <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>练习</li> -->
+                                                {/volist}
+                                              {/if}
+                                          </ul>
+                                        </dd>
+                                        {/if}
+                                      </dl>
+                                      {/volist}
+                                  </div>
+                                </li>
+                {else}
+                <!-- 开学第一课部分 -->
+                    <li class="layui-colla-item">
+                      <h2 class="layui-colla-title">{$v['testclass']}
+                          <div class="layui_collapse_down_top">
+                              <!-- <span class="layui_collapse_down">
+                                <i class="iconfont icon-ordinarydownload-copy"></i>
+                                <span>下载例题</span>
+                              </span>
+                              <span class="layui_collapse_down">
+                                  <i class="iconfont icon-ordinarydownload-copy"></i>
+                                  <span>下载资料</span>
+                                </span> -->
+                            </div>
+                        <!-- 第一单元-->
+                      </h2>
+                      <div class="layui-colla-content {if condition='$k eq 1'}layui-show{/if}">
+                        <!-- 开学第一课知识点 -->
+                        <dl class="particulars-course-container">
+                          <dd class="particulars-course-container-lis clearfix">
+                            <ul class="particulars-container-position-contain  clearfix" style="display: block">
+                              {if(!empty($v.skill))}
+                                <li class="particulars-position-container-lis" id="videoid_start{$v['id']}" onclick="courseListKnow({$v['id']},{$v['kid']},0,0,0,{$productStatus},{$id})">
+                                    <a href="#course_maodian" style="">
+                                        <i class="iconfont icon-location"></i>开始
+                                      </a> 
+                                    </li>
+                                {volist name="v['skill']" id="vl" key="kl"}
+                                  <li class="particulars-position-container-lis  layui-first-class-click" id="kid1{$vl['k_id']}"  onclick="courseListKnow({$v['id']},{$v['kid']},{$vl['k_id']},{$vl.start_time},{$kl},{$productStatus},{$id})">
+                                  <a href="#course_maodian">
+                                    <i class="iconfont icon-location"></i>{$vl['k_name']}
+                                  </a>
+                                  </li>
+                                  <!-- <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>练习</li> -->
+                                {/volist}
+                              {/if}
+                            </ul>
+                          </dd>
+                        </dl>
+                      </div>
+                    </li>
+                {/if}
+              {/volist}
+            </ol>
+          </div>
+          <!-- 课程介绍 -->
+          <!-- <div class="layui-tab-item">
+            <div class="course-introduce">
+              <p class="course-introduce-msg">{$getCrumbs.content}</p>
+            </div> 
+          </div> -->
+          <!-- 老师介绍 -->
+          <!-- <div class="layui-tab-item ">
+            <div class="course-teachers-introduce">
+              <div class="course-teachers-introduce-top clearfix">
+                <div class="course-teachers-introduce-img"><img src="{$teacherInfo.litpic}" alt=""></div>
+                <div class="course-teachers-introduce-right">
+                  <h4 class="course-teachers-introduce-name">{$teacherInfo.name}</h4>
+                  <span class="course-teachers-introduce-ranks">{$teacherInfo.teacherPosition}</span>
+                  <p class="course-teachers-introduce-deeds">
+                    {$teacherInfo.content}
+                  </p>
+                </div>
+              </div> -->
+              <!-- 精彩课程 -->
+              <!-- <div class="course-teachers-introduce-marvellous">
+                <h5 class="course-teachers-marvellous-title">精彩课程</h5>
+                <video class="course-teachers-marvellous-video" poster="{$teacherInfo.coverlitpic}" controls>
+                  <source src="{$teacherInfo.Audition_video}">
+                </video>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 课程购买弹框 -->
+<div class="course-buy-modal">
+  <div class="course-buy-modal-contain">
+    <div class="course-buy-close">x</div>
+    <div class="course-buy-modal-title"><h5>课程购买</h5></div>
+    <p class="course-buy-modal-p">该课程要收费啦！请填写信息后购买。</p>
+    <form class="layui-form course-buy-form" action="">
+      <div class="layui-form-item">
+        <label class="layui-form-label"><i class="i-style">*</i>姓名：</label>
+        <div class="layui-input-block">
+          <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label"><i class="i-style">*</i>电话：</label>
+        <div class="layui-input-block">
+          <input type="text" name="text" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">年级：</label>
+        <div class="layui-input-block">
+          <select name="city" lay-verify="required">
+            <option value=""></option>
+            <option value="0">初一</option>
+            <option value="1">初二</option>
+            <option value="2">初三</option>
+          </select>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">位置：</label>
+        <div class="layui-input-block sel course-buy-city">
+          <input type="hidden" id="province" class="" name="province" placeholder="请选择" value="北京" required lay-verify="required" autocomplete="off" />
+          <input type="hidden" id="city" class="" name="city" placeholder="请选择"  value="朝阳" required lay-verify="required" autocomplete="off"/>
+          <input type="hidden" id="country" class="" name="country" placeholder="请选择" value="一点通"  required lay-verify="required" autocomplete="off"/>
+          <p id="area" class="" style="width:80%;">请选择</p>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block course-buy-submit-item">
+          <button class="layui-btn course-buy-submit" lay-submit lay-filter="buySuccess">提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div> 
+<!-- 购买报名成功弹窗 -->
+<div class="course-success-modal">
+  <div class="course-success-contain">
+    <div class="course-success-close">x</div>
+    <img src="__PUBLIC__/images/icon-dui.png" alt="">
+    <p class="course-success-p">恭喜你下单成功！</p>
+    <p class="course-success-p">稍后会有老师联系你！</p>
+    <div class="course-success-btn">确定</div>
+  </div>
+</div>
+
+<!-- 卡号激活弹窗 -->
+<div class="card-activation-modal"> </div>
+<!-- 提示是否激活窗口 -->
+<div class="card-activation-confirm">
+  <div action="" class="layui-form">
+    <div class="card-activation-modal-confirm-close">x</div>
+    <p class="card-activation-power"></p>
+    <!-- <span>您同意激活本课程吗？</span>
+    <div class="card-activation-agree clearfix">
+      <input type="checkbox" lay-skin="primary" name="ok" value="1" title="同意">          
+      <span>（同意请点击确认）</span>      
+    </div> -->
+    <div class="card-activation-modal-confirm-btn" lay-submit lay-filter="agreeBtn">确定</div>
+  </div>
+</div>
+<!--  -->
+<!-- 底部导航  -->
+    {include file="index/public/footer"}
+<!-- 底部导航  -->
+
+
+<div class="number_showmodel">
+  <div class="number_showmodel_content clearfix">
+    <div class="number_showmodel_close">+</div>
+    <i class="iconfont icon-xuexi number_showmodel_iconfont"></i>
+    <p class="number_p confirm_study">确认学习吗？</p>
+    <p class="number_p free_audition"></p>
+    <!-- <p class="number_p audited"></p> -->
+    <button class="showmodel_btn i_about_btn">我再想想</button>
+    <button class="showmodel_btn confirm_study_btn">确认学习</button>
+  </div>
+</div>
+
+
+<div class="hours_model">
+  <div class="hours_model_content clearfix">
+    <div class="hours_close">+</div>
+    <div class="hours_model_img"></div>
+    <div class="hours_content_msg">
+      观看<span class="hours"></span>个小时啦!请注意休息!
+    </div>
+    <div class="hours_content_know">知道啦！</div>
+    </div>
+</div>
+
+<!-- 第二版课程测试弹窗开始 -->
+  <!-- <div class="test-model">
+    <div class="test-model-content">
+      <div class="test-model-close">+</div>
+      <div class="test-model-title">
+        <h4>第十一章 三角形</h4>
+        <span class="test-model-status">测试中</span>
+        <span class="test-model-status-over">测试中</span>
+      </div>
+      <div class="test-model-questions">
+        <dl class="test-model-list">
+          <dt class="test-model-list-title">11.2.1三角形的内角（100分）</dt>
+          <dd class="test-model-lis">
+            <p class="test-model-lis-head">1、【单选题】正方形的周长是边长的 几倍 ？（<span>10</span>分）
+              <svg t="1573457435800" class="icon test-model-lis-flower" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2066" width="15" height="15">
+                <path d="M 511.15 1010.1 c -12.2576 0 -22.2094 -9.95177 -22.2094 -22.2094 V 443.821 c 0 -12.2576 9.95177 -22.2094 22.2094 -22.2094 c 12.2576 0 22.2094 9.95177 22.2094 22.2094 v 544.07 c 0 12.2576 -9.95177 22.2094 -22.2094 22.2094 Z" fill="#1daa6a" p-id="2067"></path>
+                <path d="M 346.097 26.0897 l -67.5991 267.12 c 0 25.0007 4.00498 49.0306 11.2867 71.6042 c 9.8304 -27.5493 34.9525 -48.5452 60.6815 -75.245 c 43.5693 -45.0256 199.763 -86.1677 262.751 -123.426 c -30.3408 -105.586 -267.12 -140.052 -267.12 -140.052 Z" fill="#dd6472" p-id="2068"></path>
+                <path d="M 512.971 158.254 c -62.9874 37.2585 -124.518 79.9781 -168.087 125.004 c -25.729 26.6998 -45.2684 54.1279 -55.0988 81.6773 c 11.7723 36.5302 32.4039 69.1769 59.2251 95.5126 c 42.3557 41.5061 100.124 67.1137 163.718 67.1137 c 128.887 0 234.23 -105.464 234.23 -234.23 l -66.8709 -264.571 c 0.242725 -0.121363 -37.2585 52.7929 -167.117 129.494 Z" fill="#d1525c" p-id="2069"></path>
+                <path d="M 513.578 712.155 c -4.49043 -11.4081 29.1271 -79.8568 79.8568 -115.902 c 37.7439 -26.8212 122.576 -36.4089 126.339 -26.6998 s -47.4529 74.881 -86.6531 99.1536 c -49.5161 30.8261 -114.93 54.856 -119.542 43.448 Z" fill="#1daa6a" p-id="2070"></path><path d="M 295.973 685.454 c 8.61677 -8.8595 84.8327 -6.06815 138.354 25.4862 c 39.9284 23.5444 83.3763 96.9691 76.0946 104.372 s -87.7454 -12.6218 -125.974 -38.472 c -48.3024 -32.768 -97.0903 -82.6482 -88.4736 -91.3863 Z" fill="#1daa6a" p-id="2071"></path>
+              </svg>
+            </p>
+            <div class="test-model-lis-redio">
+              <input type="radio" name="sex" value="nan" title="男">
+              <input type="radio" name="sex" value="nv" title="女" checked>
+              <input type="radio" name="sex" value="" title="中性" disabled>
+            </div>
+            <p class="test-model-lis-answer">恭喜你，答对啦！</p>
+            <div class="test-model-lis-explain">
+              <span class="test-model-lis-explain-left">【解答】</span>  
+              <span class="test-model-lis-explain-right">解：因为，正方开$周长长X4，所以J正方形周长+边长=4.
+              答：正方形的周长是边长的4倍.
+              故选：A.</span>
+            </div>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div> -->
+<!-- 第二版课程测试弹窗结束 -->
+</body>
+
+
+
+<script type="text/javascript" src="__PUBLIC__/js/courseParticulars.js"></script>
+<script src="__PUBLIC__/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/drag.js"></script>
+<script>
+  //禁止下载显示列表
+  $('.layui_collapse_down_top a').click(function(){
+    if($(this).parents('.layui-colla-title').siblings('.layui-colla-content').hasClass('layui-show')){
+      $(this).parents('.layui-colla-title').siblings('.layui-colla-content').removeClass("layui-show");
+    }
+  })
+
+  $('.layui_collapse_down_top_one a').click(function(){
+    // if( $('.ayui-colla-content').hasClass('layui-show') ){
+      // $('.layui-colla-content').addClass('layui-show');
+    // }
+  })
+  $(".course-particulars-play video").attr('uc-video-toolbar-id','')
+</script>
+</html>

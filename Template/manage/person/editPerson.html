@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章添加--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__MANAGE__/css/menu.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__ueditor.config.js"></script> -->
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__ueditor.all.min.js"> </script> -->
+	<!-- <script type="text/javascript" charset="utf-8" src="__UE__lang/zh-cn/zh-cn.js"></script> -->
+</head>
+<style>
+	.site-doc-icon li {
+		display: inline-block;
+		vertical-align: middle;
+		width: 127px;
+		line-height: 25px;
+		padding: 20px 0;
+		margin-right: -1px;
+		margin-bottom: -1px;
+		border: 1px solid #e2e2e2;
+		font-size: 14px;
+		text-align: center;
+		color: #666;
+		transition: all .3s;
+		-webkit-transition: all .3s;
+	}
+	.site-doc-icon li .layui-icon {
+		display: inline-block;
+		font-size: 30px;
+	}
+	.input-width {
+		width: 150px;
+
+	}
+	.top {
+		margin-top: 20px;
+		float: left;
+	}
+	
+
+	/*.layui-input, .layui-textarea {
+	    display: block;
+	    width: 50%;
+	    padding-left: 10px;
+	}*/
+</style>
+<body class="childrenBody">
+	<form class="layui-form" action="javascript:">
+		<input type="hidden" name="id" class="layui-input" value="{$list.id|default=''}">
+		<div class="layui-input-inline top" style="margin-top:20px;">
+			<label class="layui-form-label">用户姓名</label>
+			<div class="layui-input-block input-width">
+				<input name="nickName" type="text" class="layui-input newsName" lay-verify="card" value="{$list.nickName|default=''}">
+			</div>
+		</div>
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">电话号码</label>
+			<div class="layui-input-block input-width">
+				<input name="phone" type="text" class="layui-input newsName" lay-verify="phone" value="{$list.phone|default=''}">
+			</div>
+		</div>
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">密码</label>
+			<div class="layui-input-block input-width">
+				<input name="password" type="password" class="layui-input newsName" lay-verify="password" value="">
+			</div>
+		</div>
+
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">学校</label>
+			<div class="layui-input-block input-width">
+				<input name="school" type="text" class="layui-input newsName" lay-verify="school" value="{$list.school|default=''}">
+			</div>
+		</div>
+
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">年级</label>
+			<div class="layui-input-block input-width">
+				<select name="grade_id">
+					<option value="">请选择年级</option>
+					<option value="7" {if condition="$list.grade_id eq 7"} selected {/if}>七年级</option>
+					<option value="8" {if condition="$list.grade_id eq 8"} selected {/if}>八年级</option>
+					<option value="9" {if condition="$list.grade_id eq 9"} selected {/if}>九年级</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">媒体</label>
+			<div class="layui-input-block input-width">
+				<select name="to_media" required >
+					<option value="0">请选择媒体</option>
+					{if condition="isset($mediaList) && $mediaList"} 
+						{volist name="$mediaList" id="v"}
+						<option value="{$v.id}" {if condition="isset($list.to_media) && $list.to_media && $v.id eq $list.to_media"} selected {/if} >{$v.name}</option>
+						{/volist}
+					{/if}
+				</select>
+			</div>
+		</div>
+
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">微信号</label>
+			<div class="layui-input-block input-width">
+				<input name="wechat" type="text" class="layui-input newsName" lay-verify="wechat" value="{$list.wechat|default=''}">
+			</div>
+		</div>
+		<div class="layui-input-inline top">
+			<div class="layui-inline">
+				<label class="layui-form-label">生日</label>
+				<div class="layui-input-inline input-width">
+				<input name="birthday" type="text" class="layui-input" id="test27" autocomplete="off" readonly="" placeholder="yyyy-MM-dd" value="{$list.birthday|date='Y-m-d', ###}">
+				</div>
+		</div>
+		</div>
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">性别</label>
+			<div class="layui-input-block input-width">
+				<input type="radio" name="gender" value="1" title="男" {if(!empty($list) && $list.gender == 1)} checked {/if}>
+				<input type="radio" name="gender" value="2" title="女" {if(!empty($list) && $list.gender == 2)} checked {/if}>
+			</div>
+		</div>
+		<div class="layui-input-inline top">
+			<label class="layui-form-label">
+				{if condition="$isAdmin"}
+					所属代理商
+				{else /}
+					所属管理员
+				{/if}
+			</label>
+			<div class="layui-form layui-input-block input-width">
+				<select name="user_id" id="user_id" lay-verify="required" lay-search="">
+						<option value="">请选泽</option>
+						{if condition="$isAdmin"}
+							{volist name="userList" id="user"}
+								<option value="{$user.uid}" {if( isset($agent) && $agent == $user.uid)}selected{/if}>{$user.username}</option>
+							{/volist}
+						{else /}
+							{volist name="userList" id="user"}
+								<option value="{$user.uid}" {if($list.user_id == $user.uid)}selected{/if}>{$user.username}</option>
+							{/volist}
+						{/if}
+				</select>
+			</div>
+		</div>
+
+		<div class="layui-form layui-inline top" id="area-picker">
+			<label class="layui-form-label">地区</label>
+			<div class="layui-input-inline" style="width: 150px;">
+				<select name="province" class="province-selector" data-value="{$list.province}" lay-filter="province-1">
+					<!-- <option value="">请选择省</option> -->
+				</select>
+			</div>
+			<div class="layui-input-inline" style="width: 150px;">
+				<select name="city" class="city-selector" data-value="{$list.city}" lay-filter="city-1">
+					<!-- <option value="">请选择市</option> -->
+				</select>
+			</div>
+			<div class="layui-input-inline" style="width: 150px;">
+				<select name="county" class="county-selector" data-value="{$list.country}" lay-filter="county-1">
+					<!-- <option value="">请选择区</option> -->
+				</select>
+			</div>
+		</div>
+
+		<div class="layui-input-inline top">
+		    <div class="layui-inline">
+		      	<label class="layui-form-label">备注</label>
+		      	<div class="layui-input-block" style="width: 300px; ">
+					<textarea name="remark" class="layui-textarea">{$list.remark|default=''}</textarea>
+		     	</div>
+		    </div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">看课权限</label>
+			<div class="layui-input-block" style="width: 800px;">
+				<!-- <input name="gradeAuth" type="text" disabled class="layui-input newsName" lay-verify="password" value="{$list.courseAuth|default=''}"> -->
+				<table id="test" lay-filter="test"></table>
+			</div>
+		</div>
+		
+		<!-- <div class="layui-form-item">
+			<label class="layui-form-label">邮箱</label>
+			<div class="layui-input-block input-width">
+				<input name="email" type="text" class="layui-input newsName" lay-verify="email" value="{$list.email|default=''}">
+			</div>
+		</div> -->
+		<!-- <div class="layui-form-item">
+		    <label class="layui-form-label">用户地址</label>
+		    <div class="layui-input-inline">
+		      <select name="quiz1">
+		        <option value="">请选择省</option>
+		        <option value="" selected=""></option>
+		      </select>
+		    </div>
+		    <div class="layui-input-inline">
+		      <select name="quiz2">
+		        <option value="">请选择市</option>
+		        <option value="" selected=""></option>
+		      </select>
+		    </div>
+		    <div class="layui-input-inline">
+		      <select name="quiz3">
+		        <option value="">请选择县/区</option>
+		        <option value="" selected=""></option>
+		      </select>
+		    </div>
+		</div> -->
+	  	
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="editPerson" >立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		    </div>
+		</div>
+	</form>
+	<script type="text/javascript" src="__LAY__layui.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/person/editPerson.js"></script>
+</body>
+
+</html>
+
+<script type="text/html" id="barDemo">
+	{{# if(d.is_audition == 0) { }}
+		{{laytpl.toType(d.type)}}
+	{{# } }}
+</script>
+
+<script>
+
+	layui.config({
+		base: '/static/manage/layui/js/',
+	})
+
+	layui.use(['laydate', 'layer', 'form', 'layarea'], function(){
+		var laydate = layui.laydate
+			,form = layui.form
+			,layarea = layui.layarea
+			,layer = layui.layer;
+		var myDate = new Date();//获取系统当前时间
+		var nowTime = myDate.toLocaleDateString();
+	    laydate.render({
+				elem: '#test27'
+				,trigger: 'click'
+				,max: nowTime
+		});
+		  
+		layarea.render({
+			elem: '#area-picker',
+			change: function (res) {
+				
+			}
+		});
+	})
+
+	layui.use(['form','layer','laypage','table','jquery','laytpl'], function(data) {
+		var $ = layui.$, form = layui.form;
+		table = layui.table;
+		laytpl = layui.laytpl;
+
+		let id = $('input[name="id"]').val();
+
+		laytpl.toType=function(ns){
+			
+			if(ns==1){
+				return '<a class="layui-btn layui-btn-xs" lay-event="disabled" >停用</a>';
+			}else {
+				return '';
+			}
+		};
+		table.render({
+			elem: '#test'
+			,url:'/manage/person_controller/getOrderByPersonId?person_id='+id
+			,cols: [[
+				{field:'courseName', title: '课程名称'}
+				,{field:'isActive', title: '激活状态'}
+				,{field:'remTime', title: '剩余时间'}
+				,{fixed:'right',  title: '操作', align:'center', toolbar: '#barDemo', width:200}
+			]]
+			,id: 'testReload'
+			,done:function (res) {
+				console.log(res);
+			}
+
+		});
+
+		table.on('tool(test)', function(obj){
+			var data = obj.data;
+			if(obj.event === 'disabled'){
+				layer.confirm('真的停用吗？', function(index){
+                $.post("/manage/person_controller/disabled",{id:data.id},function(data){
+					layer.close(index);
+                    if(data.error_code==0){
+                        layer.msg(data.msg,{time:400},function(){
+							table.reload('testReload')
+                        });
+
+                    }else{
+                        layer.msg(data.msg,{time:400});
+                    }
+                })
+
+            });
+			}
+			
+		})
+	})
+</script>

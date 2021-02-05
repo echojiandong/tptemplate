@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/admin.css" media="all" />
+</head>
+<body>
+  <div class="layui-form" lay-filter="layuiadmin-form-admin" id="layuiadmin-form-admin" style="padding: 20px 30px 0 0;">
+  	<input type="hidden" name="kid" id='kid' value="{$id}">
+  	<input type="hidden" name="id" id='sid' value="{$sid}">
+    <div class="layui-form-item">
+    	<label class="layui-form-label">章节</label>
+	    <div class="layui-input-block">
+	     	<input type="text" name="testclass" lay-reqText='请输入章节' placeholder="第一章节" autocomplete="off" class="layui-input">
+	    </div>
+    </div>
+    <div class="layui-form-item">
+    	<label class="layui-form-label">章节名称</label>
+	    <div class="layui-input-block">
+	     	<input type="text" name="outline"  lay-reqText='请输入章节名称' placeholder="如：中国历史的动荡" autocomplete="off" class="layui-input">
+	    </div>
+		</div>
+		<!-- 第一个下载 -->
+		<!-- <div class="layui-form-item">
+    	<label class="layui-form-label">下载名称</label>
+	    <div class="layui-input-block">
+	     	<input type="text" name="title1"  lay-reqText='请输入下载名称' placeholder="课程预习资料" autocomplete="off" class="layui-input">
+	    </div>
+		</div> -->
+	<div class="layui-form-item">
+      <label class="layui-form-label">课程标签</label>
+      <div class="layui-input-block">
+        <div id="test1"></div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">上传学习指导</label>
+      <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="coursewarefile">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+        <div class="layui-upload-drag" id="coursewarefile_href" style="display: none">
+          <i class="layui-icon layui-icon-file"></i>
+          <a href="">点击下载课件资料</a>
+        </div>
+        <input type="hidden" name="courseware"  id="courseware" lay-verify='courseware' value="0">
+      </div>
+		</div>
+		<!-- 第二个下载 -->
+		<!-- <div class="layui-form-item">
+    	<label class="layui-form-label">下载名称</label>
+	    <div class="layui-input-block">
+	     	<input type="text" name="title2"  lay-reqText='请输入下载名称' placeholder="课程预习资料" autocomplete="off" class="layui-input">
+	    </div>
+		</div> -->
+
+    <!-- <div class="layui-form-item">
+      <label class="layui-form-label">课件资料上传</label>
+      <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="coursewarefile2">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+        <div class="layui-upload-drag" id="coursewarefile_href2" style="display: none">
+          <i class="layui-icon layui-icon-file"></i>
+          <a href="">点击下载课件资料</a>
+        </div>
+        <input type="hidden" name="courseware2"  id="courseware2" lay-verify='courseware' value="0">
+      </div>
+		</div> -->
+		<!-- 第三个下载 -->
+		<!-- <div class="layui-form-item">
+    	<label class="layui-form-label">下载名称</label>
+	    <div class="layui-input-block">
+	     	<input type="text" name="title3"  lay-reqText='请输入下载名称' placeholder="课程预习资料" autocomplete="off" class="layui-input">
+	    </div>
+		</div> -->
+
+    <!-- <div class="layui-form-item">
+      <label class="layui-form-label">课件资料上传</label>
+      <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="coursewarefile3">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+        <div class="layui-upload-drag" id="coursewarefile_href3" style="display: none">
+          <i class="layui-icon layui-icon-file"></i>
+          <a href="">点击下载课件资料</a>
+        </div>
+        <input type="hidden" name="courseware3"  id="courseware3" lay-verify='courseware' value="0">
+      </div>
+		</div> -->
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">上传习题答案</label>
+      <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="coursewarefile1">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+
+        <div class="layui-upload-drag" id="coursewarefile_href1" style="display: none">
+          <i class="layui-icon layui-icon-file"></i>
+          <a href="">点击下载课件资料</a>
+        </div>
+        <input type="hidden" name="courseware1"  id="courseware1" lay-verify='courseware1' value="0">
+      </div>
+    </div>
+
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">上传学习笔记</label>
+      <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="coursewarefile2">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+
+        <div class="layui-upload-drag" id="coursewarefile_href2" style="display: none">
+          <i class="layui-icon layui-icon-file"></i>
+          <a href="">点击下载课件资料</a>
+        </div>
+        <input type="hidden" name="courseware2"  id="courseware2" lay-verify='courseware2' value="0">
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-user-back-submit" id="LAY-user-back-submit" value="确认">
+    </div>
+  </div>
+</body>
+</html>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript">
+  // 树扩展
+	layui.config({
+		base: '/static/manage/layui/js/',
+	})
+	layui.use(['treeSelect','layer','code','form','upload','tree'],function(){
+		var $ = layui.$
+			,form = layui.form
+			,layer = layui.layer
+			,upload = layui.upload
+			,tree = layui.tree
+			,sid = $('#sid').val()
+			,datas = '';
+			// 第一个课件上传
+			  upload.render({
+			      elem: '#coursewarefile'
+			      ,url: '/manage/videos/uploadimg'
+			      ,size:'100000'
+			      ,accept:'file'
+			      ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+			        layer.load(); //上传loading
+			      },done: function(res){
+			          layer.closeAll('loading'); //关闭loading
+			          if(res.code==0){
+			              layer.msg(res.msg,{time:1200},function(){
+			                  var file = res.data;
+		                      file = file.replace("\\","/");
+		                      $('input[name="courseware"]').attr('value',file);
+                      		  $('#coursewarefile_href').children('a').attr('href',file);
+                      		  $('#coursewarefile_href').show();
+			              });
+			          }else{
+			              layer.msg(res.msg,{time:1200});
+			          }
+			      }
+			  });
+
+			 //   上传资料临时写     改版之后可删除
+			 // 课件上传
+			  upload.render({
+			      elem: '#coursewarefile1'
+			      ,url: '/manage/videos/uploadimg'
+			      ,size:'100000'
+			      ,accept:'file'
+			      ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+			        layer.load(); //上传loading
+			      },done: function(res){
+			          layer.closeAll('loading'); //关闭loading
+			          if(res.code==0){
+			              layer.msg(res.msg,{time:1200},function(){
+			                  var file = res.data;
+		                      file = file.replace("\\","/");
+		                      $('input[name="courseware1"]').attr('value',file);
+                      		  $('#coursewarefile_href1').children('a').attr('href',file);
+                      		  $('#coursewarefile_href1').show();
+
+			              });
+			          }else{
+			              layer.msg(res.msg,{time:1200});
+			          }
+			      }
+			  });
+
+			  // 课件上传
+			  upload.render({
+			      elem: '#coursewarefile2'
+			      ,url: '/manage/videos/uploadimg'
+			      ,size:'100000'
+			      ,accept:'file'
+			      ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+			        layer.load(); //上传loading
+			      },done: function(res){
+			          layer.closeAll('loading'); //关闭loading
+			          if(res.code==0){
+			              layer.msg(res.msg,{time:1200},function(){
+			                  var file = res.data;
+		                      file = file.replace("\\","/");
+		                      $('input[name="courseware2"]').attr('value',file);
+                      		  $('#coursewarefile_href2').children('a').attr('href',file);
+                      		  $('#coursewarefile_href2').show();
+
+			              });
+			          }else{
+			              layer.msg(res.msg,{time:1200});
+			          }
+			      }
+			  });
+			 //   结束
+
+			if(sid != 0){
+				$.ajax({
+					url: '/manage/videos/chapterFormval'
+					,data: {id:sid}
+					,dataType: 'json'
+					,type: 'post'
+					,async: false
+					,success: function(e){
+						if(e.code == 0){
+							form.val('layuiadmin-form-admin',e.data);
+							if(e.data.courseware != 0){
+                      			$('#coursewarefile_href').children('a').attr('href',e.data.courseware);
+                      			$('#coursewarefile_href').show();
+							}
+							if(e.data.courseware1 != 0){
+                      			$('#coursewarefile_href1').children('a').attr('href',e.data.courseware1);
+                      			$('#coursewarefile_href1').show();
+							}
+							if(e.data.courseware2 != 0){
+                      			$('#coursewarefile_href2').children('a').attr('href',e.data.courseware2);
+                      			$('#coursewarefile_href2').show();
+							}
+						}else{
+							layer.msg(e.msg,{icon:2, time:2000});
+						}
+					}
+				})
+			}
+			//初始化 视频标签树 
+	      	$.ajax({
+	        url: '/manage/videos/videoTagTree'
+		        //type:1 video_class标签 type:2 video标签
+		        ,data: {id:sid,type:2}
+		        ,type: 'post'
+		        ,dataType: 'json'
+		        ,async: false
+		        ,success: function(res){
+		          if(res.code == 0){
+		              datas = res.data
+		          }
+		              
+		        }
+	      	})
+	      	//初始化树
+	      	tree.render({
+		        elem: '#test1'
+		        ,data: datas
+		        ,id: 'demoId'
+		        ,showCheckbox: true
+		        ,accordion: true
+		        ,click: function(obj){
+		            //节点点击后的回调
+		            console.log(obj.data); //得到当前点击的节点数据
+		            console.log(obj.state); //得到当前节点的展开状态：open、close、normal
+		            console.log(obj.elem); //得到当前节点元素
+		            console.log(obj.data.children); //当前节点下是否有子节点
+		        }
+		        ,oncheck: function(){
+		          //复选框被点击后的回调
+		          
+		        }
+	    	})
+    })
+</script>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章列表--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAY__/css/layui.css" media="all" />
+	<link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
+</head>
+<body class="childrenBody">
+	<form class="layui-form">
+		<input name="id" type="hidden" class="layui-input newsName" lay-verify="num" value="{$id}">
+
+		<input type="hidden" value="{$a}" name="number"  id="number"/>
+		<div id="class">
+			<div style="padding-top: 20px;" class="addNow0" >
+				<div class="layui-input-inline">
+					<label class="layui-form-label">年级</label>
+					<div class="layui-inline" style="width:100px" sid="{$a}">
+						<select name="arr[{$a}][grade]" lay-verify="required" class="grade_id" lay-search="" lay-filter="selectClass">
+							{volist name="gradeList" id="list"}
+								<option value="{$list.id}" {if condition="$list.id eq 7"} selected {/if} >{$list.grade}</option>
+							{/volist}
+						</select>
+					</div>
+				</div>
+				<div class="layui-input-inline">
+					<label>学期</label>
+					<div class="layui-inline" style="width:100px" sid="{$a}">
+						<select name="arr[{$a}][semester]" lay-verify="required" lay-search="" lay-filter="selectClass" class="semester">
+							<option value="1" selected >上学期</option>
+							<option value="2">下学期</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-input-inline course">
+					{if condition="$courseList"}
+					{volist name="courseList" id="v"}
+					<label style="width:70px;padding: 9px 3px;">{$v.subject} {if condition="!$isAdmin"} 剩余 {$v.courseNum ? $v.courseNum : 0} {/if} </label>
+					<div class="layui-inline" style="width:50px">
+						<input name="arr[{$a}][course][{$v.id}][id]" type="hidden" class="layui-input"  value="{$v.id}" >
+						<input name="arr[{$a}][course][{$v.id}][num]" type="text" class="layui-input newsName" 	{if condition="!$v.courseNum && !$isAdmin"} disabled {/if} 
+						lay-verify="order_num"  value="" >
+					</div>
+					{/volist}
+					{else /}
+					<label class="layui-form-label" style="width:30px;padding: 9px 3px;">暂无课程</label>
+					{/if}
+				</div>
+				
+				<div class="layui-input-inline">
+					<label>备注：</label>
+					<div class="layui-inline">
+						<!-- <textarea name="arr[{$a}][remark]" placeholder="" class="layui-textarea"></textarea> -->
+						<input name="arr[{$a}][remark]" type="text" class="layui-input" />
+					</div>
+				</div>
+
+				<a class="layui-btn layui-btn-xs addclass" href="javascript:;" >+</a>
+				<a class="layui-btn layui-btn-xs delclass" href="javascript:;" >-</a>
+			</div>
+			
+		</div>
+
+		
+		<div class="layui-form-item" style="padding-top: 20px;">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="upCourse">立即提交</button>
+				<!-- <button type="reset" class="layui-btn layui-btn-primary">重置</button> -->
+		    </div>
+		</div>
+	</form>
+	<script type="text/javascript" src="__LAY__/layui.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/code/codeAssign.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/jquery-3.2.0.min.js"></script>
+</body>
+</html>
+<script>
+	layui.use('form',function(){
+		var form = layui.form;
+		var i=$('#number').val();
+		$('.addclass').on('click', function() {
+			
+			if ( i > 9) {
+			layer.msg('一次最多10项', {icon: 5,time:1500});
+				return false;
+		   }
+
+		   if (i == 1) {
+			   var tab = 0;
+		   } else {
+			   var tab = i;
+		   }
+
+			var html='';
+			html += '<div style="padding-top: 20px;"  class="addNow'+i+'">';
+			html += '	<div class="layui-input-inline">';
+			html += '		<label class="layui-form-label">年级</label>';
+			html += '		<div class="layui-inline" style="width:100px" sid="'+tab+'">';
+			html += '			<select name="arr['+tab+']['+"grade"+']" lay-verify="required" class="grade_id" lay-search="" lay-filter="selectClass">';
+			html += '				{volist name="gradeList" id="list"}';
+			html += '					<option value="{$list.id}" {if condition="$list.id eq 7"} selected {/if} >{$list.grade}</option>';
+			html += '				{/volist}';
+			html += '			</select>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '	<div class="layui-input-inline">';
+			html += '		<label>学期</label>';
+			html += '		<div class="layui-inline" style="width:100px" sid="'+tab+'">';
+			html += '			<select name="arr['+tab+']['+"semester"+']" lay-verify="required" lay-search="" lay-filter="selectClass" class="semester">';
+			html += '				<option value="1" selected >上学期</option>';
+			html += '				<option value="2">下学期</option>';
+			html += '			</select>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '	<div class="layui-input-inline course" >';
+			html += '		{if condition="$courseList"}';
+			html += '		{volist name="courseList" id="v"}';
+			html += '		<label style="width:70px;padding: 9px 3px;">{$v.subject} {if condition="!$isAdmin"} 剩余 {$v.courseNum ? $v.courseNum : 0} {/if} </label>';
+			html += '		<div class="layui-inline" style="width:50px">';
+			html += '			<input name="arr['+tab+']['+"course"+'][{$v.id}]['+"id"+']" type="hidden" class="layui-input"  value="{$v.id}" >';
+			html += '			<input name="arr['+tab+']['+"course"+'][{$v.id}]['+"num"+']" type="text" class="layui-input newsName" {if condition="!$v.courseNum && !$isAdmin"} disabled {/if} lay-verify="order_num"  value="" >';
+			html += '		</div>';
+			html += '		{/volist}';
+			html += '		{else /}';
+			html += '		<label class="layui-form-label" style="width:30px;padding: 9px 3px;">暂无课程</label>';
+			html += '		{/if}';
+			html += '	</div>';
+			html += '	<div class="layui-input-inline">';
+			html += '		<label>备注：</label>';
+			html += '		<div class="layui-inline">';
+			// html += '			<textarea name="arr[{$a}][remark]" placeholder="" class="layui-textarea"></textarea>';
+			html += '			<input name="arr[{$a}][remark]" type="text" class="layui-input" />';
+			html += '		</div>';
+			html += '	</div>';
+			html += '	<a class="layui-btn layui-btn-xs delclass" href="javascript:;" >-</a>';
+			html += '	<div class="layui-form-item" style="padding-top: 20px;"><hr /></div>';
+			html += '</div>';
+
+			// var html='';
+			// html += '<div><div class="layui-form-item">';
+			// html +=	'	<div class="layui-inline">';
+			// html +=	'		<label class="layui-form-label">年级列表</label>';
+			// html +=	'		<div class="layui-input-block" sid="'+ i +'">';
+			// html +=	'			<select name="grade_id'+i+'" lay-verify="required" lay-filter="selectGrade" lay-search="" class="grade">';
+			// html +=	'	          <option value="">请选择年级</option>';
+			// html +=	'	          {volist name="gradeList" id="list"}';
+			// html +=	'		          <option value="{$list.id}">{$list.grade}</option>';
+			// html +=	'		      {/volist}';
+			// html +=	'	        </select>';
+			// html +=	'		</div>';
+			// html +=	'	</div>';
+			// html +=	'</div>';
+			// html +=	'<div class="layui-form-item">';
+			// html +=	'	<div class="layui-inline">';
+			// html +=	'		<label class="layui-form-label">学期</label>';
+			// html +=	'		<div class="layui-input-block" sid="'+ i +'">';
+			// html +=	'			<select name="Semester'+i+'" lay-verify="required" lay-filter="selectGrade" lay-search="" class="semester">';
+			// html +=	'	          	<option value="">请选泽学期</option>';
+			// html +=	'		        <option value="1">上学期</option>';
+			// html +=	'		        <option value="2">下学期</option>';
+			// html +=	'	        </select>';
+			// html +=	'		</div>';
+			// html +=	'	</div>';
+			// html +=	'</div>';
+			// html +=	'<div class="layui-form-item" id="class">';
+			// html +=	'    <label class="layui-form-label">课程</label>';
+			// html +=	'    <div class="layui-input-block" id="course">';
+			// html +=	'   	<span>请选择相应年级、学期!</span>';
+			// // html +=	'   	{volist name="subjectList" id="val"}';
+			// // html +=	'     	<input type="checkbox" name="subject_id'+i+'[]" title="{$val.subject}" value="{$val.id}">';
+			// // html +=	'    	{/volist}';
+			// html +=	'    </div>';
+			// html +=	'</div></div>';
+
+			$('#class').before(html);
+			i++;
+			document.getElementById('number').value= i;
+			form.render();
+		});
+
+
+		$("body").delegate(".delclass","click", function(){
+			
+			if (i <= 1) {
+				layer.msg('至少保留一个选项', {icon: 5,time:1500});
+				return false;
+			}
+			
+			i--;
+			$('.addNow'+i).remove();
+			document.getElementById('number').value=i;
+			form.render();
+        });
+	
+	})
+</script>

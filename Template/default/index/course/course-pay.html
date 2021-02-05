@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="applicable-device" content="pc">
+  <meta name="renderer" content="webkit"/>
+  <meta name="force-rendering" content="webkit"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <title>E点就通名校名师同步课堂</title>
+    <!-- <link rel="icon" type="image/x-icon" href="./images/bit.ico" /> -->
+  <link rel="stylesheet" href="__PUBLIC__/css/layui.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/course.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+  <link rel="stylesheet" href="__PUBLIC__/css/jquery.mCustomScrollbar.css">
+</head>
+<style>
+  .card-activation-modal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 509;
+    display: none;
+  }
+  .card-activation-confirm{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: auto;
+    margin: 0;
+    right: auto;
+    bottom: auto;
+  }
+  .card-activation-power{
+    width: 100% !important;
+  }
+  .card-activation-modal-confirm-btn{
+        margin-bottom: 40px !important;
+      }
+</style>
+<body>
+
+  <!-- 公共头部 -->
+    {include file="index/public/header"}
+  <input type="hidden" value="{$id|default=0}" name="kid" id="kid"/>
+  <input type="hidden" value="{$productStatus|default=0}" name="productStatus" id="productStatus">
+<!-- 课程详情 -->
+<div class="course-shows clearfix">
+  <!-- 当前位置 -->
+  <div class="course-shows-top clearfix">
+    <div class="course-shows-position">
+        <a href="javascript:location.reload();">当前位置:</a>
+        <a href="../index/index.html">首页></a>
+        <a href="../course/course.html">同步课程></a>
+        <a href="javascript:location.reload();" class="course-shows-position-now">{$coursePayList.title}</a>
+    </div>
+  </div>
+
+  <!-- 课程介绍 -->
+  <div class="course-shows-introduce clearfix">
+    <!-- 顶部介绍部分 -->
+    <div class="course-shows-introduce-top clearfix">
+      <div class="course-shows-top-img">
+        <img src="{$coursePayList.img}" alt="">
+      </div>
+      <div class="course-shows-top-right">
+        <h3 class="course-shows-right-title">{$coursePayList.title}</h3>
+        <div class="course-shows-right-num clearfix">
+          <div class="course-shows-right-course">
+            <i class="iconfont icon-keshilianxi"></i>
+            <span>共{$coursePayList.classNum}节课</span>
+          </div>
+          <div class="course-shows-right-study">
+            <i class="iconfont icon-renqun"></i>
+            <span>{$coursePayList.purchase}人已经学习</span>
+          </div>
+        </div>
+        <div class="course-shows-right-teachers">
+          {$coursePayList.name}
+          <p class="course-shows-right-teachers-p">{$coursePayList.content}</p>
+        </div>
+        <div class="course-shows-right-price">
+          价格：<span class="course-shows-right-price-now">&yen;{$coursePayList.price}</span> 元
+          <!-- <span class="old-price">原价：¥{$coursePayList.price*$coursePayList.Discount}</span> -->
+        </div>
+        <!-- <div class="course-shows-right-service">服务承诺：<span>保</span>支付保障</div> -->
+      </div>
+    </div>
+    <div class="course-shows-introduce-contain">
+      <!-- <div class="layui-tab"> -->
+        <ul class="course-shows-introduce-contain-title">
+          <li class="course-list-style">课程列表</li>
+        </ul>
+        <div class="layui-tab-content clearfix">
+          <div class="layui-tab-item layui-show">
+            <!-- 课程目录 -->
+            <ol class="layui-collapse course-shows-introduce-list-title" lay-accordion>
+              {volist name="courseCatalogList" id="v" key="k"}
+              <li class="layui-colla-item">
+                {if $v.part == 2}
+                  {if($v.audi == 1)}
+                    <h2 class="layui-colla-title"><a href="/index/course/courseParticulars?id={$id}&videoid={$v.id}&productStatus={$productStatus}">{$v.testclass}</a></h2>
+                    <div class="shuxue_position">
+                        {if condition="$isbay eq 0"}
+                      <span class="shows-container-lis-frequency"><a href="/index/course/courseParticulars?id={$id}&videoid={$v.id}&productStatus={$productStatus}">试听</a></span>
+                      {else /}
+                      <span class="shows-container-lis-frequency"><a href="/index/course/courseParticulars?id={$id}&videoid={$v.id}&productStatus={$productStatus}"></a></span>
+                      {/if}
+                      <span class="shows-container-lis-duration">{$v.classhour}</span>
+                    </div>
+                  {else}
+                    <h2 class="layui-colla-title">{$v.testclass}</h2>
+                    <span class="shows-container-lis-duration">{$v.classhour}</span>
+                  {/if}
+                {else}
+                  <h2 class="layui-colla-title">{$v.testclass}</h2>
+                {/if}
+                <div class="layui-colla-content {if condition='$k eq 1 && isset($v["son"])'}layui-show{/if}">
+                  <!-- 目录 -->
+                  {if(isset($v['son']))}
+                    {volist name="v['son']" id="vo"}
+                      <dl class="shows-course-container">
+                        {if(!empty($vo['son']))}
+                        <dt class="shows-course-container-title">{$vo.testclass}</dt>
+                        {volist name="vo['son']" id="vol"}
+                        <dd class="shows-course-container-lis clearfix">
+                          <!-- {if $vol['audi'] == 1}
+                          <a href="/index/course/courseParticulars?id={$vol.kid}&videoid={$vol.id}"> 
+                          {/if} -->
+                            <div class="shows-container-lis-div clearfix" >
+                              <div class="shows-container-lis-name" data-isshow='{$vol.skill?1:0}'>
+                                <span class="shows-container-lis-title" {if(empty($vol.skill))} onclick="layui.clickurl({$vol.id},{$vol['audi']},'/index/course/courseParticulars?id={$id}&videoid={$vol.id}&productStatus={$productStatus}')" {/if}>
+                                  <i class="iconfont icon-bofang11"></i>
+                                  {if $vol['audi'] == 1}
+                                  {$vol.testclass}{$vol.outline}
+                                  {else}
+                                  {$vol.testclass}{$vol.outline}
+                                  {/if}
+                                </span>
+                                
+                              </div>
+                              {if $vol['audi'] == 1}
+                              {if condition="$isbay eq 0"}
+                                <span class="shows-container-lis-frequency" onclick="layui.clickurl({$vol.id},{$vol['audi']},'/index/course/courseParticulars?id={$id}&videoid={$vol.id}&productStatus={$productStatus}')">试听</span>
+                                {else /}
+                                <span class="shows-container-lis-frequency" onclick="layui.clickurl({$vol.id},{$vol['audi']},'/index/course/courseParticulars?id={$id}&videoid={$vol.id}&productStatus={$productStatus}')"></span>
+                                {/if}
+                              {/if}
+                              <span class="shows-container-lis-duration">{$vol.classhour}</span>
+                            </div>
+                            <!-- {if $vol['audi'] == 1}
+                          </a>
+                          {/if} -->
+                          <ul class="particulars-container-position-contain clearfix">
+                              {if(!empty($vol.skill))}
+                              <li class="particulars-position-container-lis" onclick="layui.clickurl({$vol.id},{$vol['audi']},'/index/course/courseParticulars?id={$id}&videoid={$vol.id}&startTime=0&productStatus={$productStatus}',0)" >
+                                  <i class="iconfont icon-location"></i>
+                                  开始
+                                </li>  
+                              {volist name='vol.skill' id='voll'}
+                              <li class="particulars-position-container-lis" onclick="layui.clickurl({$vol.id},{$vol['audi']},'/index/course/courseParticulars?id={$id}&videoid={$vol.id}&startTime={$voll.start_time}&productStatus={$productStatus}',{$id})" >
+                                <i class="iconfont icon-location"></i>
+                                {$voll.k_name}
+                              </li>  
+                              {/volist}
+                              {/if}
+                              <!-- <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>练习</li>
+                              <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>例题</li>
+                              <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>技巧</li> -->
+                            </ul>
+                        </dd>
+                        {/volist}
+                        {else}
+                        <dd class="shows-course-container-lis clearfix" >
+                          <!-- {if $vo['audi'] == 1}
+                          <a href="/index/course/courseParticulars?id={$vo.kid}&videoid={$vo.id}">
+                            {/if} -->
+                            <div class="shows-container-lis-div clearfix">
+                              <div class="shows-container-lis-name" data-isshow='{$vo.skill?1:0}'>
+                                <span class="shows-container-lis-title" {if(empty($vo.skill))} onclick="layui.clickurl({$vo.id},{$vo['audi']},'/index/course/courseParticulars?id={$id}&videoid={$vo.id}&productStatus={$productStatus}')" {/if}>
+                                  <i class="iconfont icon-bofang11"></i>
+                                  {if $vo['audi'] == 1}
+                                  {$vo.testclass}{$vo.outline}
+                                  {else}
+                                  {$vo.testclass}{$vo.outline}
+                                  {/if}
+                                </span>
+                              </div>
+                              {if $vo['audi'] == 1}
+                              
+                                {if condition="$isbay eq 0"}
+                                <span class="shows-container-lis-frequency" onclick="layui.clickurl({$vo.id},{$vo['audi']},'/index/course/courseParticulars?id={$id}&videoid={$vo.id}&productStatus={$productStatus}')">试听</span>
+                                {else /}
+                                <span class="shows-container-lis-frequency" onclick="layui.clickurl({$vo.id},{$vo['audi']},'/index/course/courseParticulars?id={$id}&videoid={$vo.id}&productStatus={$productStatus}')"></span>
+                                {/if}
+                              {/if}
+                              <span class="shows-container-lis-duration">{$vo.classhour}</span>
+                            </div>
+                          <!-- {if $vo['audi'] == 1}
+                          </a>
+                          {/if} -->
+                          <ul class="particulars-container-position-contain clearfix">
+                            {if(!empty($vo.skill))}
+                            <li class="particulars-position-container-lis" onclick="layui.clickurl({$vo.id},{$vo['audi']},'/index/course/courseParticulars?id={$id}&videoid={$vo.id}&startTime=0&productStatus={$productStatus}',0)">
+                                <i class="iconfont icon-location"></i>
+                                开始
+                              </li>
+                            {volist name='vo.skill' id='vol'}
+                            <li class="particulars-position-container-lis" onclick="layui.clickurl({$vo.id},{$vo['audi']},'/index/course/courseParticulars?id={$id}&videoid={$vo.id}&startTime={$vol.start_time}&productStatus={$productStatus}',{$id})">
+                              <i class="iconfont icon-location"></i>
+                              {$vol.k_name}
+                            </li>  
+                            {/volist}
+                            {/if}
+                            <!-- <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>练习</li>
+                            <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>例题</li>
+                            <li class="particulars-position-container-lis"><i class="iconfont icon-location"></i>技巧</li> -->
+                          </ul>
+                        </dd>
+                        {/if}
+                      </dl>
+                    {/volist}
+                  {/if}
+                </div>
+              </li>
+              {/volist}
+            </ol>
+          </div>
+
+        </div>
+    <!-- </div> -->
+    </div>
+  </div>
+</div>
+<!-- 卡号激活弹窗 -->
+<!-- <div class="card-activation-modal"> </div> -->
+<!-- 提示是否激活窗口 -->
+<!-- <div class="card-activation-confirm">
+  <div action="" class="layui-form">
+    <div class="card-activation-modal-confirm-close">x</div>
+    <p class="card-activation-power"></p>
+    <div class="card-activation-modal-confirm-btn" lay-submit lay-filter="agreeBtn">确定</div>
+  </div>
+</div> -->
+
+<div class="number_showmodel">
+  <div class="number_showmodel_content clearfix">
+    <div class="number_showmodel_close">+</div>
+    <i class="iconfont icon-xuexi number_showmodel_iconfont"></i>
+    <p class="number_p confirm_study">确认学习吗？</p>
+    <p class="number_p free_audition"></p>
+    <!-- <p class="number_p audited"></p> -->
+    <button class="showmodel_btn i_about_btn">我再想想</button>
+    <button class="showmodel_btn confirm_study_btn">确认学习</button>
+  </div>
+</div>
+
+
+  <!-- footer -->
+  {include file="index/public/footer"}
+</body>
+<script>
+  
+  $(".shows-container-lis-name").click(function() {
+    if($(this).attr('data-isshow') != 0){
+      $('.particulars-container-position-contain').stop().stop().slideUp()
+      $(this).parents('.shows-container-lis-div')
+              .siblings('.particulars-container-position-contain').stop()
+              .slideToggle()
+              .end()
+      $(this).children('.shows-container-lis-title').addClass('personal-learn-now')
+              .parents('.shows-course-container-lis')
+              .siblings()
+              .find('.shows-container-lis-title')
+              .removeClass('personal-learn-now')
+              .end()
+      $(this).children('.shows-container-lis-title').addClass('personal-learn-now')
+              .parents('.shows-course-container')
+              .siblings()
+              .find('.shows-container-lis-title')
+              .removeClass('personal-learn-now')
+              .end()
+    }
+  })
+  //文字超出隐藏
+$('.course-shows-right-teachers-p').each(function(){
+  var maxwidth = 75;
+  if($(this).text().length > maxwidth){
+    $(this).text($(this).text().substring(0,maxwidth));
+    $(this).html($(this).html() +  '...')
+  }
+})
+
+layui.use(['element','layer', 'form','carousel','laypage'], function(){
+  var layer = layui.layer
+      ,element = layui.element
+      ,form = layui.form
+      ,carousel = layui.carousel
+      ,laypage = layui.laypage;
+
+
+      layui.clickurl = function(id,audi,url,k_id){
+        var k_id = k_id || 0;
+        var kid=$('#kid').val();
+        var productStatus=$('#productStatus').val();
+        $.ajax({
+           type: "POST",  
+           url: "/index/course/checkAudiVideo",  
+           data: {videoid:id,kid:kid,productStatus:productStatus},
+           dataType: "json",  
+           success: function(data){
+               if(data.error_code == 1){
+                $('.free_audition').html(data.msg)
+                $('.number_showmodel').show();
+                $('.showmodel_btn').show();
+                $('.confirm_study').show();
+                $('.number_showmodel_iconfont').removeClass('showmodel_bg');
+                $('.number_showmodel_iconfont').addClass('iconfont icon-xuexi');
+                $('.number_showmodel_close').click(function(){
+                  $('.number_showmodel').hide();
+                })
+                $('.i_about_btn').click(function(){
+                  $('.number_showmodel').hide();
+                })
+                $('.confirm_study_btn').click(function(){
+                  $('.number_showmodel').hide();
+                  // if(data.data){
+                  //   window.location.href = data.data;
+                  // }else{
+                    window.location.href = url+'&k_id='+k_id;
+                  //}
+                })
+               }else if(data.error_code == 0){
+                //  layer.msg(data.msg,{time:1500,icon:0});
+                $('.free_audition').html(data.msg)
+                $('.number_showmodel').show();
+                $('.number_showmodel_iconfont').removeClass('iconfont icon-xuexi');
+                $('.number_showmodel_iconfont').addClass('showmodel_bg');
+                $('.showmodel_btn').hide();
+                $('.confirm_study').hide();
+                $('.number_showmodel_close').click(function(){
+                  $('.number_showmodel').hide();
+                })
+                $('.i_about_btn').click(function(){
+                  $('.number_showmodel').hide();
+                })
+                $('.confirm_study_btn').click(function(){
+                  $('.number_showmodel').hide();
+                })
+               }else if(data.error_code == 2){
+                window.location.href = url+'&k_id='+k_id;
+               }
+            },  
+           error:function(e){  
+              console.log(e);  
+           }  
+      })
+
+      }
+});
+</script>
+</html>

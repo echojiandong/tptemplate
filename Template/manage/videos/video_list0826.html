@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="__LAY__css/layui.css">
+	<link rel="stylesheet" type="text/css" href="__LAY__css/admin.css">
+</head>
+<body>
+	<input type="hidden" id="subject" value="{$subject}">
+	<input type="hidden" id="grade" value="{$grade}">
+	<button type="button" class="layui-btn layui-btn-primary layui-btn-sm add-button" data-subject="{$subject}" data-grade="{$grade}">添加</button>
+	<div id="layuiTable"></div>
+</body>
+</html>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript">
+	layui.config({
+		base: '/static/manage/layui-tree/',
+	}).extend({
+		treetable: 'treetable'
+	});
+
+	var layout = [{
+			name: '部门ID',
+			field: 'id',
+			headerClass: 'value_col',
+			colClass: 'value_col',
+			style: ''
+		},
+		{
+			name: '部门名称',
+			field: 'title',
+			treeNodes: true,
+			headerClass: 'value_col',
+			colClass: 'value_col',
+			style: ''
+		},
+		{
+			name: '上级部门',
+			field: 'title',
+			headerClass: 'value_col',
+			colClass: 'value_col',
+			style: ''
+		},
+		{
+			name: '上级部门ID',
+			field: 'price',
+			headerClass: 'value_col',
+			colClass: 'value_col',
+			style: ''
+		},
+		{
+			name: '排序号',
+			field: 'price',
+			headerClass: 'value_col',
+			colClass: 'value_col',
+			style: ''
+		}
+	];
+ 
+function renderTable() {
+	layui.use(['form', 'treetable', 'layer'], function() {
+		var layer = layui.layer,
+			form = layui.form,
+			$ = layui.jquery,
+			subject = $('#subject').val(),
+			grade = $('#grade').val();
+		layer.load(2);
+		$.ajax({
+			type: "POST",
+			url: '/manage/videos/videotree?g_type='+grade+'&s_type='+subject,
+			contentType: "application/json",
+			success: function(r) {
+				//if (r.code === 0) {
+					var nodes = JSON.parse(r);
+					tableTree = layui.treetable({
+						elem: '#layuiTable', //传入元素选择器
+						spreadable: false, //设置是否全展开，默认不展开
+						checkbox: false,
+						nodes: nodes,
+						layout: layout
+					});
+					form.render();
+					layer.closeAll('loading');
+				// } else {
+				// 	alert(r.msg);
+				// }
+			}
+		});
+	});
+}
+renderTable();
+</script>

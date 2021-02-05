@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>E点就通名校名师同步课堂</title>
+    <link href="__mobile__/css/DPlayer.min.css" rel="stylesheet"/>
+</head>
+<body>
+      <div class="course-particulars-video">
+        <div class="course-particulars-play" id="dplayer"></div>
+      </div>
+</body>
+<script src="__mobile__/js/jquery-2.2.3.js"></script>
+<script src="__mobile__/js/DPlayer.min.js"></script>
+</html>
+<script>
+  const player = new DPlayer({
+    container: document.getElementById('dplayer'),
+    screenshot: true,
+    autoplay: false,
+    theme: '#FADFA3',
+    loop: false,
+    lang: 'zh-cn',
+    screenshot: true,
+    hotkey: true,
+    preload: 'auto',
+    volume: 0.7,
+    mutex: true,
+    video: {
+      url: 'http://demo-videos.qnsdk.com/movies/qiniu.mp4',
+      type: 'auto'
+    },
+    highlight: [
+      {
+        time: 20,
+        text: '这是第 20 秒'
+      },
+      {
+        time: 120,
+        text: '这是 2 分钟'
+      }
+    ]
+});
+
+$(function(){
+  //动态给video设置属性
+  $('.dplayer-video').attr({
+    'controlsList' : 'nodownload',
+    'x5-playsinline':'""',
+    'x-webkit-airplay':"true",
+    'x5-video-player-type':"h5",
+    'x5-video-player-fullscreen':"",
+    'x5-video-orientation':"portraint",
+  })
+})
+</script>

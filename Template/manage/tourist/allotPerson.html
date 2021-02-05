@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章添加--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__MANAGE__/css/menu.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+</head>
+<style>
+	.layui-form-item{
+		margin-top: 20px;
+	}
+</style>
+<body class="childrenBody">
+	<form class="layui-form" action="javascript:">
+		<input type="hidden" name="id" class="layui-input" value="{$id}">
+		<input type="hidden" name="type" class="layui-input" value="{$type}">
+		<div class="layui-form-item">
+			<label class="layui-form-label" >所属管理员</label>
+			<div class="layui-inline">
+				<select name="user_id" lay-filter="aihao">
+					{volist name="userList" id="val"}
+					<option value="{$val['uid']}">{$val['username']}</option>
+					{/volist}
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="editCode" >确定</button>
+		    </div>
+		</div>
+	</form>
+	<script type="text/javascript" src="__LAY__layui.js"></script>
+	<script type="text/javascript" src="__MANAGE__/js/tourist/index.js"></script>
+</body>
+
+</html>
+<!-- <script>
+    var ue = UE.getEditor('editor',{initialFrameWidth:"90.8%",initialFrameHeight:300});
+</script> -->

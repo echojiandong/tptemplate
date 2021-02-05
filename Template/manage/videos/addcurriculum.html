@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="__LAY__css/layui.css" media="all" />
+	<link rel="stylesheet" href="__LAY__css/admin.css" media="all" />
+  <style type="text/css">
+    .layui-upload-drag{
+      float: left;;
+    }
+    .layui-form-div-video{
+      width: 243px;
+      margin-top: -136px;
+      float: left;
+      margin-left: 461px;
+      display: none;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="layui-form" lay-filter="layuiadmin-form-admin" id="layuiadmin-form-admin" style="padding: 20px 30px 0 0;">
+
+    <input type="hidden" name="subject_id" value="{$subject}">
+    <input type="hidden" name='selfid' id='selfid' value="{$selfid}">
+    <input type="hidden" name="layeditindex" id='layeditindex' value="">
+    <div class="layui-form-item">
+      <label class="layui-form-label">课程名称</label>
+      <div class="layui-input-block">
+        <input type="text" name="name" lay-verify="required" lay-reqText='请输入课程名称' placeholder="七年级语文上册" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">课程副标题</label>
+      <div class="layui-input-block">
+        <input type="text" name="title" lay-reqText='请输入课程副标题' placeholder="读写、读写" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">年级</label>
+        <div class="layui-input-block">
+          <select name="grade_id">
+            {volist name="grade_list" id="v"}
+              <option value="{$v.id}">{$v.name}</option>
+            {/volist}
+          </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">教材版本</label>
+        <div class="layui-input-block">
+          <select name="edition_id">
+            {volist name="edition" id="v"}
+              <option value="{$v.id}">{$v.textbook}</option>
+            {/volist}
+          </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">学期</label>
+        <div class="layui-input-block">
+          <select name="Semester">
+            <option value="1">上学期</option>
+            <option value="2">下学期</option>
+            <option value="3">全册</option>
+          </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">教师</label>
+        <div class="layui-input-block">
+          <select name="sname">
+            {volist name="t_list" id="v"}
+              <option value="{$v.id}-{$v.name}">{$v.name}</option>
+            {/volist}
+          </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">课程价格</label>
+      <div class="layui-input-block">
+        <input type="text" name="price" lay-verify="number" lay-reqText='这个课不要钱嘛？' placeholder="699" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">有效天数</label>
+      <div class="layui-input-block">
+        <input type="text" name="effectivedays"  placeholder="请输入课程观看有效天数（例：180天）" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">折扣</label>
+      <div class="layui-input-block">
+        <input type="text" name="Discount" lay-verify="number" lay-reqText='行行好、打点折吧' placeholder="0.01" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">试听</label>
+      <div class="layui-input-block">
+          <input type="radio" name="audi" value="1" title="可试听">
+          <input type="radio" name="audi" value="2" title="无试听" checked="">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">试听价格：</label>
+      <div class="layui-input-block">
+        <input type="text" name="audition_price" lay-verify="number"  placeholder="199" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">课程标签</label>
+      <div class="layui-input-block">
+        <div id="test1"></div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">课件资料上传</label>
+      <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="coursewarefile">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+
+        <div class="layui-upload-drag" id="coursewarefile_href" style="display: none">
+          <i class="layui-icon layui-icon-file"></i>
+          <a href="">点击下载课件资料</a>
+        </div>
+        <input type="hidden" name="courseware"  id="courseware" lay-verify='courseware' value="0">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">课件资料上传（1）</label>
+      <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="coursewarefile1">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+
+        <div class="layui-upload-drag" id="coursewarefile_href1" style="display: none">
+          <i class="layui-icon layui-icon-file"></i>
+          <a href="">点击下载课件资料</a>
+        </div>
+        <input type="hidden" name="courseware1"  id="courseware1" lay-verify='courseware1' value="0">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">课件资料上传（2）</label>
+      <div class="site-demo-upload">
+        <div class="layui-upload-drag" id="coursewarefile2">
+          <i class="layui-icon"></i>
+          <p>点击上传，或将文件拖拽到此处</p>
+        </div>
+
+        <div class="layui-upload-drag" id="coursewarefile_href2" style="display: none">
+          <i class="layui-icon layui-icon-file"></i>
+          <a href="">点击下载课件资料</a>
+        </div>
+        <input type="hidden" name="courseware2"  id="courseware2" lay-verify='courseware2' value="0">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label" style="display: block">封面(购买)</label>
+      <div class="site-demo-upload">
+          <div class="layui-upload-drag" id="test10">
+            <i class="layui-icon"></i>
+            <p>点击上传，或将文件拖拽到此处</p>
+          </div>
+          <img id="testImg" style="width: 244px; height: 135px; display: none;  float: left; margin-left: 92px" src=""/>
+          <input type="hidden" name="img"  id="image" lay-verify="image">
+        </div>
+      </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label" style="display: block">封面(未购买)</label>
+      <div class="site-demo-upload">
+          <div class="layui-upload-drag" id="test9">
+            <i class="layui-icon"></i>
+            <p>点击上传，或将文件拖拽到此处</p>
+          </div>
+          <img id="testImgs" style="width: 244px; height: 135px; display: none;  float: left; margin-left: 92px" src=""/>
+          <input type="hidden" name="imgNo"  id="imageNo" lay-verify="image">
+        </div>
+      </div>
+
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">课程简介</label>
+        <div class="layui-input-block">
+          <textarea  name='content' id="demo" placeholder="多听、多读、多看、多写" class="layui-textarea"></textarea>
+        </div>
+      </div>
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-user-back-submit" id="LAY-user-back-submit" value="确认">
+    </div>
+  </div>
+</body>
+</html>
+<script type="text/javascript" src="__LAY__layui.js"></script>
+<script type="text/javascript">
+	layui.use(['layer','code','form','upload','layedit','tree'],function(){
+		var $ = layui.$
+      ,form = layui.form
+			,tree = layui.tree
+			,layer = layui.layer
+      ,upload = layui.upload
+      ,layedit = layui.layedit
+      ,selfid = $('#selfid').val()
+      ,_index
+      ,datas = '';
+
+
+      //拖拽上传(购买)
+      upload.render({
+          elem: '#test10'
+          ,url: '/manage/videos/uploadimg'
+          ,size:'60000'
+          ,exts:'jpg|png|jpeg'
+          ,done: function(res){
+              if(res.code==0){
+                  layer.msg(res.msg,{time:1200},function(){
+                      var img = res.data;
+                      var img = img.replace("\\","/");
+                      $("#testImg").attr("src",img).show();
+                      $("#image").attr("value",img);
+                  });
+              }else{
+                  layer.msg(res.msg,{time:1200});
+              }
+          }
+      });
+
+      //拖拽上传(未购买)
+      upload.render({
+          elem: '#test9'
+          ,url: '/manage/videos/uploadimg'
+          ,size:'60000'
+          ,exts:'jpg|png|jpeg'
+          ,done: function(res){
+              if(res.code==0){
+                  layer.msg(res.msg,{time:1200},function(){
+                      var img = res.data;
+                      var img = img.replace("\\","/");
+                      $("#testImgs").attr("src",img).show();
+                      $("#imageNo").attr("value",img);
+                  });
+              }else{
+                  layer.msg(res.msg,{time:1200});
+              }
+          }
+      });
+
+      // 课件上传
+      upload.render({
+          elem: '#coursewarefile'
+          ,url: '/manage/videos/uploadimg'
+          ,size:'100000'
+          ,accept:'file'
+          ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+            layer.load(); //上传loading
+          },done: function(res){
+              layer.closeAll('loading'); //关闭loading
+              if(res.code==0){
+                  layer.msg(res.msg,{time:1200},function(){
+                      var file = res.data;
+                      file = file.replace("\\","/");
+                      $('input[name="courseware"]').attr('value',file);
+                      $('#coursewarefile_href').children('a').attr('href',file);
+                      $('#coursewarefile_href').show();
+
+                  });
+              }else{
+                  layer.msg(res.msg,{time:1200});
+              }
+          }
+      });
+
+      //   临时 文件上传  将就用
+      // 课件上传1
+      upload.render({
+          elem: '#coursewarefile1'
+          ,url: '/manage/videos/uploadimg'
+          ,size:'100000'
+          ,accept:'file'
+          ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+            layer.load(); //上传loading
+          },done: function(res){
+              layer.closeAll('loading'); //关闭loading
+              if(res.code==0){
+                  layer.msg(res.msg,{time:1200},function(){
+                      var file = res.data;
+                      file = file.replace("\\","/");
+                      $('input[name="courseware1"]').attr('value',file);
+                      $('#coursewarefile_href1').children('a').attr('href',file);
+                      $('#coursewarefile_href1').show();
+
+                  });
+              }else{
+                  layer.msg(res.msg,{time:1200});
+              }
+          }
+      });
+
+      // 课件上传2
+      upload.render({
+          elem: '#coursewarefile2'
+          ,url: '/manage/videos/uploadimg'
+          ,size:'100000'
+          ,accept:'file'
+          ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+            layer.load(); //上传loading
+          },done: function(res){
+              layer.closeAll('loading'); //关闭loading
+              if(res.code==0){
+                  layer.msg(res.msg,{time:1200},function(){
+                      var file = res.data;
+                      file = file.replace("\\","/");
+                      $('input[name="courseware2"]').attr('value',file);
+                      $('#coursewarefile_href2').children('a').attr('href',file);
+                      $('#coursewarefile_href2').show();
+
+                  });
+              }else{
+                  layer.msg(res.msg,{time:1200});
+              }
+          }
+      });
+      //   结束
+
+
+      layedit.set({
+        uploadImage: {
+          url: '/manage/videos/uploadimg' //接口url
+          ,type: 'post' //默认post
+        }
+      });
+
+      //表单初始赋值
+      if(selfid != 0){
+          $.ajax({
+            url: '/manage/videos/setcurriculumval'
+            ,data: {id:selfid}
+            ,type: 'post'
+            ,dataType: 'json'
+            ,async: false
+            ,success: function(res){
+                if(res.code == 0){
+                  form.val('layuiadmin-form-admin',res.data);
+
+                  if(res.data.courseware != 0){
+                
+                      $('#coursewarefile_href').children('a').attr('href',res.data.courseware);
+                      $('#coursewarefile_href').show();
+                  }
+
+                  if(res.data.courseware1 != 0){
+                
+                      $('#coursewarefile_href1').children('a').attr('href',res.data.courseware1);
+                      $('#coursewarefile_href1').show();
+                  }
+
+                  if(res.data.courseware2 != 0){
+                
+                      $('#coursewarefile_href2').children('a').attr('href',res.data.courseware2);
+                      $('#coursewarefile_href2').show();
+                  }
+
+                  _index = layedit.build('demo');
+                  $('#layeditindex').val(_index);
+                  if(res.data.img != null){
+                    $("#testImg").attr("src",res.data.img).show();
+                    $("#image").attr("value",res.data.img);
+                  }
+                  if(res.data.imgNo != null){
+                    $("#testImgs").attr("src",res.data.imgNo).show();
+                    $("#imageNo").attr("value",res.data.imgNo);
+                  }
+                }
+            }
+          })
+      }else{
+
+          _index = layedit.build('demo');
+          $('#layeditindex').val(_index);
+      }
+
+      //初始化 视频标签树 
+      $.ajax({
+        url: '/manage/videos/videoTagTree'
+        //type:1 video_class标签 type:2 video标签
+        ,data: {id:selfid,type:1}
+        ,type: 'post'
+        ,dataType: 'json'
+        ,async: false
+        ,success: function(res){
+          if(res.code == 0){
+              datas = res.data
+          }
+              
+        }
+      })
+      //初始化树
+      tree.render({
+        elem: '#test1'
+        ,data: datas
+        ,id: 'demoId'
+        ,showCheckbox: true
+        ,accordion: true
+        ,click: function(obj){
+            //节点点击后的回调
+            console.log(obj.data); //得到当前点击的节点数据
+            console.log(obj.state); //得到当前节点的展开状态：open、close、normal
+            console.log(obj.elem); //得到当前节点元素
+            console.log(obj.data.children); //当前节点下是否有子节点
+        }
+        ,oncheck: function(){
+          //复选框被点击后的回调
+          
+        }
+      })
+	})
+
+</script>
